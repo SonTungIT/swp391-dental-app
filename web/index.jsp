@@ -183,6 +183,12 @@
                                     Tài Khoản Của Tôi
                                 </button>
                             </a>
+                            <a href="#" style="padding: 0">
+                                <button class="dropdown-item" type="button">
+                                    <i class="fa-solid fa-circle-arrow-right"></i>
+                                    Lịch Sử Đặt Lịch
+                                </button>
+                            </a>
                             <a href="patient.jsp" style="padding: 0">
                                 <form action="MainController">
                                 <button class="dropdown-item" type="button">

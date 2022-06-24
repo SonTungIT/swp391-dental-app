@@ -125,8 +125,8 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
-                                            <i class="fa-solid fa-circle-arrow-right"></i>
-                                            Tài Khoản Của Tôi
+                                        <i class="fa-solid fa-circle-arrow-right"></i>
+                                        Tài Khoản Của Tôi
                                     </button>
                                     <form action="MainController">
                                         <button class="dropdown-item" type="button">
@@ -135,8 +135,8 @@
                                         </button>
                                     </form>
                                     <button class="dropdown-item" type="button">
-                                            <i class="fa-solid fa-circle-arrow-right"></i>
-                                            Quản Lý
+                                        <i class="fa-solid fa-circle-arrow-right"></i>
+                                        Quản Lý
                                     </button>
                                 </ul>
                             </li>
@@ -163,6 +163,12 @@
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Hồ Sơ</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Lịch Sử Đặt Lịch</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Thay Đổi Mật Khẩu</span></a></li>
                         </ul>
 
                     </nav>
@@ -239,18 +245,18 @@
                                     <center class="mt-4"> <img src="./images/sontung.jpg"
                                                                class="rounded-circle" width="150" />
                                         <h4 class="card-title mt-2">Sơn Tùng MTP</h4>
-<!--                                        <div class="row text-center justify-content-center">
-                                            <div class="col-4">
-                                                <a href="javascript:void(0)" class="link">
-                                                    <i class="icon-people" aria-hidden="true"></i>
-                                                    <span class="value-digit">254</span>
-                                                </a></div>
-                                            <div class="col-4">
-                                                <a href="javascript:void(0)" class="link">
-                                                    <i class="icon-picture" aria-hidden="true"></i>
-                                                    <span class="value-digit">54</span>
-                                                </a></div>
-                                        </div>-->
+                                        <!--                                        <div class="row text-center justify-content-center">
+                                                                                    <div class="col-4">
+                                                                                        <a href="javascript:void(0)" class="link">
+                                                                                            <i class="icon-people" aria-hidden="true"></i>
+                                                                                            <span class="value-digit">254</span>
+                                                                                        </a></div>
+                                                                                    <div class="col-4">
+                                                                                        <a href="javascript:void(0)" class="link">
+                                                                                            <i class="icon-picture" aria-hidden="true"></i>
+                                                                                            <span class="value-digit">54</span>
+                                                                                        </a></div>
+                                                                                </div>-->
                                     </center>
                                 </div>
                             </div>
@@ -268,13 +274,13 @@
                                                        class="form-control ps-0 form-control-line">
                                             </div>
                                         </div>
-                                        <div class="form-group">
+<!--                                        <div class="form-group">
                                             <label class="col-md-12 mb-0">Password</label>
                                             <div class="col-md-12">
                                                 <input type="password" value="password"
                                                        class="form-control ps-0 form-control-line">
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div class="form-group">
                                             <label class="col-md-12 mb-0">Giới Tính</label>
                                             <div class="col-md-12">
@@ -304,7 +310,7 @@
                                                        id="example-email">
                                             </div>
                                         </div>
-                                            
+
                                         <div class="form-group">
                                             <label class="col-md-12 mb-0">Số Điện Thoại</label>
                                             <div class="col-md-12">
@@ -312,24 +318,24 @@
                                                        class="form-control ps-0 form-control-line">
                                             </div>
                                         </div>
-                                        <div class="form-group">
+<!--                                        <div class="form-group">
                                             <label class="col-md-12 mb-0">Message</label>
                                             <div class="col-md-12">
                                                 <textarea rows="5" class="form-control ps-0 form-control-line"></textarea>
                                             </div>
-                                        </div>
-<!--                                        <div class="form-group">
-                                            <label class="col-sm-12">Select Country</label>
-                                            <div class="col-sm-12 border-bottom">
-                                                <select class="form-select shadow-none ps-0 border-0 form-control-line">
-                                                    <option>London</option>
-                                                    <option>India</option>
-                                                    <option>Usa</option>
-                                                    <option>Canada</option>
-                                                    <option>Thailand</option>
-                                                </select>
-                                            </div>
                                         </div>-->
+                                        <!--                                        <div class="form-group">
+                                                                                    <label class="col-sm-12">Select Country</label>
+                                                                                    <div class="col-sm-12 border-bottom">
+                                                                                        <select class="form-select shadow-none ps-0 border-0 form-control-line">
+                                                                                            <option>London</option>
+                                                                                            <option>India</option>
+                                                                                            <option>Usa</option>
+                                                                                            <option>Canada</option>
+                                                                                            <option>Thailand</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>-->
                                         <div class="form-group">
                                             <div class="col-sm-12 d-flex">
                                                 <button class="btn btn-success mx-auto mx-md-0 text-white">Cập Nhật</button>

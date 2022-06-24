@@ -26,7 +26,7 @@ public class LoginController extends HttpServlet {
     private static final String AD = "AD";
     private static final String ADMIN_PAGE = "admin.jsp";
     private static final String PT = "PT";
-    private static final String PATIENT_PAGE = "patient.jsp";
+    private static final String PATIENT_PAGE = "index.jsp";
     private static final String DR = "DR";
     private static final String DOCTOR_PAGE = "doctor.jsp";
 
