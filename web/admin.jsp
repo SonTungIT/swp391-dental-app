@@ -123,8 +123,8 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
-                                            <i class="fa-solid fa-circle-arrow-right"></i>
-                                            Tài Khoản Của Tôi
+                                        <i class="fa-solid fa-circle-arrow-right"></i>
+                                        Tài Khoản Của Tôi
                                     </button>
                                     <form action="MainController">
                                         <button class="dropdown-item" type="button">
@@ -133,8 +133,8 @@
                                         </button>
                                     </form>
                                     <button class="dropdown-item" type="button">
-                                            <i class="fa-solid fa-circle-arrow-right"></i>
-                                            Quản Lý
+                                        <i class="fa-solid fa-circle-arrow-right"></i>
+                                        Quản Lý
                                     </button>
                                 </ul>
                             </li>
@@ -173,7 +173,10 @@
                                         class="hide-menu">Quản lí bệnh nhân</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowBooking" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>            
+                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=SearchSC&searchSC" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí lịch hoạt động</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">FeedBack</span></a></li>

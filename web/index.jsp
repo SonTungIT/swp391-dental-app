@@ -162,7 +162,7 @@
                         </li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
+                        <li class=""><a href="MainController?action=ShowService">ĐẶT LỊCH</a></li>
                     </ul>
 
                     <% if (loginUser == null) {

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import sample.booking.BookingDTO;
+import sample.booking.ScheduleDTO;
 import sample.booking.SlotDTO;
 import sample.services.CategoryServiceDTO;
-import sample.services.ServiceDTO;
 import sample.utils.DBUtils;
 
 /**
@@ -24,24 +24,16 @@ import sample.utils.DBUtils;
  */
 public class AdminDAO {
 
-    public static void main(String[] args) throws SQLException {
-        AdminDAO dao = new AdminDAO();
-        List<BookingDTO> list = dao.getListAllAppointmentBooking();
-        for (BookingDTO doctor : list) {
-            System.out.println(doctor.getServiceName());
-        }
-
-        // lấy danh sách bệnh nhân
-//        List<UserDTO> patient = dao.getListAllPatient();
-//        for (UserDTO pt: patient) {
-//            System.out.println(pt.getAddress());
-//        }
-        // lấy danh sách bác sĩ
-//        List<CategoryServiceDTO> cs = dao.getCategoryService();
-//        for (CategoryServiceDTO dt: cs) {
-//            System.out.println(dt.getService());
-//        }
-    }
+    private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, doctorID, slotID, dayWork, status) VALUES(?, ?, ?, ?, ?)";
+    private static final String UPDATE_SCHEDULE_DR = "UPDATE Schedule SET status = ? WHERE doctorID = ? AND dayWork = ?";
+    private static final String SHOW_DR_SC = "SELECT userID, fullName, image, categoryName, shift from Users us JOIN Doctor dt ON us.userID = dt.doctorID JOIN CategoryService cs ON  cs.categoryID = dt.categoryID  WHERE us.status = 1 AND fullName like ?";
+    private static final String SHOWSLOT = "SELECT slotID, slotName, slotTime, slotDateStart, slotDateEnd, status FROM Slot WHERE slotDateStart = ? OR slotDateEnd = ?";
+    private static final String UPDATE_SLOT = "UPDATE Slot SET slotDateStart = ?, slotDateEnd = ?  WHERE slotTime = ?";
+    private static final String UPDATE_BOOKING_FAIL_BY_UPDATESLOT = "UPDATE Booking SET status = 'Inactive' WHERE bookingID = ?";
+    private static final String CHECK_BOOKING_FAILBY_UPDATESLOT = "SELECT bookingID, patientID, serviceID, dateBooking, timeBooking, status FROM Booking WHERE dateBooking >= ?";
+    private static final String CHECK_DUPLICATE_SD_ID = "SELECT doctorID FROM Schedule WHERE scheduleID = ? ";
+    private static final String CHECK_DUPLICATE_SD_DR_DW_SL = "SELECT scheduleID FROM Schedule WHERE doctorID = ? AND slotID = ? AND dayWork = ?";
+    private static final String CHECK_SL_FAIL_BY_UDSL = "select slotID from Slot WHERE slotTime = ? AND slotDateStart !='' AND slotDateEnd !=''";
 
     public List<DoctorDTO> getListAllDoctor() throws SQLException {
         List<DoctorDTO> list = new ArrayList<>();
@@ -51,7 +43,7 @@ public class AdminDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select us.userID, us.fullName, us.gender, us.email, us.phone, cs.categoryName, us.status "
+                String sql = "select us.userID, us.fullName, us.gender, us.email, us.phone, cs.categoryName, us.status, dt.shift "
                         + " from Users us inner join Doctor dt ON us.userID = dt.doctorID inner join CategoryService cs ON dt.categoryID = cs.categoryID";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
@@ -62,9 +54,9 @@ public class AdminDAO {
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     String categoryName = rs.getString("categoryName");
+                    String shift = rs.getString("shift");
                     boolean status = rs.getBoolean("status");
-                    list.add(new DoctorDTO(userID, fullName, gender, email, phone, categoryName, status));
-
+                    list.add(new DoctorDTO(userID, fullName, gender, email, phone, categoryName, shift, status));
                 }
             }
         } catch (Exception e) {
@@ -91,7 +83,7 @@ public class AdminDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select us.userID, us.fullName, us.gender, us.email, us.phone, cs.categoryName, us.status "
+                String sql = "select us.userID, us.fullName, us.gender, us.email, us.phone, cs.categoryName, dt.shift,us.status "
                         + " from Users us inner join Doctor dt ON us.userID = dt.doctorID inner join CategoryService cs ON dt.categoryID = cs.categoryID"
                         + "order by us.userID \n"
                         + "offset ? rows \n"
@@ -106,8 +98,9 @@ public class AdminDAO {
                     String email = rs.getString(4);
                     String phone = rs.getString(5);
                     String categoryName = rs.getString(6);
+                    String shift = rs.getString(7);
                     boolean status = rs.getBoolean(7);
-                    list.add(new DoctorDTO(doctorID, fullName, gender, email, phone, categoryName, status));
+                    list.add(new DoctorDTO(doctorID, fullName, gender, email, phone, categoryName, shift, status));
 
                 }
             }
@@ -135,7 +128,7 @@ public class AdminDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select dt.doctorID, us.fullName, us.gender, us.email, us.phone, cs.categoryName, us.status  from Users us\n"
+                String sql = "select dt.doctorID, us.fullName, us.gender, us.email, us.phone, cs.categoryName, dt.shift ,us.status  from Users us\n"
                         + "inner join Doctor dt ON us.userID = dt.doctorID \n"
                         + "inner join CategoryService cs ON dt.categoryID = cs.categoryID \n"
                         + "where fullName like ? ";
@@ -149,8 +142,9 @@ public class AdminDAO {
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     String categoryName = rs.getString("categoryName");
+                    String shift = rs.getString("shift");
                     boolean status = rs.getBoolean("status");
-                    list.add(new DoctorDTO(doctorID, fullName, gender, email, phone, categoryName, status));
+                    list.add(new DoctorDTO(doctorID, fullName, gender, email, phone, categoryName, shift, status));
 
                 }
             }
@@ -566,9 +560,9 @@ public class AdminDAO {
                     String categoryID = rs.getString("categoryID");
                     String categotyName = rs.getString("categoryName");
                     String serviceID = rs.getString("serviceID");
-                    String serviceName = rs.getString("serviceName");                    
+                    String serviceName = rs.getString("serviceName");
                     String status = rs.getString("status");
-                    list.add(new CategoryServiceDTO(categoryID, categotyName, serviceID,serviceName, status));
+                    list.add(new CategoryServiceDTO(categoryID, categotyName, serviceID, serviceName, status));
                 }
             }
         } catch (Exception e) {
@@ -609,14 +603,14 @@ public class AdminDAO {
                 while (rs.next()) {
                     String bookingID = rs.getString("bookingID");
                     String patientName = rs.getString("fullName");
-                    String patientGender = rs.getString("gender");                   
-                    String serviceName = rs.getString("serviceName");                    
-                    String doctorName = rs.getString("fullName");                    
-                    String dateBooking = rs.getString("dateBooking");
+                    String patientGender = rs.getString("gender");
+                    String serviceName = rs.getString("serviceName");
+                    String doctorName = rs.getString("fullName");
+                    Date dateBooking = rs.getDate("dateBooking");
                     String timeBooking = rs.getString("timeBooking");
                     String slotName = rs.getString("slotName");
-                    String slotTime = rs.getString("slotTime");                    
-                    boolean status = rs.getBoolean("status");
+                    String slotTime = rs.getString("slotTime");
+                    String status = rs.getString("status");
 
                     list.add(new BookingDTO(bookingID, patientName, patientGender, serviceName, doctorName, dateBooking, timeBooking, slotName, slotTime, status));
 
@@ -637,7 +631,7 @@ public class AdminDAO {
         }
         return list;
     }
-    
+
     public boolean deteleAppointmentBooking(String bookingID) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -661,7 +655,7 @@ public class AdminDAO {
         }
         return check;
     }
-    
+
     public List<BookingDTO> searchListAppointmentBooking(String search) throws SQLException {
         List<BookingDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -685,14 +679,14 @@ public class AdminDAO {
                 while (rs.next()) {
                     String bookingID = rs.getString("bookingID");
                     String patientName = rs.getString("fullName");
-                    String patientGender = rs.getString("gender");                   
-                    String serviceName = rs.getString("serviceName");                    
-                    String doctorName = rs.getString("fullName");                    
-                    String dateBooking = rs.getString("dateBooking");
+                    String patientGender = rs.getString("gender");
+                    String serviceName = rs.getString("serviceName");
+                    String doctorName = rs.getString("fullName");
+                    Date dateBooking = rs.getDate("dateBooking");
                     String timeBooking = rs.getString("timeBooking");
                     String slotName = rs.getString("slotName");
-                    String slotTime = rs.getString("slotTime");                    
-                    boolean status = rs.getBoolean("status");
+                    String slotTime = rs.getString("slotTime");
+                    String status = rs.getString("status");
                     list.add(new BookingDTO(bookingID, patientName, patientGender, serviceName, doctorName, dateBooking, timeBooking, slotName, slotTime, status));
                 }
             }
@@ -711,58 +705,386 @@ public class AdminDAO {
         }
         return list;
     }
-    
-//    public List<BookingDTO> getListAllAppointmentBookingversion2() throws SQLException {
-//        List<BookingDTO> list = new ArrayList<>();
-//        Connection conn = null;
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        try {
-//            conn = DBUtils.getConnection();
-//            if (conn != null) {
-//                String sql = "select bk.bookingID, PT.fullName , PT.gender, sv.serviceName , us.fullName, bk.dateBooking, bk.timeBooking,  sl.slotName, sl.slotTime, bk.status from \n"
-//                        + "(Select fullName, userID, gender from Users where roleID = 'PT') AS PT \n"
-//                        + " inner join Booking bk ON bk.patientID = PT.userID \n"
-//                        + " inner join Service sv On sv.serviceID = bk.serviceID\n"
-//                        + " inner join CategoryService cs ON cs.categoryID = sv.categoryID\n"
-//                        + " inner join Doctor dt ON dt.categoryID	= sv.categoryID\n"
-//                        + " inner join Schedule sch ON sch.doctorID = dt.doctorID\n"
-//                        + " inner join Slot sl ON sl.slotID = sch.slotID\n"
-//                        + " inner join Users us ON us.userID = dt.doctorID";
-//                stm = conn.prepareStatement(sql);
-//                rs = stm.executeQuery();
-//                while (rs.next()) {
-//                    BookingDTO booking = new BookingDTO();
-//                    booking.setBookingID(rs.getString("bookingID"));
-//                    UserDTO us = new UserDTO(rs.getString("fullName"), rs.getString("gender"));
-//                    booking.setPatient(us);
-//                    ServiceDTO sv = new ServiceDTO(rs.getString("serviceName"));
-//                    booking.setServicename(sv);
-//                    DoctorDTO dt = new DoctorDTO(rs.getString("fullName"));
-//                    booking.setDoctorname(dt);
-//                    booking.setDateBooking(rs.getString("dateBooking"));
-//                    booking.setTimeBooking(rs.getString("timeBooking"));
-//                    SlotDTO sl =new  SlotDTO(rs.getString("slotName"), rs.getString("slotTime"));
-//                    booking.setSlot(sl);
-//                    boolean status = rs.getBoolean("status");
-//                    list.add(booking);
-//                    
-//
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return list;
-//    }
+
+    public boolean updateSlot(String slotDateStart, String slotEndStart, String slotTime) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_SLOT);
+                ptm.setString(1, slotDateStart);
+                ptm.setString(2, slotEndStart);
+                ptm.setString(3, slotTime);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public boolean updateBooking_FailBy_UpdateSlot(String bookingID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_BOOKING_FAIL_BY_UPDATESLOT);
+                ptm.setString(1, bookingID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public List<BookingDTO> getListBookingFailByUDSlot(Date curDate) throws SQLException, ClassNotFoundException {
+        List<BookingDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_BOOKING_FAILBY_UPDATESLOT);
+                ptm.setDate(1, curDate);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String bookingID = rs.getString("bookingID");
+                    String patientID = rs.getString("patientID");
+                    String serviceID = rs.getString("serviceID");
+                    Date dateBooking = rs.getDate("dateBooking");
+                    String timeBooking = rs.getString("timeBooking");
+                    String status = rs.getString("status");
+                    list.add(new BookingDTO(bookingID, patientID, serviceID, dateBooking, timeBooking, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public List<SlotDTO> showListSlot(String slotDateStart, String slotDateEnd) throws SQLException, ClassNotFoundException {
+        List<SlotDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SHOWSLOT);
+                ptm.setString(1, slotDateStart);
+                ptm.setString(2, slotDateEnd);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String slotID = rs.getString("slotID");
+                    String slotName = rs.getString("slotName");
+                    String slotTime = rs.getString("slotTime");
+                    boolean status = rs.getBoolean("status");
+                    list.add(new SlotDTO(slotID, slotName, slotTime, slotDateStart, slotDateEnd, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public boolean checkDuplicate_SCD_ID(String scheduleID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_DUPLICATE_SD_ID);
+                ptm.setString(1, scheduleID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public boolean checkDuplicate_SCD_DR_DW_SL(String doctorID, String slotID, String dayWork) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_DUPLICATE_SD_DR_DW_SL);
+                ptm.setString(1, doctorID);
+                ptm.setString(2, slotID);
+                ptm.setString(3, dayWork);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public boolean createSchedule(ScheduleDTO sc) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CREATE_SCHEDULE);
+                ptm.setString(1, sc.getScheduleID());
+                ptm.setString(2, sc.getDoctorID());
+                ptm.setString(3, sc.getSlotID());
+                ptm.setString(4, sc.getDayWork());
+                ptm.setBoolean(5, sc.isStatus());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public boolean updateSchedule(String dayWork, String scheduleID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_SLOT);
+                ptm.setString(1, dayWork);
+                ptm.setString(2, scheduleID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public List<DoctorDTO> getListDoctorSC(String search) throws SQLException, ClassNotFoundException {
+        List<DoctorDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SHOW_DR_SC);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String doctorName = rs.getString("fullName");
+                    String image = rs.getString("image");
+                    String categoryName = rs.getString("categoryName");
+                    String shift = rs.getString("shift");
+                    list.add(new DoctorDTO(userID, doctorName, image, categoryName, shift));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public List<ScheduleDTO> showListAllSchedule() throws SQLException, ClassNotFoundException {
+        List<ScheduleDTO> list = new ArrayList<>();
+        list.add(new ScheduleDTO("", "", "", "", true));
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT DISTINCT doctorID, dayWork FROM Schedule WHERE status = 1";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String scheduleID = "";
+                    String doctorID = rs.getString("doctorID");
+                    String slotID = "";
+                    String dayWork = rs.getString("dayWork");
+                    boolean status = true;
+                    list.add(new ScheduleDTO(scheduleID, doctorID, slotID, dayWork, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public boolean updateScheduleDR(String doctorID, String dayWork, boolean status) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_SCHEDULE_DR);
+                ptm.setBoolean(1, status);
+                ptm.setString(2, doctorID);
+                ptm.setString(3, dayWork);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public boolean checkSL_FAIL_BY_UPSL(String bktime) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_SL_FAIL_BY_UDSL);
+                ptm.setString(1, bktime);             
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
 }
