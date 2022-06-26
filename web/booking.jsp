@@ -57,6 +57,11 @@
                 response.sendRedirect("login.jsp");
             }
 
+            String patientID = loginUser.getUserID();
+            if (patientID == null) {
+                patientID = "";
+            }
+
             String sID = request.getParameter("serviceID");
             if (sID == null) {
                 sID = "";
@@ -135,7 +140,7 @@
                     <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2 ml-auto">
-                        
+
                         <li class=""><a href="about.jsp">GIỚI THIỆU</a></li>
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
@@ -200,7 +205,6 @@
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
                         <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
                     </ul>
-<<<<<<< HEAD
 
                     <% if (loginUser == null) {
                     %>
@@ -231,9 +235,9 @@
                         </ul>
                     </div>
                     <%
-                        } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
+                    } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
                     %> 
-                    
+
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="./images/sontung.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
@@ -262,7 +266,7 @@
                         </ul>
                     </div>
                     <%
-                        } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
+                    } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -288,12 +292,10 @@
                     <%
                         }
                     %>
-
-=======
-                    <div class="login-icon ml-2">
+<!--                    <div class="login-icon ml-2">
                         <a class="user" href="login.jsp"> LOGIN </a>
-                    </div>
->>>>>>> d7cbbef5e8e6ba4f126c82784efac2e6b6f3786d
+                    </div>-->
+
                 </nav>
                 <div class="clear"></div>
                 <!-- //nav -->
@@ -389,7 +391,7 @@
                                     <input type="hidden" name="serviceName" value="<%=sName%>"/>
                                     <input type="hidden" name="doctorID" value="<%=drID%>"/>
                                     <input type="hidden" name="dateBooking" value="<%=dateBooking%>"/>
-                                    <input type="hidden" name="patientID" value="<%=loginUser.getUserID()%>"/>
+                                    <input type="hidden" name="patientID" value="<%=patientID%>"/>
                                     <div class="time">
 
 
@@ -535,6 +537,14 @@
             }
         </script>
 
-
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     </body>
 </html>
