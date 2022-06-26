@@ -35,8 +35,7 @@ public class PatientDAO {
     private static final String SELECT_DRNAME = "SELECT fullName FROM Users us JOIN Doctor dr ON us.userID = dr.doctorID WHERE doctorID = ?";
     private static final String SELECT_SLOTID = "SELECT slotID FROM Slot WHERE slotTime = ?";
     private static final String CHECK_DUPLICATE_BK_ID = "SELECT patientID FROM Booking WHERE bookingID = ? ";
-    private static final String CREATE_BOOKING = "INSERT INTO Booking(bookingID, patientID, serviceID, dateBooking, timeBooking, status) VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_SCHEDULE = "UPDATE Schedule SET status = 0  WHERE doctorID = ? AND dateBooking = ? AND slotID = ?";
+    private static final String CREATE_BOOKING = "INSERT INTO Booking(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status) VALUES(?, ?, ?, ?, ?, ?, ?)";
     private static final String CHECK_DUPLICATE_BK_SLOT = "SELECT DISTINCT sl.slotID From Slot sl JOIN Schedule sc ON sc.slotID = sl.slotID \n"
             + "								JOIN Doctor dt ON dt.doctorID = sc.doctorID JOIN CategoryService cs\n"
             + "								ON cs.categoryID = dt.categoryID JOIN Service sv ON sv.categoryID = cs.categoryID\n"
@@ -368,9 +367,10 @@ public class PatientDAO {
                 ptm.setString(1, bk.getBookingID());
                 ptm.setString(2, bk.getPatientID());
                 ptm.setString(3, bk.getServiceID());
-                ptm.setDate(4, bk.getDateBooking());
-                ptm.setString(5, bk.getTimeBooking());
-                ptm.setString(6, bk.getStatus());
+                ptm.setString(4, bk.getDoctorID());
+                ptm.setDate(5, bk.getDateBooking());
+                ptm.setString(6, bk.getTimeBooking());
+                ptm.setString(7, bk.getStatus());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } finally {
@@ -385,35 +385,7 @@ public class PatientDAO {
         }
         return check;
     }
-
-    public boolean updateSchedule(String doctorID, Date dateBooking, String slotID) throws SQLException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                ptm = conn.prepareStatement(UPDATE_SCHEDULE);
-                ptm.setString(1, doctorID);
-                ptm.setDate(2, dateBooking);
-                ptm.setString(3, slotID);
-                check = ptm.executeUpdate() > 0 ? true : false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-
-        }
-        return check;
-    }
-
+   
     public boolean checkDuplicate_BK_SLOT(String slotID) throws SQLException {
         boolean check = false;
         Connection conn = null;

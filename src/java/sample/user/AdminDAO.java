@@ -30,7 +30,7 @@ public class AdminDAO {
     private static final String SHOWSLOT = "SELECT slotID, slotName, slotTime, slotDateStart, slotDateEnd, status FROM Slot WHERE slotDateStart = ? OR slotDateEnd = ?";
     private static final String UPDATE_SLOT = "UPDATE Slot SET slotDateStart = ?, slotDateEnd = ?  WHERE slotTime = ?";
     private static final String UPDATE_BOOKING_FAIL_BY_UPDATESLOT = "UPDATE Booking SET status = 'Inactive' WHERE bookingID = ?";
-    private static final String CHECK_BOOKING_FAILBY_UPDATESLOT = "SELECT bookingID, patientID, serviceID, dateBooking, timeBooking, status FROM Booking WHERE dateBooking >= ?";
+    private static final String CHECK_BOOKING_FAILBY_UPDATESLOT = "SELECT bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status FROM Booking WHERE dateBooking >= ?";
     private static final String CHECK_DUPLICATE_SD_ID = "SELECT doctorID FROM Schedule WHERE scheduleID = ? ";
     private static final String CHECK_DUPLICATE_SD_DR_DW_SL = "SELECT scheduleID FROM Schedule WHERE doctorID = ? AND slotID = ? AND dayWork = ?";
     private static final String CHECK_SL_FAIL_BY_UDSL = "select slotID from Slot WHERE slotTime = ? AND slotDateStart !='' AND slotDateEnd !=''";
@@ -775,10 +775,11 @@ public class AdminDAO {
                     String bookingID = rs.getString("bookingID");
                     String patientID = rs.getString("patientID");
                     String serviceID = rs.getString("serviceID");
+                    String doctorID = rs.getString("doctorID");
                     Date dateBooking = rs.getDate("dateBooking");
                     String timeBooking = rs.getString("timeBooking");
                     String status = rs.getString("status");
-                    list.add(new BookingDTO(bookingID, patientID, serviceID, dateBooking, timeBooking, status));
+                    list.add(new BookingDTO(bookingID, patientID, serviceID, doctorID,dateBooking, timeBooking, status));
                 }
             }
         } catch (Exception e) {
@@ -1064,7 +1065,7 @@ public class AdminDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(CHECK_SL_FAIL_BY_UDSL);
-                ptm.setString(1, bktime);             
+                ptm.setString(1, bktime);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     check = true;
