@@ -19,37 +19,54 @@
         <link href="loginPage/colorlib-regform-7/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div class="main">
+        <div class="main" style="padding: 50px 0">
+            
             <!-- Sing in  Form -->
             <section class="sign-in">
+                
                 <div class="container">
+                    <a class="navbar-brand ms-4" style="margin: 20px" href="index.jsp">
+                            <!-- Logo icon -->
+                            <b class="logo-icon">
+                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                                <!-- Dark Logo icon -->
+                                <img src="./assets/images/logo-header1.png" alt="homepage" class="dark-logo" />
+                            </b>
+                            <!--End Logo icon -->
+                            <!-- Logo text -->
+                            <span class="logo-text">
+                                <!-- dark Logo text -->
+                                <img src="./assets/images/logo-header2-2.png" alt="homepage" class="dark-logo" />
+
+                            </span>
+                        </a>
                     <div class="signin-content">
                         <div class="signin-image">
                             <figure><img src="loginPage/colorlib-regform-7/images/login-img1.jpg" alt="sing up image"></figure>
-                            <a href="loginPage/colorlib-regform-7/register.jsp" class="signup-image-link">Create an account</a>
+                            <a href="loginPage/colorlib-regform-7/register.jsp" class="signup-image-link">Tạo mới tài khoản</a>
                         </div>
 
                         <div class="signin-form">
-                            <h2 class="form-title">Login</h2>
+                            <h2 class="form-title">Đăng Nhập</h2>
                             <form method="POST" action="MainController" class="register-form" id="login-form" ">
                                 <div class="form-group">
                                     <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="userID" id="your_name" placeholder="Your Name"/>
+                                    <input type="text" name="userID" id="your_name" placeholder="Tên Đăng Nhập"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                    <input type="password" name="password"  placeholder="Password"/>
+                                    <input type="password" name="password"  placeholder="Mật Khẩu"/>
                                 </div>
                                 <div class="form-group">
                                     <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                                    <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                                    <label for="remember-me" class="label-agree-term"><span><span></span></span>Ghi nhớ tình trạng đăng nhập</label>
                                 </div>
                                 <div class="form-group form-button">
                                     <input type="submit" name="action" id="signin" class="form-submit" value="Login"/>
                                 </div>
                             </form>
                             <div class="social-login">
-                                <span class="social-label">Or login with</span>
+                                <span class="social-label">Đăng nhập bằng dịch vụ</span>
                                 <ul class="socials">
                                     <!-- <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
                                     <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li> -->

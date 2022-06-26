@@ -58,7 +58,7 @@
                         <!-- ============================================================== -->
                         <!-- Logo -->
                         <!-- ============================================================== -->
-                        <a class="navbar-brand ms-4" href="admin.jsp">
+                        <a class="navbar-brand ms-4" href="index.jsp">
                             <!-- Logo icon -->
                             <b class="logo-icon">
                                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -245,12 +245,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#" class="btn btn-danger d-none d-md-inline-block text-white"
-                                   target="_blank">Admin</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
