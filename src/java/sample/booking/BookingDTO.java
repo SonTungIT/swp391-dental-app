@@ -6,16 +6,13 @@
 package sample.booking;
 
 import java.sql.Date;
-import java.sql.Time;
-import sample.services.ServiceDTO;
-import sample.user.DoctorDTO;
-import sample.user.UserDTO;
 
 /**
  *
  * @author QUANG VAN
  */
 public class BookingDTO {
+
     private String bookingID;
     private String patientID;
     private String patientName;
@@ -23,19 +20,25 @@ public class BookingDTO {
     private String serviceID;
     private String serviceName;
     private String doctorName;
-    private String dateBooking;
-    private String timeBooking;    
+    private Date dateBooking;
+    private String timeBooking;
     private String slotName;
     private String slotTime;
-    private boolean status;
-    
-    
-    
-    
+    private String status;
+
     public BookingDTO() {
     }
 
-    public BookingDTO(String bookingID, String patientName, String patientGender, String serviceName, String doctorName, String dateBooking, String timeBooking, String slotName, String slotTime, boolean status) {
+    public BookingDTO(String bookingID, String patientID, String serviceID, Date dateBooking, String timeBooking, String status) {
+        this.bookingID = bookingID;
+        this.patientID = patientID;
+        this.serviceID = serviceID;
+        this.dateBooking = dateBooking;
+        this.timeBooking = timeBooking;
+        this.status = status;
+    }
+
+    public BookingDTO(String bookingID, String patientName, String patientGender, String serviceName, String doctorName, Date dateBooking, String timeBooking, String slotName, String slotTime, String status) {
         this.bookingID = bookingID;
         this.patientName = patientName;
         this.patientGender = patientGender;
@@ -48,7 +51,7 @@ public class BookingDTO {
         this.status = status;
     }
 
-    public BookingDTO(String bookingID, String patientID, String patientName, String patientGender, String serviceID, String serviceName, String doctorName, String dateBooking, String timeBooking, String slotName, String slotTime, boolean status) {
+    public BookingDTO(String bookingID, String patientID, String patientName, String patientGender, String serviceID, String serviceName, String doctorName, Date dateBooking, String timeBooking, String slotName, String slotTime, String status) {
         this.bookingID = bookingID;
         this.patientID = patientID;
         this.patientName = patientName;
@@ -119,11 +122,11 @@ public class BookingDTO {
         this.doctorName = doctorName;
     }
 
-    public String getDateBooking() {
+    public Date getDateBooking() {
         return dateBooking;
     }
 
-    public void setDateBooking(String dateBooking) {
+    public void setDateBooking(Date dateBooking) {
         this.dateBooking = dateBooking;
     }
 
@@ -151,22 +154,12 @@ public class BookingDTO {
         this.slotTime = slotTime;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
-    
-    
-    
-    
-    
-    
 
-    
-    
-    
-    
 }

@@ -30,7 +30,13 @@ public class UserDTO {
     public UserDTO(String fullName) {
         this.fullName = fullName;
     }
-    
+
+    public UserDTO(String userID, String fullName, String image) {
+        this.userID = userID;
+        this.fullName = fullName;
+        this.image = image;
+    }
+
     public UserDTO(String fullName, String gender) {
         this.fullName = fullName;
         this.gender = gender;
@@ -137,18 +143,19 @@ public class UserDTO {
         this.phone = phone;
         this.status = status;
     }
-    public UserDTO(String userID,  String fullName,  String gender,   String email, String phone, boolean status) {
-        this.userID = userID;        
-        this.fullName = fullName;        
-        this.gender = gender;       
+
+    public UserDTO(String userID, String fullName, String gender, String email, String phone, boolean status) {
+        this.userID = userID;
+        this.fullName = fullName;
+        this.gender = gender;
         this.email = email;
         this.phone = phone;
         this.status = status;
     }
-    
-    public UserDTO(String userID,  String fullName, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
-        this.userID = userID;        
-        this.fullName = fullName;     
+
+    public UserDTO(String userID, String fullName, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
+        this.userID = userID;
+        this.fullName = fullName;
         this.gender = gender;
         this.address = address;
         this.image = image;

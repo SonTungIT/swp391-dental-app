@@ -5,24 +5,19 @@
  */
 package sample.booking;
 
-import sample.user.DoctorDTO;
+import java.sql.Date;
 
 /**
  *
  * @author QUANG VAN
  */
 public class ScheduleDTO {
-    private String scheduleID;
-    private DoctorDTO doctorID;
-    private SlotDTO slotID;
-    private String  status;
 
-    public ScheduleDTO(String scheduleID, DoctorDTO doctorID, SlotDTO slotID, String status) {
-        this.scheduleID = scheduleID;
-        this.doctorID = doctorID;
-        this.slotID = slotID;
-        this.status = status;
-    }
+    private String scheduleID;
+    private String doctorID;
+    private String slotID;
+    private String dayWork;
+    private boolean status;
 
     public ScheduleDTO() {
     }
@@ -35,28 +30,46 @@ public class ScheduleDTO {
         this.scheduleID = scheduleID;
     }
 
-    public DoctorDTO getDoctorID() {
+    public String getDoctorID() {
         return doctorID;
     }
 
-    public void setDoctorID(DoctorDTO doctorID) {
+    public void setDoctorID(String doctorID) {
         this.doctorID = doctorID;
     }
 
-    public SlotDTO getSlotID() {
+    public String getSlotID() {
         return slotID;
     }
 
-    public void setSlotID(SlotDTO slotID) {
+    public void setSlotID(String slotID) {
         this.slotID = slotID;
     }
 
-    public String getStatus() {
+    public String getDayWork() {
+        return dayWork;
+    }
+
+    public void setDayWork(String dayWork) {
+        this.dayWork = dayWork;
+    }
+
+    
+
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
-    
+
+    public ScheduleDTO(String scheduleID, String doctorID, String slotID, String dayWork, boolean status) {
+        this.scheduleID = scheduleID;
+        this.doctorID = doctorID;
+        this.slotID = slotID;
+        this.dayWork = dayWork;
+        this.status = status;
+    }
+
 }

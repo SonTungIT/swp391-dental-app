@@ -10,12 +10,13 @@ package sample.booking;
  * @author QUANG VAN
  */
 public class SlotDTO {
+
     private String slotID;
     private String slotName;
     private String slotTime;
     private String slotDateStart;
     private String slotDateEnd;
-    private String status;
+    private boolean status;
 
     public SlotDTO() {
     }
@@ -25,7 +26,7 @@ public class SlotDTO {
         this.slotTime = slotTime;
     }
 
-    public SlotDTO(String slotID, String slotName, String slotTime, String slotDateStart, String slotDateEnd, String status) {
+    public SlotDTO(String slotID, String slotName, String slotTime, String slotDateStart, String slotDateEnd, boolean status) {
         this.slotID = slotID;
         this.slotName = slotName;
         this.slotTime = slotTime;
@@ -74,12 +75,12 @@ public class SlotDTO {
         this.slotDateEnd = slotDateEnd;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
-    
+
 }

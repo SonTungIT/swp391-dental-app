@@ -4,7 +4,14 @@
     Author     : Lenovo Legion
 --%>
 
+<%@page import="sample.services.ServiceDTO"%>
+<%@page import="sample.booking.SlotDTO"%>
 <%@page import="sample.user.UserDTO"%>
+<%@page import="java.sql.Date"%>
+
+<%@page import="sample.user.DoctorDTO"%>
+
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +27,6 @@
             addEventListener("load", function () {
                 setTimeout(hideURLbar, 0);
             }, false);
-
             function hideURLbar() {
                 window.scrollTo(0, 1);
             }
@@ -47,7 +53,44 @@
     <body>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                response.sendRedirect("login.jsp");
+            }
+
+            String sID = request.getParameter("serviceID");
+            if (sID == null) {
+                sID = "";
+            }
+            String sName = request.getParameter("serviceName");
+            if (sName == null) {
+                sName = "--------------Dịch Vụ--------------";
+            }
+            String drID = request.getParameter("doctorID");
+            if (drID == null) {
+                drID = "";
+            }
+            String drName = (String) request.getAttribute("doctorName");
+            if (drName == null) {
+                drName = "----------Bác Sĩ----------";
+            }
+            String dateBooking = request.getParameter("bookingDate");
+            if (dateBooking == null) {
+                dateBooking = "";
+            }
+            String error = (String) request.getAttribute("ERROR");
+            if (error == null) {
+                error = "";
+            }
+            String errorTime = (String) request.getAttribute("ERROR_TIME");
+            if (errorTime == null) {
+                errorTime = "";
+            }
+            String errorDate = (String) request.getAttribute("ERROR_NULLDATE");
+            if (errorDate == null) {
+                errorDate = "";
+            }
         %>
+
         <!-- top header -->
         <div class="header-top">
             <div class="container">
@@ -157,6 +200,7 @@
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
                         <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
                     </ul>
+<<<<<<< HEAD
 
                     <% if (loginUser == null) {
                     %>
@@ -245,6 +289,11 @@
                         }
                     %>
 
+=======
+                    <div class="login-icon ml-2">
+                        <a class="user" href="login.jsp"> LOGIN </a>
+                    </div>
+>>>>>>> d7cbbef5e8e6ba4f126c82784efac2e6b6f3786d
                 </nav>
                 <div class="clear"></div>
                 <!-- //nav -->
@@ -265,125 +314,111 @@
                 <h2 class="heading text-center mb-sm-5 mb-4">Đặt Lịch</h2>
                 <div class="row agileinfo_mail_grids">
                     <div class="col-lg-8 agileinfo_mail_grid_right">
-                        <form action="#" method="post">
-                            <div class="row">
-                                <div class="col-md-4 wthree_contact_left_grid pr-md-0">
-                                    <div class="form-group">
-                                        <input type="text" name="name" class="form-control" placeholder="Name" required="">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 wthree_contact_left_grid pr-md-0">
-                                    <div class="form-group">
-                                        <input type="text" name="phone number" class="form-control"
-                                               placeholder="Phone Number" required="">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 wthree_contact_left_grid pr-md-0">
-                                    <div class="form-group">
-                                        <input type="email" name="email" class="form-control" placeholder="Email"
-                                               required="">
-                                    </div>
-                                </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label style="width: 50%;padding: 0 10px;">
-                                            Service
-                                            <span class="">
-                                                <select name="menu-dichvu" aria-required="true" aria-invalid="false">
-                                                    <option value="">---</option>
-                                                    <option value="Niềng răng trong suốt 3D Invisalign">Niềng răng trong
-                                                        suốt 3D Invisalign</option>
-                                                    <option value="Niềng răng mắc cài tự buộc thông minh">Niềng răng mắc cài
-                                                        tự buộc thông minh</option>
-                                                    <option value="Niềng răng mắc cài kim loại">Niềng răng mắc cài kim loại
-                                                    </option>
-                                                    <option value="Bọc răng sứ thẩm mỹ">Bọc răng sứ thẩm mỹ</option>
-                                                    <option value="Điều trị cười hở lợi">Điều trị cười hở lợi</option>
-                                                    <option value="Khám răng miệng miễn phí">Khám răng miệng miễn phí
-                                                    </option>
+                        <div class="row">
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label style="width: 50%;padding: 0 10px;">
+                                        Service
+                                        <span class="">
+                                            <form action="MainController" id="form_SV">
+                                                <select  name="serviceName"  onchange="showService()">
+                                                    <option class="form-option" value="<%=sName%>"><%=sName%></option>
+                                                    <% List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
+                                                        if (listService != null) {
+                                                            if (listService.size() > 0) {
+                                                                for (ServiceDTO service : listService) {
+                                                    %> 
+                                                    <option class="form-option" value="<%=service.getServiceName()%>"><%=service.getServiceName()%> <%=service.getPrice()%>$ </option>
+                                                    <%
+                                                                }
+                                                            }
+                                                        }
+                                                    %>
                                                 </select>
-                                            </span>
-                                        </label>
-                                    </div>
+                                                <input type="hidden" name="action" value="ShowDRByCT"/>                          
+                                            </form> 
+                                        </span>
+                                    </label>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label style="width: 50%;padding: 0 10px;">
-                                            Chọn ngày thăm khám
-                                            <span class="wpcf7-form-control-wrap date-ngay">
-                                                <input type="date" name="date-ngay" value="" id="datepicker"
-                                                       min="Now" aria-required="true" aria-invalid="false">
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label style="width: 50%;padding: 0 10px;">
+                                        Chọn ngày khám:
+                                        <span class="wpcf7-form-control-wrap date-ngay">
+                                            <form action="MainController" id="form_DR" name="from_DR">
+                                                <div id="dateBK">
+                                                    <input type="date" id="dateB" name="bookingDate" value="<%=dateBooking%>" required="" onchange="showDate()"/></br></br>
+                                                </div>
+                                                <input type="hidden" name="serviceName" value="<%=sName%>"/>
+                                                <div class="" id="doctor" style="display: none" > 
+                                                    <select name="doctorID" onchange="showDoctor()">
+                                                        <option class="form-option" value="<%=drID%>"><%=drName%></option>
+                                                        <%
+                                                            List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR_CT");
+                                                            if (listDoctor != null) {
+                                                                if (listDoctor.size() > 0) {
 
-                                <div class="booking-time">
-                                    <div class="dv-title"> Chọn giờ thăm khám</div>
+                                                                    for (DoctorDTO doctor : listDoctor) {
+
+                                                        %>
+                                                        <option class="form-option" value="<%=doctor.getUserID()%>"><%=doctor.getFullName()%></option>
+                                                        <%
+                                                                    }
+                                                                }
+                                                            }
+                                                        %>
+                                                    </select>  
+                                                </div>                                            
+                                                <input type="hidden" name="action" value="ShowSlotDR" /> 
+                                            </form>
+                                            <%=error%>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <div class="booking-time">
+                                <div class="dv-title"> Chọn giờ thăm khám</div>
+                                <form action="MainController"> 
+                                    <input type="hidden" name="serviceID" value="<%=sID%>"/>
+                                    <input type="hidden" name="serviceName" value="<%=sName%>"/>
+                                    <input type="hidden" name="doctorID" value="<%=drID%>"/>
+                                    <input type="hidden" name="dateBooking" value="<%=dateBooking%>"/>
+                                    <input type="hidden" name="patientID" value="<%=loginUser.getUserID()%>"/>
                                     <div class="time">
-                                        <div class="time__space"><input type="radio" name="time" value="7:00" checked>7:00</div>
-                                        <div class="time__space"><input type="radio" name="time" value="7:30" >7:30</div>
-                                        <div class="time__space"><input type="radio" name="time" value="8:00" >8:00</div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="8:30">8:30
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="9:00">9:00
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="9:30">9:30
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="10:00">10:00
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="10:30">10:30
 
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="13:00">13:00
 
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="13:30">13:30
+                                        <%
+                                            List<SlotDTO> listFT = (List<SlotDTO>) request.getAttribute("LIST_SLOT_FT");
+                                            if (listFT != null) {
+                                                if (listFT.size() > 0) {
 
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="14:00">14:00
-
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="14:30">14:30
-
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="15:00">15:00
-
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="15:30">15:30
-
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="16:00">16:00
-
-                                        </div>
-                                        <div class="time__space">
-                                            <input type="radio" name="time" value="16:30">16:30
-
-                                        </div>
-
+                                                    for (SlotDTO slot : listFT) {
+                                        %>
+                                        <div class="time__space"><input type="radio" required="" name="slotTime" value="<%=slot.getSlotTime()%>"/><%=slot.getSlotTime()%></div>
+                                            <%
+                                                        }
+                                                    }
+                                                }
+                                            %>
                                     </div>
-                                </div>
-
-                                <div class="col-md-12">
+                                    <%=errorTime%></br>
+                                    <input type="hidden" name="action" value="CreateBooking" />                            
                                     <div class="submit-buttons">
                                         <button type="submit" class="btn">Submit</button>
                                     </div>
-                                </div>
+                                </form>
+
                             </div>
-                        </form>
+
+
+                        </div>
+
                     </div>
                     <div class="col-lg-4 col-md-6 mt-lg-0 mt-4 contact-info">
                         <h4 class="mb-4">Address Information</h4>
@@ -481,17 +516,25 @@
             </a>
         </div>
         <!-- move top -->
-        <!-- JS bootstrap banner -->
-        <!-- JavaScript Bundle with Popper -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-        <!-- JavaScript Bundle with Popper -->  
+
+
+        <script>
+            function  showService()
+            {
+                var form = document.getElementById("form_SV");
+                form.submit();
+
+            }
+            function showDoctor()
+            {
+                var form = document.getElementById("form_DR");
+                form.submit();
+            }
+            function showDate() {
+                document.getElementById("doctor").style.display = 'block';
+            }
+        </script>
+
+
     </body>
 </html>
