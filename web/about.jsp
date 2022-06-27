@@ -402,14 +402,7 @@
     <!-- //footer -->
 
     <!-- copyright -->
-    <div class="copyright">
-        <div class="container py-4">
-            <div class=" text-center">
-                <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a>
-                </p>
-            </div>
-        </div>
-    </div>
+    
     <!-- //copyright -->
 
     <!-- move top -->

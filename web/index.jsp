@@ -382,7 +382,7 @@
                                     <span class="icon">
                                         <span class="fa fa-birthday-cake"></span>
                                     </span>
-                                    <h4>Root Canals</h4>
+                                    <h4>Niềng Răng Chỉnh Nha</h4>
                                 </div>
                             </div>
                             <div class="col-md-3 col-6">
@@ -390,7 +390,7 @@
                                     <span class="icon">
                                         <span class="fa fa-rocket"></span>
                                     </span>
-                                    <h4>Teeth Whitening</h4>
+                                    <h4>Răng Sứ Thẩm Mỹ</h4>
                                 </div>
                             </div>
                             <!-- .about-box ends here -->
@@ -399,7 +399,7 @@
                                     <span class="icon">
                                         <span class="fa fa-stethoscope"></span>
                                     </span>
-                                    <h4>Check-ups</h4>
+                                    <h4>Cấy ghép răng implant</h4>
                                 </div>
                             </div>
                             <div class="col-md-3 col-6 mt-md-0 mt-4">
@@ -407,7 +407,7 @@
                                     <span class="icon">
                                         <span class="fa fa-coffee"></span>
                                     </span>
-                                    <h4>Dental Exams</h4>
+                                    <h4>Dịch vụ bệnh lý</h4>
                                 </div>
                             </div>
                         </div>
@@ -698,14 +698,7 @@
         <!-- //footer -->
 
         <!-- copyright -->
-        <div class="copyright">
-            <div class="container py-4">
-                <div class=" text-center">
-                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+        
         <!-- //copyright -->
 
         <!-- move top -->

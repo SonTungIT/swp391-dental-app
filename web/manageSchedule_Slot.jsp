@@ -366,13 +366,16 @@
                                                         </div>
                                                     </td>
                                                     <td>                     
-                                                        <button type="submit" name="action" value="CreateSC" class="btn btn-success d-none d-md-inline-block text-white">Tạo
+                                                        <button type="submit" name="action" value="CreateSC" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-circle-plus"></i>
                                                         </button>
                                                     </td>
-                                                    <td>                     
-                                                        <button type="submit" name="action" value="DeleteSC" class="btn btn-success d-none d-md-inline-block text-white">Xoá
+                                                    <td>                
+                                                        <button type="submit" name="action" value="DeleteSC" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-trash-can"></i>
                                                         </button>
                                                     </td>
+
                                                 </tr>
                                             </form>
                                             <%
