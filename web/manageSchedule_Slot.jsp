@@ -361,7 +361,7 @@
                                                             <input type="checkbox"  name="day3" value="Wednesday"/>Wednesday</br>                                                  
                                                             <input type="checkbox"  name="day4" value="Thursday"/>Thursday</br>                                                  
                                                             <input type="checkbox"  name="day5" value="Friday"/>Friday</br>                                                  
-                                                            <input type="checkbox"  name="day6" value="Saturday"/>Saturday </br>                                                  
+                                                            <input type="checkbox"  name="day6" value="Saturday"/>Saturday</br>                                                  
                                                             <input type="checkbox"  name="day7" value="Sunday"/>Sunday</br> 
                                                         </div>
                                                     </td>

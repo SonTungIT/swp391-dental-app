@@ -33,14 +33,14 @@ public class PatientDAO {
 
     private static final String SELECT_SVID = "SELECT serviceID FROM Service WHERE serviceName = ?";
     private static final String SELECT_DRNAME = "SELECT fullName FROM Users us JOIN Doctor dr ON us.userID = dr.doctorID WHERE doctorID = ?";
-    private static final String SELECT_SLOTID = "SELECT slotID FROM Slot WHERE slotTime = ?";
+    
     private static final String CHECK_DUPLICATE_BK_ID = "SELECT patientID FROM Booking WHERE bookingID = ? ";
     private static final String CREATE_BOOKING = "INSERT INTO Booking(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status) VALUES(?, ?, ?, ?, ?, ?, ?)";
     private static final String CHECK_DUPLICATE_BK_SLOT = "SELECT DISTINCT sl.slotID From Slot sl JOIN Schedule sc ON sc.slotID = sl.slotID \n"
             + "								JOIN Doctor dt ON dt.doctorID = sc.doctorID JOIN CategoryService cs\n"
             + "								ON cs.categoryID = dt.categoryID JOIN Service sv ON sv.categoryID = cs.categoryID\n"
             + "								JOIN Booking bk ON bk.serviceID = sv.serviceID\n"
-            + "								WHERE sl.slotID = ? AND timeBooking = slotTime";
+            + "								WHERE sl.slotID = ? AND timeBooking = slotTime AND dateBooking = ?";
 
     public List<ServiceDTO> showListService() throws SQLException, ClassNotFoundException {
         List<ServiceDTO> list = new ArrayList<>();
@@ -260,38 +260,7 @@ public class PatientDAO {
         return serviceID;
     }
 
-    public String select_SlotID(String slotTime) throws SQLException {
-        String slotID = "";
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                ptm = conn.prepareStatement(SELECT_SLOTID);
-                ptm.setString(1, slotTime);
-                rs = ptm.executeQuery();
-                if (rs.next()) {
-                    slotID = rs.getString("slotID");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-
-        }
-        return slotID;
-    }
-
+    
     public String select_doctorName(String doctorID) throws SQLException {
         String doctorName = "";
         Connection conn = null;
@@ -385,8 +354,8 @@ public class PatientDAO {
         }
         return check;
     }
-   
-    public boolean checkDuplicate_BK_SLOT(String slotID) throws SQLException {
+
+    public boolean checkDuplicate_BK_SLOT(String slotID, Date dateBooking) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -396,6 +365,7 @@ public class PatientDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(CHECK_DUPLICATE_BK_SLOT);
                 ptm.setString(1, slotID);
+                ptm.setDate(2, dateBooking);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     check = true;

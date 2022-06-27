@@ -25,8 +25,8 @@ import sample.user.PatientDAO;
 @WebServlet(name = "CreateBookController", urlPatterns = {"/CreateBookController"})
 public class CreateBookController extends HttpServlet {
 
-    private static final String ERROR = "booking.jsp";
-    private static final String SUCCESS = "booking.jsp";
+    private static final String ERROR = "MainController?action=ShowService";
+    private static final String SUCCESS = "MainController?action=ShowService";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,7 +42,6 @@ public class CreateBookController extends HttpServlet {
             //Lay serviceID ra
             PatientDAO dao = new PatientDAO();
             String serviceID = dao.select_ServiceID(serviceName);
-            String slotID = dao.select_SlotID(slotTime);
             //So sanh gio book neu hom nay booking
             long millis = System.currentTimeMillis();
             Date curDate = new java.sql.Date(millis);
@@ -77,19 +76,16 @@ public class CreateBookController extends HttpServlet {
                 BookingDTO bk = new BookingDTO(bookingID, patientID, serviceID, doctorID, dateBooking, slotTime, status);
                 boolean check = dao.createBooking(bk);
 
-                if (check) {                 
-                        url = SUCCESS;
+                if (check) {
+                    request.setAttribute("MESSAGE_CRBK", "Bạn đã đặt lịch thành công!");
+                    url = SUCCESS;
                 }
             } else {
                 request.setAttribute("ERROR_TIME", "The reservation time must be 30 minutes older than the current time!!");
             }
 
         } catch (Exception e) {
-            if (e.toString().contains("duplicate")) {
-
-                request.setAttribute("PRODUCT_ERROR", "");
-            }
-            log("Error at CreateProductController" + e.toString());
+            log("Error at CreateBookController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

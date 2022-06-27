@@ -26,15 +26,14 @@ import sample.user.PatientDAO;
 @WebServlet(name = "ShowSlotDRController", urlPatterns = {"/ShowSlotDRController"})
 public class ShowSlotDRController extends HttpServlet {
 
-    private static final String ERROR = "MainController?action=ShowService&sName&action=ShowDRByCT&sName&drID&dateBooking&action=ShowSlotDR";
-    private static final String SUCCESS = "MainController?action=ShowService&sName&action=ShowDRByCT&sName&drID&dateBooking&action=ShowSlotDR";
+    private static final String ERROR = "MainController?action=ShowService&sName&action=ShowDRByCT&drID&dateBooking&action=ShowSlotDR";
+    private static final String SUCCESS = "MainController?action=ShowService&sName&action=ShowDRByCT&drID&dateBooking&action=ShowSlotDR";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try {
-            String serviceName = request.getParameter("serviceName");
+        try {           
             String doctorID = request.getParameter("doctorID");
             Date bookingDate = Date.valueOf(request.getParameter("bookingDate"));
             long millis = System.currentTimeMillis();
@@ -54,13 +53,15 @@ public class ShowSlotDRController extends HttpServlet {
                 List<SlotDTO> listSlot_FT = new ArrayList<>();
                 if (listFT.size() > 0) {
                     for (ScheduleDTO schedule : listFT) {
-                        if (!dao.checkDuplicate_BK_SLOT(schedule.getSlotID())) {
+                        if (!dao.checkDuplicate_BK_SLOT(schedule.getSlotID(), bookingDate)) {
                             SlotDTO slot = dao.checkSlot(schedule.getSlotID());
                             listSlot_FT.add(slot);
                             request.setAttribute("LIST_SLOT_FT", listSlot_FT);
                         }
                     }
                     url = SUCCESS;
+                } else {
+                    request.setAttribute("NOSLOT", "Bác sĩ không có lịch vào ngày này. Xin quý khách vui lòng chọn ngày khác!!!");
                 }
             } else {
                 request.setAttribute("ERROR", "Date of booking must be greater than or equal to current date!");
