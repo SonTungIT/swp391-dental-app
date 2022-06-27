@@ -24,8 +24,9 @@ import sample.user.DoctorDTO;
 @WebServlet(name = "SearchDoctorController", urlPatterns = {"/SearchDoctorController"})
 public class SearchDoctorController extends HttpServlet {
 
-    private  static final String ERROR ="manageDoctor.jsp";
-    private  static final String SUCCESS ="manageDoctor.jsp";
+    private static final String ERROR = "manageDoctor.jsp";
+    private static final String SUCCESS = "manageDoctor.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,12 +36,30 @@ public class SearchDoctorController extends HttpServlet {
             AdminDAO dao = new AdminDAO();
             HttpSession session = request.getSession();
             List<DoctorDTO> listDoctor = dao.searchListDoctor(search);
-            if(listDoctor.size()> 0){
-                session.setAttribute("LIST_DOCTOR", listDoctor);
+
+            if (listDoctor.size() > 0) {
+                int page, numperpage = 5;
+                int size = listDoctor.size();
+                int number = (size % 5 == 0 ? (size / 5) : (size / 5)) + 1;
+                String xpage = request.getParameter("page");
+                if (xpage == null) {
+                    page = 1;
+                } else {
+                    page = Integer.parseInt(xpage);
+                }
+                int start, end;
+                start = (page - 1) * numperpage;
+                end = Math.min(page * numperpage, size);
+                List<DoctorDTO> listAllDoctor = dao.getListByPage(listDoctor, start, end);
+                session.setAttribute("LIST_DOCTOR", listAllDoctor);
+                session.setAttribute("page", page);
+                session.setAttribute("number", number);
+                session.setAttribute("search", search);
+
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at SearchController:" +e.toString());
+            log("Error at SearchController:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

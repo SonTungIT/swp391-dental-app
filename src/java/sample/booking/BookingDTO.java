@@ -27,7 +27,7 @@ public class BookingDTO {
     private String timeBooking;    
     private String slotName;
     private String slotTime;
-    private boolean status;
+    private String status;
     
     
     
@@ -35,7 +35,7 @@ public class BookingDTO {
     public BookingDTO() {
     }
 
-    public BookingDTO(String bookingID, String patientName, String patientGender, String serviceName, String doctorName, String dateBooking, String timeBooking, String slotName, String slotTime, boolean status) {
+    public BookingDTO(String bookingID, String patientName, String patientGender, String serviceName, String doctorName, String dateBooking, String timeBooking, String slotName, String slotTime, String status) {
         this.bookingID = bookingID;
         this.patientName = patientName;
         this.patientGender = patientGender;
@@ -48,7 +48,7 @@ public class BookingDTO {
         this.status = status;
     }
 
-    public BookingDTO(String bookingID, String patientID, String patientName, String patientGender, String serviceID, String serviceName, String doctorName, String dateBooking, String timeBooking, String slotName, String slotTime, boolean status) {
+    public BookingDTO(String bookingID, String patientID, String patientName, String patientGender, String serviceID, String serviceName, String doctorName, String dateBooking, String timeBooking, String slotName, String slotTime, String status) {
         this.bookingID = bookingID;
         this.patientID = patientID;
         this.patientName = patientName;
@@ -151,13 +151,15 @@ public class BookingDTO {
         this.slotTime = slotTime;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
+
+    
     
     
     

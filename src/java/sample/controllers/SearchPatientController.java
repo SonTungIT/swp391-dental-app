@@ -25,8 +25,9 @@ import sample.user.UserDTO;
 @WebServlet(name = "SearchPatientController", urlPatterns = {"/SearchPatientController"})
 public class SearchPatientController extends HttpServlet {
 
-    private  static final String ERROR ="managePatient.jsp";
-    private  static final String SUCCESS ="managePatient.jsp";
+    private static final String ERROR = "managePatient.jsp";
+    private static final String SUCCESS = "managePatient.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -36,12 +37,27 @@ public class SearchPatientController extends HttpServlet {
             AdminDAO dao = new AdminDAO();
             HttpSession session = request.getSession();
             List<UserDTO> listPatient = dao.searchListPatient(search);
-            if(listPatient.size()> 0){
-                session.setAttribute("LIST_ALL_PATIENT", listPatient);
+            if (listPatient.size() > 0) {
+                int page, numperpage = 5;
+                int size = listPatient.size();
+                int number = (size % 5 == 0 ? (size / 5) : (size / 5)) + 1;
+                String xpage = request.getParameter("page");
+                if (xpage == null) {
+                    page = 1;
+                } else {
+                    page = Integer.parseInt(xpage);
+                }
+                int start, end;
+                start = (page - 1) * numperpage;
+                end = Math.min(page * numperpage, size);
+                List<UserDTO> listAllPatient = dao.getListPatientByPage(listPatient, start, end);
+                session.setAttribute("LIST_ALL_PATIENT", listAllPatient);
+                session.setAttribute("page", page);
+                session.setAttribute("number", number);
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at SearchPatientController:" +e.toString());
+            log("Error at SearchPatientController:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
