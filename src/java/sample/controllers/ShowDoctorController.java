@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.omg.PortableInterceptor.SUCCESSFUL;
+
 import sample.user.AdminDAO;
 import sample.user.DoctorDTO;
 import sample.user.UserDTO;
