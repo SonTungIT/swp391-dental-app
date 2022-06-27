@@ -3,7 +3,8 @@
     Created on : Jun 19, 2022, 1:12:45 PM
     Author     : QUANG VAN
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.List"%>
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -38,6 +39,26 @@
         <!-- Icon CND fontawesome -->
         <title>Manage Patient Page</title>
     </head>
+    <style>
+
+        .pagination{
+            display: inline-block;
+        }
+        .pagina a{
+            color: black;
+            font-size: 22px;
+            float: left ;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+        .pagination a.active{
+            background-color: #4CAF50;
+            color: while;
+        }
+        .pagination a:hover:not(.active){
+            background-color: chocolate;
+        }
+    </style>
     <body>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -175,9 +196,7 @@
                                     href="pages-profile.html" aria-expanded="false">
                                     <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
                             </li> -->
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="setting.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí tài khoản</span></a></li>
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Show" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bác sĩ</span></a></li>
@@ -298,6 +317,12 @@
                                             if (list != null) {
                                                 if (!list.isEmpty()) {
                                         %>
+                                        <c:set var="page" value="${sessionScope.page}"/>
+                                        <div class="pagination">
+                                            <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
+                                                <a class="${i==page?"active":""}" href="MainController?action=ShowAllPatient&page=${i}">${i}</a>
+                                            </c:forEach>
+                                        </div>
                                         <table class="table user-table">
                                             <thead>
                                                 <tr>

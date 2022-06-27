@@ -3,7 +3,8 @@
     Created on : Jun 20, 2022, 10:46:00 PM
     Author     : QUANG VAN
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="sample.user.UserDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="sample.booking.BookingDTO"%>
@@ -14,6 +15,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Appointment Booking Page</title>
     </head>
+    <style>
+
+        .pagination{
+            display: inline-block;
+        }
+        .pagina a{
+            color: black;
+            font-size: 22px;
+            float: left ;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+        .pagination a.active{
+            background-color: #4CAF50;
+            color: while;
+        }
+        .pagination a:hover:not(.active){
+            background-color: chocolate;
+        }
+    </style>
     <body>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -42,6 +63,12 @@
             if (list != null) {
                 if (!list.isEmpty()) {
         %>
+        <c:set var="page" value="${sessionScope.page}"/>
+        <div class="pagination">
+            <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
+                <a class="${i==page?"active":""}" href="MainController?action=ShowBooking&page=${i}">${i}</a>
+            </c:forEach>
+        </div>
         <table border="1">
             <thead>
                 <tr>
@@ -79,7 +106,7 @@
                     <td><%=booking.getTimeBooking()%></td>
                     <td><%=booking.getSlotName()%></td>
                     <td><%=booking.getSlotTime()%></td>
-                    <td><%=booking.isStatus()%></td>                    
+                    <td><%=booking.getStatus()%></td>                    
                     <td>
                         <form action="MainController">
                             <input type="hidden" name="bookingID" value="<%=booking.getBookingID()%>"/>

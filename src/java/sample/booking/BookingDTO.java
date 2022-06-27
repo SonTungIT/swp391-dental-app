@@ -15,6 +15,7 @@ public class BookingDTO {
 
     private String bookingID;
     private String patientID;
+    private String doctorID;
     private String patientName;
     private String patientGender;
     private String serviceID;
@@ -26,19 +27,23 @@ public class BookingDTO {
     private String slotTime;
     private String status;
 
+    
+       
     public BookingDTO() {
     }
 
-    public BookingDTO(String bookingID, String patientID, String serviceID, Date dateBooking, String timeBooking, String status) {
+    public BookingDTO(String bookingID, String patientID, String serviceID, String doctorID, Date dateBooking, String timeBooking, String status) {
         this.bookingID = bookingID;
         this.patientID = patientID;
         this.serviceID = serviceID;
+        this.doctorID = doctorID;
         this.dateBooking = dateBooking;
         this.timeBooking = timeBooking;
         this.status = status;
     }
 
     public BookingDTO(String bookingID, String patientName, String patientGender, String serviceName, String doctorName, Date dateBooking, String timeBooking, String slotName, String slotTime, String status) {
+
         this.bookingID = bookingID;
         this.patientName = patientName;
         this.patientGender = patientGender;
@@ -51,7 +56,9 @@ public class BookingDTO {
         this.status = status;
     }
 
+   
     public BookingDTO(String bookingID, String patientID, String patientName, String patientGender, String serviceID, String serviceName, String doctorName, Date dateBooking, String timeBooking, String slotName, String slotTime, String status) {
+
         this.bookingID = bookingID;
         this.patientID = patientID;
         this.patientName = patientName;
@@ -64,6 +71,14 @@ public class BookingDTO {
         this.slotName = slotName;
         this.slotTime = slotTime;
         this.status = status;
+    }
+
+    public String getDoctorID() {
+        return doctorID;
+    }
+
+    public void setDoctorID(String doctorID) {
+        this.doctorID = doctorID;
     }
 
     public String getBookingID() {
@@ -162,4 +177,5 @@ public class BookingDTO {
         this.status = status;
     }
 
+    
 }

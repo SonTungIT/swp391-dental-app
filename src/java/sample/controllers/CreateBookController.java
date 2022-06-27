@@ -74,14 +74,11 @@ public class CreateBookController extends HttpServlet {
                     }
                 }
 
-                BookingDTO bk = new BookingDTO(bookingID, patientID, serviceID, dateBooking, slotTime, status);
+                BookingDTO bk = new BookingDTO(bookingID, patientID, serviceID, doctorID, dateBooking, slotTime, status);
                 boolean check = dao.createBooking(bk);
 
-                if (check) {
-                    boolean check_update_SC = dao.updateSchedule(doctorID, dateBooking, slotID);
-                    if (check_update_SC) {
+                if (check) {                 
                         url = SUCCESS;
-                    }
                 }
             } else {
                 request.setAttribute("ERROR_TIME", "The reservation time must be 30 minutes older than the current time!!");

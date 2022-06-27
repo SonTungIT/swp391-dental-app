@@ -3,7 +3,8 @@
     Created on : Jun 6, 2022, 12:14:03 PM
     Author     : Lenovo Legion
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -91,7 +92,7 @@
         <header class="py-3">
             <div class="container">
                 <div id="logo">
-                    <h1> <a href="index.jsp"><span class="fa fa-solid fa-tooth" aria-hidden="true"></span> Nha Khoa Thiên
+                    <h1> <a href="MainController?action=Home"><span class="fa fa-solid fa-tooth" aria-hidden="true"></span> Nha Khoa Thiên
                             Thần </a></h1>
                 </div>
                 <!-- nav -->
@@ -706,6 +707,10 @@
             <a href="#home" class="move-top">
                 <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
             </a>
+        </div>
+        <div class="flex-1 ms-2">            
+            <p class="text-muted mb-0">Số lượng truy cập web</p>
+            <p>${view}</p>
         </div>
         <!-- move top -->
         <!-- JS bootstrap banner -->

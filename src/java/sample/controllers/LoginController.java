@@ -24,11 +24,11 @@ public class LoginController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
     private static final String AD = "AD";
-    private static final String ADMIN_PAGE = "admin.jsp";
+    private static final String ADMIN_PAGE = "HomeController";
     private static final String PT = "PT";
-    private static final String PATIENT_PAGE = "index.jsp";
+    private static final String PATIENT_PAGE = "HomeController";
     private static final String DR = "DR";
-    private static final String DOCTOR_PAGE = "doctor.jsp";
+    private static final String DOCTOR_PAGE = "HomeController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

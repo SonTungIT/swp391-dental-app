@@ -7,55 +7,51 @@ package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import sample.user.AdminDAO;
 import sample.user.UserDTO;
 
 /**
  *
  * @author QUANG VAN
  */
-@WebServlet(name = "ShowPatientController", urlPatterns = {"/ShowPatientController"})
-public class ShowPatientController extends HttpServlet {
+@WebServlet(name = "HomeController", urlPatterns = {"/HomeController"})
+public class HomeController extends HttpServlet {
 
     public static final String ERROR = "error.jsp";
-    public static final String SUCESSFUL = "managePatient.jsp";
+    public static final String HOME_PAGE = "index.jsp";
+    public static final String ADMIN = "admin.jsp";
+    public static final String PATIENT = "index.jsp";
+    public static final String DOCTOR = "doctor.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            AdminDAO dao = new AdminDAO();            
-            List<UserDTO> list = dao.getListAllPatient();
-            int page, numperpage =5;
-            int size = list.size();
-            int number = (size%5==0?(size/5):(size/5)) + 1;
-            String xpage = request.getParameter("page");
-            if(xpage == null){
-                page = 1;
-            } else {
-                page = Integer.parseInt(xpage);
-            }
-            int start, end;
-            start = (page-1) * numperpage;
-            end = Math.min(page*numperpage, size);
-            List<UserDTO> listAllPatient = dao.getListPatientByPage(list, start, end);
+            
             HttpSession session = request.getSession();
-            session.setAttribute("LIST_ALL_PATIENT", listAllPatient);
-            session.setAttribute("page", page);
-            session.setAttribute("number", number);
-            url = SUCESSFUL;
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            if (loginUser != null) {
+                if ("AD".equals(loginUser.getRoleID())) {                    
+                    url = ADMIN;
+                } else if ("PT".equals(loginUser.getRoleID())) {                    
+                    url = PATIENT;
+                } else if ("DR".equals(loginUser.getRoleID())) {                    
+                    url = DOCTOR;
+                }
+            }
+
         } catch (Exception e) {
-            log("Error at DisplayCUSController: " + e.toString());
+            log("Error at HomeController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

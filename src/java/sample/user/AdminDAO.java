@@ -24,16 +24,162 @@ import sample.utils.DBUtils;
  */
 public class AdminDAO {
 
-    private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, doctorID, slotID, dayWork, status) VALUES(?, ?, ?, ?, ?)";
+private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, doctorID, slotID, dayWork, status) VALUES(?, ?, ?, ?, ?)";
     private static final String UPDATE_SCHEDULE_DR = "UPDATE Schedule SET status = ? WHERE doctorID = ? AND dayWork = ?";
     private static final String SHOW_DR_SC = "SELECT userID, fullName, image, categoryName, shift from Users us JOIN Doctor dt ON us.userID = dt.doctorID JOIN CategoryService cs ON  cs.categoryID = dt.categoryID  WHERE us.status = 1 AND fullName like ?";
     private static final String SHOWSLOT = "SELECT slotID, slotName, slotTime, slotDateStart, slotDateEnd, status FROM Slot WHERE slotDateStart = ? OR slotDateEnd = ?";
     private static final String UPDATE_SLOT = "UPDATE Slot SET slotDateStart = ?, slotDateEnd = ?  WHERE slotTime = ?";
     private static final String UPDATE_BOOKING_FAIL_BY_UPDATESLOT = "UPDATE Booking SET status = 'Inactive' WHERE bookingID = ?";
-    private static final String CHECK_BOOKING_FAILBY_UPDATESLOT = "SELECT bookingID, patientID, serviceID, dateBooking, timeBooking, status FROM Booking WHERE dateBooking >= ?";
+    private static final String CHECK_BOOKING_FAILBY_UPDATESLOT = "SELECT bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status FROM Booking WHERE dateBooking >= ?";
     private static final String CHECK_DUPLICATE_SD_ID = "SELECT doctorID FROM Schedule WHERE scheduleID = ? ";
     private static final String CHECK_DUPLICATE_SD_DR_DW_SL = "SELECT scheduleID FROM Schedule WHERE doctorID = ? AND slotID = ? AND dayWork = ?";
     private static final String CHECK_SL_FAIL_BY_UDSL = "select slotID from Slot WHERE slotTime = ? AND slotDateStart !='' AND slotDateEnd !=''";
+    public static void main(String[] args) throws SQLException {
+        AdminDAO dao = new AdminDAO();
+        List<BookingDTO> list = dao.getListAllAppointmentBooking();
+        for (BookingDTO doctor : list) {
+            System.out.println(doctor.getServiceName());
+        }
+
+    }
+
+    public List<UserDTO> getListPatientByPage(List<UserDTO> list, int start, int end) {
+        List<UserDTO> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
+    public List<BookingDTO> getListBookingByPage(List<BookingDTO> list, int start, int end) {
+        List<BookingDTO> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
+    public List<DoctorDTO> getListByPage(List<DoctorDTO> list, int start, int end) {
+        List<DoctorDTO> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
+    public int totalOfBookingByStatusInOneWeek(String status, Date date1, Date date2)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            //1. Connect DB
+            con = DBUtils.getConnection();
+            //2. Create SQL String
+            String sql = "select count(*) from Booking where status='1' And ( dateBooking between ? and ?)";
+            //3. Create Statement and assign value to parameters if any
+            stm = con.prepareStatement(sql);
+            stm.setString(1, status);
+            stm.setDate(2, date1);
+            stm.setDate(3, date2);
+            //4. Execute Query
+            rs = stm.executeQuery();
+            //5. Process Result Set 
+            while (rs.next()) {
+                int booking = rs.getInt(1);
+                return booking;
+            }
+            return 0;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public int getNumberOfView() {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "SELECT * FROM [ViewOfWeb] ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public void updateNumberOfView() {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "update [ViewOfWeb] set viewed = viewed + 1 ";
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public int getNumberOfPatient() {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*)FROM Users where roleID like 'PT' and status = 1 ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getNumberOfBooking() {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "select count(*) from Booking where status = 'Active' ";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    
 
     public List<DoctorDTO> getListAllDoctor() throws SQLException {
         List<DoctorDTO> list = new ArrayList<>();
@@ -589,15 +735,16 @@ public class AdminDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select bk.bookingID, PT.fullName , PT.gender, sv.serviceName , us.fullName, bk.dateBooking, bk.timeBooking,  sl.slotName, sl.slotTime, bk.status from \n"
-                        + "(Select fullName, userID, gender from Users where roleID = 'PT') AS PT \n"
-                        + " inner join Booking bk ON bk.patientID = PT.userID \n"
-                        + " inner join Service sv On sv.serviceID = bk.serviceID\n"
-                        + " inner join CategoryService cs ON cs.categoryID = sv.categoryID\n"
-                        + " inner join Doctor dt ON dt.categoryID	= sv.categoryID\n"
-                        + " inner join Schedule sch ON sch.doctorID = dt.doctorID\n"
-                        + " inner join Slot sl ON sl.slotID = sch.slotID\n"
-                        + " inner join Users us ON us.userID = dt.doctorID";
+                String sql = "select distinct bk.bookingID, us.fullName, us.gender, sv.serviceName,DR.fullName as doctorName,  bk.dateBooking, bk.timeBooking, sl.slotName, sl.slotTime, bk.status	\n"
+                        + "   from Users us inner join Booking bk ON bk.patientID = us.userID \n"
+                        + "				 inner join Service sv On sv.serviceID = bk.serviceID\n"
+                        + "				 inner join CategoryService cs ON cs.categoryID = sv.categoryID\n"
+                        + "				 inner join Doctor dt ON dt.categoryID	= sv.categoryID\n"
+                        + "				 inner join Schedule sch ON sch.doctorID = dt.doctorID\n"
+                        + "				 inner join Slot sl ON sl.slotID = sch.slotID\n"
+                        + "				 inner join (select fullName, userID from Users where roleID ='DR') as DR on DR.userID = dt.doctorID\n"
+                        + "				 where timeBooking = slotTime And bk.doctorID = dt.doctorID\n"
+                        + "				 ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -605,7 +752,7 @@ public class AdminDAO {
                     String patientName = rs.getString("fullName");
                     String patientGender = rs.getString("gender");
                     String serviceName = rs.getString("serviceName");
-                    String doctorName = rs.getString("fullName");
+                    String doctorName = rs.getString("doctorName");
                     Date dateBooking = rs.getDate("dateBooking");
                     String timeBooking = rs.getString("timeBooking");
                     String slotName = rs.getString("slotName");
@@ -664,15 +811,16 @@ public class AdminDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select bk.bookingID, PT.fullName , PT.gender, sv.serviceName , us.fullName, bk.dateBooking, bk.timeBooking,  sl.slotName, sl.slotTime, bk.status from \n"
-                        + "(Select fullName, userID, gender from Users where roleID = 'PT') AS PT \n"
-                        + " inner join Booking bk ON bk.patientID = PT.userID \n"
-                        + " inner join Service sv On sv.serviceID = bk.serviceID\n"
-                        + " inner join CategoryService cs ON cs.categoryID = sv.categoryID\n"
-                        + " inner join Doctor dt ON dt.categoryID	= sv.categoryID\n"
-                        + " inner join Schedule sch ON sch.doctorID = dt.doctorID\n"
-                        + " inner join Slot sl ON sl.slotID = sch.slotID\n"
-                        + " inner join Users us ON us.userID = dt.doctorID where bookingID like ? ";
+                String sql = "select distinct bk.bookingID, us.fullName, us.gender, sv.serviceName,DR.fullName as doctorName,  bk.dateBooking, bk.timeBooking, sl.slotName, sl.slotTime, bk.status	\n"
+                        + "   from Users us inner join Booking bk ON bk.patientID = us.userID \n"
+                        + "				 inner join Service sv On sv.serviceID = bk.serviceID\n"
+                        + "				 inner join CategoryService cs ON cs.categoryID = sv.categoryID\n"
+                        + "				 inner join Doctor dt ON dt.categoryID	= sv.categoryID\n"
+                        + "				 inner join Schedule sch ON sch.doctorID = dt.doctorID\n"
+                        + "				 inner join Slot sl ON sl.slotID = sch.slotID\n"
+                        + "				 inner join (select fullName, userID from Users where roleID ='DR') as DR on DR.userID = dt.doctorID\n"
+                        + "				 where  bk.bookingID like ? and timeBooking = slotTime And bk.doctorID = dt.doctorID \n"
+                        + "				  ";
                 ptm = conn.prepareStatement(sql);
                 ptm.setString(1, "%" + search + "%");
                 rs = ptm.executeQuery();
@@ -681,7 +829,7 @@ public class AdminDAO {
                     String patientName = rs.getString("fullName");
                     String patientGender = rs.getString("gender");
                     String serviceName = rs.getString("serviceName");
-                    String doctorName = rs.getString("fullName");
+                    String doctorName = rs.getString("doctorName");
                     Date dateBooking = rs.getDate("dateBooking");
                     String timeBooking = rs.getString("timeBooking");
                     String slotName = rs.getString("slotName");
@@ -705,6 +853,7 @@ public class AdminDAO {
         }
         return list;
     }
+
 
     public boolean updateSlot(String slotDateStart, String slotEndStart, String slotTime) throws SQLException {
         boolean check = false;
@@ -775,10 +924,11 @@ public class AdminDAO {
                     String bookingID = rs.getString("bookingID");
                     String patientID = rs.getString("patientID");
                     String serviceID = rs.getString("serviceID");
+                    String doctorID = rs.getString("doctorID");
                     Date dateBooking = rs.getDate("dateBooking");
                     String timeBooking = rs.getString("timeBooking");
                     String status = rs.getString("status");
-                    list.add(new BookingDTO(bookingID, patientID, serviceID, dateBooking, timeBooking, status));
+                    list.add(new BookingDTO(bookingID, patientID, serviceID, doctorID,dateBooking, timeBooking, status));
                 }
             }
         } catch (Exception e) {
@@ -1064,7 +1214,7 @@ public class AdminDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(CHECK_SL_FAIL_BY_UDSL);
-                ptm.setString(1, bktime);             
+                ptm.setString(1, bktime);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     check = true;
