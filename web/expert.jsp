@@ -91,7 +91,7 @@
                     <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2 ml-auto">
-                        <li class="active"><a href="index.jsp">TRANG CHỦ</a></li>
+                        
                         <li class=""><a href="about.jsp">GIỚI THIỆU</a></li>
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
@@ -151,20 +151,47 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
                         <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
                     </ul>
+
                     <% if (loginUser == null) {
                     %>
                     <div class="login-icon ml-2">
                         <a class="user" href="login.jsp"> LOGIN </a>
                     </div>
-                    <% } else {
+                    <% } else if (loginUser != null && loginUser.getRoleID().equals("AD")) {
                     %>
                     <div class="dropdown btn-group">
+                        <a class="navbar-brand dropdown-toggle" href="admin.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="./assets/images/users/1.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="admin" class="profile-pic me-2">
+                        </a>
+                        <ul class="dropdown-menu" style="background-color: #63B43E">
+                            <a href="admin.jsp" style="padding: 0">
+                                <button class="dropdown-item" type="button">
+                                    <i class="fa-solid fa-circle-arrow-right"></i>
+                                    Tài Khoản Của Tôi
+                                </button>
+                            </a>
+                            <a href="login.jsp" style="padding: 0">
+                                <form action="MainController">
+                                    <button class="dropdown-item" type="button">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        <input type="submit" name="action" value="Logout" style=" background-color: transparent; border: none"/>
+                                    </button>
+                                </form>
+                            </a>
+                        </ul>
+                    </div>
+                    <%
+                        } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
+                    %> 
+                    
+                    <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/sontung.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="user" class="profile-pic me-2">
+                            <img src="./images/sontung.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
                             <a href="patient.jsp" style="padding: 0">
@@ -173,19 +200,50 @@
                                     Tài Khoản Của Tôi
                                 </button>
                             </a>
-                            <a href="patient.jsp" style="padding: 0">
-                                <form action="MainController">
+                            <a href="#" style="padding: 0">
                                 <button class="dropdown-item" type="button">
-                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                    <input type="submit" name="action" value="Logout" style=" background-color: transparent; border: none"/>
+                                    <i class="fa-solid fa-circle-arrow-right"></i>
+                                    Lịch Sử Đặt Lịch
                                 </button>
-                            </form>
+                            </a>
+                            <a href="login.jsp" style="padding: 0">
+                                <form action="MainController">
+                                    <button class="dropdown-item" type="button">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        <input type="submit" name="action" value="Logout" style=" background-color: transparent; border: none"/>
+                                    </button>
+                                </form>
+                            </a>
+                        </ul>
+                    </div>
+                    <%
+                        } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
+                    %>
+                    <div class="dropdown btn-group">
+                        <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="./images/t6.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
+                        </a>
+                        <ul class="dropdown-menu" style="background-color: #63B43E">
+                            <a href="doctor.jsp.jsp" style="padding: 0">
+                                <button class="dropdown-item" type="button">
+                                    <i class="fa-solid fa-circle-arrow-right"></i>
+                                    Tài Khoản Của Tôi
+                                </button>
+                            </a>
+                            <a href="login.jsp" style="padding: 0">
+                                <form action="MainController">
+                                    <button class="dropdown-item" type="button">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        <input type="submit" name="action" value="Logout" style=" background-color: transparent; border: none"/>
+                                    </button>
+                                </form>
                             </a>
                         </ul>
                     </div>
                     <%
                         }
                     %>
+
                 </nav>
                 <div class="clear"></div>
                 <!-- //nav -->

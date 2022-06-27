@@ -1,9 +1,10 @@
 <%-- 
-    Document   : patient
-    Created on : Jun 7, 2022, 7:15:28 PM
+    Document   : doctor
+    Created on : Jun 7, 2022, 7:15:13 PM
     Author     : Xqy
 --%>
 
+<%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,10 +18,10 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Profile Patient</title>
+        <title>Material Pro Lite Template by WrapPixel</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/logo-header1.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
         <!-- Custom CSS -->
         <link href="html/css/style.min.css" rel="stylesheet" type="text/css"/>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -60,7 +61,7 @@
                         <!-- ============================================================== -->
                         <!-- Logo -->
                         <!-- ============================================================== -->
-                        <a class="navbar-brand ms-4" href="index.jsp">
+                        <a class="navbar-brand ms-4" href="admin.jsp">
                             <!-- Logo icon -->
                             <b class="logo-icon">
                                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -72,7 +73,6 @@
                             <span class="logo-text">
                                 <!-- dark Logo text -->
                                 <img src="./assets/images/logo-header2-2.png" alt="homepage" class="dark-logo" />
-
                             </span>
                         </a>
                         <!-- ============================================================== -->
@@ -121,7 +121,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./images/sontung.jpg" alt="user" class="profile-pic me-2">Sơn Tùng MTP
+                                    <img src="./assets/images/users/1.jpg" alt="user" class="profile-pic me-2">Admin Page
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
@@ -158,17 +158,33 @@
                         <ul id="sidebarnav">
                             <!-- User Profile-->
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="index.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
-                                        class="hide-menu">Trang Chủ</span></a></li>
+                                                         href="admin.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                        class="hide-menu">Dashboard</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
-                                        class="hide-menu">Hồ Sơ</span></a></li>
+                                                         href="setting.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí tài khoản</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
-                                        class="hide-menu">Lịch Sử Đặt Lịch</span></a></li>
+                                                         href="doctor.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí bác sĩ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
-                                        class="hide-menu">Thay Đổi Mật Khẩu</span></a></li>
+                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí bệnh nhân</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">FeedBack</span></a></li>
+                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="pages-blank.html" aria-expanded="false"><i
+                                        class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
+                            </li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="pages-error-404.html" aria-expanded="false"><i
+                                        class="mdi me-2 mdi-help-circle"></i><span class="hide-menu">Error 404</span></a>
+                            </li>
+                            <li class="text-center p-20 upgrade-btn">
+                                <a href="https://www.wrappixel.com/templates/materialpro/"
+                                    class="btn btn-warning text-white mt-4" target="_blank">Upgrade to
+                                    Pro</a>
+                            </li> -->
                         </ul>
 
                     </nav>
@@ -208,20 +224,20 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <!--<h3 class="page-title mb-0 p-0">Thông Tin</h3>-->
+                            <h3 class="page-title mb-0 p-0">Doctor</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Trang Cá Nhân</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Thông Tin</li>
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Doctor</li>
                                     </ol>
                                 </nav>
                             </div>
                         </div>
                         <div class="col-md-6 col-4 align-self-center">
                             <div class="text-end upgrade-btn">
-                                <a href="https://www.wrappixel.com/templates/materialpro/"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Patient</a>
+                                <a href="#"
+                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
                             </div>
                         </div>
                     </div>
@@ -236,118 +252,80 @@
                     <!-- ============================================================== -->
                     <!-- Start Page Content -->
                     <!-- ============================================================== -->
-                    <!-- Row -->
+                    <button type="button" class="btn btn-success">
+                        <a href="slot.jsp">
+                            Update Slot
+                        </a>
+                    </button>
                     <div class="row">
-                        <!-- Column -->
-                        <div class="col-lg-4 col-xlg-3 col-md-5">
-                            <div class="card">
-                                <div class="card-body profile-card">
-                                    <center class="mt-4"> <img src="./images/sontung.jpg"
-                                                               class="rounded-circle" width="150" />
-                                        <h4 class="card-title mt-2">Sơn Tùng MTP</h4>
-                                        <!--                                        <div class="row text-center justify-content-center">
-                                                                                    <div class="col-4">
-                                                                                        <a href="javascript:void(0)" class="link">
-                                                                                            <i class="icon-people" aria-hidden="true"></i>
-                                                                                            <span class="value-digit">254</span>
-                                                                                        </a></div>
-                                                                                    <div class="col-4">
-                                                                                        <a href="javascript:void(0)" class="link">
-                                                                                            <i class="icon-picture" aria-hidden="true"></i>
-                                                                                            <span class="value-digit">54</span>
-                                                                                        </a></div>
-                                                                                </div>-->
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <!-- Column -->
-                        <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <!-- column -->
+                        <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="form-horizontal form-material mx-2">
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Họ và Tên</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Sơn Tùng MTP"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
+                                    <div class="input-group">
+                                        <div class="form-outline">
+                                            <input type="search" id="form1" class="form-control"
+                                                   placeholder="Tìm kiếm bác sĩ">
                                         </div>
-<!--                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Password</label>
-                                            <div class="col-md-12">
-                                                <input type="password" value="password"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>-->
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Giới Tính</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Nam"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Địa Chỉ</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Hồ Chí Minh"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Ngày Tháng Năm Sinh</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="2001-02-12"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
-                                            <div class="col-md-12">
-                                                <input type="email" placeholder="johnathan@admin.com"
-                                                       class="form-control ps-0 form-control-line" name="example-email"
-                                                       id="example-email">
-                                            </div>
-                                        </div>
+                                        <button type="button" class="btn btn-success">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Số Điện Thoại</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="123 456 7890"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-<!--                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Message</label>
-                                            <div class="col-md-12">
-                                                <textarea rows="5" class="form-control ps-0 form-control-line"></textarea>
-                                            </div>
-                                        </div>-->
-                                        <!--                                        <div class="form-group">
-                                                                                    <label class="col-sm-12">Select Country</label>
-                                                                                    <div class="col-sm-12 border-bottom">
-                                                                                        <select class="form-select shadow-none ps-0 border-0 form-control-line">
-                                                                                            <option>London</option>
-                                                                                            <option>India</option>
-                                                                                            <option>Usa</option>
-                                                                                            <option>Canada</option>
-                                                                                            <option>Thailand</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>-->
-                                        <div class="form-group">
-                                            <div class="col-sm-12 d-flex">
-                                                <button class="btn btn-success mx-auto mx-md-0 text-white">Cập Nhật</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table user-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-top-0">NO</th>
+                                                    <th class="border-top-0">ID</th>
+                                                    <th class="border-top-0">Bệnh nhân</th>
+                                                    <th class="border-top-0">Dịch vụ</th>
+                                                    <th class="border-top-0">Bác sĩ</th>
+                                                    <th class="border-top-0">Ngày hẹn</th>
+                                                    <th class="border-top-0">Giờ khám</th>
+                                                    <th class="border-top-0">Trạng thái</th>
+                                                    <th class="border-top-0">Update</th>
+                                                    <th class="border-top-0">Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Võ Văn Tự Hiến</td>
+                                                    <td>Nam</td>
+                                                    <td>Cấy ghép nha khoa</td>
+                                                    <td>Active</td>
+                                                    <td>
+                                                        <a href=""
+                                                           class="btn btn-success d-none d-md-inline-block text-white"
+                                                           target="_blank">
+                                                            <i class="fa-regular fa-eye"></i>
+                                                            Chi tiết
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Nguyễn Thị Thu Thủy</td>
+                                                    <td>Nữ</td>
+                                                    <td>Chỉnh nha</td>
+                                                    <td>Active</td>
+                                                    <td>
+                                                        <a href=""
+                                                           class="btn btn-success d-none d-md-inline-block text-white"
+                                                           target="_blank">
+                                                            <i class="fa-regular fa-eye"></i>
+                                                            Chi tiết
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Column -->
                     </div>
-                    <!-- Row -->
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -365,7 +343,8 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-
+                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
+                </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

@@ -10,23 +10,37 @@ import java.sql.Date;
  *
  * @author Xqy
  */
-public class DoctorDTO extends UserDTO{
-    private String categoryID; 
+public class DoctorDTO extends UserDTO {
+
+    private String categoryID;
     private String categoryName;
     private String serviceID;
     private String serviceName;
+    private String shift;
+
     public DoctorDTO() {
+    }
+
+    public DoctorDTO(String doctorID,String doctorName,String image,String categoryName, String shift)  {
+        super(doctorID, doctorName, image);
+        this.categoryName = categoryName;
+        this.shift = shift;
     }
 
     public DoctorDTO(String fullName) {
         super(fullName);
     }
-    
-    public DoctorDTO( String userID, String fullName, String gender, String email, String phone,String categoryName, boolean status) {
+
+    public DoctorDTO(String categoryID, String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
+        super(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
+        this.categoryID = categoryID;
+    }
+
+    public DoctorDTO(String userID, String fullName, String gender, String email, String phone, String categoryName, String shift, boolean status) {
         super(userID, fullName, gender, email, phone, status);
         this.categoryName = categoryName;
+        this.shift = shift;
     }
-    
 
     public DoctorDTO(String categoryID, String categoryName, String serviceID, String serviceName, String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
         super(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
@@ -35,8 +49,6 @@ public class DoctorDTO extends UserDTO{
         this.serviceID = serviceID;
         this.serviceName = serviceName;
     }
-
-    
 
     public String getCategoryID() {
         return categoryID;
@@ -69,7 +81,13 @@ public class DoctorDTO extends UserDTO{
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
-    
-    
+
+    public String getShift() {
+        return shift;
+    }
+
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
 
 }
