@@ -773,6 +773,19 @@ h2.heading:after {
     margin-top: 14px;
 }
 
+
+
+.hoverItem {
+    overflow: visible;
+    border: 1px solid transparent;
+    margin-bottom: 10px;
+}
+.hoverItem:hover {
+    /*border: 5px solid #63B43E;*/
+    z-index: 2;
+    box-shadow: 0 0.0625rem 20px 0 rgb(0 0 0 / 5%);
+    transform: translateY(-1rem);
+}
 /*-- //gallery --*/
 
 /*-- popup --*/
@@ -875,7 +888,7 @@ button.btn.btn-primary.submit {
 
 .appointment a {
     color: #fff;
-    font-size: 17px;
+    font-size: 30px;
     letter-spacing: 1px;
     font-weight: 500;
     padding: 12px 30px;

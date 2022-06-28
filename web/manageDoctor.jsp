@@ -193,8 +193,9 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
+                            
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="admin.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                                         href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="pages-profile.html" aria-expanded="false">
@@ -209,7 +210,10 @@
                                         class="hide-menu">Quản lí bệnh nhân</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowBooking" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>            
+                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=SearchSC&searchSC" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí lịch hoạt động</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">FeedBack</span></a></li>
@@ -271,12 +275,12 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Doctor</h3>
+                            <!--<h3 class="page-title mb-0 p-0">Bác Sĩ</h3>-->
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Doctor</li>
+                                        <li class="breadcrumb-item"><a href="admin.jsp">Trang Chủ</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Bác Sĩ</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -327,12 +331,6 @@
                                             if (list != null) {
                                                 if (!list.isEmpty()) {
                                         %>
-                                        <c:set var="page" value="${sessionScope.page}"/>
-                                        <div class="pagination">
-                                            <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
-                                                <a class="${i==page?"active":""}" href="MainController?action=Show&page=${i}">${i}</a>
-                                            </c:forEach>
-                                        </div>
                                         <table class="table user-table">
                                             <thead>
                                                 <tr>
@@ -413,6 +411,12 @@
                                             }
                                         %> 
                                     </div>
+                                    <c:set var="page" value="${sessionScope.page}"/>
+                                    <button class="btn btn-success d-none d-md-inline-block text-white">
+                                        <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
+                                            <a class="${i==page?"active":""}" style="color: #FFF" href="MainController?action=Show&page=${i}">${i}</a>
+                                        </c:forEach>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -434,8 +438,7 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
+                
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->
