@@ -343,71 +343,52 @@
         <!-- //blog -->
 
         <!-- footer -->
+        <section class="appointment text-center py-5">
+            <div class="container py-sm-3">
+                <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
+                <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
+                <p>+84123456789</p>
+                <a style="font-size: 30px" href="booking.jsp">ĐẶT LỊCH NGAY</a>
+            </div>
+        </section>
+        <!-- //appointment -->
+
+        <!-- footer -->
         <footer class="py-5">
             <div class="container py-sm-3">
                 <div class="row footer-grids">
-                    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                        <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Dental Health</h4>
-                        <p class="mb-3">Onec Consequat sapien ut cursus rhoncus. Nullam dui mi, vulputate ac metus semper
-                            quis luctus sed.</p>
-                        <h5>Trusted by <span>500+ People</span> </h5>
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                        <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Nha Khoa Thiên Thần</h4>
+                        <p class="mb-3">Nha khoa Thiên Thần -Trung tâm trồng răng và Niềng răng. Tự hào là một trong những nha
+                            khoa ở TP.HCM đi đầu về công nghệ và chất lượng đội ngũ Y bác sỹ.</p>
+                        <h5>Được tin cậy bởi <span>500+ Người</span> </h5>
                     </div>
-                    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                        <h4 class="mb-sm-4 mb-3">Address Info</h4>
-                        <p><span class="fa mr-2 fa-map-marker"></span>64d canal street TT 3356 <span>Newyork, NY.</span></p>
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                        <h4 class="mb-sm-4 mb-3">Thông Tin Địa Chỉ</h4>
+                        <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
+                                Chí Minh.</span></p>
                         <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
                         <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
                         </p>
+                        <p><span class=""><span class="fa fa-clock-o"></span>Giờ mở cửa: 7h - 16:30h (cả Thứ 7 và CN)</span>
+                        </p>
                     </div>
-                    <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
-                        <h4 class="mb-sm-4 mb-3">Quick Links</h4>
-                        <ul>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li class="my-2"><a href="#">Support Helpline</a></li>
-                            <li><a href="#">Healthy Tips</a></li>
-                            <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <h4 class="mb-sm-4 mb-3">Subscribe Us</h4>
-                        <p class="mb-3">Subscribe to our newsletter</p>
-                        <form action="#" method="post" class="d-flex">
-                            <input type="email" id="email" name="EMAIL" placeholder="Enter your email here" required="">
-                            <button type="submit" class="btn">Subscribe</button>
-                        </form>
-                        <div class="icon-social mt-3">
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-facebook"></span>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-twitter"></span>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-dribbble"></span>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-pinterest"></span>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-google-plus"></span>
-                            </a>
-
-                        </div>
-                    </div>
+                    <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
+                            <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
+                            <ul>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li class="my-2"><a href="#">Support Helpline</a></li>
+                                    <li><a href="#">Healthy Tips</a></li>
+                                    <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
+                            </ul>
+                    </div> -->
                 </div>
             </div>
         </footer>
         <!-- //footer -->
 
         <!-- copyright -->
-        <div class="copyright">
-            <div class="container py-4">
-                <div class=" text-center">
-                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+        
         <!-- //copyright -->
 
         <!-- move top -->

@@ -61,7 +61,7 @@
                         <!-- ============================================================== -->
                         <!-- Logo -->
                         <!-- ============================================================== -->
-                        <a class="navbar-brand ms-4" href="admin.jsp">
+                        <a class="navbar-brand ms-4" href="index.jsp">
                             <!-- Logo icon -->
                             <b class="logo-icon">
                                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -122,7 +122,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./assets/images/users/1.jpg" alt="user" class="profile-pic me-2">Admin Page
+                                    <img src="images/blog4.jpg" alt="user" class="profile-pic me-2">Ma Phong Ba
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
@@ -151,6 +151,12 @@
             <!-- ============================================================== -->
             <!-- Left Sidebar - style you can find in sidebar.scss  -->
             <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- End Topbar header -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
             <aside class="left-sidebar" data-sidebarbg="skin6">
                 <!-- Sidebar scroll-->
                 <div class="scroll-sidebar">
@@ -159,33 +165,17 @@
                         <ul id="sidebarnav">
                             <!-- User Profile-->
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="admin.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
-                                        class="hide-menu">Dashboard</span></a></li>
+                                                         href="index.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                        class="hide-menu">Trang Chủ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="setting.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí tài khoản</span></a></li>
+                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="doctor.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí bác sĩ</span></a></li>
+                                                         href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Lịch Sử Đặt Lịch</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí bệnh nhân</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">FeedBack</span></a></li>
-                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="pages-blank.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
-                            </li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="pages-error-404.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-help-circle"></i><span class="hide-menu">Error 404</span></a>
-                            </li>
-                            <li class="text-center p-20 upgrade-btn">
-                                <a href="https://www.wrappixel.com/templates/materialpro/"
-                                    class="btn btn-warning text-white mt-4" target="_blank">Upgrade to
-                                    Pro</a>
-                            </li> -->
+                                                         href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Thay Đổi Mật Khẩu</span></a></li>
                         </ul>
 
                     </nav>

@@ -32,7 +32,7 @@
         <link href="CSS/css_slider.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        
+        <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
         <!-- //css files -->
 
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -48,7 +48,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
+        
     </head>
     <body>
         <%
@@ -459,9 +459,9 @@
         <!-- services -->
         <section class="services py-5">
             <div class="container py-lg-5">
-                <h3 class="heading text-center mb-sm-5 mb-4">DỊCH VỤ NỔI BẬT</h3>
+                <h3 class="heading text-center mb-sm-5">DỊCH VỤ NỔI BẬT</h3>
                 <div class="row offer-grids">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6 mt-md-0 hoverItem">
                         <a href="listService/niengrang1.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu1.png" alt="">
@@ -473,7 +473,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-md-0 hoverItem">
                         <a href="listService/niengrang2.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu2.png" alt="">
@@ -486,7 +486,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-lg-0 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-lg-0 mt-4 hoverItem">
                         <a href="./listService/cayghep1.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu3.png" alt="">
@@ -498,7 +498,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-4 hoverItem">
                         <a href="./listService/rangsu2.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu4.png" alt="">
@@ -510,7 +510,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-4 hoverItem">
                         <a href="./listService/rangsu1.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu5.png" alt="">
@@ -522,7 +522,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-4 hoverItem">
                         <a href="./listService/dichvu2.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu6.png" alt="">
@@ -650,7 +650,7 @@
                 <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
                 <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
                 <p>+84123456789</p>
-                <a style="font-size: 30px" href="booking.html">ĐẶT LỊCH NGAY</a>
+                <a style="color: #FFF" href="booking.jsp">ĐẶT LỊCH NGAY</a>
             </div>
         </section>
         <!-- //appointment -->
@@ -659,13 +659,13 @@
         <footer class="py-5">
             <div class="container py-sm-3">
                 <div class="row footer-grids">
-                    <div class="col-lg-4 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
                         <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Nha Khoa Thiên Thần</h4>
                         <p class="mb-3">Nha khoa Thiên Thần -Trung tâm trồng răng và Niềng răng. Tự hào là một trong những nha
                             khoa ở TP.HCM đi đầu về công nghệ và chất lượng đội ngũ Y bác sỹ.</p>
                         <h5>Được tin cậy bởi <span>500+ Người</span> </h5>
                     </div>
-                    <div class="col-lg-4 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
                         <h4 class="mb-sm-4 mb-3">Thông Tin Địa Chỉ</h4>
                         <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
                                 Chí Minh.</span></p>
@@ -684,28 +684,6 @@
                                     <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
                             </ul>
                     </div> -->
-                    <div class="col-lg-4 col-sm-6">
-                        <h4 class="mb-sm-4 mb-3">ĐĂNG KÝ NHẬN ƯU ĐÃI</h4>
-                        <!-- <p class="mb-3">Subscribe to our newsletter</p> -->
-                        <form action="#" method="post" class="d-flex">
-                            <input type="email" id="email" name="EMAIL" placeholder="Nhập Gmail của bạn" required="">
-                            <button type="submit" class="btn">Đăng Ký</button>
-                        </form>
-                        <div class="icon-social mt-3">
-                            <a href="#" class="button-footr">
-                                <!-- <span class="fa mx-2 fa-facebook"></span> -->
-                                <i class="fa-brands mx-3 fa-facebook"></i>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <!-- <span class="fa mx-2 fa-twitter"></span> -->
-                                <i class="fa-brands mx-3 fa-instagram"></i>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <!-- <span class="fa mx-2 fa-dribbble"></span> -->
-                                <i class="fa-brands mx-3 fa-youtube" style="color: red;"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </footer>

@@ -54,7 +54,9 @@ public class HomeController extends HttpServlet {
                 } else if ("DR".equals(loginUser.getRoleID())) {
                     url = DOCTOR;
                 }
-            } 
+            } else {
+                 url = HOME_PAGE;
+            }
 
         } catch (Exception e) {
             log("Error at HomeController: " + e.toString());
