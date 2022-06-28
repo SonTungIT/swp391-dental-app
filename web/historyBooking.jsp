@@ -5,9 +5,11 @@
 --%>
 
 
+
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.Date"%>
 <%@page import="sample.booking.BookingDTO"%>
 <%@page import="sample.user.UserDTO"%>
-<%@page import="sample.user.DoctorDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,6 +54,7 @@
             if (search == null) {
                 search = "";
             }
+
 
         %>
         <!-- ============================================================== -->
@@ -258,18 +261,18 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="input-group">
-                                        <form action="MainController">
+                                    <form action="MainController">
+                                        <div class="input-group">
                                             <div class="form-outline">
                                                 <input type="text" name="searchHSBK" value="<%=search%>" id="form1" class="form-control"
                                                        placeholder="Tìm kiếm dịch vụ...">
                                             </div>
+
                                             <button type="submit" name="action" value="SearchHSBK" class="btn btn-success">
                                                 <i class="fas fa-search"></i>
                                             </button>
-                                        </form>
-                                    </div>
-
+                                        </div>
+                                    </form>
                                     <div class="table-responsive">
                                         <%  List<BookingDTO> list = (List<BookingDTO>) request.getAttribute("LIST_HISTORY_BK");
                                             if (list != null) {
@@ -292,7 +295,22 @@
                                                 <%
                                                     int count = 1;
                                                     for (BookingDTO bk : list) {
+                                                        long millis = System.currentTimeMillis();
+                                                        Date curDate = new java.sql.Date(millis);
+                                                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                                                        SimpleDateFormat formatterT = new SimpleDateFormat("HH:mm");
+                                                        String nowT = formatterT.format(curDate);
+                                                        String[] nt = nowT.split(":");
+                                                        int nt1 = Integer.parseInt(nt[0]);
+                                                        String[] tB = bk.getTimeBooking().split(":");
+                                                        int tB1 = Integer.parseInt(tB[0]);
+                                                        String date1 = formatter.format(curDate);
+                                                        String date2 = formatter.format(bk.getDateBooking());
                                                 %>
+                                            <form action="MainController">
+                                                <input type="hidden" name="searchHSBK" value="<%=search%>"/>
+                                                <input type="hidden" name="bookingID" value="<%=bk.getBookingID()%>"/>
+
                                                 <tr>
                                                     <td>
                                                         <%=count++%>
@@ -308,21 +326,50 @@
                                                         <input type="hidden" name="doctorName" value="<%=bk.getDoctorName()%>" />
                                                     </td>
                                                     <td>
-                                                        
+                                                        <%=bk.getDateBooking()%>
+                                                        <input type="hidden" name="dateBooking" value="<%=bk.getDateBooking()%>" />
                                                     </td>
-                                                    <td>Active</td>
                                                     <td>
-                                                        <a href=""
-                                                           class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            Chi tiết
-                                                        </a>
+                                                        <%=bk.getTimeBooking()%>
+                                                        <input type="hidden" name="timeBooking" value="<%=bk.getTimeBooking()%>" />
+                                                    </td>
+                                                    <td>
+
+                                                        <input type="hidden" name="timeBooking" value=" <%=bk.getStatus()%>" />
+                                                        <%
+
+                                                            if (bk.getStatus().equals("Active")) {
+                                                                if (bk.getDateBooking().after(curDate) || (date1.equals(date2) && nt1 < tB1)) {
+                                                        %>
+                                                        <button type="button"   class="btn btn-success d-none d-md-inline-block text-white">
+                                                            Đang chờ
+                                                        </button>
+                                                        <button type="submit" name="action" value="CancelBK" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            Xoá lịch
+                                                        </button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"   class="btn btn-success d-none d-md-inline-block text-white">
+                                                            Hoàn thành
+                                                        </button>
+                                                        <%
+                                                                }
+                                                            }
+                                                        %>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" name="#" value="#" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-circle-plus"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
-                                                <%
-                                                    }
-                                                %>
+
+                                            </form>
+
+                                            <%
+                                                }
+                                            %>
                                             </tbody>
                                         </table>
                                         <%

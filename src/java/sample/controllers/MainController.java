@@ -76,6 +76,8 @@ public class MainController extends HttpServlet {
     private static final String CREATE_BK_CONTROLLER = "CreateBookController";
     private static final String VIEW_HISTORY_BK = "SearchHSBK";
     private static final String VIEW_HISTORY_BK_CONTROLLER = "ViewHistoryBKController";
+    private static final String CANCEL_BK = "CancelBK";
+    private static final String CANCEL_BK_CONTROLLER = "CancelBKController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -129,6 +131,8 @@ public class MainController extends HttpServlet {
                 url = DELETE_SCHEDULEDR_CONTROLLER;
             } else if (VIEW_HISTORY_BK.equals(action)) {
                 url = VIEW_HISTORY_BK_CONTROLLER;
+            } else if (CANCEL_BK.equals(action)) {
+                url = CANCEL_BK_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

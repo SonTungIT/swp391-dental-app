@@ -6,44 +6,36 @@ package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import sample.booking.BookingDTO;
 import sample.user.PatientDAO;
-import sample.user.UserDTO;
 
 /**
  *
  * @author Xqy
  */
-@WebServlet(name = "ViewHistoryBKController", urlPatterns = {"/ViewHistoryBKController"})
-public class ViewHistoryBKController extends HttpServlet {
+@WebServlet(name = "CancelBKController", urlPatterns = {"/CancelBKController"})
+public class CancelBKController extends HttpServlet {
 
-    private static final String ERROR = "historyBooking.jsp";
-    private static final String SUCCESS = "historyBooking.jsp";
+    private static final String ERROR = "MainController?action=SearchHSBK&searchHSBK";
+    private static final String SUCCESS = "MainController?action=SearchHSBK&searchHSBK";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String patientID = loginUser.getUserID();
-            String search = request.getParameter("searchHSBK");
+            String bookingID = request.getParameter("bookingID");         
             PatientDAO dao = new PatientDAO();
-            List<BookingDTO> listHSBK = dao.getHistoryBK(search, patientID);
-            if (listHSBK.size() > 0) {
-                request.setAttribute("LIST_HISTORY_BK", listHSBK);
+            boolean checkUpdate = dao.cancelBK(bookingID);
+            if (checkUpdate) {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at ViewHistoryBKController:" + e.toString());
+            log("Error at CancelBKController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

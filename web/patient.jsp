@@ -43,12 +43,6 @@
             if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
                 response.sendRedirect("login.jsp");
             }
-
-            String patientID = loginUser.getUserID();
-            if (patientID == null) {
-                patientID = "";
-            }
-
         %>
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
@@ -177,7 +171,7 @@
                                                          href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=SearchHSBK&searchHSBK&patientID" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                                         href="MainController?action=SearchHSBK&searchHSBK&ptID" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Lịch Sử Đặt Lịch</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
