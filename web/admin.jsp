@@ -4,6 +4,9 @@
     Author     : Lenovo Legion
 --%>
 
+<%@page import="sample.user.UserDTO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +20,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>Admin Page</title>
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
         <!-- chartist CSS -->
@@ -35,6 +38,13 @@
         <!-- Icon CND fontawesome -->
     </head>
     <body>
+        <%
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            if (loginUser == null || !loginUser.getRoleID().equals("AD")) {
+                response.sendRedirect("index.jsp");
+            }
+
+        %>
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
@@ -155,6 +165,7 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
+                            
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
@@ -162,7 +173,7 @@
                                     href="pages-profile.html" aria-expanded="false">
                                     <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
                             </li> -->
-                            
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Show" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bác sĩ</span></a></li>
@@ -236,17 +247,17 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Dashboard</h3>
-                            <div class="d-flex align-items-center">
+                            <h3 class="page-title mb-0 p-0">Trang Chủ</h3>
+<!--                            <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="admin.jsp">Home</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                                     </ol>
                                 </nav>
-                            </div>
+                            </div>-->
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -270,7 +281,7 @@
                                         <i class="fa-solid fa-bed h3 mb-0"></i>
                                     </div>
                                     <div class="flex-1 ms-2">
-                                        <h5 class="mb-0">3</h5>
+                                        <h5 class="mb-0">${sessionScope.patient}</h5>
                                         <p class="text-muted mb-0">Bệnh Nhân</p>
                                     </div>
                                 </div>
@@ -285,7 +296,7 @@
                                         <i class="fa-solid fa-user-doctor h3 mb-0"></i>
                                     </div>
                                     <div class="flex-1 ms-2">
-                                        <h5 class="mb-0">8</h5>
+                                        <h5 class="mb-0">${sessionScope.doctor}</h5>
                                         <p class="text-muted mb-0">Bác Sĩ</p>
                                     </div>
                                 </div>
@@ -315,8 +326,8 @@
                                         <i class="fa-solid fa-briefcase-medical h3 mb-0"></i>
                                     </div>
                                     <div class="flex-1 ms-2">
-                                        <h5 class="mb-0">16</h5>
-                                        <p class="text-muted mb-0">Reservations</p>
+                                        <h5 class="mb-0">${sessionScope.view}</h5>
+                                        <p class="text-muted mb-0">Số lượng truy cập web</p>
                                     </div>
                                 </div>
 
@@ -331,12 +342,26 @@
                                         <i class="fa-solid fa-briefcase-medical h3 mb-0"></i>
                                     </div>
                                     <div class="flex-1 ms-2">
-                                        <h5 class="mb-0">10</h5>
-                                        <p class="text-muted mb-0">Reservations</p>
+                                        <h5 class="mb-0">${booking}</h5>
+                                        <p class="text-muted mb-0">Lịch hẹn</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-2 col-lg-6 col-md-4 mt-4">
+                            <div class="card features feature-primary rounded border-0 shadow p-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon text-center rounded-md">
+                                        <i class="fa-solid fa-briefcase-medical h3 mb-0"></i>
+                                    </div>
+                                    <div class="flex-1 ms-2">
+                                        <h5 class="mb-0">${sessionScope.numberBookingInOneWeek}</h5>
+                                        <p class="text-muted mb-0">Lịch hẹn trong 1 tuần</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!--end col-->
                     </div>
                     <!-- Column -->
@@ -353,11 +378,11 @@
                                                 <ul class="list-inline d-flex">
                                                     <li class="me-4">
                                                         <h6 class="text-success"><i
-                                                                class="fa fa-circle font-10 me-2 "></i>Reservations</h6>
+                                                                class="fa fa-circle font-10 me-2 "></i>Lịch hẹn</h6>
                                                     </li>
                                                     <li>
                                                         <h6 class="text-info"><i
-                                                                class="fa fa-circle font-10 me-2"></i>appointment
+                                                                class="fa fa-circle font-10 me-2"></i>Lịch hẹn trong 1 tuần
                                                         </h6>
                                                     </li>
                                                 </ul>

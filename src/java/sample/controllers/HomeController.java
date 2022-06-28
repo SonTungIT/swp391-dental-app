@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sample.user.AdminDAO;
 import sample.user.UserDTO;
 
 /**
@@ -33,18 +34,27 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            
+
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            AdminDAO dao = new AdminDAO();
             if (loginUser != null) {
-                if ("AD".equals(loginUser.getRoleID())) {                    
+                if ("AD".equals(loginUser.getRoleID())) {
+                    int view = dao.getNumberOfView();
+                    int numberOfDoctor = dao.getNumberOfDoctor();
+                    int numberOfPatient = dao.getNumberOfPatient();
+                    int numberOfBooking = dao.getNumberOfBooking();
+                    session.setAttribute("view", view);
+                    session.setAttribute("doctor", numberOfDoctor);
+                    session.setAttribute("patient", numberOfPatient);
+                    session.setAttribute("booking", numberOfBooking);
                     url = ADMIN;
-                } else if ("PT".equals(loginUser.getRoleID())) {                    
+                } else if ("PT".equals(loginUser.getRoleID())) {
                     url = PATIENT;
-                } else if ("DR".equals(loginUser.getRoleID())) {                    
+                } else if ("DR".equals(loginUser.getRoleID())) {
                     url = DOCTOR;
                 }
-            }
+            } 
 
         } catch (Exception e) {
             log("Error at HomeController: " + e.toString());

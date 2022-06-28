@@ -31,8 +31,8 @@
 
         <link href="CSS/css_slider.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        
         <!-- //css files -->
 
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -48,6 +48,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <%
@@ -637,7 +638,7 @@
                 <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
                 <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
                 <p>+84123456789</p>
-                <a href="booking.html">Book an Appointment</a>
+                <a style="font-size: 30px" href="booking.html">ĐẶT LỊCH NGAY</a>
             </div>
         </section>
         <!-- //appointment -->
