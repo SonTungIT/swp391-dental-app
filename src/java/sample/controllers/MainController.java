@@ -47,13 +47,11 @@ public class MainController extends HttpServlet {
     private static final String DELETE_BOOKING_CONTROLLER = "DeleteBookingController";
 
     private static final String SEARCH_BOOKING = "Search Booking";
-    private static final String SEARCH_BOOKING_CONTROLLER = "SearchBookingController";      
-    
-    
-    private static final String SHOWDASHBOARD = "ShowDashboard";
-    private static final String SHOWDASHBOARD_CONTROLLER = "ShowDashBoardController"; 
+    private static final String SEARCH_BOOKING_CONTROLLER = "SearchBookingController";
 
-   
+    private static final String SHOWDASHBOARD = "ShowDashboard";
+    private static final String SHOWDASHBOARD_CONTROLLER = "ShowDashBoardController";
+
     //Schedule
     private static final String SHOWSCHEDULE = "SearchSC";
     private static final String SHOWSCHEDULE_CONTROLLER = "ShowScheduleController";
@@ -76,7 +74,8 @@ public class MainController extends HttpServlet {
     //Patient
     private static final String CREATE_BK = "CreateBooking";
     private static final String CREATE_BK_CONTROLLER = "CreateBookController";
-
+    private static final String VIEW_HISTORY_BK = "SearchHSBK";
+    private static final String VIEW_HISTORY_BK_CONTROLLER = "ViewHistoryBKController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -88,8 +87,7 @@ public class MainController extends HttpServlet {
                 url = LOGIN_CONTROLLER;
             } else if (HOME.equals(action)) {
                 url = HOME_CONTROLLER;
-            }
-            else if (LOGOUT.equals(action)) {
+            } else if (LOGOUT.equals(action)) {
                 url = LOGOUT_CONTROLLER;
             } else if (ADD_DOCTOR.equals(action)) {
                 url = ADD_DOCTOR_CONTROLLER;
@@ -111,10 +109,8 @@ public class MainController extends HttpServlet {
                 url = DELETE_BOOKING_CONTROLLER;
             } else if (SEARCH_BOOKING.equals(action)) {
                 url = SEARCH_BOOKING_CONTROLLER;
-
-            }else if(SHOWDASHBOARD.equals(action)){
+            } else if (SHOWDASHBOARD.equals(action)) {
                 url = SHOWDASHBOARD_CONTROLLER;
-
             } else if (UPDATESLOT.equals(action)) {
                 url = UPDATESLOT_CONTROLLER;
             } else if (SHOWSERVICE.equals(action)) {
@@ -131,7 +127,8 @@ public class MainController extends HttpServlet {
                 url = UPDATE_SCHEDULEDR_CONTROLLER;
             } else if (DELETE_SCHEDULEDR.equals(action)) {
                 url = DELETE_SCHEDULEDR_CONTROLLER;
-
+            } else if (VIEW_HISTORY_BK.equals(action)) {
+                url = VIEW_HISTORY_BK_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

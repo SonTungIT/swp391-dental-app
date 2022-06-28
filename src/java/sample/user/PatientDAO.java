@@ -33,7 +33,12 @@ public class PatientDAO {
 
     private static final String SELECT_SVID = "SELECT serviceID FROM Service WHERE serviceName = ?";
     private static final String SELECT_DRNAME = "SELECT fullName FROM Users us JOIN Doctor dr ON us.userID = dr.doctorID WHERE doctorID = ?";
-    
+
+    private static final String VIEW_HISTORY_BK = "SELECT bookingID, bk.serviceID, serviceName, bk.doctorID, us.fullName, dateBooking, timeBooking, bk.status FROM Booking bk\n"
+            + "           JOIN Service sv ON sv.serviceID = bk.serviceID JOIN CategoryService cs ON cs.categoryID = sv.categoryID\n"
+            + "		  JOIN Doctor dt ON dt.categoryID = cs.categoryID JOIN Users us ON us.userID = dt.doctorID\n"
+            + "		  JOIN (SELECT userID FROM Users ) AS pt ON pt.userID = bk.patientID\n"
+            + "           WHERE bk.status = 'Active'  AND bk.doctorID = dt.doctorID AND serviceName = ? AND patientID = ?";
     private static final String CHECK_DUPLICATE_BK_ID = "SELECT patientID FROM Booking WHERE bookingID = ? ";
     private static final String CREATE_BOOKING = "INSERT INTO Booking(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status) VALUES(?, ?, ?, ?, ?, ?, ?)";
     private static final String CHECK_DUPLICATE_BK_SLOT = "SELECT DISTINCT sl.slotID From Slot sl JOIN Schedule sc ON sc.slotID = sl.slotID \n"
@@ -260,7 +265,6 @@ public class PatientDAO {
         return serviceID;
     }
 
-    
     public String select_doctorName(String doctorID) throws SQLException {
         String doctorName = "";
         Connection conn = null;
@@ -386,5 +390,45 @@ public class PatientDAO {
 
         }
         return check;
+    }
+
+    public List<BookingDTO> getHistoryBK(String search, String patientID) throws SQLException, ClassNotFoundException {
+        List<BookingDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(VIEW_HISTORY_BK);
+                ptm.setString(1, "%" + search + "%");
+                ptm.setString(2, patientID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String bookingID = rs.getString("bookingID");
+                    String serviceID = rs.getString("serviceID");
+                    String serviceName = rs.getString("serviceName");
+                    String doctorID = rs.getString("doctorID");
+                    String doctorName = rs.getString("doctorName");
+                    Date dateBooking = rs.getDate("dateBooking");
+                    String timeBooking = rs.getString("timeBooking");
+                    String status = rs.getString("status");
+                    list.add(new BookingDTO(bookingID, serviceID, serviceName, doctorID, doctorName, dateBooking, timeBooking, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }
