@@ -94,6 +94,14 @@
             if (errorDate == null) {
                 errorDate = "";
             }
+            String mess = (String) request.getAttribute("MESSAGE_CRBK");
+            if (mess == null) {
+                mess = "";
+            }
+            String slot_doctorEmmty = (String) request.getAttribute("NOSLOT");
+            if (slot_doctorEmmty == null) {
+                slot_doctorEmmty = "";
+            }
         %>
 
         <!-- top header -->
@@ -292,9 +300,7 @@
                     <%
                         }
                     %>
-<!--                    <div class="login-icon ml-2">
-                        <a class="user" href="login.jsp"> LOGIN </a>
-                    </div>-->
+
 
                 </nav>
                 <div class="clear"></div>
@@ -349,32 +355,29 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label style="width: 50%;padding: 0 10px;">
-                                        Chọn ngày khám:
+                                        Chọn bác sĩ:
                                         <span class="wpcf7-form-control-wrap date-ngay">
                                             <form action="MainController" id="form_DR" name="from_DR">
-                                                <div id="dateBK">
-                                                    <input type="date" id="dateB" name="bookingDate" value="<%=dateBooking%>" required="" onchange="showDate()"/></br></br>
-                                                </div>
                                                 <input type="hidden" name="serviceName" value="<%=sName%>"/>
-                                                <div class="" id="doctor" style="display: none" > 
-                                                    <select name="doctorID" onchange="showDoctor()">
-                                                        <option class="form-option" value="<%=drID%>"><%=drName%></option>
-                                                        <%
-                                                            List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR_CT");
-                                                            if (listDoctor != null) {
-                                                                if (listDoctor.size() > 0) {
+                                                <select name="doctorID" id="doctorID">
+                                                    <option class="form-option" value="<%=drID%>"><%=drName%></option>
+                                                    <%
+                                                        List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR_CT");
+                                                        if (listDoctor != null) {
+                                                            if (listDoctor.size() > 0) {
 
-                                                                    for (DoctorDTO doctor : listDoctor) {
+                                                                for (DoctorDTO doctor : listDoctor) {
 
-                                                        %>
-                                                        <option class="form-option" value="<%=doctor.getUserID()%>"><%=doctor.getFullName()%></option>
-                                                        <%
-                                                                    }
+                                                    %>
+                                                    <option class="form-option" value="<%=doctor.getUserID()%>"><%=doctor.getFullName()%></option>
+                                                    <%
                                                                 }
                                                             }
-                                                        %>
-                                                    </select>  
-                                                </div>                                            
+                                                        }
+                                                    %>
+                                                </select>  
+                                                </br>Chọn ngày:</br>
+                                                <input type="date" id="dateB" name="bookingDate" value="<%=dateBooking%>" required="" onchange="showDate()"/></br></br>
                                                 <input type="hidden" name="action" value="ShowSlotDR" /> 
                                             </form>
                                             <%=error%>
@@ -382,46 +385,66 @@
                                     </label>
                                 </div>
                             </div>
-
-
                             <div class="booking-time">
                                 <div class="dv-title"> Chọn giờ thăm khám</div>
-                                <form action="MainController"> 
+                                <form action="MainController" > 
                                     <input type="hidden" name="serviceID" value="<%=sID%>"/>
                                     <input type="hidden" name="serviceName" value="<%=sName%>"/>
                                     <input type="hidden" name="doctorID" value="<%=drID%>"/>
                                     <input type="hidden" name="dateBooking" value="<%=dateBooking%>"/>
                                     <input type="hidden" name="patientID" value="<%=patientID%>"/>
                                     <div class="time">
-
-
                                         <%
                                             List<SlotDTO> listFT = (List<SlotDTO>) request.getAttribute("LIST_SLOT_FT");
                                             if (listFT != null) {
                                                 if (listFT.size() > 0) {
-
                                                     for (SlotDTO slot : listFT) {
                                         %>
-                                        <div class="time__space"><input type="radio" required="" name="slotTime" value="<%=slot.getSlotTime()%>"/><%=slot.getSlotTime()%></div>
-                                            <%
-                                                        }
+                                        <div class="time__space"> <input type="radio"  required=""  name="slotTime" value="<%=slot.getSlotTime()%>"/><%=slot.getSlotTime()%></div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Nha Khoa Thiên Thần</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn có xác nhận đạt lịch hẹn này hay không?</br>
+                                                        Dịch vụ: <%=sName%></br>
+                                                        Bác sĩ: <%=drName%></br>
+                                                        Ngày hẹn: <%=dateBooking%></br>
+                                                        Giờ hẹn: <%=slot.getSlotTime()%>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Từ chối</button>
+                                                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%
                                                     }
                                                 }
-                                            %>
+                                            }
+                                        %>
                                     </div>
-                                    <%=errorTime%></br>
+                                    <%=slot_doctorEmmty%></br></br>
+                                    <%=errorTime%></br></br>
                                     <input type="hidden" name="action" value="CreateBooking" />                            
                                     <div class="submit-buttons">
-                                        <button type="submit" class="btn">Submit</button>
+                                        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
                                     </div>
-                                </form>
-
+                                </form></br>
+                                <%=mess%>
                             </div>
-
-
                         </div>
-
                     </div>
+
+
+
                     <div class="col-lg-4 col-md-6 mt-lg-0 mt-4 contact-info">
                         <h4 class="mb-4">Address Information</h4>
                         <p><span class="fa mr-2 fa-map-marker"></span>64d canal street TT 3356 <span>Newyork, NY.</span></p>
@@ -437,7 +460,7 @@
             <div class="map mt-5">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.609941491709!2d106.8076943144412!3d10.841132860961343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1653028757762!5m2!1svi!2s"
-                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
@@ -529,14 +552,27 @@
             }
             function showDoctor()
             {
-                var form = document.getElementById("form_DR");
-                form.submit();
+                alert("Hãy nhập doc!");
+                var doctor = document.getElementById("doctorID").value;
+                if (doctor !== null && doctor !== "") {
+                    var form = document.getElementById("form_DR");
+                    form.submit();
+
+                }
             }
             function showDate() {
-                document.getElementById("doctor").style.display = 'block';
+                var doctor = document.getElementById("doctorID").value;
+                if (doctor !== null && doctor !== "") {
+                    var form = document.getElementById("form_DR");
+                    form.submit();
+
+                } else {
+                    alert("Hãy lựa chọn bác sĩ mà bạn muốn!!!");
+                    location.reload();
+                }
             }
         </script>
-
+        
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
                 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

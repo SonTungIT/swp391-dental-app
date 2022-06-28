@@ -102,7 +102,7 @@
                     <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2 ml-auto">
-                        
+
                         <li class=""><a href="about.jsp">GIỚI THIỆU</a></li>
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
@@ -165,7 +165,19 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <li class=""><a href="MainController?action=ShowService">ĐẶT LỊCH</a></li>
+                            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            %>
+                        <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
+                            <%
+                            } else {
+                            %>
+                        <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH</a></li>
+                            <%
+                                }
+                            %>
+
+
+
                     </ul>
 
                     <% if (loginUser == null) {
@@ -197,9 +209,9 @@
                         </ul>
                     </div>
                     <%
-                        } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
+                    } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
                     %> 
-                    
+
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="./images/sontung.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
@@ -228,7 +240,7 @@
                         </ul>
                     </div>
                     <%
-                        } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
+                    } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -700,7 +712,7 @@
         <!-- //footer -->
 
         <!-- copyright -->
-        
+
         <!-- //copyright -->
 
         <!-- move top -->
@@ -725,6 +737,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        <!-- JavaScript Bundle with Popper -->  
+        <!-- JavaScript Bundle with Popper --> 
+        <script>
+            function control(){
+                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+            }
+        </script>
     </body>
 </html>
