@@ -3,6 +3,9 @@
     Created on : Jun 6, 2022, 12:14:03 PM
     Author     : Lenovo Legion
 --%>
+
+<%@page import="sample.user.AdminDAO"%>
+<%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="sample.user.UserDTO"%>
@@ -48,7 +51,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+
     </head>
     <body>
         <%
@@ -74,14 +77,28 @@
                             </li>
                         </ul>
                     </div>
-                   
+
                     <div class="col-sm-6 header-right-w3_pvt">
+                       <%
+                            AdminDAO dao = new AdminDAO();
+                            List<String> listTW = dao.getOPH();
+                            String stMF = "OFF";
+                            String etMF = "OFF";
+                            String stSS = "OFF";
+                            String etSS = "OFF";
+                            if (!listTW.isEmpty()) {
+                                stMF = listTW.get(0);
+                                etMF = listTW.get(1);
+                                stSS = listTW.get(2);
+                                etSS = listTW.get(3);
+                            } 
+                        %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : 7h - 16:30h</span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
                             </li>
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : 7h - 11h</span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
                             </li>
                         </ul>
                     </div>
@@ -166,7 +183,9 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            <%if (loginUser
+                                        == null || !loginUser.getRoleID()
+                                                .equals("PT")) {
                             %>
                         <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
                             <%
@@ -181,12 +200,15 @@
 
                     </ul>
 
-                    <% if (loginUser == null) {
+                    <% if (loginUser
+                                == null) {
                     %>
                     <div class="login-icon ml-2">
                         <a class="user" href="login.jsp"> LOGIN </a>
                     </div>
-                    <% } else if (loginUser != null && loginUser.getRoleID().equals("AD")) {
+                    <% } else if (loginUser
+                            != null && loginUser.getRoleID()
+                                    .equals("AD")) {
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="admin.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -210,7 +232,9 @@
                         </ul>
                     </div>
                     <%
-                    } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
+                    } else if (loginUser
+                            != null && loginUser.getRoleID()
+                                    .equals("PT")) {
                     %> 
 
                     <div class="dropdown btn-group">
@@ -241,7 +265,9 @@
                         </ul>
                     </div>
                     <%
-                    } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
+                    } else if (loginUser
+                            != null && loginUser.getRoleID()
+                                    .equals("DR")) {
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -718,9 +744,9 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
-            function control(){
-                alert("Xin hãy đăng nhập để được đặt lịch!!!");
-            }
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
         </script>
     </body>
 </html>

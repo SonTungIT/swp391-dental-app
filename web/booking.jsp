@@ -4,6 +4,8 @@
     Author     : Lenovo Legion
 --%>
 
+<%@page import="sample.booking.ScheduleDTO"%>
+<%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.services.ServiceDTO"%>
 <%@page import="sample.booking.SlotDTO"%>
 <%@page import="sample.user.UserDTO"%>
@@ -49,6 +51,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </head>
     <body>
         <%
@@ -121,12 +124,26 @@
                         </ul>
                     </div>
                     <div class="col-sm-6 header-right-w3_pvt">
+                        <%
+                            AdminDAO dao = new AdminDAO();
+                            List<String> listTW = dao.getOPH();
+                            String stMF = "OFF";
+                            String etMF = "OFF";
+                            String stSS = "OFF";
+                            String etSS = "OFF";
+                            if (!listTW.isEmpty()) {
+                                stMF = listTW.get(0);
+                                etMF = listTW.get(1);
+                                stSS = listTW.get(2);
+                                etSS = listTW.get(3);
+                            }
+                        %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Mon - Fri : 8:30am to 9:30pm</span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
                             </li>
-                            <li class="">
-                                <span class=""><span class="fa fa-clock-o"></span>Sat & Sun : 9:00am to 6:00pm</span>
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
                             </li>
                         </ul>
                     </div>
@@ -339,7 +356,7 @@
                                                             if (listService.size() > 0) {
                                                                 for (ServiceDTO service : listService) {
                                                     %> 
-                                                    <option class="form-option" value="<%=service.getServiceName()%>"><%=service.getServiceName()%> <%=service.getPrice()%>$ </option>
+                                                    <option class="form-option" value="<%=service.getServiceName()%>"><%=service.getServiceName()%> || <%=service.getPrice()%> VND </option>
                                                     <%
                                                                 }
                                                             }
@@ -367,15 +384,17 @@
                                                             if (listDoctor.size() > 0) {
 
                                                                 for (DoctorDTO doctor : listDoctor) {
-
                                                     %>
-                                                    <option class="form-option" value="<%=doctor.getUserID()%>"><%=doctor.getFullName()%></option>
+                                                    <option class="form-option" value="<%=doctor.getUserID()%>">
+                                                        <%=doctor.getFullName()%> </br>
+                                                    </option>
                                                     <%
                                                                 }
                                                             }
                                                         }
                                                     %>
-                                                </select>  
+                                                </select> 
+
                                                 </br>Chọn ngày:</br>
                                                 <input type="date" id="dateB" name="bookingDate" value="<%=dateBooking%>" required="" onchange="showDate()"/></br></br>
                                                 <input type="hidden" name="action" value="ShowSlotDR" /> 
@@ -398,9 +417,11 @@
                                             List<SlotDTO> listFT = (List<SlotDTO>) request.getAttribute("LIST_SLOT_FT");
                                             if (listFT != null) {
                                                 if (listFT.size() > 0) {
+
                                                     for (SlotDTO slot : listFT) {
+                                                        String slotTime = slot.getSlotTime();
                                         %>
-                                        <div class="time__space"> <input type="radio"  required=""  name="slotTime" value="<%=slot.getSlotTime()%>"/><%=slot.getSlotTime()%></div>
+                                        <div class="time__space" > <input type="radio" id="slotTime" required="" onchange="displayVals()" name="slotTime" value="<%=slotTime%>"/><%=slotTime%></div>
                                         <!-- Modal -->
                                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -412,11 +433,11 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Bạn có xác nhận đạt lịch hẹn này hay không?</br>
-                                                        Dịch vụ: <%=sName%></br>
-                                                        Bác sĩ: <%=drName%></br>
-                                                        Ngày hẹn: <%=dateBooking%></br>
-                                                        Giờ hẹn: <%=slot.getSlotTime()%>
+                                                        <h4>Bạn có xác nhận đạt lịch hẹn này hay không?</h4>
+                                                        <p>Dịch vụ: <%=sName%></p>
+                                                        <p>Bác sĩ: <%=drName%></p>
+                                                        <p>Ngày hẹn: <%=dateBooking%></p>
+                                                        <p id="info1"></p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Từ chối</button>
@@ -570,9 +591,16 @@
                     alert("Hãy lựa chọn bác sĩ mà bạn muốn!!!");
                     location.reload();
                 }
+
             }
+            function displayVals() {
+                var checkedradio = $('[name="slotTime"]:radio:checked').val();
+                $("p#info1").html("Giờ hẹn: " + checkedradio);
+            }
+
+
         </script>
-        
+
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
                 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

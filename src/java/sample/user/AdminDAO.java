@@ -1235,4 +1235,68 @@ public class AdminDAO {
         return check;
     }
 
+    public List<String> showTimeWork(String startDate, String endDate) throws SQLException, ClassNotFoundException {
+        List<String> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select MIN(slotTime) AS ST ,MAX(slotTime) as ET from Slot "
+                        + "where (slotDateStart = ? OR slotDateStart = 'Monday') AND slotDateEnd = ? ";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, startDate);
+                ptm.setString(2, endDate);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String startTime = rs.getString("ST");
+                    String endTime = rs.getString("ET");
+                    if (startTime == null || endTime == null) {
+                        startTime = "OFF";
+                        endTime = "OFF";
+                    } else {
+                        String[] eT = endTime.split(":");
+                        int eT1 = Integer.parseInt(eT[0]);
+                        int eT2 = Integer.parseInt(eT[1]);
+                        if (eT2 == 30) {
+                            eT1++;
+                            endTime = eT1 + ":00";
+                        } else {
+                            eT2 = 30;
+                            endTime = eT1 + ":" + eT2;
+                        }
+                    }
+
+                    list.add(startTime);
+                    list.add(endTime);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public List<String> getOPH() throws SQLException, ClassNotFoundException {
+        List<String> listTW1 = this.showTimeWork("Monday", "Friday");
+        List<String> listTW2 = this.showTimeWork("Monday", "Sunday");
+        List<String> listTW = new ArrayList<>();
+        listTW.add(listTW1.get(0));
+        listTW.add(listTW1.get(1));
+        listTW.add(listTW2.get(0));
+        listTW.add(listTW2.get(1));
+        return listTW;
+    }
+
 }

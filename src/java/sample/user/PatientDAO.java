@@ -457,4 +457,37 @@ public class PatientDAO {
         }
         return check;
     }
+
+    public List<ScheduleDTO> getDayWorkDR(String doctorID) throws SQLException, ClassNotFoundException {
+        List<ScheduleDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT DISTINCT doctorID, dayWork FROM Schedule WHERE doctorID = ? AND status = 1";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, doctorID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String dayWork = rs.getString("dayWork");
+                    list.add(new ScheduleDTO(doctorID, dayWork));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 }

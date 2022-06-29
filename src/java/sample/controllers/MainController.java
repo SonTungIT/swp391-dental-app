@@ -62,7 +62,7 @@ public class MainController extends HttpServlet {
     //Slot
     private static final String UPDATESLOT = "UpdateSlot";
     private static final String UPDATESLOT_CONTROLLER = "UpdateSlotController";
-
+    
     //Doctor
     private static final String SHOWDR_BYCT = "ShowDRByCT";
     private static final String SHOWDR_BYCT_CONTROLLER = "ShowDRByCTController";

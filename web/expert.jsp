@@ -4,6 +4,8 @@
     Author     : Lenovo Legion
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -64,12 +66,26 @@
                         </ul>
                     </div>
                     <div class="col-sm-6 header-right-w3_pvt">
+                         <%
+                            AdminDAO dao = new AdminDAO();
+                            List<String> listTW = dao.getOPH();
+                            String stMF = "OFF";
+                            String etMF = "OFF";
+                            String stSS = "OFF";
+                            String etSS = "OFF";
+                            if (!listTW.isEmpty()) {
+                                stMF = listTW.get(0);
+                                etMF = listTW.get(1);
+                                stSS = listTW.get(2);
+                                etSS = listTW.get(3);
+                            } 
+                        %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Mon - Fri : 8:30am to 9:30pm</span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
                             </li>
-                            <li class="">
-                                <span class=""><span class="fa fa-clock-o"></span>Sat & Sun : 9:00am to 6:00pm</span>
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
                             </li>
                         </ul>
                     </div>
