@@ -24,7 +24,7 @@ import sample.utils.DBUtils;
  */
 public class AdminDAO {
 
-private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, doctorID, slotID, dayWork, status) VALUES(?, ?, ?, ?, ?)";
+    private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, doctorID, slotID, dayWork, status) VALUES(?, ?, ?, ?, ?)";
     private static final String UPDATE_SCHEDULE_DR = "UPDATE Schedule SET status = ? WHERE doctorID = ? AND dayWork = ?";
     private static final String SHOW_DR_SC = "SELECT userID, fullName, image, categoryName, shift from Users us JOIN Doctor dt ON us.userID = dt.doctorID JOIN CategoryService cs ON  cs.categoryID = dt.categoryID  WHERE us.status = 1 AND fullName like ?";
     private static final String SHOWSLOT = "SELECT slotID, slotName, slotTime, slotDateStart, slotDateEnd, status FROM Slot WHERE slotDateStart = ? OR slotDateEnd = ?";
@@ -34,6 +34,7 @@ private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, 
     private static final String CHECK_DUPLICATE_SD_ID = "SELECT doctorID FROM Schedule WHERE scheduleID = ? ";
     private static final String CHECK_DUPLICATE_SD_DR_DW_SL = "SELECT scheduleID FROM Schedule WHERE doctorID = ? AND slotID = ? AND dayWork = ?";
     private static final String CHECK_SL_FAIL_BY_UDSL = "select slotID from Slot WHERE slotTime = ? AND slotDateStart !='' AND slotDateEnd !=''";
+
     public static void main(String[] args) throws SQLException {
         AdminDAO dao = new AdminDAO();
         List<BookingDTO> list = dao.getListAllAppointmentBooking();
@@ -178,8 +179,6 @@ private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, 
             return -1;
         }
     }
-
-    
 
     public List<DoctorDTO> getListAllDoctor() throws SQLException {
         List<DoctorDTO> list = new ArrayList<>();
@@ -854,7 +853,6 @@ private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, 
         return list;
     }
 
-
     public boolean updateSlot(String slotDateStart, String slotEndStart, String slotTime) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -928,7 +926,7 @@ private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, 
                     Date dateBooking = rs.getDate("dateBooking");
                     String timeBooking = rs.getString("timeBooking");
                     String status = rs.getString("status");
-                    list.add(new BookingDTO(bookingID, patientID, serviceID, doctorID,dateBooking, timeBooking, status));
+                    list.add(new BookingDTO(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status));
                 }
             }
         } catch (Exception e) {
