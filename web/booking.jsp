@@ -211,7 +211,7 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
+                        <li class=""><a href="MainController?action=ShowService">ĐẶT LỊCH</a></li>
                     </ul>
 
                     <% if (loginUser == null) {
@@ -257,7 +257,7 @@
                                     Tài Khoản Của Tôi
                                 </button>
                             </a>
-                            <a href="#" style="padding: 0">
+                            <a href="historyBooking.jsp" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Lịch Sử Đặt Lịch
@@ -278,10 +278,10 @@
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/t6.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
+                            <img src="./images/blog4.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="doctor.jsp.jsp" style="padding: 0">
+                            <a href="doctor.jsp" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Tài Khoản Của Tôi
@@ -328,7 +328,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label style="width: 50%;padding: 0 10px;">
+                                    <label style="width: 100%; padding: 0 10px;">
                                         Service
                                         <span class="">
                                             <form action="MainController" id="form_SV">
@@ -446,23 +446,25 @@
 
 
                     <div class="col-lg-4 col-md-6 mt-lg-0 mt-4 contact-info">
-                        <h4 class="mb-4">Address Information</h4>
-                        <p><span class="fa mr-2 fa-map-marker"></span>64d canal street TT 3356 <span>Newyork, NY.</span></p>
+                        <h4 class="mb-4">Thông Tin Địa Chỉ</h4>
+                        <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
+                                Chí Minh.</span></p>
                         <p class="phone py-2"><span class="fa mr-2 fa-phone"></span>Phone : +1 123 456 789 </p>
                         <p><span class="fa mr-2 fa-envelope"></span>Email : <a
-                                href="mailto:info@example.com">info@example.com</a></p>
+                                href="mailto:info@example.com">tunglsse150510@fpt.edu.com</a></p>
 
-                        <h4 class="my-4">Book Your Appointment</h4>
-                        <p class="phone"><span class="fa mr-2 fa-phone"></span>Call us at +1 123 456 789 </p>
+                        <h4 class="my-4">Đặt Lịch Ngay</h4>
+                        <p class="phone"><span class="fa mr-2 fa-phone"></span>Gọi Ngay +84 123 456 789 </p>
+                        <div class="map mt-5 mb-5">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.609941491709!2d106.8076943144412!3d10.841132860961343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1653028757762!5m2!1svi!2s"
+                                width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="map mt-5">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.609941491709!2d106.8076943144412!3d10.841132860961343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1653028757762!5m2!1svi!2s"
-                    width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+
         </section>
         <!-- //contact -->
 
@@ -470,68 +472,38 @@
         <footer class="py-5">
             <div class="container py-sm-3">
                 <div class="row footer-grids">
-                    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                        <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Dental Health</h4>
-                        <p class="mb-3">Onec Consequat sapien ut cursus rhoncus. Nullam dui mi, vulputate ac metus semper
-                            quis luctus sed.</p>
-                        <h5>Trusted by <span>500+ People</span> </h5>
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                        <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Nha Khoa Thiên Thần</h4>
+                        <p class="mb-3">Nha khoa Thiên Thần -Trung tâm trồng răng và Niềng răng. Tự hào là một trong những nha
+                            khoa ở TP.HCM đi đầu về công nghệ và chất lượng đội ngũ Y bác sỹ.</p>
+                        <h5>Được tin cậy bởi <span>500+ Người</span> </h5>
                     </div>
-                    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                        <h4 class="mb-sm-4 mb-3">Address Info</h4>
-                        <p><span class="fa mr-2 fa-map-marker"></span>64d canal street TT 3356 <span>Newyork, NY.</span></p>
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                        <h4 class="mb-sm-4 mb-3">Thông Tin Địa Chỉ</h4>
+                        <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
+                                Chí Minh.</span></p>
                         <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
                         <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
                         </p>
+                        <p><span class=""><span class="fa fa-clock-o"></span>Giờ mở cửa: 7h - 16:30h (cả Thứ 7 và CN)</span>
+                        </p>
                     </div>
-                    <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
-                        <h4 class="mb-sm-4 mb-3">Quick Links</h4>
-                        <ul>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li class="my-2"><a href="#">Support Helpline</a></li>
-                            <li><a href="#">Healthy Tips</a></li>
-                            <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <h4 class="mb-sm-4 mb-3">Subscribe Us</h4>
-                        <p class="mb-3">Subscribe to our newsletter</p>
-                        <form action="#" method="post" class="d-flex">
-                            <input type="email" id="email" name="EMAIL" placeholder="Enter your email here" required="">
-                            <button type="submit" class="btn">Subscribe</button>
-                        </form>
-                        <div class="icon-social mt-3">
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-facebook"></span>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-twitter"></span>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-dribbble"></span>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-pinterest"></span>
-                            </a>
-                            <a href="#" class="button-footr">
-                                <span class="fa mx-2 fa-google-plus"></span>
-                            </a>
-
-                        </div>
-                    </div>
+                    <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
+                            <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
+                            <ul>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li class="my-2"><a href="#">Support Helpline</a></li>
+                                    <li><a href="#">Healthy Tips</a></li>
+                                    <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
+                            </ul>
+                    </div> -->
                 </div>
             </div>
         </footer>
         <!-- //footer -->
 
         <!-- copyright -->
-        <div class="copyright">
-            <div class="container py-4">
-                <div class=" text-center">
-                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+
         <!-- //copyright -->
 
         <!-- move top -->
@@ -572,7 +544,7 @@
                 }
             }
         </script>
-        
+
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
                 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

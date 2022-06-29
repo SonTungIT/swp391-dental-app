@@ -33,6 +33,7 @@
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
+        
         <!-- //css files -->
 
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -244,10 +245,10 @@
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/t6.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
+                            <img src="./images/blog4.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="doctor.jsp.jsp" style="padding: 0">
+                            <a href="doctor.jsp" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Tài Khoản Của Tôi
@@ -650,7 +651,7 @@
                 <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
                 <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
                 <p>+84123456789</p>
-                <a style="color: #FFF" href="booking.jsp">ĐẶT LỊCH NGAY</a>
+                <a href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>
             </div>
         </section>
         <!-- //appointment -->

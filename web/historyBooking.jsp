@@ -341,17 +341,20 @@
                                                             if (bk.getStatus().equals("Active")) {
                                                                 if (bk.getDateBooking().after(curDate) || (date1.equals(date2) && nt1 < tB1)) {
                                                         %>
+                                                        <!--Đang chờ-->
                                                         <button type="button"   class="btn btn-success d-none d-md-inline-block text-white">
-                                                            Đang chờ
+                                                            <i class="fa-solid fa-hourglass"></i>
                                                         </button>
+                                                        <!--Xóa-->
                                                         <button type="submit" name="action" value="CancelBK" class="btn btn-success d-none d-md-inline-block text-white">
-                                                            Xoá lịch
+                                                            <i class="fa-solid fa-trash-can"></i>
                                                         </button>
                                                         <%
                                                         } else {
                                                         %>
+                                                        <!--Hoàn Thành-->
                                                         <button type="button"   class="btn btn-success d-none d-md-inline-block text-white">
-                                                            Hoàn thành
+                                                            <i class="fa-solid fa-clipboard-check"></i>
                                                         </button>
                                                         <%
                                                                 }
