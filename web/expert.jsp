@@ -57,14 +57,18 @@
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:info@example.com" class="">info@example.com</a>
+                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
-                            <li>
-                                <span class="fa fa-phone"></span>
-                                <p class="d-inline">Call Us +12 345 678</p>
+                            <!-- <li>
+                                    <span class="fa fa-phone"></span>
+                                    <p class="d-inline">Call Us +12 345 678</p>
+                            </li> -->
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
+
                     <div class="col-sm-6 header-right-w3_pvt">
                          <%
                             AdminDAO dao = new AdminDAO();
@@ -82,10 +86,17 @@
                         %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
+<<<<<<< HEAD
                                 <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
                             </li>
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
+=======
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : 7h - 16:30h</span>
+                            </li>
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : 7h - 11h</span>
+>>>>>>> 33a691e3a94ec376f7b051b18701ab0118afd165
                             </li>
                         </ul>
                     </div>
@@ -170,7 +181,16 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
+                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            %>
+                        <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
+                            <%
+                            } else {
+                            %>
+                        <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH</a></li>
+                            <%
+                                }
+                            %>
                     </ul>
 
                     <% if (loginUser == null) {
@@ -216,7 +236,7 @@
                                     Tài Khoản Của Tôi
                                 </button>
                             </a>
-                            <a href="#" style="padding: 0">
+                            <a href="MainController?action=SearchHSBK&searchHSBK" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Lịch Sử Đặt Lịch
@@ -237,10 +257,10 @@
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/t6.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
+                            <img src="./images/blog4.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="doctor.jsp.jsp" style="padding: 0">
+                            <a href="doctor.jsp" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Tài Khoản Của Tôi
@@ -364,7 +384,7 @@
                 <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
                 <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
                 <p>+84123456789</p>
-                <a style="font-size: 30px" href="booking.jsp">ĐẶT LỊCH NGAY</a>
+                <a style="font-size: 30px" href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>
             </div>
         </section>
         <!-- //appointment -->
@@ -426,5 +446,10 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper -->  
+        <script>
+                    function control() {
+                        alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                    }
+        </script>
     </body>
 </html>

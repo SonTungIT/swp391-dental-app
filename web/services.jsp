@@ -50,21 +50,25 @@
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:info@example.com" class="">info@example.com</a>
+                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
-                            <li>
-                                <span class="fa fa-phone"></span>
-                                <p class="d-inline">Call Us +12 345 678</p>
+                            <!-- <li>
+                                    <span class="fa fa-phone"></span>
+                                    <p class="d-inline">Call Us +12 345 678</p>
+                            </li> -->
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
+
                     <div class="col-sm-6 header-right-w3_pvt">
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Mon - Fri : 8:30am to 9:30pm</span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : 7h - 16:30h</span>
                             </li>
-                            <li class="">
-                                <span class=""><span class="fa fa-clock-o"></span>Sat & Sun : 9:00am to 6:00pm</span>
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : 7h - 11h</span>
                             </li>
                         </ul>
                     </div>
@@ -86,7 +90,7 @@
                     <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2 ml-auto">
-                        
+
                         <li class=""><a href="about.jsp">GIỚI THIỆU</a></li>
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
@@ -149,7 +153,16 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
+                            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            %>
+                        <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
+                            <%
+                            } else {
+                            %>
+                        <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH</a></li>
+                            <%
+                                }
+                            %>
                     </ul>
 
                     <% if (loginUser == null) {
@@ -181,9 +194,9 @@
                         </ul>
                     </div>
                     <%
-                        } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
+                    } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
                     %> 
-                    
+
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="./images/sontung.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
@@ -195,7 +208,7 @@
                                     Tài Khoản Của Tôi
                                 </button>
                             </a>
-                            <a href="#" style="padding: 0">
+                            <a href="MainController?action=SearchHSBK&searchHSBK" styl"e="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Lịch Sử Đặt Lịch
@@ -212,14 +225,14 @@
                         </ul>
                     </div>
                     <%
-                        } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
+                    } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/t6.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
+                            <img src="./images/blog4.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="doctor.jsp.jsp" style="padding: 0">
+                            <a href="doctorjsp" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Tài Khoản Của Tôi
@@ -315,9 +328,9 @@
         <!-- services -->
         <section class="services py-5">
             <div class="container py-lg-5">
-                <h3 class="heading text-center mb-5">CÁC DỊCH VỤ TẠI NHA KHOA THIÊN THẦN</h3>
+                <h3 class="heading text-center mb-sm-5">DỊCH VỤ NỔI BẬT</h3>
                 <div class="row offer-grids">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6 mt-md-0 hoverItem">
                         <a href="listService/niengrang1.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu1.png" alt="">
@@ -329,7 +342,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-md-0 hoverItem">
                         <a href="listService/niengrang2.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu2.png" alt="">
@@ -342,7 +355,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-lg-0 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-lg-0 mt-4 hoverItem">
                         <a href="./listService/cayghep1.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu3.png" alt="">
@@ -354,7 +367,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-4 hoverItem">
                         <a href="./listService/rangsu2.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu4.png" alt="">
@@ -366,7 +379,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-4 hoverItem">
                         <a href="./listService/rangsu1.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu5.png" alt="">
@@ -378,7 +391,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4">
+                    <div class="col-lg-4 col-md-6 mt-4 hoverItem">
                         <a href="./listService/dichvu2.html">
                             <div class="bg-layer--img">
                                 <img src="./images/dichvu6.png" alt="">
@@ -419,7 +432,7 @@
                 <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
                 <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
                 <p>+84123456789</p>
-                <a style="font-size: 30px" href="booking.jsp">ĐẶT LỊCH NGAY</a>
+                <a style="font-size: 30px" href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>
             </div>
         </section>
         <!-- //appointment -->
@@ -459,13 +472,7 @@
         <!-- //footer -->
 
         <!-- copyright -->
-        <div class="copyright">
-            <div class="container py-4">
-                <div class=" text-center">
-                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a> </p>
-                </div>
-            </div>
-        </div>
+
         <!-- //copyright -->
 
         <!-- move top -->
@@ -487,6 +494,10 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper -->  
-
+        <script>
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
+        </script>
     </body>
 </html>

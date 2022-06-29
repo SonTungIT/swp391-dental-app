@@ -168,11 +168,11 @@
                                                          href="index.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Trang Chủ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                                         href="doctor.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
-                                        class="hide-menu">Lịch Sử Đặt Lịch</span></a></li>
+                                        class="hide-menu">Lịch Làm Việc</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Thay Đổi Mật Khẩu</span></a></li>
@@ -215,20 +215,14 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Doctor</h3>
+                            <!--<h3 class="page-title mb-0 p-0">Thông Tin</h3>-->
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Doctor</li>
+                                        <li class="breadcrumb-item"><a href="#">Trang Cá Nhân</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Thông Tin</li>
                                     </ol>
                                 </nav>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
                             </div>
                         </div>
                     </div>
@@ -243,101 +237,118 @@
                     <!-- ============================================================== -->
                     <!-- Start Page Content -->
                     <!-- ============================================================== -->
+                    <!-- Row -->
                     <div class="row">
-                        <!-- column -->
-                        <div class="col-sm-12">
+                        <!-- Column -->
+                        <div class="col-lg-4 col-xlg-3 col-md-5">
                             <div class="card">
-                                <div class="card-body">
-                                    <div class="input-group">
-                                        <div class="form-outline">
-                                            <input type="search" id="form1" class="form-control"
-                                                   placeholder="Tìm kiếm bác sĩ...">
-                                        </div>
-                                        <button type="button" class="btn btn-success">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-
-                                    <div class="table-responsive">
-                                        <table class="table user-table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-top-0">ID</th>
-                                                    <th class="border-top-0">Họ tên</th>
-                                                    <th class="border-top-0">Giới tính</th>
-                                                    <th class="border-top-0">Chuyên môn</th>
-                                                    <th class="border-top-0">Trạng thái</th>
-                                                    <th class="border-top-0"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Võ Văn Tự Hiến</td>
-                                                    <td>Nam</td>
-                                                    <td>Cấy ghép nha khoa</td>
-                                                    <td>Active</td>
-                                                    <td>
-                                                        <a href=""
-                                                           class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            Chi tiết
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Nguyễn Thị Thu Thủy</td>
-                                                    <td>Nữ</td>
-                                                    <td>Chỉnh nha</td>
-                                                    <td>Active</td>
-                                                    <td>
-                                                        <a href=""
-                                                           class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            Chi tiết
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Đặng Thị Thu Hằng</td>
-                                                    <td>Nữ</td>
-                                                    <td>Phục hình răng</td>
-                                                    <td>Active</td>
-                                                    <td>
-                                                        <a href=""
-                                                           class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            Chi tiết
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Vũ Đức Hùng</td>
-                                                    <td>Nam</td>
-                                                    <td>Chăm sóc nha khoa</td>
-                                                    <td>Active</td>
-                                                    <td>
-                                                        <a href=""
-                                                           class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            Chi tiết
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="card-body profile-card">
+                                    <center class="mt-4"> <img src="./images/blog4.jpg"
+                                                               class="rounded-circle" width="150" />
+                                        <h4 class="card-title mt-2">Ma Phong Ba</h4>
+                                        <!--                                        <div class="row text-center justify-content-center">
+                                                                                    <div class="col-4">
+                                                                                        <a href="javascript:void(0)" class="link">
+                                                                                            <i class="icon-people" aria-hidden="true"></i>
+                                                                                            <span class="value-digit">254</span>
+                                                                                        </a></div>
+                                                                                    <div class="col-4">
+                                                                                        <a href="javascript:void(0)" class="link">
+                                                                                            <i class="icon-picture" aria-hidden="true"></i>
+                                                                                            <span class="value-digit">54</span>
+                                                                                        </a></div>
+                                                                                </div>-->
+                                    </center>
                                 </div>
                             </div>
                         </div>
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="col-lg-8 col-xlg-9 col-md-7">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form class="form-horizontal form-material mx-2">
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Họ và Tên</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Ma Phong Ba"
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                        </div>
+                                        <!--                                        <div class="form-group">
+                                                                                    <label class="col-md-12 mb-0">Password</label>
+                                                                                    <div class="col-md-12">
+                                                                                        <input type="password" value="password"
+                                                                                               class="form-control ps-0 form-control-line">
+                                                                                    </div>
+                                                                                </div>-->
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Giới Tính</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Nam"
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Địa Chỉ</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Hồ Chí Minh"
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Ngày Tháng Năm Sinh</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="2001-02-12"
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="example-email" class="col-md-12">Email</label>
+                                            <div class="col-md-12">
+                                                <input type="email" placeholder="maphongba@gmail.com"
+                                                       class="form-control ps-0 form-control-line" name="example-email"
+                                                       id="example-email">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Số Điện Thoại</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="123 456 7890"
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                        </div>
+                                        <!--                                        <div class="form-group">
+                                                                                    <label class="col-md-12 mb-0">Message</label>
+                                                                                    <div class="col-md-12">
+                                                                                        <textarea rows="5" class="form-control ps-0 form-control-line"></textarea>
+                                                                                    </div>
+                                                                                </div>-->
+                                        <!--                                        <div class="form-group">
+                                                                                    <label class="col-sm-12">Select Country</label>
+                                                                                    <div class="col-sm-12 border-bottom">
+                                                                                        <select class="form-select shadow-none ps-0 border-0 form-control-line">
+                                                                                            <option>London</option>
+                                                                                            <option>India</option>
+                                                                                            <option>Usa</option>
+                                                                                            <option>Canada</option>
+                                                                                            <option>Thailand</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>-->
+                                        <div class="form-group">
+                                            <div class="col-sm-12 d-flex">
+                                                <button class="btn btn-success mx-auto mx-md-0 text-white">Cập Nhật</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
                     </div>
+                    <!-- Row -->
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -355,8 +366,7 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
+
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->
