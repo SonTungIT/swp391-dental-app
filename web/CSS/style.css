@@ -91,7 +91,7 @@ ul.header-w3_pvt li a {
 }
 
 .header-top {
-    padding: 0.5em 0;
+    padding: 0.05em 0;
 }
 
 .header-top {
@@ -387,22 +387,31 @@ h3.b-w3ltxt {
 
 .btn-banner,
 .btn-banner1 {
-    background: #63B43E;
-    border-radius: 0px;
-    color: #fff;
-    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #28a745;
+    color: #28a745;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 600;
     letter-spacing: 1px;
     padding: 10px 25px;
     display: inline-block;
 }
 
 .btn-banner1 {
-    background: #ee1c25 ;
+    border: 1px solid #ee1c25;
+    background: #fff;
+    color: #ee1c25;
 }
 
-.btn-banner:hover,
-.btn-banner1:hover {
+.btn-banner1:hover { 
     color: #fff;
+    background: #ee1c25;
+}
+
+.btn-banner:hover {
+    color: #fff;
+    background: #2d7745;
 }
 
 .carousel-indicators {

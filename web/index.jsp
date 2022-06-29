@@ -33,7 +33,7 @@
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
-        
+
         <!-- //css files -->
 
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -49,7 +49,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+
     </head>
     <body>
         <%
@@ -64,18 +64,18 @@
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:info@example.com" class="">info@example.com</a>
+                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
                             <!-- <li>
                                     <span class="fa fa-phone"></span>
                                     <p class="d-inline">Call Us +12 345 678</p>
                             </li> -->
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-phone"></span>Call Us +12 345 678</span>
+                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
-                   
+
                     <div class="col-sm-6 header-right-w3_pvt">
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
@@ -95,7 +95,7 @@
         <header class="py-3">
             <div class="container">
                 <div id="logo">
-                    <h1> <a href="MainController?action=Home"><span class="fa fa-solid fa-tooth" aria-hidden="true"></span> Nha Khoa Thiên
+                    <h1> <a href="index.jsp"><span class="fa fa-solid fa-tooth" aria-hidden="true"></span> Nha Khoa Thiên
                             Thần </a></h1>
                 </div>
                 <!-- nav -->
@@ -225,7 +225,7 @@
                                     Tài Khoản Của Tôi
                                 </button>
                             </a>
-                            <a href="#" style="padding: 0">
+                            <a href="MainController?action=SearchHSBK&searchHSBK" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Lịch Sử Đặt Lịch
@@ -321,10 +321,21 @@
                                                     <p class="w3ls_pvt-title my-3">Với 12 năm kinh nghiệm, cùng đội ngũ nha
                                                         sĩ đứng hàng đầu Việt Nam. Chúng tôi luôn mong muốn cung cấp dịch vụ
                                                         nha khoa tốt nhất cho khách hàng.</p>
-                                                    <a href="about.html" class="btn btn-banner my-sm-3 mb-3">Tìm hiểu
+                                                    <a href="about.jsp" class="btn btn-banner my-sm-3 mb-3">Tìm hiểu
                                                         thêm</a>
-                                                    <a href="booking.html" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
+                                                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                                                        %>
+                                                    <a href="login.jsp" onclick="control()" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
                                                         ngay</a>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                    <a href="MainController?action=ShowService" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
+                                                        ngay</a>
+                                                        <%
+                                                            }
+                                                        %>
+
                                                 </div>
                                             </div>
                                         </li>
@@ -337,10 +348,20 @@
                                                         Chúng tôi luôn mong muốn đem lại những trải nghiệm tốt nhất cho
                                                         khách hàng. Nụ cười của khách hàng chính là niềm hạnh phúc của chúng
                                                         tôi.</p>
-                                                    <a href="about.html" class="btn btn-banner my-sm-3 mb-3">Tìm hiểu
+                                                    <a href="about.jsp" class="btn btn-banner my-sm-3 mb-3">Tìm hiểu
                                                         thêm</a>
-                                                    <a href="booking.html" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
+                                                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                                                        %>
+                                                    <a href="login.jsp" onclick="control()" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
                                                         ngay</a>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                    <a href="MainController?action=ShowService" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
+                                                        ngay</a>
+                                                        <%
+                                                            }
+                                                        %>
                                                 </div>
                                             </div>
                                         </li>
@@ -353,10 +374,20 @@
                                                         bài bản, chuyên nghiệp nhất, cùng với nhiều năm kinh nghiệm trong
                                                         giới nha khoa. Chúng tôi luôn tự tin rằng sẽ mang lại sự hài lòng
                                                         cho khách hàng. </p>
-                                                    <a href="about.html" class="btn btn-banner my-sm-3 mb-3">Tìm hiểu
+                                                    <a href="about.jsp" class="btn btn-banner my-sm-3 mb-3">Tìm hiểu
                                                         thêm</a>
-                                                    <a href="booking.html" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
+                                                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                                                        %>
+                                                    <a href="login.jsp" onclick="control()" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
                                                         ngay</a>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                    <a href="MainController?action=ShowService" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
+                                                        ngay</a>
+                                                        <%
+                                                            }
+                                                        %>
                                                 </div>
                                             </div>
                                         </li>
@@ -543,7 +574,7 @@
 
         <!-- testimonials -->
         <section class="feedback" id="testimonials">
-            <div class="feedback-layer py-5">
+            <div class="feedback-layer">
                 <div class="container py-lg-5">
                     <h3 class="heading text-center mb-sm-5 mb-4">TRẢI NGHIỆM CỦA KHÁCH HÀNG</h3>
                     <div class="row">
@@ -627,7 +658,7 @@
                         <h5>June 5, 2022.</h5>
                         <h4 class="my-3">Niềng răng Invisalign là gì? Giá bao nhiêu tiền? Kết quả Trước & Sau.</h4>
                         <p class="my-3">Bác sĩ nha khoa - 05/06/2022</p>
-                        <a href="single.html" class="btn-banner"> View Post </a>
+                        <a href="single.html" class="btn-banner">Xem Bài Đăng</a>
                     </div>
                     <div class="col-lg-7 mb-lg-0 mb-4">
                         <h5>June 5, 2022.</h5>
@@ -635,7 +666,7 @@
                             <br> Xu thế Nhất.
                         </h4>
                         <p class="my-3">Bác sĩ nha khoa - 05/06/2022</p>
-                        <a href="single.html" class="btn-banner"> View Post </a>
+                        <a href="single.html" class="btn-banner">Xem Bài Đăng</a>
                     </div>
                     <div class="col-lg-5 blog-img2">
                         <img src="images/news2.jpg" alt="" class="img-fluid" />
@@ -652,7 +683,17 @@
                 <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
                 <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
                 <p>+84123456789</p>
-                <a href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>
+                <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                %>
+                <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH NGAY</a></li>
+                    <%
+                    } else {
+                    %>
+                <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH NGAY</a></li>
+                    <%
+                        }
+                    %>
+                <!--                <a href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>-->
             </div>
         </section>
         <!-- //appointment -->
@@ -719,9 +760,9 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
-            function control(){
-                alert("Xin hãy đăng nhập để được đặt lịch!!!");
-            }
+                    function control() {
+                        alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                    }
         </script>
     </body>
 </html>

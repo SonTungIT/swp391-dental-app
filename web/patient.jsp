@@ -225,12 +225,12 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-md-6 col-4 align-self-center">
+<!--                        <div class="col-md-6 col-4 align-self-center">
                             <div class="text-end upgrade-btn">
                                 <a href="https://www.wrappixel.com/templates/materialpro/"
                                    class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Patient</a>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <!-- ============================================================== -->

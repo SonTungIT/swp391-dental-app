@@ -50,21 +50,25 @@
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:info@example.com" class="">info@example.com</a>
+                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
-                            <li>
-                                <span class="fa fa-phone"></span>
-                                <p class="d-inline">Call Us +12 345 678</p>
+                            <!-- <li>
+                                    <span class="fa fa-phone"></span>
+                                    <p class="d-inline">Call Us +12 345 678</p>
+                            </li> -->
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
+
                     <div class="col-sm-6 header-right-w3_pvt">
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Mon - Fri : 8:30am to 9:30pm</span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : 7h - 16:30h</span>
                             </li>
-                            <li class="">
-                                <span class=""><span class="fa fa-clock-o"></span>Sat & Sun : 9:00am to 6:00pm</span>
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : 7h - 11h</span>
                             </li>
                         </ul>
                     </div>
@@ -86,7 +90,7 @@
                     <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2 ml-auto">
-                        
+
                         <li class=""><a href="about.jsp">GIỚI THIỆU</a></li>
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
@@ -149,7 +153,16 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <li class=""><a href="MainController?action=ShowService">ĐẶT LỊCH</a></li>
+                            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            %>
+                        <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
+                            <%
+                            } else {
+                            %>
+                        <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH</a></li>
+                            <%
+                                }
+                            %>
                     </ul>
 
                     <% if (loginUser == null) {
@@ -181,9 +194,9 @@
                         </ul>
                     </div>
                     <%
-                        } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
+                    } else if (loginUser != null && loginUser.getRoleID().equals("PT")) {
                     %> 
-                    
+
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="./images/sontung.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
@@ -195,7 +208,7 @@
                                     Tài Khoản Của Tôi
                                 </button>
                             </a>
-                            <a href="#" style="padding: 0">
+                            <a href="MainController?action=SearchHSBK&searchHSBK" styl"e="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Lịch Sử Đặt Lịch
@@ -212,7 +225,7 @@
                         </ul>
                     </div>
                     <%
-                        } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
+                    } else if (loginUser != null && loginUser.getRoleID().equals("DR")) {
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -459,7 +472,7 @@
         <!-- //footer -->
 
         <!-- copyright -->
-        
+
         <!-- //copyright -->
 
         <!-- move top -->
@@ -481,6 +494,10 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper -->  
-
+        <script>
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
+        </script>
     </body>
 </html>

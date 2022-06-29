@@ -112,21 +112,25 @@
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:info@example.com" class="">info@example.com</a>
+                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
-                            <li>
-                                <span class="fa fa-phone"></span>
-                                <p class="d-inline">Call Us +12 345 678</p>
+                            <!-- <li>
+                                    <span class="fa fa-phone"></span>
+                                    <p class="d-inline">Call Us +12 345 678</p>
+                            </li> -->
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
+
                     <div class="col-sm-6 header-right-w3_pvt">
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Mon - Fri : 8:30am to 9:30pm</span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : 7h - 16:30h</span>
                             </li>
-                            <li class="">
-                                <span class=""><span class="fa fa-clock-o"></span>Sat & Sun : 9:00am to 6:00pm</span>
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : 7h - 11h</span>
                             </li>
                         </ul>
                     </div>
@@ -211,7 +215,17 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <li class=""><a href="MainController?action=ShowService">ĐẶT LỊCH</a></li>
+                            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            %>
+                        <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
+                            <%
+                            } else {
+                            %>
+                        <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH</a></li>
+                            <%
+                                }
+                            %>
+
                     </ul>
 
                     <% if (loginUser == null) {
@@ -257,7 +271,7 @@
                                     Tài Khoản Của Tôi
                                 </button>
                             </a>
-                            <a href="historyBooking.jsp" style="padding: 0">
+                            <a href="MainController?action=SearchHSBK&searchHSBK" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Lịch Sử Đặt Lịch
@@ -317,75 +331,78 @@
         <!-- //banner -->
 
         <!-- contact -->
-        <section class="mail pt-lg-5 pt-4">
+        <section class="mail">
             <div class="container pt-lg-5">
                 <h2 class="heading text-center mb-sm-5 mb-4">Đặt Lịch</h2>
                 <div class="row agileinfo_mail_grids">
-                    <div class="col-lg-8 agileinfo_mail_grid_right">
-
+                    <div class="col-lg-8 agileinfo_mail_grid_right" style="background-color: #f5f6f5bf; border-radius: 2px">
                         <div class="row">
-
-
-                            <div class="col-md-6">
+                            <div class="col-md-1">
                                 <div class="form-group">
-                                    <label style="width: 100%; padding: 0 10px;">
-                                        Service
-                                        <span class="">
+
+                                </div>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="form-group">
+                                    <label>
+                                        <span> <h4>Chọn Dịch Vụ</h4>
                                             <form action="MainController" id="form_SV">
-                                                <select  name="serviceName"  onchange="showService()">
-                                                    <option class="form-option" value="<%=sName%>"><%=sName%></option>
-                                                    <% List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
-                                                        if (listService != null) {
-                                                            if (listService.size() > 0) {
-                                                                for (ServiceDTO service : listService) {
-                                                    %> 
-                                                    <option class="form-option" value="<%=service.getServiceName()%>"><%=service.getServiceName()%> <%=service.getPrice()%>$ </option>
-                                                    <%
+                                                <div class="booking-input">
+                                                    <select  name="serviceName" onchange="showService()">
+                                                        <option class="form-option" value="<%=sName%>"><%=sName%></option>
+                                                        <% List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
+                                                            if (listService != null) {
+                                                                if (listService.size() > 0) {
+                                                                    for (ServiceDTO service : listService) {
+                                                        %> 
+                                                        <option class="form-option" value="<%=service.getServiceName()%>"><%=service.getServiceName()%> <%=service.getPrice()%>$ </option>
+                                                        <%
+                                                                    }
                                                                 }
                                                             }
-                                                        }
-                                                    %>
-                                                </select>
-                                                <input type="hidden" name="action" value="ShowDRByCT"/>                          
+                                                        %>
+                                                    </select>
+                                                    <input type="hidden" name="action" value="ShowDRByCT"/> 
+                                                </div>
                                             </form> 
                                         </span>
                                     </label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label style="width: 50%;padding: 0 10px;">
-                                        Chọn bác sĩ:
-                                        <span class="wpcf7-form-control-wrap date-ngay">
+                                    <label class="form-group--item" style="width: 100%;">
+                                        <span>
                                             <form action="MainController" id="form_DR" name="from_DR">
-                                                <input type="hidden" name="serviceName" value="<%=sName%>"/>
-                                                <select name="doctorID" id="doctorID">
-                                                    <option class="form-option" value="<%=drID%>"><%=drName%></option>
-                                                    <%
-                                                        List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR_CT");
-                                                        if (listDoctor != null) {
-                                                            if (listDoctor.size() > 0) {
+                                                <div class="booking-input--date">
+                                                    <input type="hidden" name="serviceName" value="<%=sName%>"/>
+                                                    <h4>Chọn Bác Sĩ</h4> 
+                                                    <select name="doctorID" id="doctorID">
+                                                        <option class="form-option" value="<%=drID%>"><%=drName%></option>
+                                                        <%
+                                                            List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR_CT");
+                                                            if (listDoctor != null) {
+                                                                if (listDoctor.size() > 0) {
 
-                                                                for (DoctorDTO doctor : listDoctor) {
+                                                                    for (DoctorDTO doctor : listDoctor) {
 
-                                                    %>
-                                                    <option class="form-option" value="<%=doctor.getUserID()%>"><%=doctor.getFullName()%></option>
-                                                    <%
+                                                        %>
+                                                        <option class="form-option" value="<%=doctor.getUserID()%>"><%=doctor.getFullName()%></option>
+                                                        <%
+                                                                    }
                                                                 }
                                                             }
-                                                        }
-                                                    %>
-                                                </select>  
-                                                </br>Chọn ngày:</br>
-                                                <input type="date" id="dateB" name="bookingDate" value="<%=dateBooking%>" required="" onchange="showDate()"/></br></br>
-                                                <input type="hidden" name="action" value="ShowSlotDR" /> 
+                                                        %>
+                                                    </select>
+                                                    <h4>Chọn Ngày Khám</h4>
+                                                    <input type="date" id="dateB" name="bookingDate" value="<%=dateBooking%>" required="" onchange="showDate()"/></br></br>
+                                                    <input type="hidden" name="action" value="ShowSlotDR" /> 
+                                                </div>
                                             </form>
                                             <%=error%>
                                         </span>
                                     </label>
                                 </div>
+
                             </div>
-                            <div class="booking-time">
+
+                            <div class="booking-time" >
                                 <div class="dv-title"> Chọn giờ thăm khám</div>
                                 <form action="MainController" > 
                                     <input type="hidden" name="serviceID" value="<%=sID%>"/>
@@ -434,8 +451,8 @@
                                     <%=slot_doctorEmmty%></br></br>
                                     <%=errorTime%></br></br>
                                     <input type="hidden" name="action" value="CreateBooking" />                            
-                                    <div class="submit-buttons">
-                                        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
+                                    <div style="margin-top: -40px">
+                                        <button type="button" class="btn-banner" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
                                     </div>
                                 </form></br>
                                 <%=mess%>
@@ -451,7 +468,7 @@
                                 Chí Minh.</span></p>
                         <p class="phone py-2"><span class="fa mr-2 fa-phone"></span>Phone : +1 123 456 789 </p>
                         <p><span class="fa mr-2 fa-envelope"></span>Email : <a
-                                href="mailto:info@example.com">tunglsse150510@fpt.edu.com</a></p>
+                                href="mailto:phongkhamnhakhoathienthan@gmail.com">phongkhamnhakhoathienthan@gmail.com</a></p>
 
                         <h4 class="my-4">Đặt Lịch Ngay</h4>
                         <p class="phone"><span class="fa mr-2 fa-phone"></span>Gọi Ngay +84 123 456 789 </p>
@@ -554,5 +571,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+        <script>
+            function control() {
+                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+            }
+        </script>
     </body>
 </html>

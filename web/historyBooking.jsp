@@ -184,7 +184,7 @@
                                                          href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="historyBooking.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                                         href="MainController?action=SearchHSBK&searchHSBK" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Lịch Sử Đặt Lịch</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
@@ -238,12 +238,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -342,18 +337,18 @@
                                                                 if (bk.getDateBooking().after(curDate) || (date1.equals(date2) && nt1 < tB1)) {
                                                         %>
                                                         <!--Đang chờ-->
-                                                        <button type="button"   class="btn btn-success d-none d-md-inline-block text-white">
+                                                        <button type="button" style="background-color: rgb(251 188 5)" class="btn d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-hourglass"></i>
                                                         </button>
                                                         <!--Xóa-->
-                                                        <button type="submit" name="action" value="CancelBK" class="btn btn-success d-none d-md-inline-block text-white">
+                                                        <button type="submit" name="action" value="CancelBK" class="btn btn-danger d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </button>
                                                         <%
                                                         } else {
                                                         %>
                                                         <!--Hoàn Thành-->
-                                                        <button type="button"   class="btn btn-success d-none d-md-inline-block text-white">
+                                                        <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-clipboard-check"></i>
                                                         </button>
                                                         <%
@@ -361,9 +356,10 @@
                                                             }
                                                         %>
                                                     </td>
+                                                    <!--đánh giá-->
                                                     <td>
                                                         <button type="button" name="#" value="#" class="btn btn-success d-none d-md-inline-block text-white">
-                                                            <i class="fa-solid fa-circle-plus"></i>
+                                                            <i class="fa-solid fa-comment-dots"></i>
                                                         </button>
                                                     </td>
                                                 </tr>

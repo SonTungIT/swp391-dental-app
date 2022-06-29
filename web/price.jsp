@@ -62,17 +62,18 @@
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:info@example.com" class="">info@example.com</a>
+                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
                             <!-- <li>
                                     <span class="fa fa-phone"></span>
                                     <p class="d-inline">Call Us +12 345 678</p>
                             </li> -->
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-phone"></span>Call Us +12 345 678</span>
+                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
+
                     <div class="col-sm-6 header-right-w3_pvt">
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
@@ -164,7 +165,16 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
+                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            %>
+                        <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
+                            <%
+                            } else {
+                            %>
+                        <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH</a></li>
+                            <%
+                                }
+                            %>
                     </ul>
 
                     <% if (loginUser == null) {
@@ -752,5 +762,10 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper -->  
+        <script>
+                    function control() {
+                        alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                    }
+        </script>
     </body>
 </html>
