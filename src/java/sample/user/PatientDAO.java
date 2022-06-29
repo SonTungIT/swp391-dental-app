@@ -45,7 +45,7 @@ public class PatientDAO {
             + "								JOIN Doctor dt ON dt.doctorID = sc.doctorID JOIN CategoryService cs\n"
             + "								ON cs.categoryID = dt.categoryID JOIN Service sv ON sv.categoryID = cs.categoryID\n"
             + "								JOIN Booking bk ON bk.serviceID = sv.serviceID\n"
-            + "								WHERE sl.slotID = ? AND timeBooking = slotTime AND dateBooking = ?";
+            + "								WHERE sl.slotID = ? AND timeBooking = slotTime AND dateBooking = ? AND bk.status = 'Active'";
 
     public List<ServiceDTO> showListService() throws SQLException, ClassNotFoundException {
         List<ServiceDTO> list = new ArrayList<>();

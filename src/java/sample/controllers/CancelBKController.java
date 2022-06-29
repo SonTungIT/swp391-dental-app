@@ -32,6 +32,7 @@ public class CancelBKController extends HttpServlet {
             PatientDAO dao = new PatientDAO();
             boolean checkUpdate = dao.cancelBK(bookingID);
             if (checkUpdate) {
+
                 url = SUCCESS;
             }
         } catch (Exception e) {
