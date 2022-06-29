@@ -268,44 +268,44 @@
                 <div class="row news-grids text-center">
                     <div class="row item-list">
                         <div class="title-bl">
-                            ${t.top1.title1}
+                            ${one.title1}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context1}
+                            ${one.context1}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image1}"/>
+                            <img src="${one.image1}"/>
                         </div>
 
                         <div class="title-bl">
-                            ${t.top1.title2}
+                            ${one.title2}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context2}
+                            ${one.context2}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image2}"/>
+                            <img src="${one.image2}"/>
                         </div>
                         <div class="title-bl">
-                            ${t.top1.title3}
+                            ${one.title3}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context3}
+                            ${one.context3}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image3}"/>
+                            <img src="${one.image3}"/>
                         </div>
                         <div class="title-bl">
-                            ${t.top1.title4}
+                            ${one.title4}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context4}
+                            ${one.context4}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image4}"/>
+                            <img src="${one.image4}"/>
                         </div>
                         <div>
-                            ${t.top1.timepost}
+                            ${one.timepost}
                         </div>
                     </div>
 

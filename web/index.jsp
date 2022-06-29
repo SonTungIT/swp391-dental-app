@@ -48,7 +48,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+
     </head>
     <body>
         <%
@@ -675,6 +675,10 @@
                         <p><span class=""><span class="fa fa-clock-o"></span>Giờ mở cửa: 7h - 16:30h (cả Thứ 7 và CN)</span>
                         </p>
                     </div>
+                    <div class="flex-1 ms-2">            
+                        <p class="text-muted mb-0">Số lượng truy cập web</p>
+                        <p>${sessionScope.viewOfWeb}</p>
+                    </div>
                     <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
                             <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
                             <ul>
@@ -699,10 +703,7 @@
                 <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
             </a>
         </div>
-        <div class="flex-1 ms-2">            
-            <p class="text-muted mb-0">Số lượng truy cập web</p>
-            <p>${view}</p>
-        </div>
+
         <!-- move top -->
         <!-- JS bootstrap banner -->
         <!-- JavaScript Bundle with Popper -->
@@ -717,9 +718,9 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
-            function control(){
-                alert("Xin hãy đăng nhập để được đặt lịch!!!");
-            }
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
         </script>
     </body>
 </html>
