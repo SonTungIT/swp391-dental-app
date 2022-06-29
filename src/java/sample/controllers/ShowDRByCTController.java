@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sample.booking.ScheduleDTO;
 import sample.user.DoctorDTO;
 import sample.user.PatientDAO;
 
@@ -33,8 +34,13 @@ public class ShowDRByCTController extends HttpServlet {
             String serviceName = request.getParameter("serviceName");
             PatientDAO dao = new PatientDAO();
             List<DoctorDTO> listDoctor = dao.getListDoctor(serviceName);
+
             if (listDoctor.size() > 0) {
                 request.setAttribute("LIST_DOCTOR_CT", listDoctor);
+                for (DoctorDTO dt : listDoctor) {
+                    List<ScheduleDTO> listSC = dao.getDayWorkDR(dt.getUserID());
+                    request.setAttribute("LIST_DOCTOR_DW", listSC);
+                }
                 url = SUCCESS;
             }
         } catch (Exception e) {

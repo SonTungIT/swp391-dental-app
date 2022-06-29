@@ -22,6 +22,20 @@ public class ScheduleDTO {
     public ScheduleDTO() {
     }
 
+    public ScheduleDTO(String doctorID, String dayWork) {
+        this.doctorID = doctorID;
+        this.dayWork = dayWork;
+    }
+
+
+    public ScheduleDTO(String scheduleID, String doctorID, String slotID, String dayWork, boolean status) {
+        this.scheduleID = scheduleID;
+        this.doctorID = doctorID;
+        this.slotID = slotID;
+        this.dayWork = dayWork;
+        this.status = status;
+    }
+
     public String getScheduleID() {
         return scheduleID;
     }
@@ -54,21 +68,11 @@ public class ScheduleDTO {
         this.dayWork = dayWork;
     }
 
-    
-
     public boolean isStatus() {
         return status;
     }
 
     public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public ScheduleDTO(String scheduleID, String doctorID, String slotID, String dayWork, boolean status) {
-        this.scheduleID = scheduleID;
-        this.doctorID = doctorID;
-        this.slotID = slotID;
-        this.dayWork = dayWork;
         this.status = status;
     }
 

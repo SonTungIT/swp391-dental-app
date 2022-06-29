@@ -24,7 +24,7 @@ import sample.utils.DBUtils;
  */
 public class AdminDAO {
 
-private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, doctorID, slotID, dayWork, status) VALUES(?, ?, ?, ?, ?)";
+    private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, doctorID, slotID, dayWork, status) VALUES(?, ?, ?, ?, ?)";
     private static final String UPDATE_SCHEDULE_DR = "UPDATE Schedule SET status = ? WHERE doctorID = ? AND dayWork = ?";
     private static final String SHOW_DR_SC = "SELECT userID, fullName, image, categoryName, shift from Users us JOIN Doctor dt ON us.userID = dt.doctorID JOIN CategoryService cs ON  cs.categoryID = dt.categoryID  WHERE us.status = 1 AND fullName like ?";
     private static final String SHOWSLOT = "SELECT slotID, slotName, slotTime, slotDateStart, slotDateEnd, status FROM Slot WHERE slotDateStart = ? OR slotDateEnd = ?";
@@ -34,6 +34,7 @@ private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, 
     private static final String CHECK_DUPLICATE_SD_ID = "SELECT doctorID FROM Schedule WHERE scheduleID = ? ";
     private static final String CHECK_DUPLICATE_SD_DR_DW_SL = "SELECT scheduleID FROM Schedule WHERE doctorID = ? AND slotID = ? AND dayWork = ?";
     private static final String CHECK_SL_FAIL_BY_UDSL = "select slotID from Slot WHERE slotTime = ? AND slotDateStart !='' AND slotDateEnd !=''";
+
     public static void main(String[] args) throws SQLException {
         AdminDAO dao = new AdminDAO();
         List<BookingDTO> list = dao.getListAllAppointmentBooking();
@@ -178,8 +179,6 @@ private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, 
             return -1;
         }
     }
-
-    
 
     public List<DoctorDTO> getListAllDoctor() throws SQLException {
         List<DoctorDTO> list = new ArrayList<>();
@@ -854,7 +853,6 @@ private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, 
         return list;
     }
 
-
     public boolean updateSlot(String slotDateStart, String slotEndStart, String slotTime) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -928,7 +926,7 @@ private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, 
                     Date dateBooking = rs.getDate("dateBooking");
                     String timeBooking = rs.getString("timeBooking");
                     String status = rs.getString("status");
-                    list.add(new BookingDTO(bookingID, patientID, serviceID, doctorID,dateBooking, timeBooking, status));
+                    list.add(new BookingDTO(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status));
                 }
             }
         } catch (Exception e) {
@@ -1235,6 +1233,70 @@ private static final String CREATE_SCHEDULE = "INSERT INTO Schedule(scheduleID, 
 
         }
         return check;
+    }
+
+    public List<String> showTimeWork(String startDate, String endDate) throws SQLException, ClassNotFoundException {
+        List<String> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select MIN(slotTime) AS ST ,MAX(slotTime) as ET from Slot "
+                        + "where (slotDateStart = ? OR slotDateStart = 'Monday') AND slotDateEnd = ? ";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, startDate);
+                ptm.setString(2, endDate);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String startTime = rs.getString("ST");
+                    String endTime = rs.getString("ET");
+                    if (startTime == null || endTime == null) {
+                        startTime = "OFF";
+                        endTime = "OFF";
+                    } else {
+                        String[] eT = endTime.split(":");
+                        int eT1 = Integer.parseInt(eT[0]);
+                        int eT2 = Integer.parseInt(eT[1]);
+                        if (eT2 == 30) {
+                            eT1++;
+                            endTime = eT1 + ":00";
+                        } else {
+                            eT2 = 30;
+                            endTime = eT1 + ":" + eT2;
+                        }
+                    }
+
+                    list.add(startTime);
+                    list.add(endTime);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public List<String> getOPH() throws SQLException, ClassNotFoundException {
+        List<String> listTW1 = this.showTimeWork("Monday", "Friday");
+        List<String> listTW2 = this.showTimeWork("Monday", "Sunday");
+        List<String> listTW = new ArrayList<>();
+        listTW.add(listTW1.get(0));
+        listTW.add(listTW1.get(1));
+        listTW.add(listTW2.get(0));
+        listTW.add(listTW2.get(1));
+        return listTW;
     }
 
 }

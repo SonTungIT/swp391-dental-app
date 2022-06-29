@@ -1,5 +1,41 @@
 .booking-time{
-    margin: 20px 20px;
+    margin: 0 90px;
+}
+
+.booking-input select {
+    border-radius: 5px;
+    border: 1px solid #28a745;
+    color: #28a745;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+
+}
+.form-option {
+    color: black;
+}
+.booking-input--date input,
+.booking-input--date select
+{
+    border-radius: 5px;
+    border: 1px solid #28a745;
+    color: #28a745;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 10px 40px;
+    display: inline-block;
+    text-align: center;
+}
+
+.booking-input--date option {
+    text-align: center;
+}
+.booking-input select:hover {
+    cursor: pointer;
 }
 .time {
     margin-top: 20px;
@@ -8,7 +44,8 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     margin-bottom: 20px;
-    border: 2px solid #e4e4e4;  
+    border: 2px solid #28a745;
+    border-radius: 5px; 
 }
 .time input{
     margin-right: 10px;
@@ -16,7 +53,27 @@
 
 .time__space {
     margin: 25px;
-    border: 2px solid #e4e4e4;
+    border-radius: 5px; 
+    border: 2px solid #28a745;
     padding: 5px 20px;
     font-weight: 500;
 }
+
+.form-group h4 {
+    margin: 20px 0;
+    font-family: 'Open Sans', sans-serif;
+}
+.dv-title {
+    font-size: 24px;
+    margin: 20px 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+
+/*.form-group--item {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    
+}*/
