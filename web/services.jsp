@@ -4,6 +4,8 @@
     Author     : Lenovo Legion
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -63,12 +65,26 @@
                     </div>
 
                     <div class="col-sm-6 header-right-w3_pvt">
+                        <%
+                            AdminDAO dao = new AdminDAO();
+                            List<String> listTW = dao.getOPH();
+                            String stMF = "OFF";
+                            String etMF = "OFF";
+                            String stSS = "OFF";
+                            String etSS = "OFF";
+                            if (!listTW.isEmpty()) {
+                                stMF = listTW.get(0);
+                                etMF = listTW.get(1);
+                                stSS = listTW.get(2);
+                                etSS = listTW.get(3);
+                            }
+                        %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : 7h - 16:30h</span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
                             </li>
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : 7h - 11h</span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
                             </li>
                         </ul>
                     </div>
@@ -454,7 +470,9 @@
                         <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
                         <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
                         </p>
-                        <p><span class=""><span class="fa fa-clock-o"></span>Giờ mở cửa: 7h - 16:30h (cả Thứ 7 và CN)</span>
+                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
+                        </p>
+                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
                         </p>
                     </div>
                     <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">

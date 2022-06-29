@@ -144,17 +144,10 @@
                         %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
-<<<<<<< HEAD
                                 <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
                             </li>
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
-=======
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : 7h - 16:30h</span>
-                            </li>
-                            <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : 7h - 11h</span>
->>>>>>> 33a691e3a94ec376f7b051b18701ab0118afd165
                             </li>
                         </ul>
                     </div>
@@ -363,7 +356,6 @@
                         <div class="row">
                             <div class="col-md-1">
                                 <div class="form-group">
-
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -371,20 +363,11 @@
                                     <label>
                                         <span> <h4>Chọn Dịch Vụ</h4>
                                             <form action="MainController" id="form_SV">
-<<<<<<< HEAD
-                                                <select  name="serviceName"  onchange="showService()">
-                                                    <option class="form-option" value="<%=sName%>"><%=sName%></option>
-                                                    <% List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
-                                                        if (listService != null) {
-                                                            if (listService.size() > 0) {
-                                                                for (ServiceDTO service : listService) {
-                                                    %> 
-                                                    <option class="form-option" value="<%=service.getServiceName()%>"><%=service.getServiceName()%> || <%=service.getPrice()%> VND </option>
-                                                    <%
-=======
                                                 <div class="booking-input">
-                                                    <select  name="serviceName" onchange="showService()">
-                                                        <option class="form-option" value="<%=sName%>"><%=sName%></option>
+                                                    <select name = "serviceName" onchange = "showService()"
+                                                            > <option 
+                                                            class="form-option" value =
+                                                            "<%=sName%>"><%=sName%></option>
                                                         <% List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
                                                             if (listService != null) {
                                                                 if (listService.size() > 0) {
@@ -393,7 +376,7 @@
                                                         <option class="form-option" value="<%=service.getServiceName()%>"><%=service.getServiceName()%> <%=service.getPrice()%>$ </option>
                                                         <%
                                                                     }
->>>>>>> 33a691e3a94ec376f7b051b18701ab0118afd165
+
                                                                 }
                                                             }
                                                         %>
@@ -416,23 +399,6 @@
                                                             if (listDoctor != null) {
                                                                 if (listDoctor.size() > 0) {
 
-<<<<<<< HEAD
-                                                                for (DoctorDTO doctor : listDoctor) {
-                                                    %>
-                                                    <option class="form-option" value="<%=doctor.getUserID()%>">
-                                                        <%=doctor.getFullName()%> </br>
-                                                    </option>
-                                                    <%
-                                                                }
-                                                            }
-                                                        }
-                                                    %>
-                                                </select> 
-
-                                                </br>Chọn ngày:</br>
-                                                <input type="date" id="dateB" name="bookingDate" value="<%=dateBooking%>" required="" onchange="showDate()"/></br></br>
-                                                <input type="hidden" name="action" value="ShowSlotDR" /> 
-=======
                                                                     for (DoctorDTO doctor : listDoctor) {
 
                                                         %>
@@ -447,15 +413,12 @@
                                                     <input type="date" id="dateB" name="bookingDate" value="<%=dateBooking%>" required="" onchange="showDate()"/></br></br>
                                                     <input type="hidden" name="action" value="ShowSlotDR" /> 
                                                 </div>
->>>>>>> 33a691e3a94ec376f7b051b18701ab0118afd165
                                             </form>
                                             <%=error%>
                                         </span>
                                     </label>
                                 </div>
-
                             </div>
-
                             <div class="booking-time" >
                                 <div class="dv-title"> Chọn giờ thăm khám</div>
                                 <form action="MainController" > 
@@ -515,9 +478,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                     <div class="col-lg-4 col-md-6 mt-lg-0 mt-4 contact-info">
                         <h4 class="mb-4">Thông Tin Địa Chỉ</h4>
                         <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
@@ -537,10 +497,8 @@
                     </div>
                 </div>
             </div>
-
         </section>
         <!-- //contact -->
-
         <!-- footer -->
         <footer class="py-5">
             <div class="container py-sm-3">
@@ -558,7 +516,9 @@
                         <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
                         <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
                         </p>
-                        <p><span class=""><span class="fa fa-clock-o"></span>Giờ mở cửa: 7h - 16:30h (cả Thứ 7 và CN)</span>
+                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
+                        </p>
+                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
                         </p>
                     </div>
                     <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
