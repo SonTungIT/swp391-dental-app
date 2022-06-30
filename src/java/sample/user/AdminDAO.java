@@ -37,11 +37,53 @@ public class AdminDAO {
 
     public static void main(String[] args) throws SQLException {
         AdminDAO dao = new AdminDAO();
-        List<BookingDTO> list = dao.getListAllAppointmentBooking();
-        for (BookingDTO doctor : list) {
-            System.out.println(doctor.getServiceName());
-        }
+//        List<BookingDTO> list = dao.getListAllAppointmentBooking();
+//        for (BookingDTO doctor : list) {
+//            System.out.println(doctor.getServiceName());
+//        }
+        int count = dao.countBooking("01");
+        System.out.println(count);
 
+    }
+    public int countBooking(String search) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select count(*)	\n"
+                        + "   from Users us inner join Booking bk ON bk.patientID = us.userID \n"
+                        + "				 inner join Service sv On sv.serviceID = bk.serviceID\n"
+                        + "				 inner join CategoryService cs ON cs.categoryID = sv.categoryID\n"
+                        + "				 inner join Doctor dt ON dt.categoryID	= sv.categoryID\n"
+                        + "				 inner join Schedule sch ON sch.doctorID = dt.doctorID\n"
+                        + "				 inner join Slot sl ON sl.slotID = sch.slotID\n"
+                        + "				 inner join (select fullName, userID from Users where roleID ='DR') as DR on DR.userID = dt.doctorID\n"
+                        + "				 where  bk.bookingID like ? and timeBooking = slotTime And bk.doctorID = dt.doctorID \n"
+                        + "				  ";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                     return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return 0;
     }
 
     public List<UserDTO> getListPatientByPage(List<UserDTO> list, int start, int end) {
@@ -1298,5 +1340,6 @@ public class AdminDAO {
         listTW.add(listTW2.get(1));
         return listTW;
     }
+    
 
 }

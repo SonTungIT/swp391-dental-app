@@ -11,6 +11,7 @@
 <html>
     <head>
         <jsp:useBean id="t" class="sample.informattion.KnowledgeDAO" scope="request" />
+        <c:set var="txtSearch" value="${param.txtSearchValue}"/>
 
         <title>Dental Health Medical Category Flat Bootstrap Responsive Website Template | Gallery :: W3layouts</title>
         <!-- for-mobile-apps -->
@@ -47,6 +48,12 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
+        
+        <form action="SearchInformationController" >
+            <input type="text" name="txtSearch"  value="${param.txtSearchValue}" placeholder="input your text"/>
+            <input type="submit" name="action"  value="Tìm kiếm"/>
+            <input type="hidden" name="index" value="1"/>
+        </form>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         %>

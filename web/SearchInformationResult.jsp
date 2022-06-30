@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@page import="java.util.List"%>
 <%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.user.UserDTO"%>
@@ -13,8 +14,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:useBean id="a" class="sample.informattion.NewsDAO" scope="request" />
-        <c:set var="txtSearch" value="${param.txtSearchValue}"/>
+         <c:set var="txtSearch" value="${param.txtSearchValue}"/>
+
 
         <title>Dental Health Medical Category Flat Bootstrap Responsive Website Template | Gallery :: W3layouts</title>
         <!-- for-mobile-apps -->
@@ -51,8 +52,7 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        
-        <form action="SearchInformationController" >
+         <form action="SearchInformationController" >
             <input type="text" name="txtSearch"  value="${param.txtSearchValue}" placeholder="input your text"/>
             <input type="submit" name="action"  value="Tìm kiếm"/>
             <input type="hidden" name="index" value="1"/>
@@ -93,7 +93,7 @@
                                 etMF = listTW.get(1);
                                 stSS = listTW.get(2);
                                 etSS = listTW.get(3);
-                            } 
+                            }
                         %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
@@ -185,7 +185,7 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
                             %>
                         <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
                             <%
@@ -301,72 +301,49 @@
         <!-- gallery -->
         <section class="gallery py-5" id="gallery">
             <div class="container py-lg-5">
-                <h2 class="heading text-center mb-sm-5 mb-4">Tin tức nổi bật</h2>
-                <div class="row news-grids text-center">
-                    <div class="row item-list">
-                        <div class="title-bl">
-                            ${a.top1.title1}
-                        </div>
-                        <div class="text-center">
-                            ${a.top1.context1}
-                        </div>
-                        <div class="image">
-                            <img src="${a.top1.image1}"/>
-                        </div>
-
-                        <div class="title-bl">
-                            ${a.top1.title2}
-                        </div>
-                        <div class="text-center">
-                            ${a.top1.context2}
-                        </div>
-                        <div class="image">
-                            <img src="${t.top1.image2}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${a.top1.title3}
-                        </div>
-                        <div class="text-center">
-                            ${a.top1.context3}
-                        </div>
-                        <div class="image">
-                            <img src="${a.top1.image3}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${a.top1.title4}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context4}
-                        </div>
-                        <div class="image">
-                            <img src="${a.top1.image4}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${a.top1.title5}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context5}
-                        </div>
-                        <div class="image">
-                            <img src="${a.top1.image5}"/>
-                        </div>
-                        <div>
-                            ${a.top1.timepost}
-                        </div>
-                    </div>
-
-                     
-                </div>
+                <h2 class="heading text-center mb-sm-5 mb-4">Kết quả tìm kiếm</h2>
+                <h3>${requestScope.ERROR}</h3>
                 <div class="newest">
-                        <div class="titileNews">
-                            <span>5 Trang tin tức mới nhất</span>
-                        </div>
-                        <c:forEach items="${a.top5}" var="o">
-                            <a href="DetailNewsController?idDetail=${o.idDetai}">
-                                ${o.title1}
-                            </a>
-                        </c:forEach>
-                    </div> 
+                    <c:forEach items="${list}" var="s">
+                        
+                        <c:if test="${s.categoryId == 1}">                            
+                                <div>
+                                    <a href="DetailNewsController?idDetail=${s.idDetai}">
+                                        ${s.title1}
+                                    </a>
+                                </div>
+                                <div>
+                                    <p>${s.context1}</p>
+                                </div>
+                                <div>
+                                    <img src="${s.image1}"/>
+                                </div>
+                            
+                        </c:if>
+
+                        <c:if test="${s.categoryId == 2}">
+                            
+                                <div>
+                                    <a href="DetailKnowledgeController?idDetai=${s.idDetai}">
+                                        ${s.title1}
+                                    </a>
+                                </div>
+                                <div>
+                                    <p>${s.context1}</p>
+                                </div>
+                                <div>
+                                    <img src="${s.image1}"/>
+                                </div>
+                            
+                        </c:if>
+                    </c:forEach>   
+                    
+                    <c:forEach begin="1" end="${requestScope.endPage}" var="i">
+                        <a href="SearchInformationController?index=${i}&txtSearch=${requestScope.saveinfo}">
+                            ${i}
+                        </a>
+                    </c:forEach>
+                </div> 
             </div>
         </section>
         <!-- //gallery -->
@@ -449,9 +426,9 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
-                    function control() {
-                        alert("Xin hãy đăng nhập để được đặt lịch!!!");
-                    }
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
         </script>
     </body>
 </html>

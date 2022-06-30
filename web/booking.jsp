@@ -3,7 +3,8 @@
     Created on : Jun 6, 2022, 12:15:47 PM
     Author     : Lenovo Legion
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="sample.booking.ScheduleDTO"%>
 <%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.services.ServiceDTO"%>
@@ -18,6 +19,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <c:set var="txtSearch" value="${param.txtSearchValue}"/>
+
         <title>Dental Health Medical Category Flat Bootstrap Responsive Website Template | Contact :: W3layouts</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,6 +57,12 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </head>
     <body>
+
+        <form action="SearchInformationController" >
+            <input type="text" name="txtSearch"  value="${param.txtSearchValue}" placeholder="input your text"/>
+            <input type="submit" name="action"  value="Tìm kiếm"/>
+            <input type="hidden" name="index" value="1"/>
+        </form>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
