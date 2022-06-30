@@ -4,6 +4,10 @@
     Author     : Lenovo Legion
 --%>
 
+<%@page import="sample.feedback.FeedbackDTO"%>
+<%@page import="sample.services.ServiceDTO"%>
+<%@page import="sample.services.CategoryServiceDTO"%>
+<%@page import="sample.user.PatientDAO"%>
 <%@page import="sample.user.AdminDAO"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -26,7 +30,6 @@
             addEventListener("load", function () {
                 setTimeout(hideURLbar, 0);
             }, false);
-
             function hideURLbar() {
                 window.scrollTo(0, 1);
             }
@@ -141,62 +144,64 @@
                     <li class="menu-sub menu-sub--has-table">
                         <a href="services.jsp">DỊCH VỤ</a>
                         <ul class="menu__service-list">
-                            <li class="menu__service-description">
-                                <a href="#" class="menu__service-link"><span>Niềng răng chỉnh nha</span></a>
-                                <ul class="menu__service-colume">
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/niengrang1.html">Niềng răng mắc cài</a>
-                                    </li>
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/niengrang2.html">Niềng răng Invisalign</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu__service-description">
-                                <a href="#" class="menu__service-link"><span>Răng sứ thẩm mỹ</span></a>
-                                <ul class="menu__service-colume">
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/rangsu1.html">Dán sứ Veneer</a>
-                                    </li>
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/rangsu2.html">Bọc răng sứ</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu__service-description">
-                                <a href="#" class="menu__service-link"><span>Cấy ghép răng implant</span></a>
-                                <ul class="menu__service-colume">
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/cayghep1.html">Trồng răng Implant</a>
-                                    </li>
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/cayghep2.html">Trồng Implant toàn hàm</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu__service-description">
-                                <a href="#" class="menu__service-link"><span>Dịch vụ bệnh lý</span></a>
-                                <ul class="menu__service-colume">
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/dichvu1.html">Lấy cao răng</a>
-                                    </li>
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/dichvu2.html">Nhổ răng khôn</a>
-                                    </li>
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/dichvu3.html">Hàn trám răng</a>
-                                    </li>
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/dichvu4.html">Điều trị tủy</a>
-                                    </li>
-                                    <li class="menu__service-colume--item">
-                                        <a href="./listService/dichvu5.html">Tẩy trắng răng</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            <%
+                                    PatientDAO dao1 = new PatientDAO();
+                                    List<CategoryServiceDTO> listCate = dao1.getTableCategory();
+                                    if (listCate != null) {
+                                        if (listCate.size() > 0) {
+                                            for (CategoryServiceDTO cate : listCate) {
+
+
+                                %>
+                                <li class="menu__service-description">   
+                                    <a class="menu__service-link"><span> <%= cate.getCategoryName()%></span>  
+                                        
+                                    </a>    
+                                    <%
+                                        String cate1 = cate.getCategoryName();
+                                        
+                                        List<ServiceDTO> listService = dao1.getTableService(cate1);
+
+                                        if (listService != null) {
+
+                                            if (listService.size() > 0) {
+
+                                    %>
+                                    <ul class="menu__service-colume">
+                                    <%                                                                
+                                        for (ServiceDTO table : listService) {
+
+
+                                    %> 
+                                    
+                                        <li class="menu__service-colume--item">
+                                            <a href="MainController?action=Show_About&serviceID=<%= table.getServiceID() %>"><%= table.getServiceName()%></a>
+                                        </li>
+                                   
+
+
+                                    <%
+
+                                                }
+                                                %>
+                                             </ul>   
+                                                <%
+                                            }
+
+                                        }
+                                    %>
+                                </li>
+                                <%
+                                    }
+
+                                %>
+                                <%        }
+                                    }
+
+                                %>
                         </ul>
                     </li>
-                    <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
+                    <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
                     <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                     <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
                         <%if (loginUser
@@ -307,7 +312,6 @@
                     </ul>
                 </div>
                 <%
-
                     }
                 %>
 
@@ -620,69 +624,64 @@
             <div class="container py-lg-5">
                 <h3 class="heading text-center mb-sm-5 mb-4">TRẢI NGHIỆM CỦA KHÁCH HÀNG</h3>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="feedback-info">
-                            <div class="feedback-top p-4">
-                                <span class="fa fa-quote-right"></span>
-                                <p>“Về vấn đề ăn uống cải thiện rất nhiều. Tôi rất tin tưởng vào tay nghề của bác sĩ tại
-                                    Nha Khoa Thiên Thần!.</p>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="feedback-grids">
-                                <div class="feedback-img">
-                                    <img src="images/khachhang1.png" class="img-fluid" alt="">
+                      <%
+                            AdminDAO daoAD = new AdminDAO();
+                            List<FeedbackDTO> listFB = daoAD.getListFeedBackActive3();
+                            if (listFB != null) {
+                                if (listFB.size() > 0) {
+                        %>
+
+
+                        <tbody>
+                            <%
+                                for (FeedbackDTO feedback : listFB) {
+                            %>
+
+                            <tr>
+                        <div class="col-lg-4 col-md-6">    
+                            <div class="feedback-info">
+
+
+                                <div class="feedback-top p-4">
+                                    <span class="fa fa-quote-right"></span>
+                                    <p>  
+                                        <%= feedback.getComment()%>
+                                    <div class="clearfix"></div>
+                                    </p>
                                 </div>
-                                <div class="feedback-img-info">
-                                    <h5>Chú Đặng Xuân Bính</h5>
-                                    <p class="font-italic">- June 5, 2022.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mt-md-0 mt-5">
-                        <div class="feedback-info">
-                            <div class="feedback-top p-4">
-                                <span class="fa fa-quote-right"></span>
-                                <p> “Cô rất vui vì ở nha khoa nhiệt tình với cô lắm, bác sĩ nhiệt tình hết ý. Làm răng
-                                    xong cô đã có thể đi hát thánh ca mà không có một vấn đề gì cả.”</p>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="feedback-grids">
-                                <div class="feedback-img">
-                                    <img src="images/khachhang2.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="feedback-img-info">
-                                    <h5>Cô Đỗ Thị Loan </h5>
-                                    <p class="font-italic">- June 5, 2022.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mt-lg-0 mt-5">
-                        <div class="feedback-info">
-                            <div class="feedback-top p-4">
-                                <span class="fa fa-quote-right"></span>
-                                <p> “Đến với Nha Khoa Thiên Thần mình cảm thấy thoải mái, đội ngũ nhân viên và y bác sĩ
-                                    rất tận tâm.
-                                    Mình đã tự tin hơn nhiều sau khi làm thẩm mỹ răng ở đây!.</p>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="feedback-grids">
-                                <div class="feedback-img">
-                                    <img src="images/khachhang3.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="feedback-img-info">
-                                    <h5>Dương Sỹ Lượng </h5>
-                                    <p class="font-italic">- June 5, 2022.</p>
-                                </div>
-                                <div class="clearfix"></div>
+
+                                <div class="feedback-grids">    
+                                    <div class="feedback-img">
+                                        <td>  
+                                            <img width="80px" height="60px" src="image/<%= feedback.getImage()%>" alt="Image can't show">
+                                        </td>
+                                    </div>
+                                    <div class="feedback-img-info">
+                                        <h5> <%= feedback.getPatientName()%></h5>
+                                        <p class="font-italic">   <%= feedback.getDateFeedback()%> </p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div> 
+
+
                             </div>
                         </div>
+                        <%
+                            }
+
+                        %>
+                        </tr>
+
+                        </tbody>
+
+                        <%                            }
+                            }
+                        %>
+
+
                     </div>
+                    <a href="MainController?action=active" class="btn-banner"> Xem Thêm </a>
                 </div>
-            </div>
         </div>
     </section>
     <!-- //testimonials -->
@@ -808,13 +807,9 @@
     crossorigin="anonymous"></script>
     <!-- JavaScript Bundle with Popper --> 
     <script>
-
                 function control() {
                     alert("Xin hãy đăng nhập để được đặt lịch!!!");
                 }
-
-
-
     </script>
 </body>
 

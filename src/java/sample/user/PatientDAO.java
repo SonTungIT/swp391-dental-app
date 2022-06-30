@@ -14,6 +14,8 @@ import java.util.List;
 import sample.booking.BookingDTO;
 import sample.booking.ScheduleDTO;
 import sample.booking.SlotDTO;
+import sample.feedback.FeedbackDTO;
+import sample.services.CategoryServiceDTO;
 import sample.services.ServiceDTO;
 import sample.utils.DBUtils;
 
@@ -46,6 +48,15 @@ public class PatientDAO {
             + "								ON cs.categoryID = dt.categoryID JOIN Service sv ON sv.categoryID = cs.categoryID\n"
             + "								JOIN Booking bk ON bk.serviceID = sv.serviceID\n"
             + "								WHERE sl.slotID = ? AND timeBooking = slotTime AND dateBooking = ? AND bk.status = 'Active'";
+    
+    private static final String CREATE_FEEDBACK ="INSERT INTO Feedback(feedbackID, patientID, bookingID, comment, dateFeedback, timeFeedback, status) VALUES(?,?,?,?,?,?,?)";
+    private static final String CHECK_DUPLICATE_FB="SELECT PatientID FROM Feedback WHERE  feedbackID=? ";
+    
+    private static final String SHOW_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService";
+    private static final String SHOW_PRICE_SERVICE = "SELECT serviceName ,CategoryService.categoryName, price FROM Service join CategoryService on Service.categoryID = CategoryService.categoryID Where categoryName like ? "; 
+    private static final String SHOW_TABLE_SERVICE = "SELECT Service.serviceID , serviceName , CategoryService.categoryName, Service.aboutSV, image ,Service.status FROM Service join CategoryService on Service.categoryID = CategoryService.categoryID Where categoryName like ? and Service.status like '1'"; 
+    private static final String SHOW_SERVICE_BY_ID = "SELECT Service.serviceID , serviceName , CategoryService.categoryName, Service.aboutSV, image FROM Service join CategoryService on Service.categoryID = CategoryService.categoryID Where serviceID like ?";  
+    
 
     public List<ServiceDTO> showListService() throws SQLException, ClassNotFoundException {
         List<ServiceDTO> list = new ArrayList<>();
@@ -490,4 +501,202 @@ public class PatientDAO {
         }
         return list;
     }
+    
+     public boolean create_feedback(FeedbackDTO feedback) throws SQLException{
+        boolean check=false;
+        Connection conn= null;
+        PreparedStatement ptm= null;
+        try{
+            conn= DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CREATE_FEEDBACK);
+                ptm.setString(1, feedback.getFeedbackID());
+                ptm.setString(2, feedback.getPatientID());
+                ptm.setString(3, feedback.getBookingID());
+                ptm.setString(4, feedback.getComment());
+                ptm.setDate(5, feedback.getDateFeedback());
+                ptm.setString(6, feedback.getTimeFeedback());               
+                ptm.setBoolean(7, feedback.isStatus());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally{
+            if(ptm!= null) ptm.close();
+            if(conn!= null) conn.close();
+         }
+        return check;
+    }
+  
+      public boolean checkDuplicate(String feedbackID ) throws SQLException{
+        boolean check = false;
+        Connection conn= null;
+        PreparedStatement ptm =null;
+        ResultSet rs =null;
+        try{
+            conn= DBUtils.getConnection();
+                    if(conn!= null){
+                        ptm = conn.prepareStatement(CHECK_DUPLICATE_FB);
+                        ptm.setString(1, feedbackID);      
+                        rs = ptm.executeQuery();
+                        if(rs.next()){
+                            check = true;
+                        }
+                    }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(rs!=null) rs.close();
+            if(ptm!=null) ptm.close();
+            if(conn!=null) conn.close();           
+        }
+        return check;
+    }
+      
+      public List<CategoryServiceDTO> getTableCategory() throws SQLException, ClassNotFoundException {
+        List<CategoryServiceDTO> list = new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+
+                ptm = conn.prepareStatement(SHOW_CATEGORY);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String categoryID = rs.getString("categoryID");
+                    String categoryName = rs.getString("categoryName");                    
+                    boolean status = rs.getBoolean("status");
+                    list.add(new CategoryServiceDTO(categoryID, categoryName, status));
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+      
+    public List<ServiceDTO> getListPriceServiceHome(String cate) throws SQLException, ClassNotFoundException {
+        List<ServiceDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SHOW_PRICE_SERVICE); 
+                ptm.setString(1, "%" +cate+ "%");                
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String serviceName = rs.getString("serviceName");
+                    int price = rs.getInt("price"); 
+                    String categoryName = rs.getString("categoryName");
+                    list.add(new ServiceDTO(serviceName, categoryName, price));
+                    
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+     public List<ServiceDTO> getTableService(String cate) throws SQLException, ClassNotFoundException {
+        List<ServiceDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SHOW_TABLE_SERVICE);
+                ptm.setString(1, "%" +cate+ "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String serviceID = rs.getString("serviceID");
+                    String serviceName = rs.getString("serviceName");      
+                    String image = rs.getString("image");
+                    String categoryName = rs.getString("categoryName");  
+                    String aboutSV = rs.getString("aboutSV");
+                    boolean status = rs.getBoolean("status");
+                    list.add(new ServiceDTO(serviceID, serviceName, image, categoryName, aboutSV, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+     public ServiceDTO getServiceByID(String serviceID1) throws SQLException, ClassNotFoundException {
+        ServiceDTO SV = new ServiceDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SHOW_SERVICE_BY_ID);
+                ptm.setString(1, "%" +serviceID1+ "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String serviceID = rs.getString("serviceID");
+                    String serviceName = rs.getString("serviceName");      
+                    String image = rs.getString("image");
+                    String categoryName = rs.getString("categoryName");  
+                    String aboutSV = rs.getString("aboutSV");                   
+                    SV = new ServiceDTO(serviceID, serviceName, image, categoryName, aboutSV);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return SV;
+    }
+     
+     
 }

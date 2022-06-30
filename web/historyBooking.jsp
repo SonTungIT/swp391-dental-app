@@ -358,7 +358,7 @@
                                                     </td>
                                                     <!--đánh giá-->
                                                     <td>
-                                                        <button type="button" name="#" value="#" class="btn btn-success d-none d-md-inline-block text-white">
+                                                        <button  type="submit" name="action" value="ShowBookingDetail" class="btn btn-success d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-comment-dots"></i>
                                                         </button>
                                                     </td>

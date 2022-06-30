@@ -3,8 +3,16 @@
     Created on : Jun 6, 2022, 12:16:38 PM
     Author     : Lenovo Legion
 --%>
+
+
+<%@page import="sample.user.PatientDAO"%>
+<%@page import="sample.services.CategoryServiceDTO"%>
+<%@page import="sample.services.ServiceDTO"%>
+<%@page import="sample.services.ServiceDTO"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@page import="java.util.List"%>
 <%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.user.UserDTO"%>
@@ -123,62 +131,64 @@
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
                             <ul class="menu__service-list">
-                                <li class="menu__service-description">
-                                    <a href="#" class="menu__service-link"><span>Niềng răng chỉnh nha</span></a>
+                                <%
+                                    PatientDAO dao1 = new PatientDAO();
+                                    List<CategoryServiceDTO> listCate = dao1.getTableCategory();
+                                    if (listCate != null) {
+                                        if (listCate.size() > 0) {
+                                            for (CategoryServiceDTO cate : listCate) {
+
+
+                                %>
+                                <li class="menu__service-description">   
+                                    <a class="menu__service-link"><span> <%= cate.getCategoryName()%></span>  
+                                        
+                                    </a>    
+                                    <%
+                                        String cate1 = cate.getCategoryName();
+                                        
+                                        List<ServiceDTO> listService = dao1.getTableService(cate1);
+
+                                        if (listService != null) {
+
+                                            if (listService.size() > 0) {
+
+                                    %>
                                     <ul class="menu__service-colume">
+                                    <%                                                                
+                                        for (ServiceDTO table : listService) {
+
+
+                                    %> 
+                                    
                                         <li class="menu__service-colume--item">
-                                            <a href="./listService/niengrang1.html">Niềng răng mắc cài</a>
+                                            <a href="MainController?action=Show_About&serviceID=<%= table.getServiceID() %>"><%= table.getServiceName()%></a>
                                         </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/niengrang2.html">Niềng răng Invisalign</a>
-                                        </li>
-                                    </ul>
+                                   
+
+
+                                    <%
+
+                                                }
+                                                %>
+                                             </ul>   
+                                                <%
+                                            }
+
+                                        }
+                                    %>
                                 </li>
-                                <li class="menu__service-description">
-                                    <a href="#" class="menu__service-link"><span>Răng sứ thẩm mỹ</span></a>
-                                    <ul class="menu__service-colume">
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/rangsu1.html">Dán sứ Veneer</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/rangsu2.html">Bọc răng sứ</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu__service-description">
-                                    <a href="#" class="menu__service-link"><span>Cấy ghép răng implant</span></a>
-                                    <ul class="menu__service-colume">
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/cayghep1.html">Trồng răng Implant</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/cayghep2.html">Trồng Implant toàn hàm</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu__service-description">
-                                    <a href="#" class="menu__service-link"><span>Dịch vụ bệnh lý</span></a>
-                                    <ul class="menu__service-colume">
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu1.html">Lấy cao răng</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu2.html">Nhổ răng khôn</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu3.html">Hàn trám răng</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu4.html">Điều trị tủy</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu5.html">Tẩy trắng răng</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <%
+                                    }
+
+                                %>
+                                <%        }
+                                    }
+
+                                %> 
                             </ul>
                         </li>
-                        <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
+                        <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
                             <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
