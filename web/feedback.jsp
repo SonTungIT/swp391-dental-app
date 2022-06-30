@@ -260,7 +260,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                     <%
+                                    <%
                                         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
 
                                         String search = request.getParameter("search");
@@ -269,106 +269,116 @@
                                         }
                                     %>
                                     <form action="MainController" >
-                                    <div class="input-group">
-                                        <div class="form-outline">
-                                            <input type="text" id="form1" class="form-control"
-                                            name="search" value="<%= search%>"  placeholder="Tìm kiếm feedback...">
-                                            <input type="hidden" name="action" value="Search_Feedback" class="btn btn-success" >
-                                        </div>
+                                        <div class="input-group">
+                                            <div class="form-outline">
+                                                <input type="text" id="form1" class="form-control"
+                                                       name="search" value="<%= search%>"  placeholder="Tìm kiếm feedback...">
+                                                <input type="hidden" name="action" value="Search_Feedback" class="btn btn-success" >
+                                            </div>
                                             <button type="submit" class="btn btn-success d-md-inline-block text-white">
                                                 <i class="fas fa-search"></i>
                                             </button>
-                                        
-                                           
-                                        
-                                    </div>
+
+
+
+                                        </div>
                                     </form>
 
-                                                <%
-                                                    List<FeedbackDTO> listFeedback = (List<FeedbackDTO>) request.getAttribute("LIST_FEEDBACK");
-                                                    if (listFeedback != null) {
-                                                        if (listFeedback.size() > 0) {
-                                                %>
+                                    <%
+                                        List<FeedbackDTO> listFeedback = (List<FeedbackDTO>) request.getAttribute("LIST_FEEDBACK");
+                                        if (listFeedback != null) {
+                                            if (listFeedback.size() > 0) {
+                                    %>
 
-                                                <div class="table-responsive">
-                                            <table class="table user-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="border-top-0">No</th>
-                                                        <th class="border-top-0">feedback ID</th>
-                                                        
-                                                        <th class="border-top-0">booking ID</th>
-                                                        <th class="border-top-0">Tên Bệnh Nhân</th>
-                                                        <th class="border-top-0">Bác Sĩ Phụ Trách </th>
-                                                        <th class="border-top-0">Tên Dịch Vụ</th>
-                                                        <th class="border-top-0">comment</th>
-                                                        <th class="border-top-0">Ngày Viết</th>                                                     
-                                                        <th class="border-top-0">Trạng Thái</th>
-                                                        <th class="border-top-0"></th>
-                                                    </tr>
-                                                </thead>
+                                    <div class="table-responsive">
+                                        <table class="table user-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-top-0">No</th>
+                                                    <th class="border-top-0">feedback ID</th>
 
-                                                <tbody>
-                                                    <%
-                                                        int count = 1;
-                                                        for (FeedbackDTO feedback : listFeedback) {
-                                                    %>
-                                                <form action="MainController">
-                                                    <tr>
-                                                        <td><%= count++%></td>
-                                                        <td>
-                                                            <%= feedback.getFeedbackID()%>
-                                                            <input type="hidden" value="<%= feedback.getFeedbackID()%>" name="feedbackID" />
-                                                        </td>
-                                                        <td>
-                                                             <%= feedback.getBookingID()%>
-                                                        </td>
-                                                        <td>
-                                                            <%= feedback.getPatientName() %>
-                                                        </td>
-                                                        <td>
-                                                            <%= feedback.getDoctorName() %>
-                                                        </td>
-                                                        <td>
-                                                            <%= feedback.getServiceName() %>
-                                                        </td>
-                                                        
-                                                        <td>  
-                                                            <%= feedback.getComment()%>
-                                                        </td>
-                                                        <td>  
-                                                             <%= feedback.getDateFeedback()%> 
-                                                        </td>
-                                                        
-                                                        <td> 
-                                                            <%= feedback.isStatus()%></br>
-                                                            <br></br>
-                                                            <input checked="checked" type="radio" name="status" value="True">Hiện<br>
-                                                            <input type="radio" name="status" value="False">Ẩn
-                                                        </td>
-
-                                                        <!--update-->
-                                                        <td>
-                                                            <input type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank" />
-                                                            <input type="hidden" name="search" value="<%= search%>" />                      
-                                                        </td>
-                                                </form>  
-
-
-
-
-                                                    <%
-                                                        }
-                   
-                                                    %> 
+                                                    <th class="border-top-0">booking ID</th>
+                                                    <th class="border-top-0">Tên Bệnh Nhân</th>
+                                                    <th class="border-top-0">Bác Sĩ Phụ Trách </th>
+                                                    <th class="border-top-0">Tên Dịch Vụ</th>
+                                                    <th class="border-top-0">comment</th>
+                                                    <th class="border-top-0">Ngày Viết</th>                                                     
+                                                    <th class="border-top-0">Trạng Thái</th>
+                                                    <th class="border-top-0"></th>
                                                 </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <%
+                                                    int count = 1;
+                                                    for (FeedbackDTO feedback : listFeedback) {
+                                                %>
+                                            <form action="MainController">
+                                                <tr>
+                                                    <td><%= count++%></td>
+                                                    <td>
+                                                        <%= feedback.getFeedbackID()%>
+                                                        <input type="hidden" value="<%= feedback.getFeedbackID()%>" name="feedbackID" />
+                                                    </td>
+                                                    <td>
+                                                        <%= feedback.getBookingID()%>
+                                                    </td>
+                                                    <td>
+                                                        <%= feedback.getPatientName()%>
+                                                    </td>
+                                                    <td>
+                                                        <%= feedback.getDoctorName()%>
+                                                    </td>
+                                                    <td>
+                                                        <%= feedback.getServiceName()%>
+                                                    </td>
+
+                                                    <td>  
+                                                        <%= feedback.getComment()%>
+                                                    </td>
+                                                    <td>  
+                                                        <%= feedback.getDateFeedback()%> 
+                                                    </td>
+
+                                                    <td> 
+                                                        <%
+                                                            if (feedback.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white"><%= feedback.isStatus()%></button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white"><%= feedback.isStatus()%></button>
+                                                        <%
+                                                            }
+                                                        %>
+
+                                                        <br></br>
+                                                        <input checked="checked" type="radio" name="status" value="True">Hiện<br>
+                                                        <input type="radio" name="status" value="False">Ẩn
+                                                    </td>
+
+                                                    <!--update-->
+                                                    <td>
+                                                        <input type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white"
+                                                               target="_blank" />
+                                                        <input type="hidden" name="search" value="<%= search%>" />                      
+                                                    </td>
+                                            </form>  
+
+
+
+
+                                            <%
+                                                }
+
+                                            %> 
+                                            </tr>
                                             </tbody>
                                         </table>
-                                                    <%
-                                                             }
-                                                               }
-                                                    %>
+                                        <%                                                            }
+                                            }
+                                        %>
                                     </div>
                                 </div>
                             </div>

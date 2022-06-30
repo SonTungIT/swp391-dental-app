@@ -48,7 +48,8 @@ public class KnowledgeDAO {
                             rs.getString(15),
                             rs.getString(16),
                             rs.getDate(17),
-                            rs.getInt(18));
+                            rs.getInt(18),
+                            rs.getString(19));
                     return knowledge;
                 }
             }
@@ -97,7 +98,8 @@ public class KnowledgeDAO {
                             rs.getString(15),
                             rs.getString(16),
                             rs.getDate(17),
-                            rs.getInt(18));
+                            rs.getInt(18),
+                            rs.getString(19));
                     list.add(knowledge);
                 }
             }
@@ -147,7 +149,8 @@ public class KnowledgeDAO {
                             rs.getString(15),
                             rs.getString(16),
                             rs.getDate(17),
-                            rs.getInt(18));
+                            rs.getInt(18),
+                            rs.getString(19));
                     return knowledge;
                 }
             }

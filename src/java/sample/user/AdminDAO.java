@@ -39,7 +39,7 @@ public class AdminDAO {
     
     private static final String ACTIVE_FEEDBACK3 = "SELECT top(3) fullName , Users.image  , Feedback.comment, Feedback.dateFeedback , Feedback.status From Feedback join Users on Feedback.patientID = Users.userID Where Feedback.status like '1' ORDER BY Feedback.dateFeedback DESC";
     private static final String ACTIVE_FEEDBACK = "SELECT  PT.fullName as patientName , PT.image  , fb.comment , sv.serviceName, us.fullName as doctorName ,fb.dateFeedback , fb.status From(Select fullName, userID,image from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID ORDER BY fb.dateFeedback DESC";
-    private static final String SHOW_FEEDBACK = "SELECT feedbackID, fb.bookingID, PT.fullName as patientName , us.fullName as doctorName, sv.serviceName ,  comment , dateFeedBack , fb.status From (Select fullName, userID from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join CategoryService cs ON cs.categoryID = sv.categoryID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID WHERE feedbackID like ? ORDER BY feedbackID DESC";
+    private static final String SHOW_FEEDBACK = "SELECT feedbackID, fb.bookingID, PT.fullName as patientName , us.fullName as doctorName, sv.serviceName ,  comment , dateFeedBack , fb.status From (Select fullName, userID from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join CategoryService cs ON cs.categoryID = sv.categoryID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID WHERE feedbackID like ? AND Booking.doctorID = dt.doctorID ORDER BY feedbackID DESC";
     private static final String UPDATE_FEEDBACK = "UPDATE Feedback SET status=? WHERE feedbackID =? ";
 
     private static final String SEARCH_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService WHERE categoryID like ? ";
@@ -59,11 +59,53 @@ public class AdminDAO {
     
     public static void main(String[] args) throws SQLException {
         AdminDAO dao = new AdminDAO();
-        List<BookingDTO> list = dao.getListAllAppointmentBooking();
-        for (BookingDTO doctor : list) {
-            System.out.println(doctor.getServiceName());
-        }
+//        List<BookingDTO> list = dao.getListAllAppointmentBooking();
+//        for (BookingDTO doctor : list) {
+//            System.out.println(doctor.getServiceName());
+//        }
+        int count = dao.countBooking("01");
+        System.out.println(count);
 
+    }
+    public int countBooking(String search) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select count(*)	\n"
+                        + "   from Users us inner join Booking bk ON bk.patientID = us.userID \n"
+                        + "				 inner join Service sv On sv.serviceID = bk.serviceID\n"
+                        + "				 inner join CategoryService cs ON cs.categoryID = sv.categoryID\n"
+                        + "				 inner join Doctor dt ON dt.categoryID	= sv.categoryID\n"
+                        + "				 inner join Schedule sch ON sch.doctorID = dt.doctorID\n"
+                        + "				 inner join Slot sl ON sl.slotID = sch.slotID\n"
+                        + "				 inner join (select fullName, userID from Users where roleID ='DR') as DR on DR.userID = dt.doctorID\n"
+                        + "				 where  bk.bookingID like ? and timeBooking = slotTime And bk.doctorID = dt.doctorID \n"
+                        + "				  ";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                     return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return 0;
     }
 
     public List<UserDTO> getListPatientByPage(List<UserDTO> list, int start, int end) {
@@ -1321,6 +1363,7 @@ public class AdminDAO {
         return listTW;
     }
     
+
      public BookingDTO getListBooking(String bookingID) throws SQLException {
         BookingDTO bk = new BookingDTO();
         Connection conn = null;
@@ -1910,5 +1953,6 @@ public class AdminDAO {
         }
         return SV;
     }
+
 
 }
