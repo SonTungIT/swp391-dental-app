@@ -4,11 +4,13 @@
     Author     : Xqy
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:useBean id="d" class="sample.user.DoctorDAO" scope="request" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
@@ -43,6 +45,7 @@
             if (loginUser == null || !loginUser.getRoleID().equals("DR")) {
                 response.sendRedirect("login.jsp");
             }
+
         %>
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
@@ -243,118 +246,76 @@
                     <!-- ============================================================== -->
                     <!-- Start Page Content -->
                     <!-- ============================================================== -->
-                    <!-- Row -->
                     <div class="row">
-                        <!-- Column -->
-                        <div class="col-lg-4 col-xlg-3 col-md-5">
-                            <div class="card">
-                                <div class="card-body profile-card">
-                                    <center class="mt-4"> <img src="./images/blog4.jpg"
-                                                               class="rounded-circle" width="150" />
-                                        <h4 class="card-title mt-2">Ma Phong Ba</h4>
-                                        <!--                                        <div class="row text-center justify-content-center">
-                                                                                    <div class="col-4">
-                                                                                        <a href="javascript:void(0)" class="link">
-                                                                                            <i class="icon-people" aria-hidden="true"></i>
-                                                                                            <span class="value-digit">254</span>
-                                                                                        </a></div>
-                                                                                    <div class="col-4">
-                                                                                        <a href="javascript:void(0)" class="link">
-                                                                                            <i class="icon-picture" aria-hidden="true"></i>
-                                                                                            <span class="value-digit">54</span>
-                                                                                        </a></div>
-                                                                                </div>-->
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <!-- Column -->
-                        <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <!-- column -->
+                        <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="form-horizontal form-material mx-2">
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Họ và Tên</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Ma Phong Ba"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <!--                                        <div class="form-group">
-                                                                                    <label class="col-md-12 mb-0">Password</label>
-                                                                                    <div class="col-md-12">
-                                                                                        <input type="password" value="password"
-                                                                                               class="form-control ps-0 form-control-line">
-                                                                                    </div>
-                                                                                </div>-->
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Giới Tính</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Nam"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Địa Chỉ</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Hồ Chí Minh"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Ngày Tháng Năm Sinh</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="2001-02-12"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
-                                            <div class="col-md-12">
-                                                <input type="email" placeholder="maphongba@gmail.com"
-                                                       class="form-control ps-0 form-control-line" name="example-email"
-                                                       id="example-email">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Số Điện Thoại</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="123 456 7890"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <!--                                        <div class="form-group">
-                                                                                    <label class="col-md-12 mb-0">Message</label>
-                                                                                    <div class="col-md-12">
-                                                                                        <textarea rows="5" class="form-control ps-0 form-control-line"></textarea>
-                                                                                    </div>
-                                                                                </div>-->
-                                        <!--                                        <div class="form-group">
-                                                                                    <label class="col-sm-12">Select Country</label>
-                                                                                    <div class="col-sm-12 border-bottom">
-                                                                                        <select class="form-select shadow-none ps-0 border-0 form-control-line">
-                                                                                            <option>London</option>
-                                                                                            <option>India</option>
-                                                                                            <option>Usa</option>
-                                                                                            <option>Canada</option>
-                                                                                            <option>Thailand</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>-->
-                                        <div class="form-group">
-                                            <div class="col-sm-12 d-flex">
-                                                <button class="btn btn-success mx-auto mx-md-0 text-white">Cập Nhật</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table user-table" border="5" cellspacing="0" cellpadding="10">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 2</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 3</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 4</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 5</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 6</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 7</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Chủ nhật</h4></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <c:forEach items="${listSC_FDR_1}" var="slot"> 
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
+                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${listSC_FDR_2}" var="slot"> 
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
+                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${listSC_FDR_3}" var="slot"> 
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
+                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${listSC_FDR_4}" var="slot"> 
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
+                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${listSC_FDR_5}" var="slot"> 
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
+                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${listSC_FDR_6}" var="slot"> 
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
+                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${listSC_FDR_7}" var="slot"> 
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
+                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        </c:forEach>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Column -->
                     </div>
-                    <!-- Row -->
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -397,5 +358,6 @@
         <script src="html/js/sidebarmenu.js"></script>
         <!--Custom JavaScript -->
         <script src="html/js/custom.js"></script>
+
     </body>
 </html>
