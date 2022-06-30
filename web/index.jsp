@@ -677,7 +677,7 @@
             <div class="container py-md-5 py-3">
                 <h3>
                     <a href="news.jsp">Tin tức nổi bật</a>
-                        
+
                 </h3>
                 <div class="row blog-grids">
                     <div class="col-lg-7 mb-lg-5 blog-img1">
@@ -687,7 +687,7 @@
                     <div class="col-lg-5 mb-lg-5 mb-4">
                         <h5>29-06-2022.</h5>
                         <h4 class="my-3">Nụ cười mới, cuộc sống mới với chỉnh nha</h4>
-                        
+
                         <a href="DetailNewsController?idDetail=0006" class="btn-banner">Xem Bài Đăng</a>
                     </div>
                     <div class="col-lg-7 mb-lg-0 mb-4">
@@ -695,7 +695,7 @@
                         <h4 class="my-3">TOP 4 Dáng răng sứ Đẹp, Phong Cách, Form chuẩn
                             <br> Xu thế Nhất.
                         </h4>
-                        
+
                         <a href="DetailNewsController?idDetail=0001" class="btn-banner">Xem Bài Đăng</a>
                     </div>
                     <div class="col-lg-5 blog-img2">
@@ -793,17 +793,10 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
-<<<<<<< HEAD
-                            function control() {
-                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
-                            }
-=======
-
                     function control() {
                         alert("Xin hãy đăng nhập để được đặt lịch!!!");
                     }
 
->>>>>>> refs/remotes/origin/main
         </script>
     </body>
 </html>
