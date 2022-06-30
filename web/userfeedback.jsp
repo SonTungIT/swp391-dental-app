@@ -1,12 +1,16 @@
 <%-- 
-    Document   : feedback
-    Created on : Jun 8, 2022, 3:56:51 PM
-    Author     : Lenovo Legion
+    Document   : userfeedback
+    Created on : Jun 9, 2022, 10:20:52 PM
+    Author     : dangk
 --%>
 
-<%@page import="sample.user.UserDTO"%>
+
+
+
 <%@page import="java.util.List"%>
-<%@page import="sample.feedback.FeedbackDTO"%>
+<%@page import="sample.booking.BookingDTO"%>
+<%@page import="java.sql.Date"%>
+<%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,10 +24,10 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>User FeedBack</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/logo-header1.png">
         <!-- Custom CSS -->
         <link href="html/css/style.min.css" rel="stylesheet" type="text/css"/>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -40,18 +44,25 @@
         <!-- Icon CND fontawesome -->
     </head>
     <body>
-        <!-- ============================================================== -->
-        <!-- Preloader - style you can find in spinners.css -->
-        <!-- ============================================================== -->
+
+        <%
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String patientID = loginUser.getUserID();
+            if (patientID == null) {
+                patientID = "";
+            }
+
+            BookingDTO booking = (BookingDTO) session.getAttribute("LIST_BOOKING");
+
+        %>
+        
         <div class="preloader">
             <div class="lds-ripple">
                 <div class="lds-pos"></div>
                 <div class="lds-pos"></div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- Main wrapper - style you can find in pages.scss -->
-        <!-- ============================================================== -->
+        
         <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
              data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
             <!-- ============================================================== -->
@@ -63,7 +74,7 @@
                         <!-- ============================================================== -->
                         <!-- Logo -->
                         <!-- ============================================================== -->
-                        <a class="navbar-brand ms-4" href="admin.jsp">
+                        <a class="navbar-brand ms-4" href="index.jsp">
                             <!-- Logo icon -->
                             <b class="logo-icon">
                                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -124,7 +135,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./assets/images/users/1.jpg" alt="user" class="profile-pic me-2">Admin Page
+                                    <img src="./images/sontung.jpg" alt="user" class="profile-pic me-2">Sơn Tùng MTP
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
@@ -161,33 +172,17 @@
                         <ul id="sidebarnav">
                             <!-- User Profile-->
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="admin.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
-                                        class="hide-menu">Dashboard</span></a></li>
+                                                         href="index.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                        class="hide-menu">Trang Chủ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="setting.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí tài khoản</span></a></li>
+                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="doctor.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí bác sĩ</span></a></li>
+                                                         href="MainController?action=SearchHSBK&searchHSBK&ptID" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Lịch Sử Đặt Lịch</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí bệnh nhân</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">FeedBack</span></a></li>
-                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="pages-blank.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
-                            </li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="pages-error-404.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-help-circle"></i><span class="hide-menu">Error 404</span></a>
-                            </li>
-                            <li class="text-center p-20 upgrade-btn">
-                                <a href="https://www.wrappixel.com/templates/materialpro/"
-                                    class="btn btn-warning text-white mt-4" target="_blank">Upgrade to
-                                    Pro</a>
-                            </li> -->
+                                                         href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Thay Đổi Mật Khẩu</span></a></li>
                         </ul>
 
                     </nav>
@@ -227,20 +222,20 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Feedback</h3>
+                            <!--<h3 class="page-title mb-0 p-0">Thông Tin</h3>-->
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Feedback</li>
+                                        <li class="breadcrumb-item"><a href="#">Trang Cá Nhân</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Thông Tin</li>
                                     </ol>
                                 </nav>
                             </div>
                         </div>
                         <div class="col-md-6 col-4 align-self-center">
                             <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
+                                <a href="https://www.wrappixel.com/templates/materialpro/"
+                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Patient</a>
                             </div>
                         </div>
                     </div>
@@ -255,125 +250,90 @@
                     <!-- ============================================================== -->
                     <!-- Start Page Content -->
                     <!-- ============================================================== -->
+                    <!-- Row -->
                     <div class="row">
-                        <!-- column -->
-                        <div class="col-sm-12">
+                        <!-- Column -->
+                        
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="col-lg-8 col-xlg-9 col-md-7">
                             <div class="card">
                                 <div class="card-body">
-                                     <%
-                                        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-
-                                        String search = request.getParameter("search");
-                                        if (search == null) {
-                                            search = "";
-                                        }
-                                    %>
-                                    <form action="MainController" >
-                                    <div class="input-group">
-                                        <div class="form-outline">
-                                            <input type="text" id="form1" class="form-control"
-                                            name="search" value="<%= search%>"  placeholder="Tìm kiếm feedback...">
-                                            <input type="hidden" name="action" value="Search_Feedback" class="btn btn-success" >
+                                    <form action="MainController"  class="form-horizontal form-material mx-2">
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Bác Sĩ Phụ Trách:</label>
+                                            <div class="col-md-12">
+                                                <td>  
+                                                    <%= booking.getDoctorName()%>
+                                                </td> 
+                                            </div>
                                         </div>
-                                            <button type="submit" class="btn btn-success d-md-inline-block text-white">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+<!--                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Password</label>
+                                            <div class="col-md-12">
+                                                <input type="password" value="password"
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Tên Dịch Vụ:</label>
+                                            <div class="col-md-12">
+                                                <td>  
+                                                    <%= booking.getServiceName() %>
+                                                </td>  
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Ngày Đặt Lịch</label>
+                                            <div class="col-md-12">
+                                                <td>  
+                                                    <%= booking.getDateBooking() %>
+                                                </td> 
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Thời Gian</label>
+                                            <div class="col-md-12">
+                                                <td>  
+                                                    <%= booking.getTimeBooking() %>
+                                                </td> 
+                                            </div>
+                                        </div>
                                         
-                                           
+
                                         
-                                    </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Nội Dung </label>
+                                            <div class="col-md-12">
+                                                
+
+                                                    <input type="hidden" name="patientID" value="<%=patientID%>"  />    
+                                                    <input type="hidden" name="bookingID" value="<%= booking.getBookingID()%>"  />
+<!--                                                    <input type="text" name="comment"  required=""/>-->
+                                                <textarea rows="5" class="form-control ps-0 form-control-line" type="text" name="comment"  required=""></textarea>
+
+                                                    <input type="hidden" name="status" value="false"  />
+
+<!--                                                    <input type="submit" name="action" value="Create_Feedback"/>
+                                                    <input type="reset"  value="Reset"/>-->
+
+                                               
+                                            </div>
+                                        </div>
+
+                                                
+                                        <div class="form-group">
+                                            <div class="col-sm-12 d-flex">
+                                                <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Create_Feedback">Tạo</button>
+                                            </div>
+                                        </div>
                                     </form>
-
-                                                <%
-                                                    List<FeedbackDTO> listFeedback = (List<FeedbackDTO>) request.getAttribute("LIST_FEEDBACK");
-                                                    if (listFeedback != null) {
-                                                        if (listFeedback.size() > 0) {
-                                                %>
-
-                                                <div class="table-responsive">
-                                            <table class="table user-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="border-top-0">No</th>
-                                                        <th class="border-top-0">feedback ID</th>
-                                                        
-                                                        <th class="border-top-0">booking ID</th>
-                                                        <th class="border-top-0">Tên Bệnh Nhân</th>
-                                                        <th class="border-top-0">Bác Sĩ Phụ Trách </th>
-                                                        <th class="border-top-0">Tên Dịch Vụ</th>
-                                                        <th class="border-top-0">comment</th>
-                                                        <th class="border-top-0">Ngày Viết</th>                                                     
-                                                        <th class="border-top-0">Trạng Thái</th>
-                                                        <th class="border-top-0"></th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    <%
-                                                        int count = 1;
-                                                        for (FeedbackDTO feedback : listFeedback) {
-                                                    %>
-                                                <form action="MainController">
-                                                    <tr>
-                                                        <td><%= count++%></td>
-                                                        <td>
-                                                            <%= feedback.getFeedbackID()%>
-                                                            <input type="hidden" value="<%= feedback.getFeedbackID()%>" name="feedbackID" />
-                                                        </td>
-                                                        <td>
-                                                             <%= feedback.getBookingID()%>
-                                                        </td>
-                                                        <td>
-                                                            <%= feedback.getPatientName() %>
-                                                        </td>
-                                                        <td>
-                                                            <%= feedback.getDoctorName() %>
-                                                        </td>
-                                                        <td>
-                                                            <%= feedback.getServiceName() %>
-                                                        </td>
-                                                        
-                                                        <td>  
-                                                            <%= feedback.getComment()%>
-                                                        </td>
-                                                        <td>  
-                                                             <%= feedback.getDateFeedback()%> 
-                                                        </td>
-                                                        
-                                                        <td> 
-                                                            <%= feedback.isStatus()%></br>
-                                                            <br></br>
-                                                            <input checked="checked" type="radio" name="status" value="True">Hiện<br>
-                                                            <input type="radio" name="status" value="False">Ẩn
-                                                        </td>
-
-                                                        <!--update-->
-                                                        <td>
-                                                            <input type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank" />
-                                                            <input type="hidden" name="search" value="<%= search%>" />                      
-                                                        </td>
-                                                </form>  
-
-
-
-
-                                                    <%
-                                                        }
-                   
-                                                    %> 
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                                    <%
-                                                             }
-                                                               }
-                                                    %>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Column -->
                     </div>
+                    <!-- Row -->
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -391,8 +351,7 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
+
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->
@@ -417,5 +376,6 @@
         <script src="html/js/sidebarmenu.js"></script>
         <!--Custom JavaScript -->
         <script src="html/js/custom.js"></script>
+        
     </body>
 </html>

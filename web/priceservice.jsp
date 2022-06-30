@@ -1,16 +1,24 @@
 <%-- 
-    Document   : feedback
-    Created on : Jun 8, 2022, 3:56:51 PM
-    Author     : Lenovo Legion
+    Document   : priceservice
+    Created on : Jun 26, 2022, 8:05:19 PM
+    Author     : dangk
 --%>
 
-<%@page import="sample.user.UserDTO"%>
+
+<%@page import="sample.services.ServiceDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="sample.feedback.FeedbackDTO"%>
+<%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+                                       
+    
+        
+         <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
@@ -173,8 +181,14 @@
                                                          href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bệnh nhân</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">FeedBack</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Category Services</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Service</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="pages-blank.html" aria-expanded="false"><i
                                         class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
@@ -227,12 +241,12 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Feedback</h3>
+                            <h3 class="page-title mb-0 p-0">Service</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Feedback</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Service</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -260,7 +274,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                     <%
+                                    <%
                                         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
 
                                         String search = request.getParameter("search");
@@ -272,86 +286,60 @@
                                     <div class="input-group">
                                         <div class="form-outline">
                                             <input type="text" id="form1" class="form-control"
-                                            name="search" value="<%= search%>"  placeholder="Tìm kiếm feedback...">
-                                            <input type="hidden" name="action" value="Search_Feedback" class="btn btn-success" >
+                                                name="search" value="<%= search%>"  placeholder="Nhập Tên Service">
+                                            <input type="hidden" name="action" value="Search_Price" class="btn btn-success" >
                                         </div>
-                                            <button type="submit" class="btn btn-success d-md-inline-block text-white">
+                                       <button type="submit" class="btn btn-success d-md-inline-block text-white">
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         
-                                           
-                                        
                                     </div>
+                                       
                                     </form>
+                                        
+                                        
+                                       
 
-                                                <%
-                                                    List<FeedbackDTO> listFeedback = (List<FeedbackDTO>) request.getAttribute("LIST_FEEDBACK");
-                                                    if (listFeedback != null) {
-                                                        if (listFeedback.size() > 0) {
-                                                %>
-
+                                                  
+          <%
+                                                    List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_PRICE_SERVICE");
+                                                    if (listService != null) {
+                                                        if (listService.size() > 0) {
+                                                %>  
                                                 <div class="table-responsive">
                                             <table class="table user-table">
                                                 <thead>
                                                     <tr>
-                                                        <th class="border-top-0">No</th>
-                                                        <th class="border-top-0">feedback ID</th>
-                                                        
-                                                        <th class="border-top-0">booking ID</th>
-                                                        <th class="border-top-0">Tên Bệnh Nhân</th>
-                                                        <th class="border-top-0">Bác Sĩ Phụ Trách </th>
-                                                        <th class="border-top-0">Tên Dịch Vụ</th>
-                                                        <th class="border-top-0">comment</th>
-                                                        <th class="border-top-0">Ngày Viết</th>                                                     
-                                                        <th class="border-top-0">Trạng Thái</th>
-                                                        <th class="border-top-0"></th>
+                                                        <th class="border-top-0">Tên Dịch Vụ</th> 
+                                                        <th class="border-top-0">Chi Phí</th> 
+                                                        <th class="border-top-0"></th>    
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
                                                     <%
                                                         int count = 1;
-                                                        for (FeedbackDTO feedback : listFeedback) {
+                                                        for (ServiceDTO service : listService) {
                                                     %>
                                                 <form action="MainController">
                                                     <tr>
-                                                        <td><%= count++%></td>
+                                                        
+                                                        
                                                         <td>
-                                                            <%= feedback.getFeedbackID()%>
-                                                            <input type="hidden" value="<%= feedback.getFeedbackID()%>" name="feedbackID" />
-                                                        </td>
-                                                        <td>
-                                                             <%= feedback.getBookingID()%>
-                                                        </td>
-                                                        <td>
-                                                            <%= feedback.getPatientName() %>
-                                                        </td>
-                                                        <td>
-                                                            <%= feedback.getDoctorName() %>
-                                                        </td>
-                                                        <td>
-                                                            <%= feedback.getServiceName() %>
+                                                            <%= service.getServiceName() %>
+                                                            <input type="hidden" value="<%= service.getServiceName() %>" name="serviceName" />
                                                         </td>
                                                         
-                                                        <td>  
-                                                            <%= feedback.getComment()%>
-                                                        </td>
-                                                        <td>  
-                                                             <%= feedback.getDateFeedback()%> 
-                                                        </td>
                                                         
-                                                        <td> 
-                                                            <%= feedback.isStatus()%></br>
-                                                            <br></br>
-                                                            <input checked="checked" type="radio" name="status" value="True">Hiện<br>
-                                                            <input type="radio" name="status" value="False">Ẩn
-                                                        </td>
-
-                                                        <!--update-->
                                                         <td>
-                                                            <input type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white"
+                                                            
+                                                            <input type="text" value="<%= service.getPrice()%>" name="price" />
+                                                        </td>
+<!--                                                        update-->
+                                                        <td>
+                                                            <input type="submit" name="action" value="Update_Price" class="btn btn-success d-none d-md-inline-block text-white"
                                                            target="_blank" />
-                                                            <input type="hidden" name="search" value="<%= search%>" />                      
+                                                            <input type="hidden" name="search" value="<%= search%>"/>
                                                         </td>
                                                 </form>  
 
@@ -368,7 +356,7 @@
                                                     <%
                                                              }
                                                                }
-                                                    %>
+                                                    %>    
                                     </div>
                                 </div>
                             </div>
@@ -417,5 +405,5 @@
         <script src="html/js/sidebarmenu.js"></script>
         <!--Custom JavaScript -->
         <script src="html/js/custom.js"></script>
-    </body>
+    </body>  
 </html>
