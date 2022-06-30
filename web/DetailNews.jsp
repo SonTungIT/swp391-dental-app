@@ -7,14 +7,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <%@page import="java.util.List"%>
 <%@page import="sample.user.AdminDAO"%>
+
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:useBean id="t" class="sample.informattion.KnowledgeDAO" scope="request" />
+        <jsp:useBean id="a" class="sample.informattion.NewsDAO" scope="request" />
 
         <title>Dental Health Medical Category Flat Bootstrap Responsive Website Template | Gallery :: W3layouts</title>
         <!-- for-mobile-apps -->
@@ -87,7 +89,7 @@
                                 etMF = listTW.get(1);
                                 stSS = listTW.get(2);
                                 etSS = listTW.get(3);
-                            } 
+                            }
                         %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
@@ -179,7 +181,7 @@
                         <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
                             %>
                         <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
                             <%
@@ -295,63 +297,72 @@
         <!-- gallery -->
         <section class="gallery py-5" id="gallery">
             <div class="container py-lg-5">
-                <h2 class="heading text-center mb-sm-5 mb-4">Kiến thức Nha Khoa</h2>
+                <h2 class="heading text-center mb-sm-5 mb-4">BẢN TIN</h2>
                 <div class="row news-grids text-center">
                     <div class="row item-list">
                         <div class="title-bl">
-                            ${t.top1.title1}
+                            ${onenews.title1}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context1}
+                            ${onenews.context1}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image1}"/>
+                            <img src="${onenews.image1}"/>
                         </div>
 
                         <div class="title-bl">
-                            ${t.top1.title2}
+                            ${onenews.title2}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context2}
+                            ${onenews.context2}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image2}"/>
+                            <img src="${onenews.image2}"/>
                         </div>
                         <div class="title-bl">
-                            ${t.top1.title3}
+                            ${onenews.title3}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context3}
+                            ${onenews.context3}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image3}"/>
+                            <img src="${onenews.image3}"/>
                         </div>
                         <div class="title-bl">
-                            ${t.top1.title4}
+                            ${onenews.title4}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context4}
+                            ${onenews.context4}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image4}"/>
+                            <img src="${onenews.image4}"/>
+                        </div>
+                        <div class="title-bl">
+                            ${onenews.title5}
+                        </div>
+                        <div class="text-center">
+                            ${onenews.context5}
+                        </div>
+                        <div class="image">
+                            <img src="${onenews.image5}"/>
                         </div>
                         <div>
-                            ${t.top1.timepost}
+                            ${onenews.timepost}
                         </div>
                     </div>
 
-                     
+
                 </div>
                 <div class="newest">
-                        <div class="titileNews">
-                            <span>4 Kiên thức mới nhất</span>
-                        </div>
-                        <c:forEach items="${t.top4}" var="o">
-                            <a href="DetailKnowledgeController?idDetai=${o.idDetai}">
-                                ${o.title1}
-                            </a>
-                        </c:forEach>
-                    </div> 
+                    <div class="titileNews">
+                        <span>5 Trang tin tức mới nhất</span>
+                    </div>
+                    <c:forEach items="${a.top5}" var="o">
+                        <a href="DetailNewsController?idDetail=${o.idDetai}">
+                            ${o.title1}
+                        </a>
+                    </c:forEach>
+                </div> 
             </div>
         </section>
         <!-- //gallery -->
@@ -434,9 +445,9 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
-                    function control() {
-                        alert("Xin hãy đăng nhập để được đặt lịch!!!");
-                    }
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
         </script>
     </body>
 </html>

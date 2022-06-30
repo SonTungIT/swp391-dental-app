@@ -13,6 +13,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:useBean id="a" class="sample.informattion.NewsDAO" scope="request" />
         <title>Nha Khoa Thiên Thần</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -674,25 +675,28 @@
         <!-- blog -->
         <section class="blog py-5">
             <div class="container py-md-5 py-3">
-                <h3 class="heading text-center mb-sm-5 mb-4">Tin Tức Nổi Bật</h3>
+                <h3>
+                    <a href="news.jsp">Tin tức nổi bật</a>
+                        
+                </h3>
                 <div class="row blog-grids">
                     <div class="col-lg-7 mb-lg-5 blog-img1">
-                        <img src="images/news1.jpg" alt="" class="img-fluid" />
+                        <img src="https://newgatedental.com/wp-content/uploads/2022/02/cac-dang-rang-1.jpeg" alt="" class="img-fluid" />
                         <!-- <a href="single.html">Blog #1</a> -->
                     </div>
                     <div class="col-lg-5 mb-lg-5 mb-4">
-                        <h5>June 5, 2022.</h5>
-                        <h4 class="my-3">Niềng răng Invisalign là gì? Giá bao nhiêu tiền? Kết quả Trước & Sau.</h4>
-                        <p class="my-3">Bác sĩ nha khoa - 05/06/2022</p>
-                        <a href="single.html" class="btn-banner">Xem Bài Đăng</a>
+                        <h5>29-06-2022.</h5>
+                        <h4 class="my-3">Nụ cười mới, cuộc sống mới với chỉnh nha</h4>
+                        
+                        <a href="DetailNewsController?idDetail=0006" class="btn-banner">Xem Bài Đăng</a>
                     </div>
                     <div class="col-lg-7 mb-lg-0 mb-4">
-                        <h5>June 5, 2022.</h5>
-                        <h4 class="my-3">TOP 9 Dáng răng sứ Đẹp, Phong Cách, Form chuẩn
+                        <h5>20-05-2022.</h5>
+                        <h4 class="my-3">TOP 4 Dáng răng sứ Đẹp, Phong Cách, Form chuẩn
                             <br> Xu thế Nhất.
                         </h4>
-                        <p class="my-3">Bác sĩ nha khoa - 05/06/2022</p>
-                        <a href="single.html" class="btn-banner">Xem Bài Đăng</a>
+                        
+                        <a href="DetailNewsController?idDetail=0001" class="btn-banner">Xem Bài Đăng</a>
                     </div>
                     <div class="col-lg-5 blog-img2">
                         <img src="images/news2.jpg" alt="" class="img-fluid" />
@@ -746,6 +750,10 @@
                         <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
                         </p>
                     </div>
+                    <div class="flex-1 ms-2">            
+                        <p class="text-muted mb-0">Số lượng truy cập web</p>
+                        <p>${sessionScope.viewOfWeb}</p>
+                    </div>
                     <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
                             <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
                             <ul>
@@ -770,10 +778,7 @@
                 <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
             </a>
         </div>
-        <div class="flex-1 ms-2">            
-            <p class="text-muted mb-0">Số lượng truy cập web</p>
-            <p>${view}</p>
-        </div>
+
         <!-- move top -->
         <!-- JS bootstrap banner -->
         <!-- JavaScript Bundle with Popper -->
@@ -788,11 +793,17 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
+<<<<<<< HEAD
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
+=======
 
                     function control() {
                         alert("Xin hãy đăng nhập để được đặt lịch!!!");
                     }
 
+>>>>>>> refs/remotes/origin/main
         </script>
     </body>
 </html>

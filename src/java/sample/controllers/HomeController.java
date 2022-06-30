@@ -55,7 +55,12 @@ public class HomeController extends HttpServlet {
                     url = DOCTOR;
                 }
             } else {
-                 url = HOME_PAGE;
+                if (session.isNew()) {
+                    dao.updateNumberOfView();
+                }
+                int view = dao.getNumberOfView();
+                session.setAttribute("viewOfWeb", view);
+                url = HOME_PAGE;
             }
 
         } catch (Exception e) {

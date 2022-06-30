@@ -6,7 +6,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@page import="java.util.List"%>
 <%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.user.UserDTO"%>
@@ -14,7 +13,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:useBean id="t" class="sample.informattion.KnowledgeDAO" scope="request" />
+        <jsp:useBean id="a" class="sample.informattion.NewsDAO" scope="request" />
 
         <title>Dental Health Medical Category Flat Bootstrap Responsive Website Template | Gallery :: W3layouts</title>
         <!-- for-mobile-apps -->
@@ -295,48 +294,57 @@
         <!-- gallery -->
         <section class="gallery py-5" id="gallery">
             <div class="container py-lg-5">
-                <h2 class="heading text-center mb-sm-5 mb-4">Kiến thức Nha Khoa</h2>
+                <h2 class="heading text-center mb-sm-5 mb-4">Tin tức nổi bật</h2>
                 <div class="row news-grids text-center">
                     <div class="row item-list">
                         <div class="title-bl">
-                            ${t.top1.title1}
+                            ${a.top1.title1}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context1}
+                            ${a.top1.context1}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image1}"/>
+                            <img src="${a.top1.image1}"/>
                         </div>
 
                         <div class="title-bl">
-                            ${t.top1.title2}
+                            ${a.top1.title2}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context2}
+                            ${a.top1.context2}
                         </div>
                         <div class="image">
                             <img src="${t.top1.image2}"/>
                         </div>
                         <div class="title-bl">
-                            ${t.top1.title3}
+                            ${a.top1.title3}
                         </div>
                         <div class="text-center">
-                            ${t.top1.context3}
+                            ${a.top1.context3}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image3}"/>
+                            <img src="${a.top1.image3}"/>
                         </div>
                         <div class="title-bl">
-                            ${t.top1.title4}
+                            ${a.top1.title4}
                         </div>
                         <div class="text-center">
                             ${t.top1.context4}
                         </div>
                         <div class="image">
-                            <img src="${t.top1.image4}"/>
+                            <img src="${a.top1.image4}"/>
+                        </div>
+                        <div class="title-bl">
+                            ${a.top1.title5}
+                        </div>
+                        <div class="text-center">
+                            ${t.top1.context5}
+                        </div>
+                        <div class="image">
+                            <img src="${a.top1.image5}"/>
                         </div>
                         <div>
-                            ${t.top1.timepost}
+                            ${a.top1.timepost}
                         </div>
                     </div>
 
@@ -344,10 +352,10 @@
                 </div>
                 <div class="newest">
                         <div class="titileNews">
-                            <span>4 Kiên thức mới nhất</span>
+                            <span>5 Trang tin tức mới nhất</span>
                         </div>
-                        <c:forEach items="${t.top4}" var="o">
-                            <a href="DetailKnowledgeController?idDetai=${o.idDetai}">
+                        <c:forEach items="${a.top5}" var="o">
+                            <a href="DetailNewsController?idDetail=${o.idDetai}">
                                 ${o.title1}
                             </a>
                         </c:forEach>
