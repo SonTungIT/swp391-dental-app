@@ -27,7 +27,7 @@ public class NewsDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select  top 1 * from News order by timepost desc";
+                String sql = "select  top 1 * from News where categoryId = 1 order by timepost desc";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -47,7 +47,8 @@ public class NewsDAO {
                             rs.getString(14),
                             rs.getString(15),
                             rs.getString(16),
-                            rs.getDate(17));
+                            rs.getDate(17),
+                            rs.getInt(18));
                     return news;
                 }
             }
@@ -75,7 +76,7 @@ public class NewsDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select  top 5 * from News order by timepost desc";
+                String sql = "select  top 5 * from News where categoryId = 1  order by timepost desc";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -95,7 +96,8 @@ public class NewsDAO {
                             rs.getString(14),
                             rs.getString(15),
                             rs.getString(16),
-                            rs.getDate(17));
+                            rs.getDate(17),
+                            rs.getInt(18));
                     list.add(news);
                 }
             }
@@ -115,7 +117,7 @@ public class NewsDAO {
         return list;
     }
 
-    public NewsDTO getOnePage(int id) throws SQLException {
+    public NewsDTO getOnePage(int idDetai) throws SQLException {
 
         Connection conn = null;
         PreparedStatement stm = null;
@@ -123,9 +125,9 @@ public class NewsDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select * from News where id = ?";
+                String sql = "select * from News where categoryID = 1 and idDetai = ?";
                 stm = conn.prepareStatement(sql);
-                stm.setInt(1, id);
+                stm.setInt(1, idDetai);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     NewsDTO news = new NewsDTO(rs.getInt(1),
@@ -144,7 +146,8 @@ public class NewsDAO {
                             rs.getString(14),
                             rs.getString(15),
                             rs.getString(16),
-                            rs.getDate(17));
+                            rs.getDate(17),
+                            rs.getInt(18));
                     return news;
                 }
             }
@@ -163,10 +166,12 @@ public class NewsDAO {
         }
         return null;
     }
+
     
+
     public static void main(String[] args) throws SQLException {
         NewsDAO dao = new NewsDAO();
-        NewsDTO news = dao.getOnePage(3);
+        NewsDTO news = dao.getOnePage(0001);
         System.out.println(news);
     }
 }

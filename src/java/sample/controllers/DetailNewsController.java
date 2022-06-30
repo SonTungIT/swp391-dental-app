@@ -35,7 +35,7 @@ public class DetailNewsController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try{
-            String id = request.getParameter("id");
+            String id = request.getParameter("idDetail");
             NewsDAO dao = new NewsDAO();
             NewsDTO news = dao.getOnePage(Integer.parseInt(id));
             request.setAttribute("onenews", news);

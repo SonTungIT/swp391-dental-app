@@ -297,7 +297,7 @@
         <!-- gallery -->
         <section class="gallery py-5" id="gallery">
             <div class="container py-lg-5">
-                <h2 class="heading text-center mb-sm-5 mb-4">Kiến thức Nha Khoa</h2>
+                <h2 class="heading text-center mb-sm-5 mb-4">BẢN TIN</h2>
                 <div class="row news-grids text-center">
                     <div class="row item-list">
                         <div class="title-bl">
@@ -358,7 +358,7 @@
                         <span>5 Trang tin tức mới nhất</span>
                     </div>
                     <c:forEach items="${a.top5}" var="o">
-                        <a href="DetailNewsController?id=${o.id}">
+                        <a href="DetailNewsController?idDetail=${o.idDetai}">
                             ${o.title1}
                         </a>
                     </c:forEach>

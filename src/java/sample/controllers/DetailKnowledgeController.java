@@ -5,6 +5,7 @@
  */
 package sample.controllers;
 
+import com.sun.corba.se.impl.naming.cosnaming.InterOperableNamingImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -35,10 +36,10 @@ public class DetailKnowledgeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try{
-            String id = request.getParameter("id");
-            KnowledgeDAO dao = new KnowledgeDAO();
-            KnowledgeDTO knowlegePage = dao.getOnePage(Integer.parseInt(id));
-            request.setAttribute("one", knowlegePage);
+            String id = request.getParameter("idDetai");
+            KnowledgeDAO knowdao = new KnowledgeDAO();
+            KnowledgeDTO knowledge = knowdao.getOnePage(Integer.parseInt(id));
+            request.setAttribute("oneknowledge", knowledge);
             request.getRequestDispatcher("DetailKnowledge.jsp").forward(request, response);
         }catch(Exception ex){
         }

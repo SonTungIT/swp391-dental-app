@@ -355,7 +355,7 @@
                             <span>5 Trang tin tức mới nhất</span>
                         </div>
                         <c:forEach items="${a.top5}" var="o">
-                            <a href="DetailNewsController?id=${o.id}">
+                            <a href="DetailNewsController?idDetail=${o.idDetai}">
                                 ${o.title1}
                             </a>
                         </c:forEach>

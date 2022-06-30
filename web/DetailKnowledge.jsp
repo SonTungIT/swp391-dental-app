@@ -268,59 +268,59 @@
                 <div class="row news-grids text-center">
                     <div class="row item-list">
                         <div class="title-bl">
-                            ${one.title1}
+                            ${oneknowledge.title1}
                         </div>
                         <div class="text-center">
-                            ${one.context1}
+                            ${oneknowledge.context1}
                         </div>
                         <div class="image">
-                            <img src="${one.image1}"/>
+                            <img src="${oneknowledge.image1}"/>
                         </div>
 
                         <div class="title-bl">
-                            ${one.title2}
+                            ${oneknowledge.title2}
                         </div>
                         <div class="text-center">
-                            ${one.context2}
+                            ${oneknowledge.context2}
                         </div>
                         <div class="image">
-                            <img src="${one.image2}"/>
+                            <img src="${oneknowledge.image2}"/>
                         </div>
                         <div class="title-bl">
-                            ${one.title3}
+                            ${oneknowledge.title3}
                         </div>
                         <div class="text-center">
-                            ${one.context3}
+                            ${oneknowledge.context3}
                         </div>
                         <div class="image">
-                            <img src="${one.image3}"/>
+                            <img src="${oneknowledge.image3}"/>
                         </div>
                         <div class="title-bl">
-                            ${one.title4}
+                            ${oneknowledge.title4}
                         </div>
                         <div class="text-center">
-                            ${one.context4}
+                            ${oneknowledge.context4}
                         </div>
                         <div class="image">
-                            <img src="${one.image4}"/>
+                            <img src="${oneknowledge.image4}"/>
                         </div>
                         <div>
-                            ${one.timepost}
+                            ${oneknowledge.timepost}
                         </div>
                     </div>
 
-                     
+
                 </div>
                 <div class="newest">
-                        <div class="titileNews">
-                            <span>4 Kiên thức mới nhất</span>
-                        </div>
-                        <c:forEach items="${t.top4}" var="o">
-                            <a href="DetailKnowledgeController?id=${o.id}">
-                                ${o.title1}
-                            </a>
-                        </c:forEach>
-                    </div> 
+                    <div class="titileNews">
+                        <span>4 Kiên thức mới nhất</span>
+                    </div>
+                    <c:forEach items="${t.top4}" var="o">
+                        <a href="DetailKnowledgeController?idDetai=${o.idDetai}">
+                            ${o.title1}
+                        </a>
+                    </c:forEach>
+                </div> 
             </div>
         </section>
         <!-- //gallery -->

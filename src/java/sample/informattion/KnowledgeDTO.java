@@ -13,29 +13,30 @@ import java.util.Date;
  * @author QUANG VAN
  */
 public class KnowledgeDTO {
-    private int id;
+    private int categoryId;
     private String title1;
     private String context1;
     private String image1;
     private String title2;
-
     private String context2;
     private String image2;
-
     private String title3;
     private String context3;
     private String image3;
-
     private String title4;
     private String context4;
     private String image4;
+    private String title5;
+    private String context5;
+    private String image5;
     private Date timepost;
+    private int idDetai;
 
     public KnowledgeDTO() {
     }
 
-    public KnowledgeDTO(int id, String title1, String context1, String image1, String title2, String context2, String image2, String title3, String context3, String image3, String title4, String context4, String image4, Date timepost) {
-        this.id = id;
+    public KnowledgeDTO(int id, String title1, String context1, String image1, String title2, String context2, String image2, String title3, String context3, String image3, String title4, String context4, String image4,String title5, String context5, String image5, Date timepost, int idDetai) {
+        this.categoryId = categoryId;
         this.title1 = title1;
         this.context1 = context1;
         this.image1 = image1;
@@ -48,7 +49,11 @@ public class KnowledgeDTO {
         this.title4 = title4;
         this.context4 = context4;
         this.image4 = image4;
+        this.title5 = title5;
+        this.context5 = context5;
+        this.image5 = image5;
         this.timepost = timepost;
+        this.idDetai = idDetai;
     }
 
     
@@ -158,18 +163,54 @@ public class KnowledgeDTO {
         this.timepost = timepost;
     }
 
-    public int getId() {
-        return id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public int getIdDetai() {
+        return idDetai;
+    }
+
+    public void setIdDetai(int idDetai) {
+        this.idDetai = idDetai;
+    }
+
+    public String getTitle5() {
+        return title5;
+    }
+
+    public void setTitle5(String title5) {
+        this.title5 = title5;
+    }
+
+    public String getContext5() {
+        return context5;
+    }
+
+    public void setContext5(String context5) {
+        this.context5 = context5;
+    }
+
+    public String getImage5() {
+        return image5;
+    }
+
+    public void setImage5(String image5) {
+        this.image5 = image5;
     }
 
     @Override
     public String toString() {
-        return "KnowledgeDTO{" + "id=" + id + ", title1=" + title1 + ", context1=" + context1 + ", image1=" + image1 + ", title2=" + title2 + ", context2=" + context2 + ", image2=" + image2 + ", title3=" + title3 + ", context3=" + context3 + ", image3=" + image3 + ", title4=" + title4 + ", context4=" + context4 + ", image4=" + image4 + ", timepost=" + timepost + '}';
+        return "KnowledgeDTO{" + "categoryId=" + categoryId + ", title1=" + title1 + ", context1=" + context1 + ", image1=" + image1 + ", title2=" + title2 + ", context2=" + context2 + ", image2=" + image2 + ", title3=" + title3 + ", context3=" + context3 + ", image3=" + image3 + ", title4=" + title4 + ", context4=" + context4 + ", image4=" + image4 + ", title5=" + title5 + ", context5=" + context5 + ", image5=" + image5 + ", timepost=" + timepost + ", idDetai=" + idDetai + '}';
     }
+
+    
+
+    
 
     
      

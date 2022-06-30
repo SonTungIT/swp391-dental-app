@@ -3,14 +3,12 @@
     Created on : Jun 6, 2022, 12:18:01 PM
     Author     : Lenovo Legion
 --%>
-<<<<<<< HEAD
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-=======
 
 <%@page import="java.util.List"%>
 <%@page import="sample.user.AdminDAO"%>
->>>>>>> refs/remotes/origin/main
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -349,7 +347,7 @@
                             <span>4 Kiên thức mới nhất</span>
                         </div>
                         <c:forEach items="${t.top4}" var="o">
-                            <a href="DetailKnowledgeController?id=${o.id}">
+                            <a href="DetailKnowledgeController?idDetai=${o.idDetai}">
                                 ${o.title1}
                             </a>
                         </c:forEach>

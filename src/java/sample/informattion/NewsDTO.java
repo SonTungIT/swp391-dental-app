@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class NewsDTO {
 
-    private int id;
+    private int categoryId;
     private String title1;
     private String context1;
     private String image1;
@@ -32,12 +32,13 @@ public class NewsDTO {
     private String context5;
     private String image5;
     private Date timepost;
+    private int idDetai;
 
     public NewsDTO() {
     }
 
-    public NewsDTO(int id, String title1, String context1, String image1, String title2, String context2, String image2, String title3, String context3, String image3, String title4, String context4, String image4, String title5, String context5, String image5, Date timepost) {
-        this.id = id;
+    public NewsDTO(int categoryId, String title1, String context1, String image1, String title2, String context2, String image2, String title3, String context3, String image3, String title4, String context4, String image4, String title5, String context5, String image5, Date timepost,int idDetai) {
+        this.categoryId = categoryId;
         this.title1 = title1;
         this.context1 = context1;
         this.image1 = image1;
@@ -54,15 +55,26 @@ public class NewsDTO {
         this.context5 = context5;
         this.image5 = image5;
         this.timepost = timepost;
+        this.idDetai = idDetai;
     }
 
-    public int getId() {
-        return id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
+
+    public int getIdDetai() {
+        return idDetai;
+    }
+
+    public void setIdDetai(int idDetai) {
+        this.idDetai = idDetai;
+    }
+
+    
 
     public String getTitle1() {
         return title1;
@@ -194,7 +206,10 @@ public class NewsDTO {
 
     @Override
     public String toString() {
-        return "NewsDTO{" + "id=" + id + ", title1=" + title1 + ", context1=" + context1 + ", image1=" + image1 + ", title2=" + title2 + ", context2=" + context2 + ", image2=" + image2 + ", title3=" + title3 + ", context3=" + context3 + ", image3=" + image3 + ", title4=" + title4 + ", context4=" + context4 + ", image4=" + image4 + ", title5=" + title5 + ", context5=" + context5 + ", image5=" + image5 + ", timepost=" + timepost + '}';
+        return "NewsDTO{" + "categoryId=" + categoryId + ", title1=" + title1 + ", context1=" + context1 + ", image1=" + image1 + ", title2=" + title2 + ", context2=" + context2 + ", image2=" + image2 + ", title3=" + title3 + ", context3=" + context3 + ", image3=" + image3 + ", title4=" + title4 + ", context4=" + context4 + ", image4=" + image4 + ", title5=" + title5 + ", context5=" + context5 + ", image5=" + image5 + ", timepost=" + timepost + ", idDetai=" + idDetai + '}';
     }
+
     
+
+     
 }
