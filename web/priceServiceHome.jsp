@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.user.UserDTO"%>
 <%@page import="sample.services.ServiceDTO"%>
 <%@page import="sample.services.CategoryServiceDTO"%>
@@ -80,6 +81,20 @@
                         </ul>
                     </div>
                     <div class="col-sm-6 header-right-w3_pvt">
+                        <%
+                            AdminDAO dao = new AdminDAO();
+                            List<String> listTW = dao.getOPH();
+                            String stMF = "OFF";
+                            String etMF = "OFF";
+                            String stSS = "OFF";
+                            String etSS = "OFF";
+                            if (!listTW.isEmpty()) {
+                                stMF = listTW.get(0);
+                                etMF = listTW.get(1);
+                                stSS = listTW.get(2);
+                                etSS = listTW.get(3);
+                            } 
+                        %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : 7h - 16:30h</span>
@@ -113,8 +128,8 @@
                             <a href="services.jsp">DỊCH VỤ</a>
                             <ul class="menu__service-list">
                                <%
-                                    PatientDAO dao = new PatientDAO();
-                                    List<CategoryServiceDTO> listCate = dao.getTableCategory();
+                                    PatientDAO dao1 = new PatientDAO();
+                                    List<CategoryServiceDTO> listCate = dao1.getTableCategory();
                                     if (listCate != null) {
                                         if (listCate.size() > 0) {
                                             for (CategoryServiceDTO cate : listCate) {
@@ -128,7 +143,7 @@
                                     <%
                                         String cate1 = cate.getCategoryName();
                                         
-                                        List<ServiceDTO> listService = dao.getTableService(cate1);
+                                        List<ServiceDTO> listService = dao1.getTableService(cate1);
 
                                         if (listService != null) {
 
@@ -169,10 +184,19 @@
                                 %>    
                             </ul>
                         </li>
-                        <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
+                        <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
+                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            %>
+                        <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
+                            <%
+                            } else {
+                            %>
+                        <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH</a></li>
+                            <%
+                                }
+                            %>
                     </ul>
 
                     <% if (loginUser == null) {
@@ -356,7 +380,7 @@
                     </div>
                 </div>
                  <%
-            List<CategoryServiceDTO> listCate1 = dao.getTableCategory();
+            List<CategoryServiceDTO> listCate1 = dao1.getTableCategory();
             if (listCate1 != null) {
                 if (listCate1.size() > 0) {
                     for (CategoryServiceDTO cate : listCate1) {
@@ -374,7 +398,7 @@
                             <%
                                 String cate1 = cate.getCategoryName();
 
-                                List<ServiceDTO> listPrice = dao.getListPriceServiceHome(cate1);
+                                List<ServiceDTO> listPrice = dao1.getListPriceServiceHome(cate1);
                                 if (listPrice != null) {
                                     if (listPrice.size() > 0) {
                             %>
@@ -452,7 +476,11 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper -->  
     </body>
-    
+    <script>
+                    function control() {
+                        alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                    }
+    </script>
     
     
     

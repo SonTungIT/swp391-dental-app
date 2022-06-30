@@ -795,17 +795,13 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
-<<<<<<< HEAD
+
                             function control() {
                                 alert("Xin hãy đăng nhập để được đặt lịch!!!");
                             }
-=======
 
-                    function control() {
-                        alert("Xin hãy đăng nhập để được đặt lịch!!!");
-                    }
 
->>>>>>> refs/remotes/origin/main
+
         </script>
     </body>
 </html>

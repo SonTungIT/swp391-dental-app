@@ -274,24 +274,24 @@
 
                                                     <tr>
                                                         <td class="border-top-0">Service Name</td>
-                                                        <td><input type="text" name="serviceName" placeholder="input Name" required=""/></td>
+                                                        <td><input class="form-control ps-0 form-control-line" type="text" name="serviceName" placeholder="input Name" required=""/></td>
 
                                                     </tr>
                                                     <tr>
                                                         <td class="border-top-0">Image</td>
-                                                        <td><input type="text" name="image" placeholder="input XXX.jpg" required=""/></td>
+                                                        <td><input class="form-control ps-0 form-control-line" type="text" name="image" placeholder="input XXX.jpg" required=""/></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="border-top-0">Category ID</td>
-                                                        <td><input type="text" name="categoryID" placeholder="input category ID"required=""/></td>
+                                                        <td><input class="form-control ps-0 form-control-line" type="text" name="categoryID" placeholder="input category ID"required=""/></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="border-top-0">Price</td>
-                                                        <td><input type="text" name="price" placeholder="input number" required=""/></td>
+                                                        <td><input class="form-control ps-0 form-control-line" type="text" name="price" placeholder="input number" required=""/></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="border-top-0">Content</td>
-                                                        <td><input type="text" name="aboutSV" placeholder="input content" required=""/></td>
+                                                        <td><input class="form-control ps-0 form-control-line" type="text" name="aboutSV" placeholder="input content" required=""/></td>
                                                     </tr>
                                                     
                                                     <tr>

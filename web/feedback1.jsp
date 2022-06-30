@@ -4,6 +4,10 @@
     Author     : dangk
 --%>
 
+<%@page import="sample.user.AdminDAO"%>
+<%@page import="sample.user.PatientDAO"%>
+<%@page import="sample.services.CategoryServiceDTO"%>
+<%@page import="sample.services.ServiceDTO"%>
 <%@page import="sample.feedback.FeedbackDTO"%>
 <%@page import="sample.user.UserDTO"%>
 <%@page import="java.util.List"%>
@@ -59,15 +63,32 @@
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:info@example.com" class="">info@example.com</a>
+                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
-                            <li>
+<!--                            <li>
                                 <span class="fa fa-phone"></span>
                                 <p class="d-inline">Call Us +12 345 678</p>
+                            </li>-->
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
                     <div class="col-sm-6 header-right-w3_pvt">
+                    <%
+                            AdminDAO dao = new AdminDAO();
+                            List<String> listTW = dao.getOPH();
+                            String stMF = "OFF";
+                            String etMF = "OFF";
+                            String stSS = "OFF";
+                            String etSS = "OFF";
+                            if (!listTW.isEmpty()) {
+                                stMF = listTW.get(0);
+                                etMF = listTW.get(1);
+                                stSS = listTW.get(2);
+                                etSS = listTW.get(3);
+                            }
+                        %>   
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-clock-o"></span>Mon - Fri : 8:30am to 9:30pm</span>
@@ -100,62 +121,64 @@
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
                             <ul class="menu__service-list">
-                                <li class="menu__service-description">
-                                    <a href="#" class="menu__service-link"><span>Niềng răng chỉnh nha</span></a>
+                                <%
+                                    PatientDAO dao1 = new PatientDAO();
+                                    List<CategoryServiceDTO> listCate = dao1.getTableCategory();
+                                    if (listCate != null) {
+                                        if (listCate.size() > 0) {
+                                            for (CategoryServiceDTO cate : listCate) {
+
+
+                                %>
+                                <li class="menu__service-description">   
+                                    <a class="menu__service-link"><span> <%= cate.getCategoryName()%></span>  
+                                        
+                                    </a>    
+                                    <%
+                                        String cate1 = cate.getCategoryName();
+                                        
+                                        List<ServiceDTO> listService = dao1.getTableService(cate1);
+
+                                        if (listService != null) {
+
+                                            if (listService.size() > 0) {
+
+                                    %>
                                     <ul class="menu__service-colume">
+                                    <%                                                                
+                                        for (ServiceDTO table : listService) {
+
+
+                                    %> 
+                                    
                                         <li class="menu__service-colume--item">
-                                            <a href="./listService/niengrang1.html">Niềng răng mắc cài</a>
+                                            <a href="MainController?action=Show_About&serviceID=<%= table.getServiceID() %>"><%= table.getServiceName()%></a>
                                         </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/niengrang2.html">Niềng răng Invisalign</a>
-                                        </li>
-                                    </ul>
+                                   
+
+
+                                    <%
+
+                                                }
+                                                %>
+                                             </ul>   
+                                                <%
+                                            }
+
+                                        }
+                                    %>
                                 </li>
-                                <li class="menu__service-description">
-                                    <a href="#" class="menu__service-link"><span>Răng sứ thẩm mỹ</span></a>
-                                    <ul class="menu__service-colume">
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/rangsu1.html">Dán sứ Veneer</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/rangsu2.html">Bọc răng sứ</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu__service-description">
-                                    <a href="#" class="menu__service-link"><span>Cấy ghép răng implant</span></a>
-                                    <ul class="menu__service-colume">
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/cayghep1.html">Trồng răng Implant</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/cayghep2.html">Trồng Implant toàn hàm</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu__service-description">
-                                    <a href="#" class="menu__service-link"><span>Dịch vụ bệnh lý</span></a>
-                                    <ul class="menu__service-colume">
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu1.html">Lấy cao răng</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu2.html">Nhổ răng khôn</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu3.html">Hàn trám răng</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu4.html">Điều trị tủy</a>
-                                        </li>
-                                        <li class="menu__service-colume--item">
-                                            <a href="./listService/dichvu5.html">Tẩy trắng răng</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <%
+                                    }
+
+                                %>
+                                <%        }
+                                    }
+
+                                %> 
                             </ul>
                         </li>
-                        <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
+                        <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
                         <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
@@ -303,7 +326,7 @@
                     
             <div>
                 <td>  
-                    <img width="80px" height="60px" src="image/<%= feedback.getImage()%>" >
+                    
                     <%= feedback.getPatientName()%>
                 </td>
                 <td>  
@@ -345,7 +368,16 @@
             <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
             <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
             <p>+84123456789</p>
-            <a style="font-size: 30px" href="booking.jsp">ĐẶT LỊCH NGAY</a>
+            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                %>
+                <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH NGAY</a></li>
+                    <%
+                    } else {
+                    %>
+                <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH NGAY</a></li>
+                    <%
+                        }
+                    %>
         </div>
     </section>
     <!-- //appointment -->
@@ -406,7 +438,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-    <!-- JavaScript Bundle with Popper -->  
+    <!-- JavaScript Bundle with Popper --> 
+    <script>
+
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
+
+
+
+        </script>
 </body>
     
 

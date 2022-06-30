@@ -92,7 +92,7 @@ public class MainController extends HttpServlet {
     
     private static final String SEARCH_CATEGORY = "Search_Category";
     private static final String SEARCH_CATEGORY_CONTROLLER = "SearchCategoryServicesController";
-     private static final String DELETE_CATEGORY = "DeleteCategory";
+    private static final String DELETE_CATEGORY = "DeleteCategory";
     private static final String DELETE_CATEGORY_CONTROLLER = "DeleteCategoryServicesController";
     private static final String UPDATE_CATEGORY = "Update_Category";
     private static final String UPDATE_CATEGORY_CONTROLLER = "UpdateCategoryServicesController";

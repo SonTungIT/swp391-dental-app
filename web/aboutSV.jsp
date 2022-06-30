@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.services.CategoryServiceDTO"%>
 <%@page import="sample.user.PatientDAO"%>
 <%@page import="sample.user.UserDTO"%>
@@ -61,15 +62,32 @@
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:info@example.com" class="">info@example.com</a>
+                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan.com</a>
                             </li>
-                            <li>
+<!--                            <li>
                                 <span class="fa fa-phone"></span>
                                 <p class="d-inline">Call Us +12 345 678</p>
+                            </li>-->
+                            <li class="mr-lg-3">
+                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
                     <div class="col-sm-6 header-right-w3_pvt">
+                        <%
+                            AdminDAO dao = new AdminDAO();
+                            List<String> listTW = dao.getOPH();
+                            String stMF = "OFF";
+                            String etMF = "OFF";
+                            String stSS = "OFF";
+                            String etSS = "OFF";
+                            if (!listTW.isEmpty()) {
+                                stMF = listTW.get(0);
+                                etMF = listTW.get(1);
+                                stSS = listTW.get(2);
+                                etSS = listTW.get(3);
+                            }
+                        %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-clock-o"></span>Mon - Fri : 8:30am to 9:30pm</span>
@@ -103,8 +121,8 @@
                             <a href="services.jsp">DỊCH VỤ</a>
                             <ul class="menu__service-list">
                                 <%
-                                    PatientDAO dao = new PatientDAO();
-                                    List<CategoryServiceDTO> listCate = dao.getTableCategory();
+                                    PatientDAO dao1 = new PatientDAO();
+                                    List<CategoryServiceDTO> listCate = dao1.getTableCategory();
                                     if (listCate != null) {
                                         if (listCate.size() > 0) {
                                             for (CategoryServiceDTO cate : listCate) {
@@ -118,7 +136,7 @@
                                     <%
                                         String cate1 = cate.getCategoryName();
                                         
-                                        List<ServiceDTO> listService = dao.getTableService(cate1);
+                                        List<ServiceDTO> listService = dao1.getTableService(cate1);
 
                                         if (listService != null) {
 
@@ -159,7 +177,7 @@
                                 %> 
                             </ul>
                         </li>
-                        <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
+                        <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
                         <li class=""><a href="booking.jsp">ĐẶT LỊCH</a></li>
@@ -304,7 +322,16 @@
             <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
             <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
             <p>+84123456789</p>
-            <a style="font-size: 30px" href="booking.jsp">ĐẶT LỊCH NGAY</a>
+           <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                %>
+                <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH NGAY</a></li>
+                    <%
+                    } else {
+                    %>
+                <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH NGAY</a></li>
+                    <%
+                        }
+                    %>
         </div>
     </section>
     <!-- //appointment -->
@@ -367,6 +394,13 @@
     crossorigin="anonymous"></script>
     <!-- JavaScript Bundle with Popper -->  
 </body>
+<script>
+
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
+
+        </script>
     
 
 </html>
