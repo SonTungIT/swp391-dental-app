@@ -12,19 +12,21 @@ package sample.services;
 public class CategoryServiceDTO {
     private String categoryID;
     private String categoryName;
-    private String status;
+    private boolean status;
     private String serviceID;
     private String serviceName;
 
     public CategoryServiceDTO() {
     }
 
-    public CategoryServiceDTO(String categoryID, String categoryName, String status) {
+    public CategoryServiceDTO(String categoryID, String categoryName, boolean status) {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
         this.status = status;
     }
 
+   
+    
     
   
     
@@ -44,20 +46,22 @@ public class CategoryServiceDTO {
         this.categoryName = categoryName;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
-    public CategoryServiceDTO(String categoryID, String categoryName, String status, String serviceID, String serviceName) {
+   
+
+    public CategoryServiceDTO(String categoryID, String categoryName, String serviceID, String serviceName, boolean status) {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
-        this.status = status;
         this.serviceID = serviceID;
         this.serviceName = serviceName;
+        this.status = status;
     }
 
     

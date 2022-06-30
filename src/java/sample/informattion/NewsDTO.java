@@ -33,11 +33,12 @@ public class NewsDTO {
     private String image5;
     private Date timepost;
     private int idDetai;
+    private String allcontext;
 
     public NewsDTO() {
     }
 
-    public NewsDTO(int categoryId, String title1, String context1, String image1, String title2, String context2, String image2, String title3, String context3, String image3, String title4, String context4, String image4, String title5, String context5, String image5, Date timepost,int idDetai) {
+    public NewsDTO(int categoryId, String title1, String context1, String image1, String title2, String context2, String image2, String title3, String context3, String image3, String title4, String context4, String image4, String title5, String context5, String image5, Date timepost,int idDetai,String allcontext) {
         this.categoryId = categoryId;
         this.title1 = title1;
         this.context1 = context1;
@@ -56,8 +57,17 @@ public class NewsDTO {
         this.image5 = image5;
         this.timepost = timepost;
         this.idDetai = idDetai;
+        this.allcontext = allcontext;
     }
 
+    public String getAllcontext() {
+        return allcontext;
+    }
+
+    public void setAllcontext(String allcontext) {
+        this.allcontext = allcontext;
+    }
+ 
     public int getCategoryId() {
         return categoryId;
     }
@@ -206,8 +216,10 @@ public class NewsDTO {
 
     @Override
     public String toString() {
-        return "NewsDTO{" + "categoryId=" + categoryId + ", title1=" + title1 + ", context1=" + context1 + ", image1=" + image1 + ", title2=" + title2 + ", context2=" + context2 + ", image2=" + image2 + ", title3=" + title3 + ", context3=" + context3 + ", image3=" + image3 + ", title4=" + title4 + ", context4=" + context4 + ", image4=" + image4 + ", title5=" + title5 + ", context5=" + context5 + ", image5=" + image5 + ", timepost=" + timepost + ", idDetai=" + idDetai + '}';
+        return "NewsDTO{" + "categoryId=" + categoryId + ", title1=" + title1 + ", context1=" + context1 + ", image1=" + image1 + ", title2=" + title2 + ", context2=" + context2 + ", image2=" + image2 + ", title3=" + title3 + ", context3=" + context3 + ", image3=" + image3 + ", title4=" + title4 + ", context4=" + context4 + ", image4=" + image4 + ", title5=" + title5 + ", context5=" + context5 + ", image5=" + image5 + ", timepost=" + timepost + ", idDetai=" + idDetai + ", allcontext=" + allcontext + '}';
     }
+
+    
 
     
 

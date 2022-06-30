@@ -80,6 +80,13 @@ public class BookingDTO {
         this.slotTime = slotTime;
         this.status = status;
     }
+    public BookingDTO(String bookingID, String serviceName, String doctorName, Date dateBooking, String timeBooking) {
+        this.bookingID = bookingID;
+        this.serviceName = serviceName;
+        this.doctorName = doctorName;
+        this.dateBooking = dateBooking;
+        this.timeBooking = timeBooking;
+    }
 
     public String getDoctorID() {
         return doctorID;

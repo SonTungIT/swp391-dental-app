@@ -48,7 +48,8 @@ public class NewsDAO {
                             rs.getString(15),
                             rs.getString(16),
                             rs.getDate(17),
-                            rs.getInt(18));
+                            rs.getInt(18),
+                            rs.getString(19));
                     return news;
                 }
             }
@@ -97,7 +98,8 @@ public class NewsDAO {
                             rs.getString(15),
                             rs.getString(16),
                             rs.getDate(17),
-                            rs.getInt(18));
+                            rs.getInt(18),
+                            rs.getString(19));
                     list.add(news);
                 }
             }
@@ -147,7 +149,8 @@ public class NewsDAO {
                             rs.getString(15),
                             rs.getString(16),
                             rs.getDate(17),
-                            rs.getInt(18));
+                            rs.getInt(18),
+                            rs.getString(19));
                     return news;
                 }
             }
@@ -166,8 +169,6 @@ public class NewsDAO {
         }
         return null;
     }
-
-    
 
     public static void main(String[] args) throws SQLException {
         NewsDAO dao = new NewsDAO();

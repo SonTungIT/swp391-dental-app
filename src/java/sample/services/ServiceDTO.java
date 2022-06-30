@@ -15,6 +15,8 @@ public class ServiceDTO {
     private String image;
     private String categoryID;
     private int price;
+    private String aboutSV;
+    private String categoryName;
     private boolean status;
 
     public ServiceDTO() {
@@ -27,6 +29,50 @@ public class ServiceDTO {
         this.categoryID = categoryID;
         this.price = price;
         this.status = status;
+    }
+    public ServiceDTO(String serviceName, String categoryName, int price) {
+        this.serviceName = serviceName;
+        this.categoryName = categoryName;
+        this.price = price;
+    }
+
+    public ServiceDTO(String serviceID, String serviceName, String image, String categoryName, String aboutSV, boolean status) {
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.image = image;
+        this.categoryName = categoryName;
+        this.aboutSV = aboutSV;
+        this.status = status;
+    }
+
+    public ServiceDTO(String serviceID, String serviceName, String image, String categoryName, String aboutSV) {
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.image = image;
+        this.categoryName = categoryName;
+        this.aboutSV = aboutSV;
+    }
+    public ServiceDTO(String serviceID, String serviceName, String image, String categoryID, int price, String aboutSV, boolean status) {
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.image = image;
+        this.categoryID = categoryID;
+        this.price = price;
+        this.aboutSV = aboutSV;
+        this.status = status;
+    }
+
+    public ServiceDTO(String serviceName, int price) {
+        this.serviceName = serviceName;
+        this.price = price;
+    }
+    
+    public String getAboutSV() {
+        return aboutSV;
+    }
+
+    public void setAboutSV(String aboutSV) {
+        this.aboutSV = aboutSV;
     }
 
     public String getServiceID() {
@@ -75,6 +121,14 @@ public class ServiceDTO {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
      
 }

@@ -1,31 +1,26 @@
 <%-- 
-    Document   : knowledge
-    Created on : Jun 6, 2022, 12:18:01 PM
-    Author     : Lenovo Legion
+    Document   : priceServiceHome
+    Created on : Jun 26, 2022, 9:30:30 PM
+    Author     : dangk
 --%>
 
-<%@page import="sample.user.PatientDAO"%>
-<%@page import="sample.services.CategoryServiceDTO"%>
-<%@page import="sample.services.ServiceDTO"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@page import="java.util.List"%>
 <%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.user.UserDTO"%>
+<%@page import="sample.services.ServiceDTO"%>
+<%@page import="sample.services.CategoryServiceDTO"%>
+<%@page import="sample.user.PatientDAO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <jsp:useBean id="t" class="sample.informattion.KnowledgeDAO" scope="request" />
-        <c:set var="txtSearch" value="${param.txtSearchValue}"/>
 
-        <title>Dental Health Medical Category Flat Bootstrap Responsive Website Template | Gallery :: W3layouts</title>
+    <head>
+        <title>Nha Khoa Thiên Thần</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content="Dental Health Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-              Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+        <meta name="keywords" content="Thien Than Dental" />
 
         <script>
             addEventListener("load", function () {
@@ -38,10 +33,17 @@
         </script>
 
         <!-- css files -->
+
+
+        <link href="CSS/css_slider.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/price.css" rel="stylesheet" type="text/css"/>
         <!-- //css files -->
+
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
 
         <!-- google fonts -->
         <link
@@ -54,16 +56,11 @@
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
-    <body>
-        
-        <form action="SearchInformationController" >
-            <input type="text" name="txtSearch"  value="${param.txtSearchValue}" placeholder="input your text"/>
-            <input type="submit" name="action"  value="Tìm kiếm"/>
-            <input type="hidden" name="index" value="1"/>
-        </form>
-        <%
+    <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
+    <body>       
+
         <!-- top header -->
         <div class="header-top">
             <div class="container">
@@ -72,18 +69,17 @@
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
+                                <a href="mailto:info@example.com" class="">info@example.com</a>
                             </li>
                             <!-- <li>
                                     <span class="fa fa-phone"></span>
                                     <p class="d-inline">Call Us +12 345 678</p>
                             </li> -->
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
+                                <span class=""><span class="fa fa-phone"></span>Call Us +12 345 678</span>
                             </li>
                         </ul>
                     </div>
-
                     <div class="col-sm-6 header-right-w3_pvt">
                         <%
                             AdminDAO dao = new AdminDAO();
@@ -101,10 +97,10 @@
                         %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : 7h - 16:30h</span>
                             </li>
                             <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
+                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : 7h - 11h</span>
                             </li>
                         </ul>
                     </div>
@@ -131,7 +127,7 @@
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
                             <ul class="menu__service-list">
-                                <%
+                               <%
                                     PatientDAO dao1 = new PatientDAO();
                                     List<CategoryServiceDTO> listCate = dao1.getTableCategory();
                                     if (listCate != null) {
@@ -185,7 +181,7 @@
                                 <%        }
                                     }
 
-                                %> 
+                                %>    
                             </ul>
                         </li>
                         <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
@@ -246,7 +242,7 @@
                                     Tài Khoản Của Tôi
                                 </button>
                             </a>
-                            <a href="MainController?action=SearchHSBK&searchHSBK" style="padding: 0">
+                            <a href="#" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Lịch Sử Đặt Lịch
@@ -267,10 +263,10 @@
                     %>
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/blog4.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
+                            <img src="./images/t6.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="doctor.jsp" style="padding: 0">
+                            <a href="doctor.jsp.jsp" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Tài Khoản Của Tôi
@@ -296,142 +292,176 @@
             </div>
         </header>
         <!-- //header -->
-
-        <!-- banner -->
+        <!-- banner-clinic -->
         <div class="innerpage-banner" id="home">
             <div class="inner-page-layer">
             </div>
         </div>
-        <!-- //banner -->
+        <main id="main" class="">
+            <div id="content" role="main" class="content-area">
+                <div class="row row-collapse row-full-width align-center" id="row-622117674">
+                    <div id="col-2021140538" class="col small-12 large-12">
+                        <div class="col-inner text-center">
+                            <div class="banner has-hover show-for-small" id="banner-1216324343">
+                                <div class="banner-inner fill">
+                                    <div class="banner-bg fill">
+                                        <div class="bg fill bg-fill "></div>
+                                    </div>
+                                    <div class="banner-layers container">
+                                        <a class="fill" href="https://nhakhoafamily.vn/boc-rang-su-tham-my/"><div class="fill banner-link"></div></a>            
+                                        <div id="text-box-920915226" class="text-box banner-layer x50 md-x50 lg-x50 y50 md-y50 lg-y50 res-text">
+                                            <div class="text-box-content text dark">
+                                                <div class="text-inner text-center">
+                                                </div>
+                                            </div>
+                                            <style>
+                                                #text-box-920915226 {
+                                                    width: 60%;
+                                                }
+                                                #text-box-920915226 .text-box-content {
+                                                    font-size: 100%;
+                                                }
+                                            </style>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="height-fix is-invisible"></div>
+                                <style>
+                                    #banner-1216324343 .bg.bg-loaded {
+                                        background-image: 15681;
+                                    }
+                                </style>
+                            </div>
 
-        <!-- gallery -->
-        <section class="gallery py-5" id="gallery">
-            <div class="container py-lg-5">
-                <h2 class="heading text-center mb-sm-5 mb-4">Kiến thức Nha Khoa</h2>
-                <div class="row news-grids text-center">
-                    <div class="row item-list">
-                        <div class="title-bl">
-                            ${t.top1.title1}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context1}
-                        </div>
-                        <div class="image">
-                            <img src="${t.top1.image1}"/>
-                        </div>
+                            <div class="banner has-hover hide-for-small" id="banner-288351956">
+                                <div class="banner-inner fill">
+                                    <div class="banner-bg fill">
+                                        <div class="bg fill bg-fill bg-loaded"></div>
+                                    </div>
+                                    <div class="banner-layers container">
+                                        <a class="fill" href="https://nhakhoafamily.vn/boc-rang-su-tham-my/"><div class="fill banner-link"></div></a>            
+                                        <div id="text-box-1114964449" class="text-box banner-layer x50 md-x50 lg-x50 y50 md-y50 lg-y50 res-text">
+                                            <div class="text-box-content text dark">
+                                                <div class="text-inner text-center">
+                                                </div>
+                                            </div>
 
-                        <div class="title-bl">
-                            ${t.top1.title2}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context2}
-                        </div>
-                        <div class="image">
-                            <img src="${t.top1.image2}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${t.top1.title3}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context3}
-                        </div>
-                        <div class="image">
-                            <img src="${t.top1.image3}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${t.top1.title4}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context4}
-                        </div>
-                        <div class="image">
-                            <img src="${t.top1.image4}"/>
-                        </div>
-                        <div>
-                            ${t.top1.timepost}
+                                            <style>
+                                                #text-box-1114964449 {
+                                                    width: 60%;
+                                                }
+                                                #text-box-1114964449 .text-box-content {
+                                                    font-size: 100%;
+                                                }
+                                            </style>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="height-fix is-invisible"></div>
+                                <style>
+                                    #banner-288351956 .bg.bg-loaded {
+                                        background-image: 15680;
+                                    }
+                                </style>
+                            </div>
+                            <div class="container section-title-container"><h2 class="section-title section-title-bold-center"><b></b><span class="section-title-main"><i class="icon-menu"></i>Bảng giá dịch vụ nha khoa tại Nha khoa Thiên Thần</span><b></b></h2></div>
                         </div>
                     </div>
-
-                     
                 </div>
-                <div class="newest">
-                        <div class="titileNews">
-                            <span>4 Kiên thức mới nhất</span>
+                <div class="row align-center" style="max-width:900px" id="row-1366531008">
+
+                    <div id="col-384072966" class="col small-12 large-12">
+                        <div class="col-inner text-center">
+                            <div class="motangan">
+                                <p>Nha Khoa Thiên Thần – Hệ thống nha khoa thẩm mỹ công nghệ cao lớn và uy tín tại Việt Nam, nơi hội tụ đội ngũ Thạc Sĩ, Bác Sĩ đầu ngành với chuyên môn cao và tận tâm với khách hàng, nhất quán với mục tiêu:</p>
+                                <p style="text-align: center;"><span style="color: #ff0000;"><em><span style="font-size: 110%;">“Lấy sự hài lòng của Khách Hàng làm kim chỉ nam cho sự phát triển của Nha khoa Thiên Thần”</span></em></span></p>
+                            </div>
                         </div>
-                        <c:forEach items="${t.top4}" var="o">
-                            <a href="DetailKnowledgeController?idDetai=${o.idDetai}">
-                                ${o.title1}
-                            </a>
-                        </c:forEach>
-                    </div> 
-            </div>
-        </section>
-        <!-- //gallery -->
-
-        <!-- appointment -->
-        <section class="appointment text-center py-5">
-            <div class="container py-sm-3">
-                <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
-                <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
-                <p>+84123456789</p>
-                <a style="font-size: 30px" href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>
-            </div>
-        </section>
-        <!-- //appointment -->
-
-        <!-- footer -->
-        <footer class="py-5">
-            <div class="container py-sm-3">
-                <div class="row footer-grids">
-                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                        <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Nha Khoa Thiên Thần</h4>
-                        <p class="mb-3">Nha khoa Thiên Thần -Trung tâm trồng răng và Niềng răng. Tự hào là một trong những nha
-                            khoa ở TP.HCM đi đầu về công nghệ và chất lượng đội ngũ Y bác sỹ.</p>
-                        <h5>Được tin cậy bởi <span>500+ Người</span> </h5>
                     </div>
-                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                        <h4 class="mb-sm-4 mb-3">Thông Tin Địa Chỉ</h4>
-                        <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
-                                Chí Minh.</span></p>
-                        <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
-                        <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
-                        </p>
-                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
-                        </p>
-                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
-                        </p>
+                </div>
+                 <%
+            List<CategoryServiceDTO> listCate1 = dao1.getTableCategory();
+            if (listCate1 != null) {
+                if (listCate1.size() > 0) {
+                    for (CategoryServiceDTO cate : listCate1) {
+
+
+        %>
+                <p>&nbsp;</p>
+                <div class="row row-collapse" id="row-409067757">
+                </div>
+                <div class="row" style="max-width:900px" id="row-2037044618">
+                    <div id="col-592795447" class="col small-12 large-12">
+                        <div class="col-inner">
+                            <div class="is-divider divider clearfix"></div>
+                            <h3 class="tt-dichvunhakhoa"> <a><span  class="pagebanggia">Bảng Giá <%= cate.getCategoryName()%></span></a></h3>
+                            <%
+                                String cate1 = cate.getCategoryName();
+
+                                List<ServiceDTO> listPrice = dao1.getListPriceServiceHome(cate1);
+                                if (listPrice != null) {
+                                    if (listPrice.size() > 0) {
+                            %>
+                            <table id="tablepress-24" class="tablepress tablepress-id-24">
+                                <thead>
+                                    <tr class="row-1 odd">
+                                        <th class="column-1">NO</th>  
+                                        <th class="column-2">TÊN DỊCH VỤ</th> 
+                                        <th class="column-3">CHI PHÍ(VNĐ)</th> 
+                                    </tr>
+                                </thead>
+                                <%
+                                    int count = 1;
+                                    for (ServiceDTO PriceService : listPrice) {
+
+                                %>
+                                <tbody class="row-hover">
+                                    <tr class="row-2 even">
+                                        <td class="column-1">
+                                            <%= count++%>
+                                        </td>
+
+                                        <td class="column-2">
+                                            <%= PriceService.getServiceName()%>
+                                        </td>
+
+                                        <td class="column-3">
+                                            <%= PriceService.getPrice()%>
+                                        </td>
+                                    </tr>
+                                    <%
+                    }
+
+                %> 
+
+                                </tbody>
+                            </table>
+<%                        
+                }
+                                                 }
+                                    }
+                                }
+                            }
+
+                        %>
+
+                          
+                            <!-- #tablepress-13 from cache -->
+                            <h2 class="h2-sv">BẢO HÀNH RĂNG SỨ</h2>
+                            <blockquote>
+                                <ul>
+                                    <li><strong><span style="color: #ff0000;">Bảo hành 5 năm</span></strong> đối với các dòng răng sứ kim loại</li>
+                                    <li><span style="color: #ff0000;"><strong>Bảo hành 5-10 năm</strong></span> đối với các dòng răng toàn sứ</li>
+                                    <li><span style="color: #ff0000;"><strong>Bảo hành 10-20 năm</strong> </span>đối với dòng răng sứ cao cấp Ceramill, Emax Nacera, Veneer,…</li>
+                                    <li><span style="color: #ff0000;"><b>Hỗ trợ bảo hành trọn đời cho tất cả khách hàng làm răng sứ thẩm mỹ.</b></span></li>
+                                </ul>
+                            </blockquote>
+                        </div>
                     </div>
-                    <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
-                            <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
-                            <ul>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li class="my-2"><a href="#">Support Helpline</a></li>
-                                    <li><a href="#">Healthy Tips</a></li>
-                                    <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
-                            </ul>
-                    </div> -->
                 </div>
             </div>
-        </footer>
-        <!-- //footer -->
+        </main>
 
-        <!-- copyright -->
-        <div class="copyright">
-            <div class="container py-4">
-                <div class=" text-center">
-                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!-- //copyright -->
-
-        <!-- move top -->
-        <div class="move-top text-right">
-            <a href="#home" class="move-top">
-                <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
-            </a>
-        </div>
         <!-- move top -->
         <!-- JS bootstrap banner -->
         <!-- JavaScript Bundle with Popper -->
@@ -444,11 +474,17 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        <!-- JavaScript Bundle with Popper --> 
-        <script>
+        <!-- JavaScript Bundle with Popper -->  
+    </body>
+    <script>
                     function control() {
                         alert("Xin hãy đăng nhập để được đặt lịch!!!");
                     }
-        </script>
-    </body>
+    </script>
+    
+    
+    
+  
+    
+   
 </html>

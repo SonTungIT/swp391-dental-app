@@ -1,12 +1,13 @@
 <%-- 
-    Document   : feedback
-    Created on : Jun 8, 2022, 3:56:51 PM
-    Author     : Lenovo Legion
+    Document   : updateService
+    Created on : Jun 29, 2022, 8:32:53 PM
+    Author     : dangk
 --%>
+
 
 <%@page import="sample.user.UserDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="sample.feedback.FeedbackDTO"%>
+<%@page import="sample.services.ServiceDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -173,8 +174,14 @@
                                                          href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bệnh nhân</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">FeedBack</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Category Services</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Service</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="pages-blank.html" aria-expanded="false"><i
                                         class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
@@ -227,12 +234,12 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Feedback</h3>
+                            <h3 class="page-title mb-0 p-0">Service</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Feedback</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Service</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -261,171 +268,125 @@
                             <div class="card">
                                 <div class="card-body">
                                     <%
-                                        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-
-                                        String search = request.getParameter("search");
-                                        if (search == null) {
-                                            search = "";
-                                        }
+                                        ServiceDTO list = (ServiceDTO) request.getAttribute("SERVICE");
                                     %>
-                                    <form action="MainController" >
-                                        <div class="input-group">
-                                            <div class="form-outline">
-                                                <input type="text" id="form1" class="form-control"
-                                                       name="search" value="<%= search%>"  placeholder="Tìm kiếm feedback...">
-                                                <input type="hidden" name="action" value="Search_Feedback" class="btn btn-success" >
+                                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <form action="MainController"  class="form-horizontal form-material mx-2">
+                                                    <div>
+                                                        <input type="hidden" name="serviceID" value="<%= list.getServiceID()%>">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 mb-0">Tên Dịch Vụ:</label>
+                                                        <div class="col-md-12">
+                                                            <td>  
+                                                                <input class="form-control ps-0 form-control-line" type="text" name="serviceName" value="<%= list.getServiceName()%>">
+                                                            </td> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 mb-0">Hình Ảnh:</label>
+                                                        <div class="col-md-12">
+                                                            <td>  
+                                                                <input class="form-control ps-0 form-control-line" type="text" name="image" value="<%= list.getImage()%>">
+                                                            </td>  
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 mb-0">ID Loại Dịch Vụ:</label>
+                                                        <div class="col-md-12">
+                                                            <td>  
+                                                                <input class="form-control ps-0 form-control-line" type="text" name="categoryID" value="<%= list.getCategoryID()%>"> 
+                                                            </td> 
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <input type="hidden" name="price" value="<%= list.getPrice()%>">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 mb-0">Nội Dung </label>
+                                                        <div class="col-md-12">
+
+                                                            <textarea rows="5" class="form-control ps-0 form-control-line" type="text" name="aboutSV" value="<%= list.getAboutSV()%>"><%= list.getAboutSV()%></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group"> 
+                                                        <br> Trạng Thái :<%= list.isStatus()%></br>
+                                                        <input checked="checked" type="radio" name="status" value="True">True<br>
+                                                        <input type="radio" name="status" value="False">False
+
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12 d-flex">
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Update_Service">Cập Nhật</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <button type="submit" class="btn btn-success d-md-inline-block text-white">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-
-
-
                                         </div>
-                                    </form>
-
-                                    <%
-                                        List<FeedbackDTO> listFeedback = (List<FeedbackDTO>) request.getAttribute("LIST_FEEDBACK");
-                                        if (listFeedback != null) {
-                                            if (listFeedback.size() > 0) {
-                                    %>
-
-                                    <div class="table-responsive">
-                                        <table class="table user-table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-top-0">No</th>
-                                                    <th class="border-top-0">feedback ID</th>
-
-                                                    <th class="border-top-0">booking ID</th>
-                                                    <th class="border-top-0">Tên Bệnh Nhân</th>
-                                                    <th class="border-top-0">Bác Sĩ Phụ Trách </th>
-                                                    <th class="border-top-0">Tên Dịch Vụ</th>
-                                                    <th class="border-top-0">comment</th>
-                                                    <th class="border-top-0">Ngày Viết</th>                                                     
-                                                    <th class="border-top-0">Trạng Thái</th>
-                                                    <th class="border-top-0"></th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <%
-                                                    int count = 1;
-                                                    for (FeedbackDTO feedback : listFeedback) {
-                                                %>
-                                            <form action="MainController">
-                                                <tr>
-                                                    <td><%= count++%></td>
-                                                    <td>
-                                                        <%= feedback.getFeedbackID()%>
-                                                        <input type="hidden" value="<%= feedback.getFeedbackID()%>" name="feedbackID" />
-                                                    </td>
-                                                    <td>
-                                                        <%= feedback.getBookingID()%>
-                                                    </td>
-                                                    <td>
-                                                        <%= feedback.getPatientName()%>
-                                                    </td>
-                                                    <td>
-                                                        <%= feedback.getDoctorName()%>
-                                                    </td>
-                                                    <td>
-                                                        <%= feedback.getServiceName()%>
-                                                    </td>
-
-                                                    <td>  
-                                                        <%= feedback.getComment()%>
-                                                    </td>
-                                                    <td>  
-                                                        <%= feedback.getDateFeedback()%> 
-                                                    </td>
-
-                                                    <td> 
-                                                        <%
-                                                            if (feedback.isStatus() == true) {
-                                                        %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white"><%= feedback.isStatus()%></button>
-                                                        <%
-                                                        } else {
-                                                        %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white"><%= feedback.isStatus()%></button>
-                                                        <%
-                                                            }
-                                                        %>
-
-                                                        <br></br>
-                                                        <input checked="checked" type="radio" name="status" value="True">Hiện<br>
-                                                        <input type="radio" name="status" value="False">Ẩn
-                                                    </td>
-
-                                                    <!--update-->
-                                                    <td>
-                                                        <input type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white"
-                                                               target="_blank" />
-                                                        <input type="hidden" name="search" value="<%= search%>" />                      
-                                                    </td>
-                                            </form>  
-
-
-
-
-                                            <%
-                                                }
-
-                                            %> 
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <%                                                            }
-                                            }
-                                        %>
                                     </div>
-                                </div>
+                                    <!-- Column -->
+                                </div>       
                             </div>
                         </div>
                     </div>
-                    <!-- ============================================================== -->
-                    <!-- End PAge Content -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- Right sidebar -->
-                    <!-- ============================================================== -->
-                    <!-- .right-sidebar -->
-                    <!-- ============================================================== -->
-                    <!-- End Right sidebar -->
-                    <!-- ============================================================== -->
                 </div>
                 <!-- ============================================================== -->
-                <!-- End Container fluid  -->
+                <!-- End PAge Content -->
                 <!-- ============================================================== -->
                 <!-- ============================================================== -->
-                <!-- footer -->
+                <!-- Right sidebar -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
+                <!-- .right-sidebar -->
                 <!-- ============================================================== -->
-                <!-- End footer -->
+                <!-- End Right sidebar -->
                 <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- End Page wrapper  -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
             <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Wrapper -->
+        <!-- End Page wrapper  -->
         <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
-        <script src="assets/plugins/jquery/dist1/jquery.min.js" type="text/javascript"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="assets/plugins/bootstrap/dist1/js/bootstrap.bundle.min.js"></script>
-        <script src="html/js/app-style-switcher.js" type="text/javascript"></script>
-        <!--Wave Effects -->
-        <script src="html/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="html/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="html/js/custom.js"></script>
-    </body>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="assets/plugins/jquery/dist1/jquery.min.js" type="text/javascript"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/plugins/bootstrap/dist1/js/bootstrap.bundle.min.js"></script>
+    <script src="html/js/app-style-switcher.js" type="text/javascript"></script>
+    <!--Wave Effects -->
+    <script src="html/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="html/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="html/js/custom.js"></script>
+</body> 
+
+
+
+
+
+
+
+
 </html>
