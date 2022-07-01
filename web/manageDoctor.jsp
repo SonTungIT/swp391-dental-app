@@ -40,38 +40,16 @@
         <!-- Icon CND fontawesome -->
         <title>Manage Doctor Page</title>
     </head>
-    <style>
-
-        .pagination{
-            display: inline-block;
-        }
-        .pagina a{
-            color: black;
-            font-size: 22px;
-            float: left ;
-            padding: 8px 16px;
-            text-decoration: none;
-        }
-        .pagination a.active{
-            background-color: #4CAF50;
-            color: while;
-        }
-        .pagination a:hover:not(.active){
-            background-color: chocolate;
-        }
-    </style>
     <body>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             if (loginUser == null || !loginUser.getRoleID().equals("AD")) {
                 response.sendRedirect("login.jsp");
             }
-
             String search = request.getParameter("search");
             if (search == null) {
                 search = "";
             }
-
         %>
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
@@ -215,8 +193,17 @@
                                                          href="MainController?action=SearchSC&searchSC" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí lịch hoạt động</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">FeedBack</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Category Services</span></a></li> 
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Service</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí giá dịch vụ</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="icon-material.html" aria-expanded="false"><i
                                         class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Icon</span></a></li>
@@ -275,12 +262,12 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <!--<h3 class="page-title mb-0 p-0">Bác Sĩ</h3>-->
+                            <h3 class="page-title mb-0 p-0">Doctor</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="admin.jsp">Trang Chủ</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Bác Sĩ</li>
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Doctor</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -308,18 +295,13 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
+                                    <h2><a href="addDoctor.jsp">Add new Doctor</a></br></h2>
                                     <form action="MainController">
                                         <div class="input-group">
                                             <div class="form-outline">
                                                 <input type="text" name="search" class="form-control" value="<%=search%>" placeholder="Tìm kiếm bác sĩ..."/>
                                                 <input type="hidden" name="action"  value="Search" />
                                             </div>
-                                                <c:set var="page" value="${sessionScope.page}"/>
-                                            <c:if test="${not empty search}">
-                                        <c:forEach begin="1" end="${maxPages}" var="i">
-                                          <a class="${i==page?"active":""}" href="MainController?action=Search&page=${i}&search=${search}">${i}</a>
-                                        </c:forEach>
-                                    </c:if>
                                             <button type="submit" class="btn btn-success d-md-inline-block text-white">
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -337,13 +319,13 @@
                                                     <th>STT</th>
                                                     <th>Tài khoản</th>
                                                     <th>Họ và tên</th>
-                                                    <th>Giới tính</th>
+                                                   
                                                     <th>Email</th>
                                                     <th>Số điện thoại</th>
                                                     <th>Chuyên môn</th>
                                                     <th>Trạng Thái</th>
                                                     <th>Chi Tiết</th>
-                                                    <th>Cập Nhật</th>
+                                                    
                                                     <th>Xóa</th>
 
 
@@ -356,25 +338,24 @@
                                                 %>
                                             <form action="MainController">
                                                 <tr>
-
                                                     <td><%=count++%></td>
                                                     <td><%=doctor.getUserID()%></td>
                                                     <td><%=doctor.getFullName()%></td>
-                                                    <td><%=doctor.getGender()%></td>                                              
+                                                                                     
                                                     <td><%=doctor.getEmail()%></td>
                                                     <td><%=doctor.getPhone()%></td>
                                                     <td><%=doctor.getCategoryName()%></td>
                                                     <td><%=doctor.isStatus()%></td>
-
                                                     <td>
-                                                        <a href=""
+                                                        <a href="seemore.jsp"
                                                            class="btn btn-success d-none d-md-inline-block text-white"
                                                            target="_blank">
                                                             <i class="fa-regular fa-eye"></i>
+                                                            Chi tiết
                                                         </a>
                                                     </td>
                                                     <td>
-
+                                                        <input type="hidden" name="id" value="<%=doctor.getUserID()%>"/>
                                                         <input type="hidden" name="fullName" value="<%=doctor.getFullName()%>"/>
                                                         <input type="hidden" name="gender" value="<%=doctor.getGender()%>"/>
                                                         <input type="hidden" name="address" value="<%=doctor.getAddress()%>"/>
@@ -385,16 +366,16 @@
                                                         <input type="hidden" name="image" value="<%=doctor.getImage()%>"/>
                                                         <input type="hidden" name="birthday" value="<%=doctor.getBirthday()%>"/>
                                                         <input type="hidden" name="status" value="<%=doctor.isStatus()%>"/>
-                                                        <input type="submit"  name="action" value="Edit"/>
+                                                        <input type="hidden"  name="action" value="Delete"/>
+                                                            <button type="submit" class="btn btn-success d-none d-md-inline-block text-white">
+                                                                <i class="fa-solid fa-trash-can"></i>
+                                                            </button>
                                                     </td>
 
                                                     <td>
                                                         <form action="MainController">
                                                             <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
-                                                            <input type="hidden"  name="action" value="Delete"/>
-                                                            <button type="submit" class="btn btn-success d-none d-md-inline-block text-white">
-                                                                <i class="fa-solid fa-trash-can"></i>
-                                                            </button>
+                                                            
                                                         </form>
 
                                                     </td>   
@@ -411,12 +392,6 @@
                                             }
                                         %> 
                                     </div>
-                                    <c:set var="page" value="${sessionScope.page}"/>
-                                    <button class="btn btn-success d-none d-md-inline-block text-white">
-                                        <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
-                                            <a class="${i==page?"active":""}" style="color: #FFF" href="MainController?action=Show&page=${i}">${i}</a>
-                                        </c:forEach>
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -438,7 +413,8 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                
+                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
+                </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

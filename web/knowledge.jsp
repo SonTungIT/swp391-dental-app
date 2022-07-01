@@ -41,6 +41,7 @@
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/bkstyle.css" rel="stylesheet" type="text/css"/>
         <!-- //css files -->
 
         <!-- google fonts -->
@@ -55,36 +56,47 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        
-        <form action="SearchInformationController" >
-            <input type="text" name="txtSearch"  value="${param.txtSearchValue}" placeholder="input your text"/>
-            <input type="submit" name="action"  value="Tìm kiếm"/>
-            <input type="hidden" name="index" value="1"/>
-        </form>
+
+
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <!-- top header -->
         <div class="header-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
                                 <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
-                            <!-- <li>
-                                    <span class="fa fa-phone"></span>
-                                    <p class="d-inline">Call Us +12 345 678</p>
-                            </li> -->
+                        </ul>
+                        <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="col-sm-6 header-right-w3_pvt">
+                    <div class="col-sm-4">
+                        <ul class="d-lg-flex">
+                            <form action="SearchInformationController" >
+                                <div class="tech-btm d-lg-flex">
+                                    <div class="form-outline">
+                                        <input type="text" name="txtSearch" class="form-control px-2" value="${param.txtSearchValue}" placeholder="Tìm Kiếm"/>
+                                        <input type="hidden" name="index" value="1"/>
+                                    </div>
+                                    <button type="submit" name="action" value="Tìm kiếm" class="btn btn-success">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+
+                                </div>
+                            </form>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-4 header-right-w3_pvt">
                         <%
                             AdminDAO dao = new AdminDAO();
                             List<String> listTW = dao.getOPH();
@@ -97,7 +109,7 @@
                                 etMF = listTW.get(1);
                                 stSS = listTW.get(2);
                                 etSS = listTW.get(3);
-                            } 
+                            }
                         %>
                         <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
@@ -108,6 +120,7 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -142,11 +155,11 @@
                                 %>
                                 <li class="menu__service-description">   
                                     <a class="menu__service-link"><span> <%= cate.getCategoryName()%></span>  
-                                        
+
                                     </a>    
                                     <%
                                         String cate1 = cate.getCategoryName();
-                                        
+
                                         List<ServiceDTO> listService = dao1.getTableService(cate1);
 
                                         if (listService != null) {
@@ -155,24 +168,23 @@
 
                                     %>
                                     <ul class="menu__service-colume">
-                                    <%                                                                
-                                        for (ServiceDTO table : listService) {
+                                        <%                                        for (ServiceDTO table : listService) {
 
 
-                                    %> 
-                                    
+                                        %> 
+
                                         <li class="menu__service-colume--item">
-                                            <a href="MainController?action=Show_About&serviceID=<%= table.getServiceID() %>"><%= table.getServiceName()%></a>
+                                            <a href="MainController?action=Show_About&serviceID=<%= table.getServiceID()%>"><%= table.getServiceName()%></a>
                                         </li>
-                                   
 
 
+
+                                        <%
+
+                                            }
+                                        %>
+                                    </ul>   
                                     <%
-
-                                                }
-                                                %>
-                                             </ul>   
-                                                <%
                                             }
 
                                         }
@@ -191,7 +203,7 @@
                         <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
                             %>
                         <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
                             <%
@@ -305,65 +317,79 @@
         <!-- //banner -->
 
         <!-- gallery -->
-        <section class="gallery py-5" id="gallery">
-            <div class="container py-lg-5">
-                <h2 class="heading text-center mb-sm-5 mb-4">Kiến thức Nha Khoa</h2>
-                <div class="row news-grids text-center">
-                    <div class="row item-list">
-                        <div class="title-bl">
-                            ${t.top1.title1}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context1}
-                        </div>
-                        <div class="image">
-                            <img src="${t.top1.image1}"/>
-                        </div>
-
-                        <div class="title-bl">
-                            ${t.top1.title2}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context2}
-                        </div>
-                        <div class="image">
-                            <img src="${t.top1.image2}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${t.top1.title3}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context3}
-                        </div>
-                        <div class="image">
-                            <img src="${t.top1.image3}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${t.top1.title4}
-                        </div>
-                        <div class="text-center">
-                            ${t.top1.context4}
-                        </div>
-                        <div class="image">
-                            <img src="${t.top1.image4}"/>
-                        </div>
-                        <div>
-                            ${t.top1.timepost}
+        <section class="gallery" id="gallery">
+            <div class="container py-lg-5" style="display: flex">
+                <div class="col-lg-9 left-blog-info text-left">
+                    <h2 class="heading text-center mb-sm-5 mb-4">Kiến thức Nha Khoa</h2>
+                    <div style="text-align: end">Ngày Đăng: ${t.top1.timepost}</div>
+                    <div class="row news-grids text-center">
+                        <div class="row item-list">
+                            <div class="form-content">
+                                <div class="title-know title--know-big">
+                                    ${t.top1.title1}
+                                </div>
+                                <div class="form-text--center">
+                                    ${t.top1.context1}
+                                </div>
+                                <div class="image">
+                                    <img src="${t.top1.image1}"/>
+                                </div>
+                            </div>
+                            <div class="form-content">
+                                <div class="title-know title--know-big">
+                                    ${t.top1.title2}
+                                </div>
+                                <div class="form-text--center">
+                                    ${t.top1.context2}
+                                </div>
+                                <div class="image">
+                                    <img src="${t.top1.image2}"/>
+                                </div>
+                            </div>        
+                            <div class="form-content">
+                                <div class="title-know title--know-big">
+                                    ${t.top1.title3}
+                                </div>
+                                <div class="form-text--center">
+                                    ${t.top1.context3}
+                                </div>
+                                <div class="image">
+                                    <img src="${t.top1.image3}" width="900" height="600"/>
+                                </div>
+                            </div>
+                            <div class="form-content">
+                                <div class="title-know title--know-big">
+                                    ${t.top1.title4}
+                                </div>
+                                <div class="form-text--center">
+                                    ${t.top1.context4}
+                                </div>
+                                <div class="image">
+                                    <img src="${t.top1.image4}" width="900" height="600"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                     
                 </div>
-                <div class="newest">
-                        <div class="titileNews">
-                            <span>4 Kiên thức mới nhất</span>
+
+                <aside class="col-lg-3 right-blog-con text-left ml-5">
+                    <div class="right-blog-info text-left mt-5">
+                        <div class="widget">
+                            <div class="title-bl"><span>Kiên thức mới nhất</span></div>
+                            <div class="sidebar-menu">
+                                <ul class="widget-list">
+                                    <c:forEach items="${t.top4}" var="o">
+                                        <li>
+                                            <a style="line-height: 5px; font-size: 16px" href="DetailKnowledgeController?idDetai=${o.idDetai}">
+                                                ${o.title1}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
                         </div>
-                        <c:forEach items="${t.top4}" var="o">
-                            <a href="DetailKnowledgeController?idDetai=${o.idDetai}">
-                                ${o.title1}
-                            </a>
-                        </c:forEach>
-                    </div> 
+                    </div>
+                </aside>                
             </div>
         </section>
         <!-- //gallery -->
@@ -416,14 +442,6 @@
         <!-- //footer -->
 
         <!-- copyright -->
-        <div class="copyright">
-            <div class="container py-4">
-                <div class=" text-center">
-                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a>
-                    </p>
-                </div>
-            </div>
-        </div>
         <!-- //copyright -->
 
         <!-- move top -->
@@ -446,9 +464,9 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
-                    function control() {
-                        alert("Xin hãy đăng nhập để được đặt lịch!!!");
-                    }
+                            function control() {
+                                alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                            }
         </script>
     </body>
 </html>

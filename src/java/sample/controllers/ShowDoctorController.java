@@ -27,7 +27,7 @@ import sample.user.UserDTO;
 @WebServlet(name = "ShowDoctorController", urlPatterns = {"/ShowDoctorController"})
 public class ShowDoctorController extends HttpServlet {
 
-    public static final String ERROR = "error.jsp";
+     public static final String ERROR = "error.jsp";
     public static final String SUCESSFUL = "manageDoctor.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -36,28 +36,24 @@ public class ShowDoctorController extends HttpServlet {
         String url = ERROR;
         HttpSession session = request.getSession();
         try {
-            AdminDAO dao = new AdminDAO();            
+            AdminDAO dao = new AdminDAO();
+//            int numberOfDoctor = dao.getNumberOfDoctor();
+//            request.setAttribute("NUMBER_OF_DOCTOR", numberOfDoctor);
+//            String indexString = request.getParameter("index");
+//            if (indexString == null) {
+//                indexString = "1";
+//            }
+//            int index = Integer.parseInt(indexString);
+//            int maxPages = dao.getFullDoctorMaxPagesBy5();
+//            System.out.println(maxPages);
+//            dao.getFullListDoctor(index);
+            
             List<DoctorDTO> list = dao.getListAllDoctor();
             
-                int page, numperpage = 5;
-                int size = list.size();
-                int number = (size % 5 == 0 ? (size / 5) : (size / 5)) + 1;
-                String xpage = request.getParameter("page");
-                if (xpage == null) {
-                    page = 1;
-                } else {
-                    page = Integer.parseInt(xpage);
-                }
-                int start, end;
-                start = (page - 1) * numperpage;
-                end = Math.min(page * numperpage, size);
-                List<DoctorDTO> listAllDoctor = dao.getListByPage(list, start, end);
-                session.setAttribute("LIST_DOCTOR", listAllDoctor);
-                session.setAttribute("page", page);
-                session.setAttribute("number", number);
-                url = SUCESSFUL;
-            
-            
+            session.setAttribute("LIST_DOCTOR", list);
+//            session.setAttribute("maxPages", maxPages);
+//            session.setAttribute("index", index);
+            url = SUCESSFUL;
         } catch (Exception e) {
             log("Error at DisplayCUSController: " + e.toString());
         } finally {
