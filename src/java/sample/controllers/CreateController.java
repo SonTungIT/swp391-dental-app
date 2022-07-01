@@ -8,54 +8,54 @@ package sample.controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import sample.services.CategoryServiceDTO;
-import sample.user.AdminDAO;
-import sample.user.DoctorDTO;
+import sample.user.UserDAO;
+import sample.user.UserDTO;
 
 /**
  *
- * @author QUANG VAN
+ * @author Admin
  */
-@WebServlet(name = "AddDoctorController", urlPatterns = {"/AddDoctorController"})
-public class AddDoctorController extends HttpServlet {
+@WebServlet(name = "CreateController", urlPatterns = {"/CreateController"})
+public class CreateController extends HttpServlet {
 
-    public static final String ERROR = "MainController?action=Search&search";
-    public static final String SUCCESS = "MainController?action=Search&search";
+    private static final String ERROR = "register.jsp";
+    private static final String SUCCESS = "patient.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("lamdcj");
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             String userID = request.getParameter("userID");
-            String password = "1";
-            String shift = request.getParameter("shift");
-
+            String password = request.getParameter("password");
             String fullName = request.getParameter("fullName");
             String roleID = request.getParameter("roleID");
-
-            String gender = request.getParameter("gender");;
-            String address = request.getParameter("address");
-            String categoryID = request.getParameter("categoryID");
+            String gender = "";
+            String address = "";
             String image = "";
-            String phone = request.getParameter("phone");
             Date birthday = null;
-
+            
+            
+          
+           
+          
             String email = request.getParameter("email");
-
+            String phone = "";
+            
+           
             boolean status = true;
-            AdminDAO dao = new AdminDAO();
+            UserDAO dao = new UserDAO();
             UserError PE = new UserError();
-
+            
             boolean checkDuplicate = dao.checkDuplicate(userID);
             boolean checkValidation = true;
+
             if (checkDuplicate) {
                 PE.setUserIDError("Duplicate Parking Attendant ID " + userID + " !");
                 request.setAttribute("UserID_ERROR", PE);
@@ -64,26 +64,22 @@ public class AddDoctorController extends HttpServlet {
 //                checkValidation = false;
 //                PE.setUserIDError("UserID must be PAT*** !!!");
 //            }
-
+           
             if (email.length() < 2 || email.length() > 50) {
                 PE.setEmailError("Email must be in[2,50]!");
                 checkValidation = false;
             }
+           
+            
 
             if (checkValidation) {
                 System.out.println("duyet validation");
-                DoctorDTO doctor = new DoctorDTO(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
+                UserDTO user = new UserDTO(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
 
-                boolean checkAddDoctor = dao.addDoctor(doctor);
-                if (checkAddDoctor) {
-                    DoctorDTO dt = new DoctorDTO(categoryID, phone, shift);
-                    boolean checkDR = dao.buildDR(doctor.getUserID(), dt);
-                    if (checkDR) {
-
-                        request.setAttribute("SUCCESS_INFO", "Created successfully !!!");
-                        url = SUCCESS;
-
-                    }
+                boolean checkCreate = dao.create(user);
+                if (checkCreate) {
+                    url = SUCCESS;
+                    request.setAttribute("SUCCESS_INFO", "Created successfully !!!");
                 }
             } else {
                 System.out.println("Co loi");
@@ -91,7 +87,7 @@ public class AddDoctorController extends HttpServlet {
             }
 
         } catch (Exception e) {
-            log("Error at AddDoctorController: " + e.toString());
+            log("Error at CreateController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

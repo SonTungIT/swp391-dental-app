@@ -1,12 +1,11 @@
 <%-- 
-    Document   : manageDoctor
-    Created on : Jun 17, 2022, 10:09:37 PM
-    Author     : QUANG VAN
+    Document   : doctor
+    Created on : Jun 7, 2022, 7:15:13 PM
+    Author     : Xqy
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page import="sample.user.DoctorDTO"%>
+
 <%@page import="java.util.List"%>
+<%@page import="sample.user.DoctorDTO"%>
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -284,7 +283,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h2><a href="addDoctor.jsp">Add new Doctor</a></br></h2>
+                                    <h2><a href="manageDoctor.jsp">Back</a></br></h2>
                                     <form action="MainController">
                                         <div class="input-group">
                                             <div class="form-outline">
@@ -306,16 +305,18 @@
                                             <thead>
                                                 <tr>
                                                     <th>STT</th>
+                                                    <th>Image</th>
                                                     <th>Tài khoản</th>
                                                     <th>Họ và tên</th>
-                                                   
+                                                    <th>Giới tính</th>
                                                     <th>Email</th>
                                                     <th>Số điện thoại</th>
                                                     <th>Chuyên môn</th>
+                                                    <th>Giới Thiệu</th>
                                                     <th>Trạng Thái</th>
-                                                    <th>Chi Tiết</th>
+                                                 
+                                                    <th>Cập Nhật</th>
                                                     
-                                                    <th>Xóa</th>
 
 
                                                 </tr>
@@ -328,46 +329,37 @@
                                             <form action="MainController">
                                                 <tr>
                                                     <td><%=count++%></td>
-                                                    <td><%=doctor.getUserID()%></td>
-                                                    <td><%=doctor.getFullName()%></td>
-                                                                                     
-                                                    <td><%=doctor.getEmail()%></td>
-                                                    <td><%=doctor.getPhone()%></td>
-                                                    <td><%=doctor.getCategoryName()%></td>
-                                                    <td><%=doctor.isStatus()%></td>
+                                                    <td><%=doctor.getImage()%></td>
                                                     <td>
-                                                        <a href="seemore.jsp"
-                                                           class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            Chi tiết
-                                                        </a>
+                                                    <input type="text" name="id" value="<%=doctor.getUserID()%>"/>
+                                                    </td>
+                                                    <td><%=doctor.getFullName()%></td>
+                                                    <td><%=doctor.getGender()%></td>                                              
+                                                    <td>
+                                                        <input type="text" name="email" value="<%=doctor.getEmail()%>"/>
                                                     </td>
                                                     <td>
-                                                        <input type="hidden" name="id" value="<%=doctor.getUserID()%>"/>
-                                                        <input type="hidden" name="fullName" value="<%=doctor.getFullName()%>"/>
-                                                        <input type="hidden" name="gender" value="<%=doctor.getGender()%>"/>
-                                                        <input type="hidden" name="address" value="<%=doctor.getAddress()%>"/>
-                                                        <input type="hidden" name="email" value="<%=doctor.getEmail()%>"/>
-                                                        <input type="hidden" name="phone" value="<%=doctor.getPhone()%>"/>
-                                                        <input type="hidden" name="categoryName" value="<%=doctor.getCategoryName()%>"/>
-                                                        <input type="hidden" name="serviceName" value="<%=doctor.getServiceName()%>"/>
-                                                        <input type="hidden" name="image" value="<%=doctor.getImage()%>"/>
-                                                        <input type="hidden" name="birthday" value="<%=doctor.getBirthday()%>"/>
-                                                        <input type="hidden" name="status" value="<%=doctor.isStatus()%>"/>
-                                                        <input type="hidden"  name="action" value="Delete"/>
-                                                            <button type="submit" class="btn btn-success d-none d-md-inline-block text-white">
-                                                                <i class="fa-solid fa-trash-can"></i>
-                                                            </button>
+                                                        <input type="text" name="phone" value="<%=doctor.getPhone()%>"/>
                                                     </td>
 
-                                                    <td>
-                                                        <form action="MainController">
-                                                            <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
-                                                            
+
+                                                    <td><%=doctor.getCategoryName()%></td>
+                                                    <td><%=doctor.getAboutDR()%></td>
+                                                    <td><%=doctor.isStatus()%></td>
+
+                                                    <td class="form-group form-button">
+                                                    <input type="submit" name="action"  value="Update"/>
+                                                    </td>
+
+                                                <td>
+                                                    <form action="MainController">
+                                                        <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
+
+
                                                         </form>
 
-                                                    </td>   
+                                                    </td> 
+
                                                 </tr>
                                             </form>
                                             <%
