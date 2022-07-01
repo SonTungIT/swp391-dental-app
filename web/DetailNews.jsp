@@ -40,6 +40,7 @@
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/bkstyle.css" rel="stylesheet" type="text/css"/>
         <!-- //css files -->
 
         <!-- google fonts -->
@@ -302,74 +303,92 @@
 
         <!-- gallery -->
         <section class="gallery py-5" id="gallery">
-            <div class="container py-lg-5">
-                <h2 class="heading text-center mb-sm-5 mb-4">BẢN TIN</h2>
-                <div class="row news-grids text-center">
-                    <div class="row item-list">
-                        <div class="title-bl">
-                            ${onenews.title1}
-                        </div>
-                        <div class="text-center">
-                            ${onenews.context1}
-                        </div>
-                        <div class="image">
-                            <img src="${onenews.image1}"/>
-                        </div>
+            <div class="container py-lg-5" style="display: flex">
+                <div class="col-lg-9 left-blog-info text-left">
+                    <h2 class="heading text-center mb-sm-5 mb-4">BẢN TIN</h2>
+                    <div style="text-align: end">Ngày Đăng: ${onenews.timepost}</div>
+                    <div class="row news-grids text-center">
+                        <div class="row item-list">
+                            <div class="form-content">
+                                <div class="title-know title--know-big title--know-big">
+                                    ${onenews.title1}
+                                </div>
+                                <div class="form-text--center">
+                                    ${onenews.context1}
+                                </div>
+                                <div class="image">
+                                    <img src="${onenews.image1}" width="900" height="600/>
+                                         </div>
+                                         </div>
 
-                        <div class="title-bl">
-                            ${onenews.title2}
-                        </div>
-                        <div class="text-center">
-                            ${onenews.context2}
-                        </div>
-                        <div class="image">
-                            <img src="${onenews.image2}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${onenews.title3}
-                        </div>
-                        <div class="text-center">
-                            ${onenews.context3}
-                        </div>
-                        <div class="image">
-                            <img src="${onenews.image3}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${onenews.title4}
-                        </div>
-                        <div class="text-center">
-                            ${onenews.context4}
-                        </div>
-                        <div class="image">
-                            <img src="${onenews.image4}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${onenews.title5}
-                        </div>
-                        <div class="text-center">
-                            ${onenews.context5}
-                        </div>
-                        <div class="image">
-                            <img src="${onenews.image5}"/>
-                        </div>
-                        <div>
-                            ${onenews.timepost}
+                                         <div class="form-content">
+                                    <div class="title-know title--know-big">
+                                        ${onenews.title2}
+                                    </div>
+                                    <div class="form-text--center">
+                                        ${onenews.context2}
+                                    </div>
+                                    <div class="image">
+                                        <img src="${onenews.image2}" width="900" height="600"/>
+                                    </div>
+                                </div>        
+
+                                <div class="form-content">
+                                    <div class="title-know title--know-big">
+                                        ${onenews.title3}
+                                    </div>
+                                    <div class="form-text--center">
+                                        ${onenews.context3}
+                                    </div>
+                                    <div class="image">
+                                        <img src="${onenews.image3}" width="900" height="600"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-content">
+                                    <div class="title-know title--know-big">
+                                        ${onenews.title4}
+                                    </div>
+                                    <div class="form-text--center">
+                                        ${t.top1.context4}
+                                    </div>
+                                    <div class="image">
+                                        <img src="${onenews.image4}" width="900" height="600"/>
+                                    </div>
+                                </div>
+                                <div class="form-content">
+                                    <div class="title-know title--know-big">
+                                        ${onenews.title5}
+                                    </div>
+                                    <div class="form-text--center">
+                                        ${t.top1.context5}
+                                    </div>
+                                    <div class="image">
+                                        <img src="${onenews.image5}" width="900" height="600"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
-                <div class="newest">
-                    <div class="titileNews">
-                        <span>5 Trang tin tức mới nhất</span>
+                <aside class="col-lg-3 right-blog-con text-left mt-5 ml-5">
+                    <div class="right-blog-info text-left mt-5">
+                        <div class="widget">
+                            <div class="title-bl"><span>Trang tin tức mới nhất</span></div>
+                            <div class="sidebar-menu">
+                                <ul class="widget-list">
+                                    <c:forEach items="${a.top5}" var="o">
+                                        <li>
+                                            <a style="line-height: 5px; font-size: 16px" href="DetailNewsController?idDetail=${o.idDetai}">
+                                                ${o.title1}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <c:forEach items="${a.top5}" var="o">
-                        <a href="DetailNewsController?idDetail=${o.idDetai}">
-                            ${o.title1}
-                        </a>
-                    </c:forEach>
-                </div> 
-            </div>
+                </aside>
         </section>
         <!-- //gallery -->
 
@@ -421,14 +440,6 @@
         <!-- //footer -->
 
         <!-- copyright -->
-        <div class="copyright">
-            <div class="container py-4">
-                <div class=" text-center">
-                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a>
-                    </p>
-                </div>
-            </div>
-        </div>
         <!-- //copyright -->
 
         <!-- move top -->

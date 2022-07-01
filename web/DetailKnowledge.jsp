@@ -34,6 +34,7 @@
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/bkstyle.css" rel="stylesheet" type="text/css"/>
         <!-- //css files -->
 
         <!-- google fonts -->
@@ -269,65 +270,79 @@
         <!-- //banner -->
 
         <!-- gallery -->
-        <section class="gallery py-5" id="gallery">
-            <div class="container py-lg-5">
-                <h2 class="heading text-center mb-sm-5 mb-4">Kiến thức Nha Khoa</h2>
-                <div class="row news-grids text-center">
-                    <div class="row item-list">
-                        <div class="title-bl">
-                            ${oneknowledge.title1}
-                        </div>
-                        <div class="text-center">
-                            ${oneknowledge.context1}
-                        </div>
-                        <div class="image">
-                            <img src="${oneknowledge.image1}"/>
-                        </div>
-
-                        <div class="title-bl">
-                            ${oneknowledge.title2}
-                        </div>
-                        <div class="text-center">
-                            ${oneknowledge.context2}
-                        </div>
-                        <div class="image">
-                            <img src="${oneknowledge.image2}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${oneknowledge.title3}
-                        </div>
-                        <div class="text-center">
-                            ${oneknowledge.context3}
-                        </div>
-                        <div class="image">
-                            <img src="${oneknowledge.image3}"/>
-                        </div>
-                        <div class="title-bl">
-                            ${oneknowledge.title4}
-                        </div>
-                        <div class="text-center">
-                            ${oneknowledge.context4}
-                        </div>
-                        <div class="image">
-                            <img src="${oneknowledge.image4}"/>
-                        </div>
-                        <div>
-                            ${oneknowledge.timepost}
+        <section class="gallery" id="gallery">
+            <div class="container py-lg-5" style="display: flex">
+                <div class="col-lg-9 left-blog-info text-left">
+                    <h2 class="heading text-center mb-sm-5 mb-4">Kiến thức Nha Khoa</h2>
+                    <div style="text-align: end">Ngày Đăng: ${oneknowledge.timepost}</div>
+                    <div class="row news-grids text-center">
+                        <div class="row item-list">
+                            <div class="form-content">
+                                <div class="title-know  title--know-big">
+                                    ${oneknowledge.title1}
+                                </div>
+                                <div class="form-text--center">
+                                    ${oneknowledge.context1}
+                                </div>
+                                <div class="image">
+                                    <img src="${oneknowledge.image1}" width="900" height="600"/>
+                                </div>
+                            </div>
+                            <div class="form-content">
+                                <div class="title-know  title--know-big">
+                                    ${oneknowledge.title2}
+                                </div>
+                                <div class="form-text--center">
+                                    ${oneknowledge.context2}
+                                </div>
+                                <div class="image">
+                                    <img src="${oneknowledge.image2}" width="900" height="600"/>
+                                </div>
+                            </div>        
+                            <div class="form-content">
+                                <div class="title-know  title--know-big">
+                                    ${oneknowledge.title3}
+                                </div>
+                                <div class="form-text--center">
+                                    ${oneknowledge.context3}
+                                </div>
+                                <div class="image">
+                                    <img src="${oneknowledge.image3}" width="900" height="600"/>
+                                </div>
+                            </div>
+                            <div class="form-content">
+                                <div class="title-know  title--know-big">
+                                    ${oneknowledge.title4}
+                                </div>
+                                <div class="form-text--center">
+                                    ${oneknowledge.context4}
+                                </div>
+                                <div class="image">
+                                    <img src="${oneknowledge.image4}" width="900" height="600"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
-                <div class="newest">
-                    <div class="titileNews">
-                        <span>4 Kiên thức mới nhất</span>
+
+                <aside class="col-lg-3 right-blog-con text-left ml-5">
+                    <div class="right-blog-info text-left mt-5">
+                        <div class="widget">
+                            <div class="title-bl"><span>Kiến thức mới nhất</span></div>
+                            <div class="sidebar-menu">
+                                <ul class="widget-list">
+                                    <c:forEach items="${t.top4}" var="o">
+                                        <li>
+                                            <a style="line-height: 5px; font-size: 16px" href="DetailKnowledgeController?idDetai=${o.idDetai}">
+                                                ${o.title1}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <c:forEach items="${t.top4}" var="o">
-                        <a href="DetailKnowledgeController?idDetai=${o.idDetai}">
-                            ${o.title1}
-                        </a>
-                    </c:forEach>
-                </div> 
+                </aside>                
             </div>
         </section>
         <!-- //gallery -->
@@ -378,14 +393,6 @@
         <!-- //footer -->
 
         <!-- copyright -->
-        <div class="copyright">
-            <div class="container py-4">
-                <div class=" text-center">
-                    <p>© 2019 Dental Health. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a>
-                    </p>
-                </div>
-            </div>
-        </div>
         <!-- //copyright -->
 
         <!-- move top -->

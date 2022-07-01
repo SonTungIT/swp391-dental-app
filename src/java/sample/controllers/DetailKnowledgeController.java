@@ -5,7 +5,6 @@
  */
 package sample.controllers;
 
-import com.sun.corba.se.impl.naming.cosnaming.InterOperableNamingImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

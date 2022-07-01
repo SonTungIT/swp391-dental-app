@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <c:set var="txtSearch" value="${param.txtSearchValue}"/>
+        <c:set var="txtSearch" value="${param.txtSearchValue}"/>
 
 
         <title>Dental Health Medical Category Flat Bootstrap Responsive Website Template | Gallery :: W3layouts</title>
@@ -38,6 +38,7 @@
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/bkstyle.css" rel="stylesheet" type="text/css"/>
         <!-- //css files -->
 
         <!-- google fonts -->
@@ -52,35 +53,46 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-         <form action="SearchInformationController" >
-            <input type="text" name="txtSearch"  value="${param.txtSearchValue}" placeholder="input your text"/>
-            <input type="submit" name="action"  value="Tìm kiếm"/>
-            <input type="hidden" name="index" value="1"/>
-        </form>
+        
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <!-- top header -->
         <div class="header-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
                                 <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
-                            <!-- <li>
-                                    <span class="fa fa-phone"></span>
-                                    <p class="d-inline">Call Us +12 345 678</p>
-                            </li> -->
+                        </ul>
+                        <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
+                    
+                    <div class="col-sm-4">
+                        <ul class="d-lg-flex">
+                                <form action="SearchInformationController" >
+                                    <div class="tech-btm d-lg-flex">
+                                        <div class="form-outline">
+                                            <input type="text" name="txtSearch" class="form-control px-2" value="${param.txtSearchValue}" placeholder="Tìm Kiếm"/>
+                                            <input type="hidden" name="index" value="1"/>
+                                        </div>
+                                        <button type="submit" name="action" value="Tìm kiếm" class="btn btn-success">
+                                            <i class="fas fa-search"></i>
+                                        </button>
 
-                    <div class="col-sm-6 header-right-w3_pvt">
+                                    </div>
+                                </form>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-sm-4 header-right-w3_pvt">
                         <%
                             AdminDAO dao = new AdminDAO();
                             List<String> listTW = dao.getOPH();
@@ -104,6 +116,7 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -299,53 +312,70 @@
         <!-- //banner -->
 
         <!-- gallery -->
-        <section class="gallery py-5" id="gallery">
-            <div class="container py-lg-5">
-                <h2 class="heading text-center mb-sm-5 mb-4">Kết quả tìm kiếm</h2>
-                <h3>${requestScope.ERROR}</h3>
-                <div class="newest">
-                    <c:forEach items="${list}" var="s">
-                        
-                        <c:if test="${s.categoryId == 1}">                            
-                                <div>
-                                    <a href="DetailNewsController?idDetail=${s.idDetai}">
-                                        ${s.title1}
-                                    </a>
-                                </div>
-                                <div>
-                                    <p>${s.context1}</p>
-                                </div>
-                                <div>
-                                    <img src="${s.image1}"/>
-                                </div>
-                            
-                        </c:if>
 
-                        <c:if test="${s.categoryId == 2}">
-                            
-                                <div>
-                                    <a href="DetailKnowledgeController?idDetai=${s.idDetai}">
-                                        ${s.title1}
+        <section class="gallery py-5" id="gallery">
+            <div class="container py-lg-5" style="display: flex">
+                <div class="col-lg-9 left-blog-info text-left">
+                    <h2 class="heading text-center mb-sm-5 mb-4">Kết quả tìm kiếm</h2>
+                    <h3>${requestScope.ERROR}</h3>
+                    <div class="row news-grids text-center">
+                        <div class="row item-list">
+                            <c:forEach items="${list}" var="s">
+                                <c:if test="${s.categoryId == 1}"> 
+                                    <div style="border: 1px solid #333;
+                                         border-radius: 5px;
+                                         background: #f6f8fa;
+                                         font-weight: 600;
+                                         padding: 20px;
+                                         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="form-content">
+                                        <a style="font-size: 30px; color: #000" href="DetailNewsController?idDetail=${s.idDetai}">
+                                            ${s.title1}
+                                        </a>
+                                        <div class="form-text--center">
+                                            <p>${s.context1}</p>
+                                        </div>
+                                        <div class="image">
+                                            <img src="${s.image1}"/>
+                                        </div>
+                                    </div>
+                                </c:if>
+
+                                <c:if test="${s.categoryId == 2}">
+
+                                    <div style="border: 1px solid #333;
+                                         border-radius: 5px;
+                                         background: #f6f8fa;
+                                         font-weight: 600;
+                                         padding: 20px;
+                                         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="form-content">
+                                        <a style="font-size: 30px; color: #000" href="DetailKnowledgeController?idDetai=${s.idDetai}">
+                                            ${s.title1}
+                                            <div class="form-text--center">
+                                                <p>${s.context1}</p>
+                                            </div>
+                                            <div class="image">
+                                                <img src="${s.image1}"/>
+                                            </div>
+                                    </div> 
+                                </c:if>
+                            </c:forEach>
+
+
+                            <div>
+                                <c:forEach begin="1" end="${requestScope.endPage}" var="i">
+                                    <a style="padding: 10px; background: #2d7745; margin-left: 10px; color: white; font-size: 20px; border-radius: 10px" href="SearchInformationController?index=${i}&txtSearch=${requestScope.saveinfo}">
+                                        ${i}
                                     </a>
-                                </div>
-                                <div>
-                                    <p>${s.context1}</p>
-                                </div>
-                                <div>
-                                    <img src="${s.image1}"/>
-                                </div>
-                            
-                        </c:if>
-                    </c:forEach>   
-                    
-                    <c:forEach begin="1" end="${requestScope.endPage}" var="i">
-                        <a href="SearchInformationController?index=${i}&txtSearch=${requestScope.saveinfo}">
-                            ${i}
-                        </a>
-                    </c:forEach>
-                </div> 
+                                </c:forEach>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
+
         <!-- //gallery -->
 
         <!-- appointment -->

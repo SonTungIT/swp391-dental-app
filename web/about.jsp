@@ -55,35 +55,46 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-         <form action="SearchInformationController" >
-            <input type="text" name="txtSearch"  value="${param.txtSearchValue}" placeholder="input your text"/>
-            <input type="submit" name="action"  value="Tìm kiếm"/>
-            <input type="hidden" name="index" value="1"/>
-        </form>
+         
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <!-- top header -->
         <div class="header-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
                                 <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
-                            <!-- <li>
-                                    <span class="fa fa-phone"></span>
-                                    <p class="d-inline">Call Us +12 345 678</p>
-                            </li> -->
+                        </ul>
+                        <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
+                    
+                    <div class="col-sm-4">
+                        <ul class="d-lg-flex">
+                                <form action="SearchInformationController" >
+                                    <div class="tech-btm d-lg-flex">
+                                        <div class="form-outline">
+                                            <input type="text" name="txtSearch" class="form-control px-2" value="${param.txtSearchValue}" placeholder="Tìm Kiếm"/>
+                                            <input type="hidden" name="index" value="1"/>
+                                        </div>
+                                        <button type="submit" name="action" value="Tìm kiếm" class="btn btn-success">
+                                            <i class="fas fa-search"></i>
+                                        </button>
 
-                    <div class="col-sm-6 header-right-w3_pvt">
+                                    </div>
+                                </form>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-sm-4 header-right-w3_pvt">
                         <%
                             AdminDAO dao = new AdminDAO();
                             List<String> listTW = dao.getOPH();
@@ -107,6 +118,7 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
