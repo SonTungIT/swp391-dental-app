@@ -304,10 +304,10 @@
 
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/sontung.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
+                            <img src="./images/customers/${LOGIN_USER.image}" style="width: 50px; height: 50px ; border-radius: 40px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="patient.jsp" style="padding: 0">
+                            <a href="ShowProfilePatientController?patientID=${LOGIN_USER.getUserID()}" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Tài Khoản Của Tôi
@@ -492,14 +492,15 @@
                                             }
                                         %>
                                     </div>
-                                    <%=slot_doctorEmmty%></br></br>
-                                    <%=errorTime%></br></br>
+                                    </br></br>
                                     <input type="hidden" name="action" value="CreateBooking" />                            
                                     <div style="margin-top: -40px">
                                         <button type="button" class="btn-banner" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
                                     </div>
                                 </form></br>
                                 <%=mess%>
+                                <%=slot_doctorEmmty%></br></br>
+                                <%=errorTime%></br></br>
                             </div>
                         </div>
                     </div>

@@ -255,164 +255,72 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table user-table" border="5" cellspacing="0" cellpadding="10">
+                                        <table class="table user-table" border="5" cellspacing="0" cellpadding="10" style="text-align: center">
                                             <thead>
                                                 <tr>
-                                                    <th class="border-top-0"><h4 style="text-align: center">Slot</h4></th>
-                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 2</h4></th>
-                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 3</h4></th>
-                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 4</h4></th>
-                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 5</h4></th>
-                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 6</h4></th>
-                                                    <th class="border-top-0"><h4 style="text-align: center">Thứ 7</h4></th>
-                                                    <th class="border-top-0"><h4 style="text-align: center">Chủ nhật</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">ID</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Tên bệnh nhân</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Dịch vụ</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Ngày hẹn</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Giờ hẹn</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Trạng Thái</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center"></h4></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-                                                <tr style="text-align: center">
-                                                    <td style="margin-top: 10px">
-                                                        <c:forEach items="${d.showAllSlot()}" var="s">
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${s.slotName}</button>
-                                                            <hp style="text-align: left">${s.slotTime}</p></br>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <c:set scope="request" var="number" value="0"/>
-                                                        <c:forEach items="${d.showAllSlot()}" var="s">
-                                                            <c:forEach items="${listSC_FDR_1}" var="slot"> 
-                                                                <c:if test="${slot.slotName eq s.slotName}">
-                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
-                                                                  <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                                    <c:set scope="request" var="number" value="1"/>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <c:if test="${number == 0}">
-                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
-                                                                   <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
+                                                <c:forEach items="${listBK_PT_ForDR}" var="list"> 
+                                                <form action="UpdateBKByDRController">
+                                                    <input type="hidden" name="doctorID" value="${LOGIN_USER.userID}" />
+                                                    <tr style="text-align: center">
+                                                        <td>
+                                                            ${list.bookingID}
+                                                            <input type="hidden" name="bookingID" value="${list.bookingID}" />
+                                                        </td>
+                                                        <td>
+                                                            ${list.patientName}
+                                                        </td>
+                                                        <td>
+                                                            ${list.serviceName}
+                                                        </td>
+                                                        <td>
+                                                            ${list.dateBooking}
+                                                        </td>
+                                                        <td>
+                                                            ${list.timeBooking}
+                                                        </td>
+                                                        <td>
+                                                            <c:if test="${list.status == 'Finished'}">
+                                                                <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-clipboard-check"></i>
+                                                                </button> 
                                                             </c:if>
-                                                            <c:set scope="request" var="number" value="0"/>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <c:set scope="request" var="number" value="0"/>
-                                                        <c:forEach items="${d.showAllSlot()}" var="s">
-                                                            <c:forEach items="${listSC_FDR_2}" var="slot"> 
-                                                                <c:if test="${slot.slotName eq s.slotName}">
-                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
-                                                                  <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                                    <c:set scope="request" var="number" value="1"/>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <c:if test="${number == 0}">
-                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
-                                                                   <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
+                                                            <c:if test="${list.status == 'Active'}">
+                                                                <button type="button" style="background-color: rgb(251 188 5)" class="btn d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-hourglass"></i>
+                                                                </button>
                                                             </c:if>
-                                                            <c:set scope="request" var="number" value="0"/>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <c:set scope="request" var="number" value="0"/>
-                                                        <c:forEach items="${d.showAllSlot()}" var="s">
-                                                            <c:forEach items="${listSC_FDR_3}" var="slot"> 
-                                                                <c:if test="${slot.slotName eq s.slotName}">
-                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
-                                                                  <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                                    <c:set scope="request" var="number" value="1"/>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <c:if test="${number == 0}">
-                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
-                                                                   <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
+                                                        </td>
+                                                        <td>
+                                                            <c:if test="${list.status == 'Active'}">
+                                                                <button type="submit" name="action" value="Finish" class="btn btn-success d-none d-md-inline-block text-white">
+                                                                <i class="fa-solid fa-calendar-check"></i>
+                                                            </button> 
+                                                            <button type="submit" name="action" value="Cancel" class="btn btn-danger d-none d-md-inline-block text-white">
+                                                                <i class="fa-solid fa-trash-can"></i>
+                                                            </button> 
                                                             </c:if>
-                                                            <c:set scope="request" var="number" value="0"/>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <c:set scope="request" var="number" value="0"/>
-                                                        <c:forEach items="${d.showAllSlot()}" var="s">
-                                                            <c:forEach items="${listSC_FDR_4}" var="slot"> 
-                                                                <c:if test="${slot.slotName eq s.slotName}">
-                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
-                                                                  <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                                    <c:set scope="request" var="number" value="1"/>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <c:if test="${number == 0}">
-                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
-                                                                   <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
+                                                            <c:if test="${list.status == 'Finished'}">
+                                                                <button type="button"  style="background-color: rgb(52 168 84)" class="btn  d-none d-md-inline-block text-white">
+                                                                <i class="fa-solid fa-calendar-check"></i>
+                                                            </button> 
+                                                            <button type="submit" name="action" value="Cancel" class="btn btn-danger d-none d-md-inline-block text-white">
+                                                                <i class="fa-solid fa-trash-can"></i>
+                                                            </button> 
                                                             </c:if>
-                                                            <c:set scope="request" var="number" value="0"/>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <c:set scope="request" var="number" value="0"/>
-                                                        <c:forEach items="${d.showAllSlot()}" var="s">
-                                                            <c:forEach items="${listSC_FDR_5}" var="slot"> 
-                                                                <c:if test="${slot.slotName eq s.slotName}">
-                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
-                                                                  <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                                    <c:set scope="request" var="number" value="1"/>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <c:if test="${number == 0}">
-                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
-                                                                    <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                            </c:if>
-                                                            <c:set scope="request" var="number" value="0"/>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                      <c:set scope="request" var="number" value="0"/>
-                                                        <c:forEach items="${d.showAllSlot()}" var="s">
-                                                            <c:forEach items="${listSC_FDR_6}" var="slot"> 
-                                                                <c:if test="${slot.slotName eq s.slotName}">
-                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
-                                                                   <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                                    <c:set scope="request" var="number" value="1"/>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <c:if test="${number == 0}">
-                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
-                                                                    <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                            </c:if>
-                                                            <c:set scope="request" var="number" value="0"/>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <c:set scope="request" var="number" value="0"/>
-                                                        <c:forEach items="${d.showAllSlot()}" var="s">
-                                                            <c:forEach items="${listSC_FDR_7}" var="slot"> 
-                                                                <c:if test="${slot.slotName eq s.slotName}">
-                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
-                                                                   <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                                    <c:set scope="request" var="number" value="1"/>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <c:if test="${number == 0}">
-                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
-                                                                    <i class="fa-solid fa-check"></i>
-                                                                </button>  </br></br></br>
-                                                            </c:if>
-                                                            <c:set scope="request" var="number" value="0"/>
-                                                        </c:forEach>
-
-                                                    </td>
-
-                                                </tr>
+                                                        </td>
+                                                    </tr>
+                                                </form>
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
