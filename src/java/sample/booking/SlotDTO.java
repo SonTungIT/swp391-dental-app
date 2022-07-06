@@ -26,6 +26,8 @@ public class SlotDTO {
         this.slotTime = slotTime;
     }
 
+    
+
     public SlotDTO(String slotID, String slotName, String slotTime, String slotDateStart, String slotDateEnd, boolean status) {
         this.slotID = slotID;
         this.slotName = slotName;

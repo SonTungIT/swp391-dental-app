@@ -1,13 +1,12 @@
 <%-- 
-    Document   : showBooking
-    Created on : Jun 20, 2022, 10:46:00 PM
-    Author     : QUANG VAN
+    Document   : doctor
+    Created on : Jun 7, 2022, 7:15:13 PM
+    Author     : Xqy
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page import="sample.user.UserDTO"%>
+
 <%@page import="java.util.List"%>
-<%@page import="sample.booking.BookingDTO"%>
+<%@page import="sample.user.DoctorDTO"%>
+<%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,28 +36,32 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <title>Appointment Booking Page</title>
+        <!-- Icon CND fontawesome -->
+        <title>Manage Doctor Page</title>
     </head>
-
     <body>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             if (loginUser == null || !loginUser.getRoleID().equals("AD")) {
                 response.sendRedirect("login.jsp");
             }
-
             String search = request.getParameter("search");
             if (search == null) {
                 search = "";
             }
         %>
-
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
         <div class="preloader">
             <div class="lds-ripple">
                 <div class="lds-pos"></div>
                 <div class="lds-pos"></div>
             </div>
         </div>
+        <!-- ============================================================== -->
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <!-- ============================================================== -->
         <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
              data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
             <!-- ============================================================== -->
@@ -167,39 +170,28 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-                            
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                                         href="admin.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="pages-profile.html" aria-expanded="false">
                                     <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
                             </li> -->
-
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="setting.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí tài khoản</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Show" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bác sĩ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=ShowAllPatient" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=ShowAllDoctor" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bệnh nhân</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowBooking" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>
+                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>            
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=SearchSC&searchSC" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí lịch hoạt động</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">FeedBack</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Category Services</span></a></li> 
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Service</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí giá dịch vụ</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="icon-material.html" aria-expanded="false"><i
                                         class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Icon</span></a></li>
@@ -258,12 +250,12 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <!--<h3 class="page-title mb-0 p-0">Lịch Hẹn</h3>-->
+                            <h3 class="page-title mb-0 p-0">Doctor</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="admin.jsp">Trang Chủ</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Lịch Hẹn</li>
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Doctor</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -291,38 +283,40 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-
+                                    <h2><a href="manageDoctor.jsp">Back</a></br></h2>
                                     <form action="MainController">
                                         <div class="input-group">
                                             <div class="form-outline">
-                                                <input type="text" name="search" class="form-control" value="<%= search%>" placeholder="Tìm kiếm lịch hẹn..."/>
-                                                <input type="hidden" name="action"  value="Search Booking" />
+                                                <input type="text" name="search" class="form-control" value="<%=search%>" placeholder="Tìm kiếm bác sĩ..."/>
+                                                <input type="hidden" name="action"  value="Search" />
                                             </div>
                                             <button type="submit" class="btn btn-success d-md-inline-block text-white">
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         </div>
                                     </form>
+
                                     <div class="table-responsive">
-                                        <%  List<BookingDTO> list = (List<BookingDTO>) session.getAttribute("LIST_BOOKING");
+                                        <%  List<DoctorDTO> list = (List<DoctorDTO>) session.getAttribute("LIST_DOCTOR");
                                             if (list != null) {
                                                 if (!list.isEmpty()) {
                                         %>
                                         <table class="table user-table">
                                             <thead>
                                                 <tr>
-                                                    <th>Số thứ tự</th>
-                                                    <th>Mã lịch hẹn</th>
-                                                    <th>Họ và tên bệnh nhân</th>
+                                                    <th>STT</th>
+                                                    <th>Image</th>
+                                                    <th>Tài khoản</th>
+                                                    <th>Họ và tên</th>
                                                     <th>Giới tính</th>
-                                                    <th>Dịch vụ khám</th>
-                                                    <th>Bác sĩ </th>
-                                                    <th>Ngày đặt lịch</th>
-                                                    <th>Thời gian đặt lịch</th>
-                                                    <th>Slot Name</th>
-                                                    <th>Slot Time</th>
-                                                    <th>Trạng thái</th>
-                                                    <th>Xóa</th>
+                                                    <th>Email</th>
+                                                    <th>Số điện thoại</th>
+                                                    <th>Chuyên môn</th>
+                                                    <th>Giới Thiệu</th>
+                                                    <th>Trạng Thái</th>
+                                                 
+                                                    <th>Cập Nhật</th>
+                                                    
 
 
                                                 </tr>
@@ -330,52 +324,55 @@
                                             <tbody>
                                                 <%
                                                     int count = 1;
-                                                    for (BookingDTO booking : list) {
+                                                    for (DoctorDTO doctor : list) {
                                                 %>
                                             <form action="MainController">
                                                 <tr>
-
                                                     <td><%=count++%></td>
-                                                    <td><%=booking.getBookingID()%></td>
-                                                    <td><%=booking.getPatientName()%></td>
-                                                    <td><%=booking.getPatientGender()%></td>                                              
-                                                    <td><%=booking.getServiceName()%></td>
-                                                    <td><%=booking.getDoctorName()%></td>
-                                                    <td><%=booking.getDateBooking()%></td>
-                                                    <td><%=booking.getTimeBooking()%></td>
-                                                    <td><%=booking.getSlotName()%></td>
-                                                    <td><%=booking.getSlotTime()%></td>
-                                                    <td><%=booking.getStatus()%></td>                    
+                                                    <td><%=doctor.getImage()%></td>
                                                     <td>
-                                                        <form action="MainController">
-                                                            <input type="hidden" name="bookingID" value="<%=booking.getBookingID()%>"/>
-                                                            <input type="hidden"  name="action" value="Xóa lịch hẹn"/>
-                                                            <button type="submit" class="btn btn-success d-none d-md-inline-block text-white">
-                                                                <i class="fa-solid fa-trash-can"></i>
-                                                            </button>
+                                                    <input type="text" name="id" value="<%=doctor.getUserID()%>"/>
+                                                    </td>
+                                                    <td><%=doctor.getFullName()%></td>
+                                                    <td><%=doctor.getGender()%></td>                                              
+                                                    <td>
+                                                        <input type="text" name="email" value="<%=doctor.getEmail()%>"/>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="phone" value="<%=doctor.getPhone()%>"/>
+                                                    </td>
+
+
+                                                    <td><%=doctor.getCategoryName()%></td>
+                                                    <td><%=doctor.getAboutDR()%></td>
+                                                    <td><%=doctor.isStatus()%></td>
+
+                                                    <td class="form-group form-button">
+                                                    <input type="submit" name="action"  value="Update"/>
+                                                    </td>
+
+                                                <td>
+                                                    <form action="MainController">
+                                                        <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
+
+
                                                         </form>
 
-                                                    </td>   
+                                                    </td> 
+
                                                 </tr>
                                             </form>
                                             <%
                                                 }
                                             %>
                                             </tbody>
+                                            <!----------------------------------------------------------->
                                         </table>
-
-
                                         <%
                                                 }
                                             }
                                         %> 
                                     </div>
-                                    <c:set var="page" value="${sessionScope.page}"/>
-                                    <button class="btn btn-success d-none d-md-inline-block text-white">
-                                        <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
-                                            <a class="${i==page?"active":""}" style="color: #FFF" href="MainController?action=ShowBooking&page=${i}">${i}</a>
-                                        </c:forEach>
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -397,6 +394,8 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
+                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
+                </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

@@ -20,34 +20,34 @@
     </head>
     <body>
         <div class="main" style="padding: 50px 0">
-            
+
             <!-- Sing in  Form -->
             <section class="sign-in">
-                
+
                 <div class="container">
                     <a class="navbar-brand ms-4" style="margin: 20px" href="index.jsp">
-                            <!-- Logo icon -->
-                            <b class="logo-icon">
-                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                                <!-- Dark Logo icon -->
-                                <img src="./assets/images/logo-header1.png" alt="homepage" class="dark-logo" />
-                            </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
-                            <span class="logo-text">
-                                <!-- dark Logo text -->
-                                <img src="./assets/images/logo-header2-2.png" alt="homepage" class="dark-logo" />
+                        <!-- Logo icon -->
+                        <b class="logo-icon">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="./assets/images/logo-header1.png" alt="homepage" class="dark-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span class="logo-text">
+                            <!-- dark Logo text -->
+                            <img src="./assets/images/logo-header2-2.png" alt="homepage" class="dark-logo" />
 
-                            </span>
-                        </a>
+                        </span>
+                    </a>
                     <div class="signin-content">
                         <div class="signin-image">
                             <figure><img src="loginPage/colorlib-regform-7/images/login-img1.jpg" alt="sing up image"></figure>
-                            <a href="loginPage/colorlib-regform-7/register.jsp" class="signup-image-link">Tạo mới tài khoản</a>
+                            <a style="font-family: ui-serif; font-size: 18px" href="register.jsp" class="signup-image-link">Tạo mới tài khoản</a>
                         </div>
 
-                        <div class="signin-form">
-                            <h2 class="form-title">Đăng Nhập</h2>
+                        <div style="font-family: ui-serif; font-size: 16px" class="signin-form">
+                            <h2 style="font-family: ui-serif" class="form-title">Đăng Nhập</h2>
                             <form method="POST" action="MainController" class="register-form" id="login-form" ">
                                 <div class="form-group">
                                     <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
@@ -71,7 +71,7 @@
                                     <!-- <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
                                     <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li> -->
                                     <li><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/dental-demo-2/LoginGoogleController&response_type=code
-    &client_id=232049583848-lgpfr9t4gadm8m6mgmu4jpu160ld6khv.apps.googleusercontent.com&approval_prompt=force"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                                           &client_id=232049583848-lgpfr9t4gadm8m6mgmu4jpu160ld6khv.apps.googleusercontent.com&approval_prompt=force"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
                                 </ul>
                             </div>
                         </div>

@@ -23,14 +23,16 @@ public class MainController extends HttpServlet {
     //Login and logout
     private static final String LOGIN = "Login";
     private static final String LOGIN_CONTROLLER = "LoginController";
+    private static final String REGISTER = "Register";
+    private static final String REGISTER_CONTROLLER = "CreateController";
     private static final String LOGOUT = "Logout";
     private static final String LOGOUT_CONTROLLER = "LogoutController";
     private static final String SHOW_DOCTOR = "Show";
     private static final String SHOW_DOCTOR_CONTROLLER = "ShowDoctorController";
     private static final String SEARCH_DOCTOR = "Search";
     private static final String SEARCH_DOCTOR_CONTROLLER = "SearchDoctorController";
-    private static final String ADD_DOCTOR = "AddDoctor";
-    private static final String ADD_DOCTOR_CONTROLLER = "AddDoctorController";
+    private static final String ADD_DOCTOR = "Add";
+    private static final String ADD_DOCTOR_CONTROLLER = "AddDoctorController";   
     private static final String DELETE_DOCTOR = "Delete";
     private static final String DELETE_DOCTOR_CONTROLLER = "DeleteDoctorController";
 
@@ -130,10 +132,11 @@ public class MainController extends HttpServlet {
                 url = LOGIN_CONTROLLER;
             } else if (HOME.equals(action)) {
                 url = HOME_CONTROLLER;
+            } else if (REGISTER.equals(action)) {
+                url = REGISTER_CONTROLLER;
             } else if (LOGOUT.equals(action)) {
                 url = LOGOUT_CONTROLLER;
-            } else if (ADD_DOCTOR.equals(action)) {
-                url = ADD_DOCTOR_CONTROLLER;
+            
             } else if (SEARCH_DOCTOR.equals(action)) {
                 url = SEARCH_DOCTOR_CONTROLLER;
             } else if (SHOW_DOCTOR.equals(action)) {
@@ -208,6 +211,8 @@ public class MainController extends HttpServlet {
                 url = SHOW_ABOUT_SERVICE_CONTROLLER;
             }else if(SHOW_SERVICE_DETAIL.equals(action)){
                 url = SHOW_SERVICE_DETAIL_CONTROLLER;
+            } else if (ADD_DOCTOR.equals(action)) {
+                url = ADD_DOCTOR_CONTROLLER;
             }
 
         } catch (Exception e) {

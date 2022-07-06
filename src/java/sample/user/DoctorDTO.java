@@ -16,6 +16,7 @@ public class DoctorDTO extends UserDTO {
     private String categoryName;
     private String serviceID;
     private String serviceName;
+    private String aboutDR;
     private String shift;
 
     public DoctorDTO() {
@@ -29,6 +30,25 @@ public class DoctorDTO extends UserDTO {
 
     public DoctorDTO(String fullName) {
         super(fullName);
+    }
+    public DoctorDTO(String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
+        super(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
+    }
+
+    public DoctorDTO(String categoryID, String aboutDR, String shift) {
+        this.categoryID = categoryID;
+        this.aboutDR = aboutDR;
+        this.shift = shift;
+        
+        
+    }
+    public DoctorDTO(String categoryID, String categoryName, String serviceID, String serviceName, String aboutDR, String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
+        super(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
+        this.categoryID = categoryID;
+        this.categoryName = categoryName;
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.aboutDR = aboutDR;
     }
 
     public DoctorDTO(String categoryID, String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
@@ -88,6 +108,13 @@ public class DoctorDTO extends UserDTO {
 
     public void setShift(String shift) {
         this.shift = shift;
+    }
+     public String getAboutDR() {
+        return aboutDR;
+    }
+
+    public void setAboutDR(String aboutDR) {
+        this.aboutDR = aboutDR;
     }
 
 }

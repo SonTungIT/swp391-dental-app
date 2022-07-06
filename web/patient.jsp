@@ -4,6 +4,7 @@
     Author     : Xqy
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,6 +19,15 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
+        <title>Profile Patient</title>
+        <script>
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+        </script>
         <title>Profile Patient</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
@@ -36,6 +46,11 @@
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Icon CND fontawesome -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
     </head>
     <body>
         <%
@@ -128,12 +143,16 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./images/sontung.jpg" alt="user" class="profile-pic me-2">Sơn Tùng MTP
+                                    <img src="./images/customers/${PROFILE_PT.image}" style="width: 40px; height: 40px" alt="user" class="profile-pic me-2">${PROFILE_PT.userID}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
                                         <i class="fa-solid fa-circle-arrow-right"></i>
                                         Tài Khoản Của Tôi
+                                    </button>
+                                    <button class="dropdown-item" type="button">
+                                        <i class="fa-solid fa-circle-arrow-right"></i>
+                                        Lịch sử cuộc hẹn
                                     </button>
                                     <form action="MainController">
                                         <button class="dropdown-item" type="button">
@@ -141,11 +160,7 @@
                                             <input type="submit" name="action" value="Logout" style=" background-color: transparent; border: none"/>
                                         </button>
                                     </form>
-                                    <button class="dropdown-item" type="button">
-                                        <i class="fa-solid fa-circle-arrow-right"></i>
-                                        Quản Lý
-                                    </button>
-                                </ul>
+                                </ul> 
                             </li>
                         </ul>
                     </div>
@@ -168,7 +183,7 @@
                                                          href="index.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Trang Chủ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                                         href="ShowProfilePatientController?patientID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=SearchHSBK&searchHSBK&ptID" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
@@ -225,12 +240,6 @@
                                 </nav>
                             </div>
                         </div>
-<!--                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="https://www.wrappixel.com/templates/materialpro/"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Patient</a>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -247,112 +256,119 @@
                     <div class="row">
                         <!-- Column -->
                         <div class="col-lg-4 col-xlg-3 col-md-5">
-                            <div class="card">
-                                <div class="card-body profile-card">
-                                    <center class="mt-4"> <img src="./images/sontung.jpg"
-                                                               class="rounded-circle" width="150" />
-                                        <h4 class="card-title mt-2">Sơn Tùng MTP</h4>
-                                        <!--                                        <div class="row text-center justify-content-center">
-                                                                                    <div class="col-4">
-                                                                                        <a href="javascript:void(0)" class="link">
-                                                                                            <i class="icon-people" aria-hidden="true"></i>
-                                                                                            <span class="value-digit">254</span>
-                                                                                        </a></div>
-                                                                                    <div class="col-4">
-                                                                                        <a href="javascript:void(0)" class="link">
-                                                                                            <i class="icon-picture" aria-hidden="true"></i>
-                                                                                            <span class="value-digit">54</span>
-                                                                                        </a></div>
-                                                                                </div>-->
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <!-- Column -->
-                        <div class="col-lg-8 col-xlg-9 col-md-7">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form class="form-horizontal form-material mx-2">
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Họ và Tên</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Sơn Tùng MTP"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-<!--                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Password</label>
-                                            <div class="col-md-12">
-                                                <input type="password" value="password"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>-->
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Giới Tính</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Nam"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Địa Chỉ</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Hồ Chí Minh"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Ngày Tháng Năm Sinh</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="2001-02-12"
-                                                       class="form-control ps-0 form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
-                                            <div class="col-md-12">
-                                                <input type="email" placeholder="johnathan@admin.com"
-                                                       class="form-control ps-0 form-control-line" name="example-email"
-                                                       id="example-email">
-                                            </div>
-                                        </div>
+                            <form action="UpdateProfilePatientController" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="patientID" value="${PROFILE_PT.userID}">
+                                <input type="hidden" name="password" value="${PROFILE_PT.fullName}">
+                                <div class="card" style="text-align: center">
+                                    <div class="card-body profile-card" >
+                                        <center class="mt-4"> <img src="./images/customers/${PROFILE_PT.image}"
+                                                                   class="rounded-circle" width="140"/>
+                                            <h4 class="card-title mt-2">${PROFILE_PT.fullName}</h4>
+                                        </center>
+                                        <!-- Button to Open the Modal -->
+                                        <input type="hidden" name="action" value="UpImage"/>
+                                        <button type="button"  class="btn btn-success" data-toggle="modal" data-target="#myModal" style="color: white">
+                                            Đổi ảnh đại diện
+                                        </button>
+                                        <!-- The Modal -->
+                                        <div class="modal fade" id="myModal" >
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
 
-                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Số Điện Thoại</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="123 456 7890"
-                                                       class="form-control ps-0 form-control-line">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Đổi ảnh đại diện</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <input type="file" name="imagePart" required=""/> 
+                                                    </div>
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                                                        <button type="submit" class="btn btn-success" >Xác nhận</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-<!--                                        <div class="form-group">
-                                            <label class="col-md-12 mb-0">Message</label>
-                                            <div class="col-md-12">
-                                                <textarea rows="5" class="form-control ps-0 form-control-line"></textarea>
-                                            </div>
-                                        </div>-->
-                                        <!--                                        <div class="form-group">
-                                                                                    <label class="col-sm-12">Select Country</label>
-                                                                                    <div class="col-sm-12 border-bottom">
-                                                                                        <select class="form-select shadow-none ps-0 border-0 form-control-line">
-                                                                                            <option>London</option>
-                                                                                            <option>India</option>
-                                                                                            <option>Usa</option>
-                                                                                            <option>Canada</option>
-                                                                                            <option>Thailand</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>-->
-                                        <div class="form-group">
-                                            <div class="col-sm-12 d-flex">
-                                                <button class="btn btn-success mx-auto mx-md-0 text-white">Cập Nhật</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <!-- Column -->
+                        <!-- Column -->
+
+                        <div class="col-lg-8 col-xlg-9 col-md-7">
+                            <form action="UpdateProfilePatientController">
+                                <input type="hidden" name="patientID" value="${PROFILE_PT.userID}">
+                                <input type="hidden" name="password" value="${PROFILE_PT.password}">
+                                <input type="hidden" name="roleID" value="${PROFILE_PT.roleID}">
+                                <input type="hidden" name="status" value="${PROFILE_PT.status}">
+                                <input type="hidden" name="image" value="${PROFILE_PT.image}">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form class="form-horizontal form-material mx-2">
+                                            <div class="form-group">
+                                                <label class="col-md-12 mb-0">Họ và Tên</label>
+                                                <div class="col-md-12">
+                                                    <input  type="text" name="fullName" value="${PROFILE_PT.fullName}"
+                                                           class="form-control ps-0 form-control-line">
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12 mb-0">Giới Tính</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" name="gender" value="${PROFILE_PT.gender}"
+                                                           class="form-control ps-0 form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12 mb-0">Địa Chỉ</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" name="address" value="${PROFILE_PT.address}"
+                                                           class="form-control ps-0 form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12 mb-0">Ngày Sinh</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" name="birthday" value="${PROFILE_PT.birthday}"
+                                                           class="form-control ps-0 form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="example-email" class="col-md-12">Email</label>
+                                                <div class="col-md-12">
+                                                    <input type="email" name="email" value="${PROFILE_PT.email}"
+                                                           class="form-control ps-0 form-control-line" name="example-email"
+                                                           id="example-email">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-12 mb-0">Số Điện Thoại</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" name="phone" value="${PROFILE_PT.phone}"
+                                                           class="form-control ps-0 form-control-line">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12 d-flex">
+                                                    <button type="submit" name="action" value="UpdatePF" class="btn btn-success ">Cập Nhật</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <h6>${MESS_UP_PFPT}</h6>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Column -->
+
+
                     </div>
                     <!-- Row -->
                     <!-- ============================================================== -->
@@ -397,5 +413,6 @@
         <script src="html/js/sidebarmenu.js"></script>
         <!--Custom JavaScript -->
         <script src="html/js/custom.js"></script>
+
     </body>
 </html>

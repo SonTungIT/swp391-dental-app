@@ -27,7 +27,6 @@ public class ScheduleDTO {
         this.dayWork = dayWork;
     }
 
-
     public ScheduleDTO(String scheduleID, String doctorID, String slotID, String dayWork, boolean status) {
         this.scheduleID = scheduleID;
         this.doctorID = doctorID;

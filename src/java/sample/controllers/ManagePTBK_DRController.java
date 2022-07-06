@@ -1,63 +1,41 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import sample.user.AdminDAO;
-import sample.user.DoctorDTO;
-import sample.user.UserDTO;
+import sample.booking.BookingDTO;
+import sample.user.DoctorDAO;
 
 /**
  *
- * @author QUANG VAN
+ * @author Xqy
  */
-
-@WebServlet(name = "ShowDoctorController", urlPatterns = {"/ShowDoctorController"})
-public class ShowDoctorController extends HttpServlet {
-
-     public static final String ERROR = "error.jsp";
-    public static final String SUCESSFUL = "manageDoctor.jsp";
+@WebServlet(name = "ManagePTBK_DRController", urlPatterns = {"/ManagePTBK_DRController"})
+public class ManagePTBK_DRController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        HttpSession session = request.getSession();
         try {
-            AdminDAO dao = new AdminDAO();
-//            int numberOfDoctor = dao.getNumberOfDoctor();
-//            request.setAttribute("NUMBER_OF_DOCTOR", numberOfDoctor);
-//            String indexString = request.getParameter("index");
-//            if (indexString == null) {
-//                indexString = "1";
-//            }
-//            int index = Integer.parseInt(indexString);
-//            int maxPages = dao.getFullDoctorMaxPagesBy5();
-//            System.out.println(maxPages);
-//            dao.getFullListDoctor(index);
-            
-            List<DoctorDTO> list = dao.getListAllDoctor();
-            
-            session.setAttribute("LIST_DOCTOR", list);
-//            session.setAttribute("maxPages", maxPages);
-//            session.setAttribute("index", index);
-            url = SUCESSFUL;
-        } catch (Exception e) {
-            log("Error at DisplayCUSController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            String doctorID = request.getParameter("doctorID");
+            long millis = System.currentTimeMillis();
+            Date curDate = new java.sql.Date(millis);
+            DoctorDAO dao = new DoctorDAO();
+            List<BookingDTO> list = dao.showBKNOW(doctorID, curDate);
+            request.setAttribute("listBK_PT_ForDR", list);
+            request.getRequestDispatcher("managePTofDR.jsp").forward(request, response);
+        } catch (Exception ex) {
+            log("Error at ManagePTBK_DRController: " + ex.toString());
         }
     }
 

@@ -223,6 +223,107 @@ public class AdminDAO {
             return -1;
         }
     }
+    private static final String ADD = "INSERT INTO Users(userID, password, fullName, roleID, gender, address,image, birthday,email,phone, status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+    public boolean addDoctor(DoctorDTO doctor) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(ADD);
+                ptm.setString(1, doctor.getUserID());
+                ptm.setString(2, doctor.getPassword());
+                ptm.setString(3, doctor.getFullName());
+                ptm.setString(4, doctor.getRoleID());
+                ptm.setString(5, doctor.getGender());
+                ptm.setString(6, doctor.getAddress());
+                ptm.setString(7, doctor.getImage());
+                ptm.setDate(8, doctor.getBirthday());
+                ptm.setString(9, doctor.getEmail());
+                ptm.setString(10, doctor.getPhone());
+               
+                ptm.setBoolean(11, doctor.isStatus());
+
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+     private static final String CHECK_DUPLICATE = "SELECT fullname FROM Users WHERE userID=?";
+    public boolean checkDuplicate(String userID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_DUPLICATE);
+                ptm.setString(1, userID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+    public boolean buildDR(String doctorID, DoctorDTO dt) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+         String sql = "Insert into Doctor(doctorID,aboutDR,categoryID,shift) values (?,?,?,?)";
+       try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, doctorID);
+                stm.setString(2, dt.getAboutDR());
+                stm.setString(3, dt.getCategoryID());
+                stm.setString(4, dt.getShift());
+               
+
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
 
     public int getNumberOfBooking() {
         Connection conn = null;

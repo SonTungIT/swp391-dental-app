@@ -45,7 +45,7 @@
     flex-wrap: wrap;
     margin-bottom: 20px;
     border: 2px solid #28a745;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
 .time input{
     margin-right: 10px;
@@ -53,7 +53,7 @@
 
 .time__space {
     margin: 25px;
-    border-radius: 5px; 
+    border-radius: 5px;
     border: 2px solid #28a745;
     padding: 5px 20px;
     font-weight: 500;
@@ -69,6 +69,53 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
 }
+
+.form-content {
+    margin-bottom: 100px;
+}
+
+.title-know {
+    background: #63B43E;
+    padding: 10px 0 10px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.title--know-big {
+    font-size: 22px;
+}
+
+.form-text--center {
+    font-size: 18px;
+    text-align: start;
+    margin: 20px 30px 20px 0;
+}
+
+.widget-list a:hover {
+    cursor: pointer;
+    color: #28a745;
+}
+
+.schedule-slot {
+    border-left: 2px solid;
+    border-right: 2px solid;
+    border-color: #26c6da;
+}
+
+.schedule-slot--item {
+    text-align: center;
+}
+.schedule-slot--item button {
+    margin: 10px 0;
+}
+.schedule-slot--itemCN {
+    text-align: center;
+    border-color: transparent;
+}
+/*scheduleOFDR*/
 
 
 /*.form-group--item {

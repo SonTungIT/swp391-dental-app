@@ -41,6 +41,17 @@ public class BookingDTO {
         this.status = status;
     }
 
+    public BookingDTO(String bookingID, String patientName, String serviceName, Date dateBooking, String timeBooking, String status) {
+        this.bookingID = bookingID;
+        this.patientName = patientName;
+        this.serviceName = serviceName;
+        this.dateBooking = dateBooking;
+        this.timeBooking = timeBooking;
+        this.status = status;
+    }
+
+
+
     public BookingDTO(String bookingID, String patientID, String serviceID, String doctorID, Date dateBooking, String timeBooking, String status) {
         this.bookingID = bookingID;
         this.patientID = patientID;

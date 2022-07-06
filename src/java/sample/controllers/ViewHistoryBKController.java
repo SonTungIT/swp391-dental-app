@@ -38,8 +38,10 @@ public class ViewHistoryBKController extends HttpServlet {
             String search = request.getParameter("searchHSBK");
             PatientDAO dao = new PatientDAO();
             List<BookingDTO> listHSBK = dao.getHistoryBK(search, patientID);
+            List<BookingDTO> listHSBKAT = dao.getHistoryBKLoading(search, patientID);
             if (listHSBK.size() > 0) {
                 request.setAttribute("LIST_HISTORY_BK", listHSBK);
+                request.setAttribute("LIST_HISTORY_BK_AT", listHSBKAT);
                 url = SUCCESS;
             }
         } catch (Exception e) {

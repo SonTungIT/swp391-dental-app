@@ -183,6 +183,9 @@
                                                          href="ShowScheduleForDRController?doctorID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Lịch Làm Việc</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="ManagePTBK_DRController?doctorID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Quản lý lịch hẹn</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Thay Đổi Mật Khẩu</span></a></li>
                         </ul>
@@ -255,6 +258,7 @@
                                         <table class="table user-table" border="5" cellspacing="0" cellpadding="10">
                                             <thead>
                                                 <tr>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Slot</h4></th>
                                                     <th class="border-top-0"><h4 style="text-align: center">Thứ 2</h4></th>
                                                     <th class="border-top-0"><h4 style="text-align: center">Thứ 3</h4></th>
                                                     <th class="border-top-0"><h4 style="text-align: center">Thứ 4</h4></th>
@@ -265,49 +269,149 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <c:forEach items="${listSC_FDR_1}" var="slot"> 
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
-                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+
+                                                <tr style="text-align: center">
+                                                    <td style="margin-top: 10px">
+                                                        <c:forEach items="${d.showAllSlot()}" var="s">
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${s.slotName}</button>
+                                                            <hp style="text-align: left">${s.slotTime}</p></br>
                                                         </c:forEach>
                                                     </td>
                                                     <td>
-                                                        <c:forEach items="${listSC_FDR_2}" var="slot"> 
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
-                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        <c:set scope="request" var="number" value="0"/>
+                                                        <c:forEach items="${d.showAllSlot()}" var="s">
+                                                            <c:forEach items="${listSC_FDR_1}" var="slot"> 
+                                                                <c:if test="${slot.slotName eq s.slotName}">
+                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
+                                                                  <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                                    <c:set scope="request" var="number" value="1"/>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:if test="${number == 0}">
+                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
+                                                                   <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                            </c:if>
+                                                            <c:set scope="request" var="number" value="0"/>
                                                         </c:forEach>
                                                     </td>
                                                     <td>
-                                                        <c:forEach items="${listSC_FDR_3}" var="slot"> 
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
-                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        <c:set scope="request" var="number" value="0"/>
+                                                        <c:forEach items="${d.showAllSlot()}" var="s">
+                                                            <c:forEach items="${listSC_FDR_2}" var="slot"> 
+                                                                <c:if test="${slot.slotName eq s.slotName}">
+                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
+                                                                  <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                                    <c:set scope="request" var="number" value="1"/>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:if test="${number == 0}">
+                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
+                                                                   <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                            </c:if>
+                                                            <c:set scope="request" var="number" value="0"/>
                                                         </c:forEach>
                                                     </td>
                                                     <td>
-                                                        <c:forEach items="${listSC_FDR_4}" var="slot"> 
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
-                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        <c:set scope="request" var="number" value="0"/>
+                                                        <c:forEach items="${d.showAllSlot()}" var="s">
+                                                            <c:forEach items="${listSC_FDR_3}" var="slot"> 
+                                                                <c:if test="${slot.slotName eq s.slotName}">
+                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
+                                                                  <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                                    <c:set scope="request" var="number" value="1"/>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:if test="${number == 0}">
+                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
+                                                                   <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                            </c:if>
+                                                            <c:set scope="request" var="number" value="0"/>
                                                         </c:forEach>
                                                     </td>
                                                     <td>
-                                                        <c:forEach items="${listSC_FDR_5}" var="slot"> 
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
-                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        <c:set scope="request" var="number" value="0"/>
+                                                        <c:forEach items="${d.showAllSlot()}" var="s">
+                                                            <c:forEach items="${listSC_FDR_4}" var="slot"> 
+                                                                <c:if test="${slot.slotName eq s.slotName}">
+                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
+                                                                  <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                                    <c:set scope="request" var="number" value="1"/>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:if test="${number == 0}">
+                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
+                                                                   <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                            </c:if>
+                                                            <c:set scope="request" var="number" value="0"/>
                                                         </c:forEach>
                                                     </td>
                                                     <td>
-                                                        <c:forEach items="${listSC_FDR_6}" var="slot"> 
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
-                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                        <c:set scope="request" var="number" value="0"/>
+                                                        <c:forEach items="${d.showAllSlot()}" var="s">
+                                                            <c:forEach items="${listSC_FDR_5}" var="slot"> 
+                                                                <c:if test="${slot.slotName eq s.slotName}">
+                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
+                                                                  <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                                    <c:set scope="request" var="number" value="1"/>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:if test="${number == 0}">
+                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                            </c:if>
+                                                            <c:set scope="request" var="number" value="0"/>
                                                         </c:forEach>
                                                     </td>
                                                     <td>
-                                                        <c:forEach items="${listSC_FDR_7}" var="slot"> 
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${slot.slotName}</button> 
-                                                            <h6 style="text-align: left">Giờ bắt đầu: ${slot.slotTime}</h6></br>
+                                                      <c:set scope="request" var="number" value="0"/>
+                                                        <c:forEach items="${d.showAllSlot()}" var="s">
+                                                            <c:forEach items="${listSC_FDR_6}" var="slot"> 
+                                                                <c:if test="${slot.slotName eq s.slotName}">
+                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
+                                                                   <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                                    <c:set scope="request" var="number" value="1"/>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:if test="${number == 0}">
+                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                            </c:if>
+                                                            <c:set scope="request" var="number" value="0"/>
                                                         </c:forEach>
                                                     </td>
+                                                    <td>
+                                                        <c:set scope="request" var="number" value="0"/>
+                                                        <c:forEach items="${d.showAllSlot()}" var="s">
+                                                            <c:forEach items="${listSC_FDR_7}" var="slot"> 
+                                                                <c:if test="${slot.slotName eq s.slotName}">
+                                                                   <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
+                                                                   <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                                    <c:set scope="request" var="number" value="1"/>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:if test="${number == 0}">
+                                                                <button type="button"   class="btn btn-secondary d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-check"></i>
+                                                                </button>  </br></br></br>
+                                                            </c:if>
+                                                            <c:set scope="request" var="number" value="0"/>
+                                                        </c:forEach>
+
+                                                    </td>
+
                                                 </tr>
                                             </tbody>
                                         </table>
