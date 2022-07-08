@@ -27,7 +27,7 @@ public class HomeController extends HttpServlet {
     public static final String HOME_PAGE = "index.jsp";
     public static final String ADMIN = "admin.jsp";
     public static final String PATIENT = "index.jsp";
-    public static final String DOCTOR = "doctor.jsp";
+   
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,7 +52,7 @@ public class HomeController extends HttpServlet {
                 } else if ("PT".equals(loginUser.getRoleID())) {
                     url = PATIENT;
                 } else if ("DR".equals(loginUser.getRoleID())) {
-                    url = DOCTOR;
+                    url = "ShowProfileDoctorController?doctorID=" + loginUser.getUserID();
                 }
             } else {
                 if (session.isNew()) {
