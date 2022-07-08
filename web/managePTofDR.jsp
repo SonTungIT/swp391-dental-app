@@ -1,17 +1,16 @@
 <%-- 
-    Document   : service
-    Created on : Jun 20, 2022, 8:36:27 AM
-    Author     : dangk
+    Document   : doctor
+    Created on : Jun 7, 2022, 7:15:13 PM
+    Author     : Xqy
 --%>
 
-<%@page import="sample.services.ServiceDTO"%>
-<%@page import="java.util.List"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:useBean id="d" class="sample.user.DoctorDAO" scope="request" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
@@ -21,7 +20,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>service</title>
+        <title>Material Pro Lite Template by WrapPixel</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
@@ -39,8 +38,19 @@
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Icon CND fontawesome -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
+        <%
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            if (loginUser == null || !loginUser.getRoleID().equals("DR")) {
+                response.sendRedirect("login.jsp");
+            }
+
+        %>
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
@@ -64,7 +74,7 @@
                         <!-- ============================================================== -->
                         <!-- Logo -->
                         <!-- ============================================================== -->
-                        <a class="navbar-brand ms-4" href="admin.jsp">
+                        <a class="navbar-brand ms-4" href="index.jsp">
                             <!-- Logo icon -->
                             <b class="logo-icon">
                                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -125,7 +135,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./assets/images/users/1.jpg" alt="user" class="profile-pic me-2">Admin Page
+                                    <img src="images/blog4.jpg" alt="user" class="profile-pic me-2">Ma Phong Ba
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
@@ -154,6 +164,12 @@
             <!-- ============================================================== -->
             <!-- Left Sidebar - style you can find in sidebar.scss  -->
             <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- End Topbar header -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
             <aside class="left-sidebar" data-sidebarbg="skin6">
                 <!-- Sidebar scroll-->
                 <div class="scroll-sidebar">
@@ -161,58 +177,21 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
-                                        class="hide-menu">Dashboard</span></a></li>
-                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="pages-profile.html" aria-expanded="false">
-                                    <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
-                            </li> -->
-
+                                                         href="index.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                        class="hide-menu">Trang Chủ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Show" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí bác sĩ</span></a></li>
+                                                         href="doctor.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=ShowAllPatient" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí bệnh nhân</span></a></li>
+                                                         href="ShowScheduleForDRController?doctorID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Lịch Làm Việc</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=ShowBooking" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>
+                                                         href="ManagePTBK_DRController?doctorID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Quản lý lịch hẹn</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=SearchSC&searchSC" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí lịch hoạt động</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">FeedBack</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Category Services</span></a></li> 
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Service</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí giá dịch vụ</span></a></li>
-                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="icon-material.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Icon</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span
-                                        class="hide-menu">Google Map</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="pages-blank.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
-                            </li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="pages-error-404.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-help-circle"></i><span class="hide-menu">Error 404</span></a>
-                            </li>
-                            <li class="text-center p-20 upgrade-btn">
-                                <a href="https://www.wrappixel.com/templates/materialpro/"
-                                    class="btn btn-warning text-white mt-4" target="_blank">Upgrade to
-                                    Pro</a>
-                            </li> -->
+                                                         href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                        class="hide-menu">Thay Đổi Mật Khẩu</span></a></li>
                         </ul>
 
                     </nav>
@@ -252,20 +231,14 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Service</h3>
+                            <!--<h3 class="page-title mb-0 p-0">Thông Tin</h3>-->
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Service</li>
+                                        <li class="breadcrumb-item"><a href="#">Trang Cá Nhân</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Thông Tin</li>
                                     </ol>
                                 </nav>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
                             </div>
                         </div>
                     </div>
@@ -285,129 +258,75 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <%
-                                        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-
-                                        String search = request.getParameter("search");
-                                        if (search == null) {
-                                            search = "";
-                                        }
-                                    %>
-                                    <form action="MainController" >
-                                        <div class="input-group">
-                                            <div class="form-outline">
-                                                <input type="text" id="form1" class="form-control"
-                                                       name="search" value="<%= search%>"  placeholder="Nhập Tên Service">
-                                                <input type="hidden" name="action" value="Search_Service" class="btn btn-success" >
-                                            </div>
-                                            <button type="submit" class="btn btn-success d-md-inline-block text-white">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-
-                                        </div>
-
-                                        <div class="text-end upgrade-btn">
-                                            <a href="createservice.jsp"
-                                               class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">
-                                                <i class="fa-solid fa-circle-plus"></i>
-                                                Add New Service
-                                            </a>
-                                        </div>
-                                    </form>
-
-
-
-                                    <%
-                                        List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
-                                        if (listService != null) {
-                                            if (listService.size() > 0) {
-                                    %>   
-
                                     <div class="table-responsive">
-                                        <table class="table user-table">
+                                        <table class="table user-table" border="5" cellspacing="0" cellpadding="10" style="text-align: center">
                                             <thead>
                                                 <tr>
-                                                    <th class="border-top-0">No</th>
-                                                    <th class="border-top-0">Service ID</th>
-                                                    <th class="border-top-0">Tên Dịch Vụ</th> 
-                                                    <th class="border-top-0">Hình Ảnh</th>
-                                                    <th class="border-top-0">Category ID</th>
-                                                    <th class="border-top-0">Chi Phí</th> 
-                                                    <th class="border-top-0">Nội Dung</th>
-                                                    <th class="border-top-0">Trạng Thái</th>
-                                                    <th class="border-top-0">Xóa</th>
-                                                    <th class="border-top-0">Cập Nhật</th>     
+                                                    <th class="border-top-0"><h4 style="text-align: center">ID</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Tên bệnh nhân</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Dịch vụ</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Ngày hẹn</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Giờ hẹn</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center">Trạng Thái</h4></th>
+                                                    <th class="border-top-0"><h4 style="text-align: center"></h4></th>
                                                 </tr>
                                             </thead>
-
                                             <tbody>
-                                                <%
-                                                    int count = 1;
-                                                    for (ServiceDTO service : listService) {
-                                                %>
-                                            <form action="MainController">
-                                                <tr>
-                                                    <td><%= count++%></td>
-                                                    <td>
-                                                        <%= service.getServiceID()%>
-                                                        <input type="hidden" value="<%= service.getServiceID()%>" name="serviceID" />
-                                                    </td>
-                                                    <td>
-                                                        <%= service.getServiceName()%>
-                                                        <input type="hidden" value="<%= service.getServiceName()%>" name="serviceName" />
-                                                    </td>
-                                                    <td>
-
-                                                        <img width="80px" height="60px" src="image/<%= service.getImage()%>" alt="Image can't show">
-                                                    </td>
-                                                    <td>
-                                                        <%= service.getCategoryID()%>
-                                                        <input type="hidden" value="<%= service.getCategoryID()%>" name="categoryID" />
-                                                    </td>
-                                                    <td>
-                                                        <%= service.getPrice()%>
-                                                        <input type="hidden" value="<%= service.getPrice()%>" name="price" />
-                                                    </td>
-                                                    <td>
-                                                        <%= service.getAboutSV()%>
-                                                        <input type="hidden" value="<%= service.getAboutSV()%>" name="aboutSV" />
-                                                    </td>
-                                                    <td> 
-                                                        <%= service.isStatus()%></br>
-
-                                                    </td>
-
-
-
-                                                    <!--delete-->
-                                                    <td>
-                                                        <a class="btn btn-success d-none d-md-inline-block text-white" href="MainController?action=DeleteService&serviceID=<%= service.getServiceID()%>&search=<%= search%>" >
-                                                            <i class="fa-solid fa-trash-can"></i>
-                                                        </a>
-                                                    </td>
-
-                                                    <!--update-->
-                                                    <td>
-                                                        <a class="btn btn-success d-none d-md-inline-block text-white" href="MainController?action=SUService&serviceName=<%= service.getServiceName()%>" >
-                                                            <i class="fa-solid fa-pencil"></i>
-                                                        </a>
-                                                        <input type="hidden" name="search" value="<%= search%>"/>
-                                                    </td>
-                                            </form>  
-
-
-
-
-                                            <%
-                                                }
-
-                                            %> 
-                                            </tr>
+                                                <c:forEach items="${listBK_PT_ForDR}" var="list">
+                                                <form action="UpdateBKByDRController" id="form_BK">
+                                                    <input type="hidden" name="doctorID" value="${LOGIN_USER.userID}" />
+                                                    <tr style="text-align: center">
+                                                        <td>
+                                                            ${list.bookingID}
+                                                            <input type="hidden" name="bookingID" value="${list.bookingID}" />
+                                                        </td>
+                                                        <td>
+                                                            ${list.patientName}
+                                                        </td>
+                                                        <td>
+                                                            ${list.serviceName}
+                                                        </td>
+                                                        <td>
+                                                            ${list.dateBooking}
+                                                        </td>
+                                                        <td>
+                                                            ${list.timeBooking}
+                                                        </td>
+                                                        <td>
+                                                            <c:if test="${list.status == 'Finished'}">
+                                                                <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-clipboard-check"></i>
+                                                                </button> 
+                                                            </c:if>
+                                                            <c:if test="${list.status == 'Active'}">
+                                                                <button  type="button" style="background-color: rgb(251 188 5)" class="btn d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-hourglass"></i>
+                                                                </button>
+                                                            </c:if>
+                                                        </td>
+                                                        <td>
+                                                            <c:if test="${list.status == 'Active'}">
+                                                                <button type="submit" name="action" value="Finish" class="btn btn-secondary d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-calendar-check"></i>
+                                                                </button> 
+                                                                <button  type="submit" name="action" value="Cancel" class="btn btn-danger d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-trash-can"></i>
+                                                                </button> 
+                                                            </c:if>
+                                                            <c:if test="${list.status == 'Finished'}">
+                                                                <button type="button"  style="background-color: rgb(52 168 84)" class="btn  btn-success d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-calendar-check"></i>
+                                                                </button> 
+                                                                <button  type="submit" name="action" value="Cancel" class="btn btn-danger d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-trash-can"></i>
+                                                                </button> 
+                                                            </c:if>
+                                                        </td>
+                                                    </tr>
+                                                </form>
+                                            </c:forEach>
                                             </tbody>
                                         </table>
-                                        <%                                                            }
-                                            }
-                                        %>    
                                     </div>
                                 </div>
                             </div>
@@ -430,6 +349,7 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
+
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->
@@ -454,5 +374,5 @@
         <script src="html/js/sidebarmenu.js"></script>
         <!--Custom JavaScript -->
         <script src="html/js/custom.js"></script>
-    </body>  
+    </body>
 </html>

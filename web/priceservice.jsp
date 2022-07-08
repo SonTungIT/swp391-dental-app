@@ -12,13 +12,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-                                       
-    
-        
-         <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
@@ -28,7 +21,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>priceservice</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
@@ -168,7 +161,7 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-                            
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
@@ -301,80 +294,77 @@
                                         }
                                     %>
                                     <form action="MainController" >
-                                    <div class="input-group">
-                                        <div class="form-outline">
-                                            <input type="text" id="form1" class="form-control"
-                                                name="search" value="<%= search%>"  placeholder="Nhập Tên Service">
-                                            <input type="hidden" name="action" value="Search_Price" class="btn btn-success" >
-                                        </div>
-                                       <button type="submit" class="btn btn-success d-md-inline-block text-white">
+                                        <div class="input-group">
+                                            <div class="form-outline">
+                                                <input type="text" id="form1" class="form-control"
+                                                       name="search" value="<%= search%>"  placeholder="Nhập Tên Service">
+                                                <input type="hidden" name="action" value="Search_Price" class="btn btn-success" >
+                                            </div>
+                                            <button type="submit" class="btn btn-success d-md-inline-block text-white">
                                                 <i class="fas fa-search"></i>
                                             </button>
-                                        
-                                    </div>
-                                       
+
+                                        </div>
+
                                     </form>
-                                        
-                                        
-                                       
-
-                                                  
-          <%
-                                                    List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_PRICE_SERVICE");
-                                                    if (listService != null) {
-                                                        if (listService.size() > 0) {
-                                                %>  
-                                                <div class="table-responsive">
-                                            <table class="table user-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="border-top-0">Tên Dịch Vụ</th> 
-                                                        <th class="border-top-0">Chi Phí</th> 
-                                                        <th class="border-top-0"></th>    
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    <%
-                                                        int count = 1;
-                                                        for (ServiceDTO service : listService) {
-                                                    %>
-                                                <form action="MainController">
-                                                    <tr>
-                                                        
-                                                        
-                                                        <td>
-                                                            <%= service.getServiceName() %>
-                                                            <input type="hidden" value="<%= service.getServiceName() %>" name="serviceName" />
-                                                        </td>
-                                                        
-                                                        
-                                                        <td>
-                                                            
-                                                            <input type="text" value="<%= service.getPrice()%>" name="price" />
-                                                        </td>
-<!--                                                        update-->
-                                                        <td>
-                                                            <input type="submit" name="action" value="Update_Price" class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank" />
-                                                            <input type="hidden" name="search" value="<%= search%>"/>
-                                                        </td>
-                                                </form>  
 
 
 
 
-                                                    <%
-                                                        }
-                   
-                                                    %> 
+
+                                    <%
+                                        List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_PRICE_SERVICE");
+                                        if (listService != null) {
+                                            if (listService.size() > 0) {
+                                    %>  
+                                    <div class="table-responsive">
+                                        <table class="table user-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-top-0">Tên Dịch Vụ</th> 
+                                                    <th class="border-top-0">Chi Phí</th> 
+                                                    <th class="border-top-0">Cập Nhật</th>    
                                                 </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <%
+                                                    int count = 1;
+                                                    for (ServiceDTO service : listService) {
+                                                %>
+                                            <form action="MainController">
+                                                <tr>
+
+
+                                                    <td>
+                                                        <%= service.getServiceName()%>
+                                                        <input type="hidden" value="<%= service.getServiceName()%>" name="serviceName" />
+                                                    </td>
+
+
+                                                    <td>
+
+                                                        <input type="text" value="<%= service.getPrice()%>" name="price" />
+                                                    </td>
+                                                    <!--                                                        update-->
+                                                    <td>
+                                                        <button type="submit" name="action" value="Update_Price" class="btn btn-success d-none d-md-inline-block text-white"
+                                                                target="_blank">
+                                                            <i class="fa-solid fa-pencil"></i>
+                                                        </button>
+                                                        <input type="hidden" name="search" value="<%= search%>"/>
+                                                    </td>
+                                            </form>  
+                                            <%
+                                                }
+
+                                            %> 
+                                            </tr>
                                             </tbody>
                                         </table>
-                                                    <%
-                                                             }
-                                                               }
-                                                    %>    
+                                        <%                                                            }
+                                            }
+                                        %>    
                                     </div>
                                 </div>
                             </div>
@@ -397,8 +387,6 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

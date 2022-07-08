@@ -81,7 +81,7 @@ public class CreateBookController extends HttpServlet {
                     url = SUCCESS;
                 }
             } else {
-                request.setAttribute("ERROR_TIME", "The reservation time must be 30 minutes older than the current time!!");
+                request.setAttribute("ERROR_TIME", "Giờ hẹn ít nhất trước 30 phút so với giờ bạn muốn đặt!!");
             }
 
         } catch (Exception e) {

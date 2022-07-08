@@ -24,6 +24,14 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
+        <script>
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+        </script>
         <title>Profile Patient</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
@@ -141,12 +149,16 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./images/sontung.jpg" alt="user" class="profile-pic me-2">Sơn Tùng MTP
+                                    <img src="./images/customers/${LOGIN_USER.image}" style="width: 40px; height: 40px" alt="user" class="profile-pic me-2">${LOGIN_USER.userID}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
                                         <i class="fa-solid fa-circle-arrow-right"></i>
                                         Tài Khoản Của Tôi
+                                    </button>
+                                    <button class="dropdown-item" type="button">
+                                        <i class="fa-solid fa-circle-arrow-right"></i>
+                                        Lịch sử cuộc hẹn
                                     </button>
                                     <form action="MainController">
                                         <button class="dropdown-item" type="button">
@@ -154,11 +166,7 @@
                                             <input type="submit" name="action" value="Logout" style=" background-color: transparent; border: none"/>
                                         </button>
                                     </form>
-                                    <button class="dropdown-item" type="button">
-                                        <i class="fa-solid fa-circle-arrow-right"></i>
-                                        Quản Lý
-                                    </button>
-                                </ul>
+                                </ul> 
                             </li>
                         </ul>
                     </div>
@@ -181,7 +189,7 @@
                                                          href="index.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Trang Chủ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                                         href="ShowProfilePatientController?patientID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=SearchHSBK&searchHSBK" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
@@ -228,17 +236,17 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Doctor</h3>
+                            <h3 class="page-title mb-0 p-0">Trang cá nhân</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Doctor</li>
+                                        <li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Người dùng</li>
                                     </ol>
                                 </nav>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -268,7 +276,7 @@
                                             </button>
                                         </div>
                                     </form>
-                                    <div class="table-responsive">
+                                    <div class="table-responsive" style="display: none" id="div1">
                                         <%  List<BookingDTO> list = (List<BookingDTO>) request.getAttribute("LIST_HISTORY_BK");
                                             if (list != null) {
                                                 if (!list.isEmpty()) {
@@ -290,17 +298,6 @@
                                                 <%
                                                     int count = 1;
                                                     for (BookingDTO bk : list) {
-                                                        long millis = System.currentTimeMillis();
-                                                        Date curDate = new java.sql.Date(millis);
-                                                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                                                        SimpleDateFormat formatterT = new SimpleDateFormat("HH:mm");
-                                                        String nowT = formatterT.format(curDate);
-                                                        String[] nt = nowT.split(":");
-                                                        int nt1 = Integer.parseInt(nt[0]);
-                                                        String[] tB = bk.getTimeBooking().split(":");
-                                                        int tB1 = Integer.parseInt(tB[0]);
-                                                        String date1 = formatter.format(curDate);
-                                                        String date2 = formatter.format(bk.getDateBooking());
                                                 %>
                                             <form action="MainController">
                                                 <input type="hidden" name="searchHSBK" value="<%=search%>"/>
@@ -334,7 +331,7 @@
                                                         <%
 
                                                             if (bk.getStatus().equals("Active")) {
-                                                                if (bk.getDateBooking().after(curDate) || (date1.equals(date2) && nt1 < tB1)) {
+
                                                         %>
                                                         <!--Đang chờ-->
                                                         <button type="button" style="background-color: rgb(251 188 5)" class="btn d-none d-md-inline-block text-white">
@@ -344,17 +341,13 @@
                                                         <button type="submit" name="action" value="CancelBK" class="btn btn-danger d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </button>
-                                                        <%
-                                                        } else {
+                                                        <%                                                        } else {
                                                         %>
                                                         <!--Hoàn Thành-->
                                                         <button type="button" style="background-color: rgb(52 168 84)"  class="btn d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-clipboard-check"></i>
                                                         </button>
-                                                        <%
-                                                                }
-                                                            }
-                                                        %>
+
                                                     </td>
                                                     <!--đánh giá-->
                                                     <td>
@@ -362,12 +355,14 @@
                                                             <i class="fa-solid fa-comment-dots"></i>
                                                         </button>
                                                     </td>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </tr>
 
                                             </form>
 
-                                            <%
-                                                }
+                                            <%                                                }
                                             %>
                                             </tbody>
                                         </table>
@@ -377,49 +372,134 @@
                                         %> 
                                     </div>
                                 </div>
+
+
+                                <div class="table-responsive" style="display: block" id="div2">
+                                    <%  List<BookingDTO> list2 = (List<BookingDTO>) request.getAttribute("LIST_HISTORY_BK_AT");
+                                        if (list2 != null) {
+                                            if (!list2.isEmpty()) {
+                                    %>
+                                    <table class="table user-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-top-0">No</th>
+                                                <th class="border-top-0">Dịch vụ</th>
+                                                <th class="border-top-0">Bác sĩ</th>
+                                                <th class="border-top-0">Ngày hẹn</th>
+                                                <th class="border-top-0">Giờ hẹn</th>
+                                                <th class="border-top-0">Trạng thái</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                int count = 1;
+                                                for (BookingDTO bk : list2) {
+                                            %>
+                                        <form action="MainController">
+                                            <input type="hidden" name="searchHSBK" value="<%=search%>"/>
+                                            <input type="hidden" name="bookingID" value="<%=bk.getBookingID()%>"/>
+
+                                            <tr>
+                                                <td>
+                                                    <%=count++%>
+                                                </td>
+                                                <td>
+                                                    <%=bk.getServiceName()%>
+                                                    <input type="hidden" name="serviceID" value="<%=bk.getServiceID()%>" />
+                                                    <input type="hidden" name="serviceName" value="<%=bk.getServiceName()%>" />
+                                                </td>
+                                                <td>
+                                                    <%=bk.getDoctorName()%>
+                                                    <input type="hidden" name="doctorID" value="<%=bk.getDoctorID()%>" />
+                                                    <input type="hidden" name="doctorName" value="<%=bk.getDoctorName()%>" />
+                                                </td>
+                                                <td>
+                                                    <%=bk.getDateBooking()%>
+                                                    <input type="hidden" name="dateBooking" value="<%=bk.getDateBooking()%>" />
+                                                </td>
+                                                <td>
+                                                    <%=bk.getTimeBooking()%>
+                                                    <input type="hidden" name="timeBooking" value="<%=bk.getTimeBooking()%>" />
+                                                </td>
+                                                <td>
+
+                                                    <input type="hidden" name="timeBooking" value=" <%=bk.getStatus()%>" />
+
+                                                    <!--Đang chờ-->
+                                                    <button type="button" style="background-color: rgb(251 188 5)" class="btn d-none d-md-inline-block text-white">
+                                                        <i class="fa-solid fa-hourglass"></i>
+                                                    </button>
+                                                    <!--Xóa-->
+                                                    <button type="submit" name="action" value="CancelBK" class="btn btn-danger d-none d-md-inline-block text-white">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                </td>
+                                                <!--đánh giá-->
+                                            </tr>
+
+                                        </form>
+                                        <%                                                }
+                                        %>
+                                        </tbody>
+                                    </table>
+                                    <%
+                                            }
+                                        }
+                                    %> 
+                                    <button  type="button" onclick="showall()" class="btn btn-success d-none d-md-inline-block text-white">
+                                        Xem thêm
+                                    </button></br>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- ============================================================== -->
-                    <!-- End PAge Content -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- Right sidebar -->
-                    <!-- ============================================================== -->
-                    <!-- .right-sidebar -->
-                    <!-- ============================================================== -->
-                    <!-- End Right sidebar -->
-                    <!-- ============================================================== -->
                 </div>
                 <!-- ============================================================== -->
-                <!-- End Container fluid  -->
+                <!-- End PAge Content -->
                 <!-- ============================================================== -->
                 <!-- ============================================================== -->
-                <!-- footer -->
+                <!-- Right sidebar -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
+                <!-- .right-sidebar -->
                 <!-- ============================================================== -->
-                <!-- End footer -->
+                <!-- End Right sidebar -->
                 <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- End Page wrapper  -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+<!--            <footer class="footer"> © 2022 Nha Khoa Thiên Thần by <a href="index.jsp">nhakhoathienthan.vn</a>
+            </footer>-->
+            <!-- ============================================================== -->
+            <!-- End footer -->
             <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Wrapper -->
-
+        <!-- End Page wrapper  -->
         <!-- ============================================================== -->
-        <script src="assets/plugins/jquery/dist1/jquery.min.js" type="text/javascript"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="assets/plugins/bootstrap/dist1/js/bootstrap.bundle.min.js"></script>
-        <script src="html/js/app-style-switcher.js" type="text/javascript"></script>
-        <!--Wave Effects -->
-        <script src="html/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="html/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="html/js/custom.js"></script>
-    </body>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+
+    <!-- ============================================================== -->
+    <script src="assets/plugins/jquery/dist1/jquery.min.js" type="text/javascript"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/plugins/bootstrap/dist1/js/bootstrap.bundle.min.js"></script>
+    <script src="html/js/app-style-switcher.js" type="text/javascript"></script>
+    <!--Wave Effects -->
+    <script src="html/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="html/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="html/js/custom.js"></script>
+    <script>
+                                        function showall() {
+                                            document.getElementById("div1").style.display = "block";
+                                            document.getElementById("div2").style.display = "none";
+                                        }
+    </script>
+</body>
 </html>

@@ -21,7 +21,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>updateService</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
@@ -161,28 +161,46 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="admin.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                                         href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
+                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="pages-profile.html" aria-expanded="false">
+                                    <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
+                            </li> -->
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="setting.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí tài khoản</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="doctor.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=Show" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bác sĩ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=ShowAllPatient" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bệnh nhân</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=ShowBooking" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=SearchSC&searchSC" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí lịch hoạt động</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">FeedBack</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Category Services</span></a></li>
+                                        class="hide-menu">Category Services</span></a></li> 
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Service</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí giá dịch vụ</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="icon-material.html" aria-expanded="false"><i
+                                        class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Icon</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span
+                                        class="hide-menu">Google Map</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="pages-blank.html" aria-expanded="false"><i
                                         class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
                             </li>
@@ -265,75 +283,73 @@
                     <div class="row">
                         <!-- column -->
                         <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <%
-                                        ServiceDTO list = (ServiceDTO) request.getAttribute("SERVICE");
-                                    %>
-                                    <div class="col-lg-8 col-xlg-9 col-md-7">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <form action="MainController"  class="form-horizontal form-material mx-2">
-                                                    <div>
-                                                        <input type="hidden" name="serviceID" value="<%= list.getServiceID()%>">
-                                                    </div>
+                            <div class="card-body">
+                                <%
+                                    ServiceDTO list = (ServiceDTO) request.getAttribute("SERVICE");
+                                %>
+                                <div class="col-lg-8 col-xlg-9 col-md-7">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="MainController"  class="form-horizontal form-material mx-2">
+                                                <div>
+                                                    <input type="hidden" name="serviceID" value="<%= list.getServiceID()%>">
+                                                </div>
 
-                                                    <div class="form-group">
-                                                        <label class="col-md-12 mb-0">Tên Dịch Vụ:</label>
-                                                        <div class="col-md-12">
-                                                            <td>  
-                                                                <input class="form-control ps-0 form-control-line" type="text" name="serviceName" value="<%= list.getServiceName()%>">
-                                                            </td> 
-                                                        </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-12 mb-0">Tên Dịch Vụ:</label>
+                                                    <div class="col-md-12">
+                                                        <td>  
+                                                            <input class="form-control ps-0 form-control-line" type="text" name="serviceName" value="<%= list.getServiceName()%>">
+                                                        </td> 
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-12 mb-0">Hình Ảnh:</label>
-                                                        <div class="col-md-12">
-                                                            <td>  
-                                                                <input class="form-control ps-0 form-control-line" type="text" name="image" value="<%= list.getImage()%>">
-                                                            </td>  
-                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-12 mb-0">Hình Ảnh:</label>
+                                                    <div class="col-md-12">
+                                                        <td>  
+                                                            <input class="form-control ps-0 form-control-line" type="text" name="image" value="<%= list.getImage()%>">
+                                                        </td>  
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-12 mb-0">ID Loại Dịch Vụ:</label>
-                                                        <div class="col-md-12">
-                                                            <td>  
-                                                                <input class="form-control ps-0 form-control-line" type="text" name="categoryID" value="<%= list.getCategoryID()%>"> 
-                                                            </td> 
-                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-12 mb-0">ID Loại Dịch Vụ:</label>
+                                                    <div class="col-md-12">
+                                                        <td>  
+                                                            <input class="form-control ps-0 form-control-line" type="text" name="categoryID" value="<%= list.getCategoryID()%>"> 
+                                                        </td> 
                                                     </div>
-                                                    <div>
-                                                        <input type="hidden" name="price" value="<%= list.getPrice()%>">
-                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <input type="hidden" name="price" value="<%= list.getPrice()%>">
+                                                </div>
 
-                                                    <div class="form-group">
-                                                        <label class="col-md-12 mb-0">Nội Dung </label>
-                                                        <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 mb-0">Nội Dung </label>
+                                                    <div class="col-md-12">
 
-                                                            <textarea rows="5" class="form-control ps-0 form-control-line" type="text" name="aboutSV" value="<%= list.getAboutSV()%>"><%= list.getAboutSV()%></textarea>
-                                                        </div>
+                                                        <textarea rows="5" class="form-control ps-0 form-control-line" type="text" name="aboutSV" value="<%= list.getAboutSV()%>"><%= list.getAboutSV()%></textarea>
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group"> 
-                                                        <br> Trạng Thái :<%= list.isStatus()%></br>
-                                                        <input checked="checked" type="radio" name="status" value="True">True<br>
-                                                        <input type="radio" name="status" value="False">False
+                                                <div class="form-group"> 
+                                                    <br> Trạng Thái :<%= list.isStatus()%></br>
+                                                    <input checked="checked" type="radio" name="status" value="True">True<br>
+                                                    <input type="radio" name="status" value="False">False
 
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-12 d-flex">
+                                                        <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Update_Service">Cập Nhật</button>
                                                     </div>
-
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12 d-flex">
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Update_Service">Cập Nhật</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <!-- Column -->
-                                </div>       
-                            </div>
+                                </div>
+                                <!-- Column -->
+                            </div>       
                         </div>
                     </div>
                 </div>
@@ -354,8 +370,6 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-            </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
@@ -381,12 +395,4 @@
     <!--Custom JavaScript -->
     <script src="html/js/custom.js"></script>
 </body> 
-
-
-
-
-
-
-
-
 </html>

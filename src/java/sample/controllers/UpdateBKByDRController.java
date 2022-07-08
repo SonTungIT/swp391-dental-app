@@ -6,48 +6,37 @@ package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import sample.booking.BookingDTO;
-import sample.user.PatientDAO;
-import sample.user.UserDTO;
+import sample.user.DoctorDAO;
 
 /**
  *
  * @author Xqy
  */
-@WebServlet(name = "ViewHistoryBKController", urlPatterns = {"/ViewHistoryBKController"})
-public class ViewHistoryBKController extends HttpServlet {
-
-    private static final String ERROR = "historyBooking.jsp";
-    private static final String SUCCESS = "historyBooking.jsp";
+@WebServlet(name = "UpdateBKByDRController", urlPatterns = {"/UpdateBKByDRController"})
+public class UpdateBKByDRController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String patientID = loginUser.getUserID();
-            String search = request.getParameter("searchHSBK");
-            PatientDAO dao = new PatientDAO();
-            List<BookingDTO> listHSBK = dao.getHistoryBK(search, patientID);
-            List<BookingDTO> listHSBKAT = dao.getHistoryBKLoading(search, patientID);
-            if (listHSBK.size() > 0) {
-                request.setAttribute("LIST_HISTORY_BK", listHSBK);
-                request.setAttribute("LIST_HISTORY_BK_AT", listHSBKAT);
-                url = SUCCESS;
+            String doctorID = request.getParameter("doctorID");
+            String bookingID = request.getParameter("bookingID");
+            String action = request.getParameter("action");
+            DoctorDAO dao = new DoctorDAO();
+            if (action.equals("Finish")) {
+                dao.updateBK(bookingID, "Finished");
+                request.getRequestDispatcher("ManagePTBK_DRController?doctorID="+doctorID).forward(request, response);
+            } else {
+                dao.updateBK(bookingID, "Inactive");
+                request.getRequestDispatcher("ManagePTBK_DRController?doctorID="+doctorID).forward(request, response);
             }
-        } catch (Exception e) {
-            log("Error at ViewHistoryBKController:" + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception ex) {
+            log("Error at UpdateBKByDRController: " + ex.toString());
         }
     }
 

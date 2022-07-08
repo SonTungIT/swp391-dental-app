@@ -43,11 +43,11 @@
                     <div class="signin-content">
                         <div class="signin-image">
                             <figure><img src="loginPage/colorlib-regform-7/images/login-img1.jpg" alt="sing up image"></figure>
-                            <a style="font-family: ui-serif; font-size: 18px" href="register.jsp" class="signup-image-link">Tạo mới tài khoản</a>
+                            <a style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 14px" href="register.jsp" class="signup-image-link">Tạo mới tài khoản</a>
                         </div>
 
-                        <div style="font-family: ui-serif; font-size: 16px" class="signin-form">
-                            <h2 style="font-family: ui-serif" class="form-title">Đăng Nhập</h2>
+                        <div style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 16px" class="signin-form">
+                            <h2 style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif" class="form-title">Đăng Nhập</h2>
                             <form method="POST" action="MainController" class="register-form" id="login-form" ">
                                 <div class="form-group">
                                     <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                                    <label for="remember-me" class="label-agree-term"><span><span></span></span>Ghi nhớ tình trạng đăng nhập</label>
+                                    <label style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif" for="remember-me" class="label-agree-term"><span><span></span></span>Ghi nhớ tình trạng đăng nhập</label>
                                 </div>
                                 <div class="form-group form-button">
                                     <input type="submit" name="action" id="signin" class="form-submit" value="Login"/>

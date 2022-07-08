@@ -6,6 +6,7 @@ package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sample.booking.BookingDTO;
+import sample.booking.DateofApp;
 import sample.user.AdminDAO;
 
 /**
@@ -53,6 +56,19 @@ public class DeleteScheduleForDRController extends HttpServlet {
             if (listDOW.size() > 0) {
                 for (String day : listDOW) {
                     if (day != null) {
+                        long millis = System.currentTimeMillis();
+                        Date curDate = new java.sql.Date(millis);
+                        List<BookingDTO> listBK = dao.getListBKOFDR(doctorID, curDate);
+                        DateofApp dow = new DateofApp();
+                        for (BookingDTO bk : listBK) {
+                            String dayBK = dow.DayofWeek(bk.getDateBooking().toString());
+                            if (dayBK.equals(day)) {
+                                boolean checkup = dao.updateBKConflic_BY_DLSC(bk.getBookingID());
+                                if (checkup) {
+                                    request.setAttribute("MESS_UD", "Có một số lịch hẹn đã bị xung đột do đổi lịch!");
+                                }
+                            }
+                        }
                         boolean check = dao.updateScheduleDR(doctorID, day, false);
                         if (check) {
                             count++;
@@ -61,11 +77,12 @@ public class DeleteScheduleForDRController extends HttpServlet {
                 }
             }
             if (count != 0) {
+                request.setAttribute("MESS", "Cập nhật thành công!");
                 url = SUCCESS;
             }
 
         } catch (Exception e) {
-            log("Error at deleteController: " + e.toString());
+            log("Error at DeleteScheduleForDRController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
