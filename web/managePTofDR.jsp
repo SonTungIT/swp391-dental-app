@@ -133,9 +133,9 @@
                             <!-- User profile and search -->
                             <!-- ============================================================== -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
+                               <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/blog4.jpg" alt="user" class="profile-pic me-2">Ma Phong Ba
+                                    <img src="./images/doctors/${LOGIN_USER.image}" style="width: 40px; height: 40px" alt="user" class="profile-pic me-2">${LOGIN_USER.userID}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
