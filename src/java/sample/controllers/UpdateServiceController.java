@@ -22,9 +22,9 @@ import sample.user.AdminDAO;
  */
 @WebServlet(name = "UpdateServiceController", urlPatterns = {"/UpdateServiceController"})
 public class UpdateServiceController extends HttpServlet {
-
-     private static final String ERROR = "SearchServiceController";
-    private static final String SUCCESS = "SearchServiceController";
+    
+    private static final String ERROR = "SearchServiceController";
+    private static final String SUCCESS = "MainController?search=&action=Search_Service";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

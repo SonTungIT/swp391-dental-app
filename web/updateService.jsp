@@ -21,7 +21,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>Service Update</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
@@ -315,9 +315,21 @@
                                                     </div>
 
                                                     <div class="form-group"> 
-                                                        <br> Trạng Thái :<%= list.isStatus()%></br>
-                                                        <input checked="checked" type="radio" name="status" value="True">True<br>
-                                                        <input type="radio" name="status" value="False">False
+                                                        <br> Trạng Thái :
+                                                            <%
+                                                            if (list.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <%
+                                                            }
+                                                        %>
+                                                        </br>
+                                                        <input checked="checked" type="radio" name="status" value="True">Hiện<br>
+                                                        <input type="radio" name="status" value="False">Ẩn
 
                                                     </div>
 
@@ -326,6 +338,7 @@
                                                         <div class="col-sm-12 d-flex">
                                                             <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Update_Service">Cập Nhật</button>
                                                         </div>
+                                                        
                                                     </div>
                                                 </form>
                                             </div>

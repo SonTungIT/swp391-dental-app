@@ -308,9 +308,10 @@
                                                         <th class="border-top-0">Comment</th>
                                                         <th class="border-top-0">Bác sĩ phụ trách</th>  
                                                         <th class="border-top-0">Dịch vụ</th>
+                                                        <th class="border-top-0">Đánh Giá</th>
                                                         <th class="border-top-0">Ngày Viết</th>
-                                                        <th class="border-top-0"></th>
-                                                        <th class="border-top-0"></th>
+                                                        
+                                                        
                                                         
                                                         
                                                     </tr>
@@ -339,6 +340,18 @@
                 <td>  
                     <%= feedback.getServiceName()%>
                 </td>
+                <!--hiện đánh giá sao-->
+                <td>  
+                    <%
+                        int star;
+                        for (star = 1; star <= feedback.getRating(); star++) {
+                    %>
+                    <i class="fa-solid fa-star " style="color : #ffcc00 " ></i>
+                    <%
+                        }
+                    %>
+                </td>
+                <!---------------->
                 <td>  
                     <%= feedback.getDateFeedback()%> 
                 </td>

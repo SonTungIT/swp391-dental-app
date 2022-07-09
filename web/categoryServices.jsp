@@ -324,8 +324,8 @@
                                                         <th class="border-top-0">Category ID</th>
                                                         <th class="border-top-0">Tên Loại Dịch Vụ</th>                                                      
                                                         <th class="border-top-0">Trạng Thái</th>
-                                                        <th class="border-top-0"></th>
-                                                        <th class="border-top-0"></th>
+                                                        <th class="border-top-0">Xóa</th>
+                                                        <th class="border-top-0">Cập Nhật</th>
                                                         
                                                         
                                                     </tr>
@@ -348,10 +348,21 @@
                                                             <input type="hidden" value="<%= category.getCategoryName()%>" name="categoryName" />
                                                         </td>
                                                         <td> 
-                                                            <%= category.isStatus()%></br>
+                                                           
+                                                            <%
+                                                            if (category.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <%
+                                                            }
+                                                        %>
                                                             <br> </br>
-                                                            <input checked="checked" type="radio" name="status" value="True">True<br>
-                                                            <input type="radio" name="status" value="False">False
+                                                            <input checked="checked" type="radio" name="status" value="True">Hiện<br>
+                                                            <input type="radio" name="status" value="False">Ẩn
                                                         </td>
 
                                                        
@@ -363,8 +374,10 @@
 
 <!--                                                        update-->
                                                         <td>
-                                                            <input type="submit" name="action" value="Update_Category" class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank" />
+                                                            <button  type="submit" name="action" value="Update_Category" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-marker"></i>
+                                                            </button>
+                                                            
                                                             <input type="hidden" name="search" value="<%= search%>"/>
                                                         </td>
                                                 </form>  

@@ -326,9 +326,10 @@
                                                     <th class="border-top-0">Bác Sĩ Phụ Trách </th>
                                                     <th class="border-top-0">Tên Dịch Vụ</th>
                                                     <th class="border-top-0">comment</th>
+                                                    <th class="border-top-0">Đánh Giá</th>
                                                     <th class="border-top-0">Ngày Viết</th>                                                     
                                                     <th class="border-top-0">Trạng Thái</th>
-                                                    <th class="border-top-0"></th>
+                                                    <th class="border-top-0">Cập Nhật</th>
                                                 </tr>
                                             </thead>
 
@@ -360,6 +361,19 @@
                                                     <td>  
                                                         <%= feedback.getComment()%>
                                                     </td>
+                                                    <!-- hiện số sao đánh giá -->
+                                                    <td>  
+                                                        <%  
+                                                            int star;
+                                                            for(star =1; star <= feedback.getRating(); star++ ){
+                                                        %>
+                                                        <i class="fa-solid fa-star " style="color : #ffcc00 " ></i>
+                                                        <%
+                                                                
+                                                            }
+                                                        %>
+                                                    </td>
+                                                    <!--------------->
                                                     <td>  
                                                         <%= feedback.getDateFeedback()%> 
                                                     </td>
@@ -368,11 +382,11 @@
                                                         <%
                                                             if (feedback.isStatus() == true) {
                                                         %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white"><%= feedback.isStatus()%></button>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
                                                         <%
                                                         } else {
                                                         %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white"><%= feedback.isStatus()%></button>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
                                                         <%
                                                             }
                                                         %>
@@ -384,8 +398,9 @@
 
                                                     <!--update-->
                                                     <td>
-                                                        <input type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white"
-                                                               target="_blank" />
+                                                        <button  type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-marker"></i>
+                                                        </button>
                                                         <input type="hidden" name="search" value="<%= search%>" />                      
                                                     </td>
                                             </form>  

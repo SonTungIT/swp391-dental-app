@@ -353,7 +353,7 @@
                                                         </td>
                                                         <td>
                                                             
-                                                            <img width="80px" height="60px" src="image/<%= service.getImage()%>" alt="Image can't show">
+                                                            <img width="80px" height="60px" src="images/<%= service.getImage()%>" alt="Image can't show">
                                                         </td>
                                                         <td>
                                                             <%= service.getCategoryID()%>
@@ -368,22 +368,31 @@
                                                             <input type="hidden" value="<%= service.getAboutSV() %>" name="aboutSV" />
                                                         </td>
                                                         <td> 
-                                                            <%= service.isStatus()%></br>
-                                                            
+                                                            <%
+                                                            if (service.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <%
+                                                            }
+                                                        %>
                                                         </td>
 
                                                        
 
                                                         <!--delete-->
                                                         <td>
-                                                            <a href="MainController?action=DeleteService&serviceID=<%= service.getServiceID() %>&search=<%= search%>" >Delete</a>
+                                                            <a href="MainController?action=DeleteService&serviceID=<%= service.getServiceID() %>&search=<%= search%>" >Xóa</a>
                                                         </td>
 
                                                         <!--update-->
                                                         <td>
 <!--                                                            <input type="submit" name="action" value="Update_Service" class="btn btn-success d-none d-md-inline-block text-white"
                                                            target="_blank" />-->
-                                                            <a href="MainController?action=SUService&serviceName=<%= service.getServiceName() %>" >Update</a>
+                                                            <a href="MainController?action=SUService&serviceName=<%= service.getServiceName() %>" >Cập Nhật</a>
                                                             <input type="hidden" name="search" value="<%= search%>"/>
                                                         </td>
                                                 </form>  

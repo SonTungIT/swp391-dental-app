@@ -38,8 +38,8 @@ public class AdminDAO {
     private static final String CHECK_SL_FAIL_BY_UDSL = "select slotID from Slot WHERE slotTime = ? AND slotDateStart !='' AND slotDateEnd !=''";
 
     private static final String ACTIVE_FEEDBACK3 = "SELECT top(3) fullName , Users.image  , Feedback.comment, Feedback.dateFeedback , Feedback.status From Feedback join Users on Feedback.patientID = Users.userID Where Feedback.status like '1' ORDER BY Feedback.dateFeedback DESC";
-    private static final String ACTIVE_FEEDBACK = "SELECT  PT.fullName as patientName , PT.image  , fb.comment , sv.serviceName, us.fullName as doctorName ,fb.dateFeedback , fb.status From(Select fullName, userID,image from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID ORDER BY fb.dateFeedback DESC";
-    private static final String SHOW_FEEDBACK = "SELECT feedbackID, fb.bookingID, PT.fullName as patientName , us.fullName as doctorName, sv.serviceName ,  comment , dateFeedBack , fb.status From (Select fullName, userID from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join CategoryService cs ON cs.categoryID = sv.categoryID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID WHERE feedbackID like ? AND Booking.doctorID = dt.doctorID ORDER BY feedbackID DESC";
+    private static final String ACTIVE_FEEDBACK = "SELECT  PT.fullName as patientName , PT.image  , fb.comment , sv.serviceName, us.fullName as doctorName ,fb.dateFeedback , fb.status, fb.rating From(Select fullName, userID,image from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID ORDER BY fb.dateFeedback DESC";
+    private static final String SHOW_FEEDBACK = "SELECT feedbackID, fb.bookingID, PT.fullName as patientName , us.fullName as doctorName, sv.serviceName ,  comment , dateFeedBack , fb.status , fb.rating From (Select fullName, userID from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join CategoryService cs ON cs.categoryID = sv.categoryID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID WHERE feedbackID like ? AND Booking.doctorID = dt.doctorID ORDER BY feedbackID DESC";
     private static final String UPDATE_FEEDBACK = "UPDATE Feedback SET status=? WHERE feedbackID =? ";
 
     private static final String SEARCH_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService WHERE categoryID like ? ";
@@ -1563,8 +1563,9 @@ public class AdminDAO {
                     String serviceName = rs.getString("serviceName");
                     Date dateFeedback = rs.getDate("dateFeedback");
                     boolean status = rs.getBoolean("status");
+                    int rating = rs.getInt("rating");
                     if (status == true) {
-                        list.add(new FeedbackDTO(comment, dateFeedback, fullname, doctorName, serviceName, image, status));
+                        list.add(new FeedbackDTO(comment, dateFeedback, fullname, doctorName, serviceName, image, status, rating));
                     }
                 }
             }
@@ -1604,7 +1605,8 @@ public class AdminDAO {
                     String comment = rs.getString("comment");
                     Date dateFeedback = rs.getDate("dateFeedback");
                     boolean status = rs.getBoolean("status");
-                    list.add(new FeedbackDTO(feedbackID, bookingID, patientName, doctorName, serviceName, comment, dateFeedback, status));
+                    int rating = rs.getInt("rating");
+                    list.add(new FeedbackDTO(feedbackID, bookingID, patientName, doctorName, serviceName, comment, dateFeedback, status, rating));
 
                 }
             }
