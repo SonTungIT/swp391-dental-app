@@ -314,11 +314,7 @@
                                                     <th>Chuyên môn</th>
                                                     <th>Giới Thiệu</th>
                                                     <th>Trạng Thái</th>
-                                                 
                                                     <th>Cập Nhật</th>
-                                                    
-
-
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -354,12 +350,8 @@
                                                 <td>
                                                     <form action="MainController">
                                                         <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
-
-
                                                         </form>
-
                                                     </td> 
-
                                                 </tr>
                                             </form>
                                             <%
