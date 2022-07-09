@@ -331,18 +331,32 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group"> 
-                                                    <br> Trạng Thái :<%= list.isStatus()%></br>
-                                                    <input checked="checked" type="radio" name="status" value="True">True<br>
-                                                    <input type="radio" name="status" value="False">False
+
+                                                    <div class="form-group"> 
+                                                        <br> Trạng Thái :
+                                                            <%
+                                                            if (list.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <%
+                                                            }
+                                                        %>
+                                                        </br>
+                                                        <input checked="checked" type="radio" name="status" value="True">Hiện<br>
+                                                        <input type="radio" name="status" value="False">Ẩn
+
 
                                                 </div>
 
 
-                                                <div class="form-group">
-                                                    <div class="col-sm-12 d-flex">
-                                                        <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Update_Service">Cập Nhật</button>
-                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12 d-flex">
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Update_Service">Cập Nhật</button>
+                                                        </div>
                                                 </div>
                                             </form>
                                         </div>

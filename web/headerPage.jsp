@@ -4,6 +4,11 @@
     Author     : Lenovo Legion
 --%>
 
+<%@page import="sample.services.ServiceDTO"%>
+<%@page import="sample.services.CategoryServiceDTO"%>
+<%@page import="sample.user.PatientDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

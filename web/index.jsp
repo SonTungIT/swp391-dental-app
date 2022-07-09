@@ -657,7 +657,7 @@
                                 <div class="feedback-grids">    
                                     <div class="feedback-img">
                                         <td>  
-                                            <img width="80px" height="60px" src="image/<%= feedback.getImage()%>" alt="Image can't show">
+                                            <img width="80px" height="60px" src="images/<%= feedback.getImage()%>" alt="Image can't show">
                                         </td>
                                     </div>
                                     <div class="feedback-img-info">
