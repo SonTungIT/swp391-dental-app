@@ -49,7 +49,7 @@ public class PatientDAO {
             + "								JOIN Booking bk ON bk.serviceID = sv.serviceID\n"
             + "								WHERE sl.slotID = ? AND timeBooking = slotTime AND dateBooking = ? AND bk.status = 'Active'";
 
-    private static final String CREATE_FEEDBACK = "INSERT INTO Feedback(feedbackID, patientID, bookingID, comment, dateFeedback, timeFeedback, status) VALUES(?,?,?,?,?,?,?)";
+    private static final String CREATE_FEEDBACK = "INSERT INTO Feedback(feedbackID, patientID, bookingID, comment, dateFeedback, timeFeedback, status , rating) VALUES(?,?,?,?,?,?,?,?)";
     private static final String CHECK_DUPLICATE_FB = "SELECT PatientID FROM Feedback WHERE  feedbackID=? ";
 
     private static final String SHOW_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService";
@@ -562,6 +562,7 @@ public class PatientDAO {
                 ptm.setDate(5, feedback.getDateFeedback());
                 ptm.setString(6, feedback.getTimeFeedback());
                 ptm.setBoolean(7, feedback.isStatus());
+                ptm.setInt(8, feedback.getRating());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

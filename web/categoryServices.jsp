@@ -317,68 +317,73 @@
                                             if (listCategory.size() > 0) {
                                     %> 
 
-                                    <div class="table-responsive">
-                                        <table class="table user-table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-top-0">No</th>
-                                                    <th class="border-top-0">Category ID</th>
-                                                    <th class="border-top-0">Tên Loại Dịch Vụ</th>                                                      
-                                                    <th class="border-top-0">Trạng Thái</th>
-                                                    <th class="border-top-0">Xóa</th>
-                                                    <th class="border-top-0">Cập Nhập</th>
 
+                                                <div class="table-responsive">
+                                            <table class="table user-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-top-0">No</th>
+                                                        <th class="border-top-0">Category ID</th>
+                                                        <th class="border-top-0">Tên Loại Dịch Vụ</th>                                                      
+                                                        <th class="border-top-0">Trạng Thái</th>
+                                                        <th class="border-top-0">Xóa</th>
+                                                        <th class="border-top-0">Cập Nhật</th>
+                                                        
+                                                        
+                                                    </tr>
+                                                </thead>
 
-                                                </tr>
-                                            </thead>
+                                                <tbody>
+                                                    <%
+                                                        int count = 1;
+                                                        for (CategoryServiceDTO category : listCategory) {
+                                                    %>
+                                                <form action="MainController">
+                                                    <tr>
+                                                        <td><%= count++%></td>
+                                                        <td>
+                                                            <%= category.getCategoryID() %>
+                                                            <input type="hidden" value="<%=  category.getCategoryID()%>" name="categoryID" />
+                                                        </td>
+                                                        <td>
+                                                            <%= category.getCategoryName() %>
+                                                            <input type="hidden" value="<%= category.getCategoryName()%>" name="categoryName" />
+                                                        </td>
+                                                        <td> 
+                                                           
+                                                            <%
+                                                            if (category.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <%
+                                                            }
+                                                        %>
+                                                            <br> </br>
+                                                            <input checked="checked" type="radio" name="status" value="True">Hiện<br>
+                                                            <input type="radio" name="status" value="False">Ẩn
+                                                        </td>
 
-                                            <tbody>
-                                                <%
-                                                    int count = 1;
-                                                    for (CategoryServiceDTO category : listCategory) {
-                                                %>
-                                            <form action="MainController">
-                                                <tr>
-                                                    <td><%= count++%></td>
-                                                    <td>
-                                                        <%= category.getCategoryID()%>
-                                                        <input type="hidden" value="<%=  category.getCategoryID()%>" name="categoryID" />
-                                                    </td>
-                                                    <td>
-                                                        <%= category.getCategoryName()%>
-                                                        <input type="hidden" value="<%= category.getCategoryName()%>" name="categoryName" />
-                                                    </td>
-                                                    <td> 
-                                                        <%= category.isStatus()%></br>
-                                                        <br> </br>
-                                                        <input checked="checked" type="radio" name="status" value="True">True<br>
-                                                        <input type="radio" name="status" value="False">False
-                                                    </td>
+                                                       
 
+<!--                                                        delete      -->
+                                                        <td>
+                                                            <a href="MainController?action=DeleteCategory&categoryID=<%= category.getCategoryID()%>&search=<%= search%>" >Delete</a>
+                                                        </td>
 
-
-                                                    <!--                                                        delete      -->
-                                                    <td>
-
-                                                        <a class="btn btn-success d-none d-md-inline-block text-white" href="MainController?action=DeleteCategory&categoryID=<%= category.getCategoryID()%>&search=<%= search%>" >
-                                                            <i class="fa-solid fa-trash-can"></i>
-                                                        </a>
-                                                    </td>
-
-                                                    <!--                                                        update-->
-                                                    <td>
-                                                        <button type="submit" name="action" value="Update_Category" class="btn btn-success d-none d-md-inline-block text-white">
+<!--                                                        update-->
+                                                        <td>
+                                                            <button  type="submit" name="action" value="Update_Category" class="btn btn-success d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-pencil"></i>
-                                                        </button>
-
-
-                                                        <input type="hidden" name="search" value="<%= search%>"/>
-                                                    </td>
-                                            </form>  
-
-
-
-
+                                                            </button>
+                                                            
+                                                            <input type="hidden" name="search" value="<%= search%>"/>
+                                                        </td>
+                                                </form>  
+ 
                                             <%
                                                 }
 

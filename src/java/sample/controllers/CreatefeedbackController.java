@@ -28,7 +28,7 @@ import sample.user.PatientDAO;
 public class CreatefeedbackController extends HttpServlet {
 
     private static final String ERROR="error.jsp";
-    private static final String SUCCESS="patient.jsp";
+    private static final String SUCCESS="MainController?searchHSBK=&action=SearchHSBK";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -63,13 +63,12 @@ public class CreatefeedbackController extends HttpServlet {
             String bookingID = request.getParameter("bookingID");
             
             String comment = request.getParameter("comment");
-             
 
-
-            
             boolean status = Boolean.parseBoolean(request.getParameter("status"));
             
-            FeedbackDTO feedback = new FeedbackDTO(feedbackID, patientID, bookingID, comment, dateFeedback, timeFeedback, status);
+            int rating = Integer.parseInt(request.getParameter("rating"));
+            
+            FeedbackDTO feedback = new FeedbackDTO(feedbackID, patientID, bookingID, comment, dateFeedback, timeFeedback, status , rating);
             boolean checkUpdate = dao.create_feedback(feedback);
             if (checkUpdate) {
                 url = SUCCESS;

@@ -38,8 +38,8 @@ public class AdminDAO {
     private static final String CHECK_SL_FAIL_BY_UDSL = "select slotID from Slot WHERE slotTime = ? AND slotDateStart !='' AND slotDateEnd !=''";
 
     private static final String ACTIVE_FEEDBACK3 = "SELECT top(3) fullName , Users.image  , Feedback.comment, Feedback.dateFeedback , Feedback.status From Feedback join Users on Feedback.patientID = Users.userID Where Feedback.status like '1' ORDER BY Feedback.dateFeedback DESC";
-    private static final String ACTIVE_FEEDBACK = "SELECT  PT.fullName as patientName , PT.image  , fb.comment , sv.serviceName, us.fullName as doctorName ,fb.dateFeedback , fb.status From(Select fullName, userID,image from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID ORDER BY fb.dateFeedback DESC";
-    private static final String SHOW_FEEDBACK = "SELECT feedbackID, fb.bookingID, PT.fullName as patientName , us.fullName as doctorName, sv.serviceName ,  comment , dateFeedBack , fb.status From (Select fullName, userID from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join CategoryService cs ON cs.categoryID = sv.categoryID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID WHERE feedbackID like ? AND Booking.doctorID = dt.doctorID ORDER BY feedbackID DESC";
+    private static final String ACTIVE_FEEDBACK = "SELECT  PT.fullName as patientName , PT.image  , fb.comment , sv.serviceName, us.fullName as doctorName ,fb.dateFeedback , fb.status, fb.rating From(Select fullName, userID,image from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID ORDER BY fb.dateFeedback DESC";
+    private static final String SHOW_FEEDBACK = "SELECT feedbackID, fb.bookingID, PT.fullName as patientName , us.fullName as doctorName, sv.serviceName ,  comment , dateFeedBack , fb.status , fb.rating From (Select fullName, userID from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join CategoryService cs ON cs.categoryID = sv.categoryID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID WHERE feedbackID like ? AND Booking.doctorID = dt.doctorID ORDER BY feedbackID DESC";
     private static final String UPDATE_FEEDBACK = "UPDATE Feedback SET status=? WHERE feedbackID =? ";
 
     private static final String SEARCH_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService WHERE categoryID like ? ";
@@ -1563,8 +1563,9 @@ public class AdminDAO {
                     String serviceName = rs.getString("serviceName");
                     Date dateFeedback = rs.getDate("dateFeedback");
                     boolean status = rs.getBoolean("status");
+                    int rating = rs.getInt("rating");
                     if (status == true) {
-                        list.add(new FeedbackDTO(comment, dateFeedback, fullname, doctorName, serviceName, image, status));
+                        list.add(new FeedbackDTO(comment, dateFeedback, fullname, doctorName, serviceName, image, status, rating));
                     }
                 }
             }
@@ -1604,7 +1605,8 @@ public class AdminDAO {
                     String comment = rs.getString("comment");
                     Date dateFeedback = rs.getDate("dateFeedback");
                     boolean status = rs.getBoolean("status");
-                    list.add(new FeedbackDTO(feedbackID, bookingID, patientName, doctorName, serviceName, comment, dateFeedback, status));
+                    int rating = rs.getInt("rating");
+                    list.add(new FeedbackDTO(feedbackID, bookingID, patientName, doctorName, serviceName, comment, dateFeedback, status, rating));
 
                 }
             }
@@ -2063,8 +2065,8 @@ public class AdminDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status FROM Booking \n" +
-"                        		WHERE doctorID = ? AND dateBooking > ? AND status = 'Active'";
+                String sql = "SELECT bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status FROM Booking \n"
+                        + "                        		WHERE doctorID = ? AND dateBooking > ? AND status = 'Active'";
                 ptm = conn.prepareStatement(sql);
                 ptm.setString(1, doctorID);
                 ptm.setDate(2, date);
@@ -2105,6 +2107,183 @@ public class AdminDAO {
                 String sql = "UPDATE Booking SET status = 'Conflic' WHERE bookingID = ?";
                 ptm = conn.prepareStatement(sql);
                 ptm.setString(1, bookingID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public List<CategoryServiceDTO> getListCT_AD() throws SQLException, ClassNotFoundException {
+        List<CategoryServiceDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT categoryID, categoryName from CategoryService WHERE status = 1";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String categoryName = rs.getString("categoryName");
+                    String categoryID = rs.getString("categoryID");
+                    list.add(new CategoryServiceDTO(categoryID, categoryName));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public DoctorDTO getProfileDR(String doctorID) throws SQLException, ClassNotFoundException {
+        DoctorDTO dt = new DoctorDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT userID, password, fullName, roleID, gender, address, image, birthday, email, phone, categoryName, shift, dt.categoryID ,aboutDR, us.status from Users us \n"
+                        + "			JOIN Doctor dt ON dt.doctorID = us.userID \n"
+                        + "			JOIN CategoryService cs ON cs.categoryID = dt.categoryID\n"
+                        + "			WHERE doctorID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, doctorID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String password = rs.getString("password");
+                    String fullName = rs.getString("fullName");
+                    String roleID = rs.getString("roleID");
+                    String gender = rs.getString("gender");
+                    String address = rs.getString("address");
+                    String image = rs.getString("image");
+                    Date birthday = rs.getDate("birthday");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String categoryName = rs.getString("categoryName");
+                    String shift = rs.getString("shift");
+                    boolean status = rs.getBoolean("status");
+                    String categoryID = rs.getString("categoryID");
+                    String serviceID = "";
+                    String serviceName = "";
+                    String aboutDR = rs.getString("aboutDR");
+                    dt = new DoctorDTO(categoryID, categoryName, serviceID, serviceName, aboutDR, userID, password, fullName, roleID, gender, address, image, birthday, email, phone, shift, status);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return dt;
+    }
+
+    public DoctorDTO getPFDR_UD(String doctorID) throws SQLException, ClassNotFoundException {
+        DoctorDTO dt = new DoctorDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT categoryID, shift, aboutDR from Doctor WHERE doctorID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, doctorID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String categoryID = rs.getString("categoryID");
+                    String shift = rs.getString("shift");
+                    String aboutDR = rs.getString("aboutDR");
+                    dt = new DoctorDTO(categoryID, aboutDR, shift);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return dt;
+    }
+
+    public boolean updateDR_ShiftCTAB(DoctorDTO dt, String doctorID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Doctor SET aboutDR = ?, categoryID = ?, shift = ? WHERE doctorID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, dt.getAboutDR());
+                ptm.setString(2, dt.getCategoryID());
+                ptm.setString(3, dt.getShift());
+                ptm.setString(4, doctorID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public boolean clearSchedule(String doctorID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Schedule SET status = 0 WHERE doctorID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, doctorID);
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

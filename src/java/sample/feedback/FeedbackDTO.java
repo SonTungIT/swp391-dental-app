@@ -24,6 +24,7 @@ public class FeedbackDTO {
     private String serviceName;
     private String image;
     private boolean status;
+    private int rating;
 
     public FeedbackDTO() {
         this.feedbackID = "";
@@ -37,6 +38,7 @@ public class FeedbackDTO {
         this.doctorName="";
         this.serviceName="";
         this.image="";
+        this.rating=0;
     }
 
     public FeedbackDTO(String feedbackID, String patientID, String bookingID, String comment, Date dateFeedback, String timeFeedback, boolean status) {
@@ -49,7 +51,7 @@ public class FeedbackDTO {
         this.status = status;
     }
 
-    public FeedbackDTO(String feedbackID, String bookingID, String patientName, String doctorName, String serviceName, String comment, Date dateFeedback, boolean status) {
+    public FeedbackDTO(String feedbackID, String bookingID, String patientName, String doctorName, String serviceName, String comment, Date dateFeedback, boolean status,int rating) {
         this.feedbackID = feedbackID;
         this.bookingID = bookingID;
         this.comment = comment;
@@ -58,6 +60,7 @@ public class FeedbackDTO {
         this.doctorName = doctorName;
         this.serviceName = serviceName;
         this.status = status;
+        this.rating= rating;
     }
 
     public FeedbackDTO(String comment, Date dateFeedback, String patientName, String image, boolean status) {
@@ -68,7 +71,7 @@ public class FeedbackDTO {
         this.status = status;
     }
 
-    public FeedbackDTO(String comment, Date dateFeedback, String patientName, String doctorName, String serviceName, String image, boolean status) {
+    public FeedbackDTO(String comment, Date dateFeedback, String patientName, String doctorName, String serviceName, String image, boolean status , int rating) {
         this.comment = comment;
         this.dateFeedback = dateFeedback;
         this.patientName = patientName;
@@ -76,9 +79,19 @@ public class FeedbackDTO {
         this.serviceName = serviceName;
         this.image = image;
         this.status = status;
+        this.rating = rating;
     }
     
-    
+    public FeedbackDTO(String feedbackID, String patientID, String bookingID, String comment, Date dateFeedback, String timeFeedback, boolean status, int rating) {
+        this.feedbackID = feedbackID;
+        this.patientID = patientID;
+        this.bookingID = bookingID;
+        this.comment = comment;
+        this.dateFeedback = dateFeedback;
+        this.timeFeedback = timeFeedback;
+        this.status = status;
+        this.rating = rating;
+    }
     
 
 
@@ -168,6 +181,14 @@ public class FeedbackDTO {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     

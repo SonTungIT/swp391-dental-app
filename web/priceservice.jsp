@@ -308,53 +308,54 @@
 
                                     </form>
 
+                                        
+                                        
+                                       
 
+                                                  
+          <%
+                                                    List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_PRICE_SERVICE");
+                                                    if (listService != null) {
+                                                        if (listService.size() > 0) {
+                                                %>  
+                                                <div class="table-responsive">
+                                            <table class="table user-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-top-0">Tên Dịch Vụ</th> 
+                                                        <th class="border-top-0">Chi Phí</th> 
+                                                        <th class="border-top-0">Cập Nhật</th>    
+                                                    </tr>
+                                                </thead>
 
-
-
-                                    <%
-                                        List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_PRICE_SERVICE");
-                                        if (listService != null) {
-                                            if (listService.size() > 0) {
-                                    %>  
-                                    <div class="table-responsive">
-                                        <table class="table user-table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-top-0">Tên Dịch Vụ</th> 
-                                                    <th class="border-top-0">Chi Phí</th> 
-                                                    <th class="border-top-0">Cập Nhật</th>    
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <%
-                                                    int count = 1;
-                                                    for (ServiceDTO service : listService) {
-                                                %>
-                                            <form action="MainController">
-                                                <tr>
-
-
-                                                    <td>
-                                                        <%= service.getServiceName()%>
-                                                        <input type="hidden" value="<%= service.getServiceName()%>" name="serviceName" />
-                                                    </td>
-
-
-                                                    <td>
-
-                                                        <input type="text" value="<%= service.getPrice()%>" name="price" />
-                                                    </td>
-                                                    <!--                                                        update-->
-                                                    <td>
-                                                        <button type="submit" name="action" value="Update_Price" class="btn btn-success d-none d-md-inline-block text-white"
-                                                                target="_blank">
-                                                            <i class="fa-solid fa-pencil"></i>
+                                                <tbody>
+                                                    <%
+                                                        int count = 1;
+                                                        for (ServiceDTO service : listService) {
+                                                    %>
+                                                <form action="MainController">
+                                                    <tr>
+                                                        
+                                                        
+                                                        <td>
+                                                            <%= service.getServiceName() %>
+                                                            <input type="hidden" value="<%= service.getServiceName() %>" name="serviceName" />
+                                                        </td>
+                                                        
+                                                        
+                                                        <td>
+                                                            
+                                                            <input type="text" value="<%= service.getPrice()%>" name="price" />
+                                                        </td>
+<!--                                                        update-->
+                                                        <td>
+                                                            <button  type="submit" name="action" value="Update_Price" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-marker"></i>
                                                         </button>
-                                                        <input type="hidden" name="search" value="<%= search%>"/>
-                                                    </td>
-                                            </form>  
+                                                            <input type="hidden" name="search" value="<%= search%>"/>
+                                                        </td>
+                                                </form>  
+  
                                             <%
                                                 }
 

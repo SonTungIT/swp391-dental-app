@@ -136,7 +136,6 @@ public class MainController extends HttpServlet {
                 url = REGISTER_CONTROLLER;
             } else if (LOGOUT.equals(action)) {
                 url = LOGOUT_CONTROLLER;
-            
             } else if (SEARCH_DOCTOR.equals(action)) {
                 url = SEARCH_DOCTOR_CONTROLLER;
             } else if (SHOW_DOCTOR.equals(action)) {

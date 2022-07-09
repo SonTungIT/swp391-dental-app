@@ -28,7 +28,7 @@ public class DoctorDTO extends UserDTO {
         this.shift = shift;
     }
 
-    public DoctorDTO(String doctorID,String doctorName,String image,String categoryName, String shift)  {
+    public DoctorDTO(String doctorID, String doctorName, String image, String categoryName, String shift) {
         super(doctorID, doctorName, image);
         this.categoryName = categoryName;
         this.shift = shift;
@@ -37,6 +37,7 @@ public class DoctorDTO extends UserDTO {
     public DoctorDTO(String fullName) {
         super(fullName);
     }
+
     public DoctorDTO(String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
         super(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
     }
@@ -45,16 +46,16 @@ public class DoctorDTO extends UserDTO {
         this.categoryID = categoryID;
         this.aboutDR = aboutDR;
         this.shift = shift;
-        
-        
     }
-    public DoctorDTO(String categoryID, String categoryName, String serviceID, String serviceName, String aboutDR, String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
+
+    public DoctorDTO(String categoryID, String categoryName, String serviceID, String serviceName, String aboutDR, String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, String shift, boolean status) {
         super(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
         this.categoryID = categoryID;
         this.categoryName = categoryName;
         this.serviceID = serviceID;
         this.serviceName = serviceName;
         this.aboutDR = aboutDR;
+        this.shift = shift;
     }
 
     public DoctorDTO(String categoryID, String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
@@ -115,7 +116,8 @@ public class DoctorDTO extends UserDTO {
     public void setShift(String shift) {
         this.shift = shift;
     }
-     public String getAboutDR() {
+
+    public String getAboutDR() {
         return aboutDR;
     }
 

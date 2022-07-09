@@ -25,10 +25,11 @@ public class CategoryServiceDTO {
         this.status = status;
     }
 
-   
-    
-    
-  
+    public CategoryServiceDTO(String categoryID, String categoryName) {
+        this.categoryID = categoryID;
+        this.categoryName = categoryName;
+    }
+
     
     public String getCategoryID() {
         return categoryID;

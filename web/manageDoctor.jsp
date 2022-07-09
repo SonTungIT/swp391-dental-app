@@ -320,16 +320,12 @@
                                                     <th>STT</th>
                                                     <th>Tài khoản</th>
                                                     <th>Họ và tên</th>
-
                                                     <th>Email</th>
                                                     <th>Số điện thoại</th>
                                                     <th>Chuyên môn</th>
                                                     <th>Trạng Thái</th>
                                                     <th>Chi Tiết</th>
-
                                                     <th>Xóa</th>
-
-
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -342,13 +338,12 @@
                                                     <td><%=count++%></td>
                                                     <td><%=doctor.getUserID()%></td>
                                                     <td><%=doctor.getFullName()%></td>
-
                                                     <td><%=doctor.getEmail()%></td>
                                                     <td><%=doctor.getPhone()%></td>
                                                     <td><%=doctor.getCategoryName()%></td>
                                                     <td><%=doctor.isStatus()%></td>
                                                     <td>
-                                                        <a href="seemore.jsp"
+                                                        <a href="ViewProfile_DRByADController?doctorID=<%=doctor.getUserID()%>"
                                                            class="btn btn-success d-none d-md-inline-block text-white"
                                                            target="_blank">
                                                             <i class="fa-regular fa-eye"></i>
