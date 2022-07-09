@@ -12,13 +12,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-                                       
-    
-        
-         <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
@@ -28,7 +21,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>priceservice</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
@@ -168,7 +161,7 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-                            
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
@@ -301,19 +294,20 @@
                                         }
                                     %>
                                     <form action="MainController" >
-                                    <div class="input-group">
-                                        <div class="form-outline">
-                                            <input type="text" id="form1" class="form-control"
-                                                name="search" value="<%= search%>"  placeholder="Nhập Tên Service">
-                                            <input type="hidden" name="action" value="Search_Price" class="btn btn-success" >
-                                        </div>
-                                       <button type="submit" class="btn btn-success d-md-inline-block text-white">
+                                        <div class="input-group">
+                                            <div class="form-outline">
+                                                <input type="text" id="form1" class="form-control"
+                                                       name="search" value="<%= search%>"  placeholder="Nhập Tên Service">
+                                                <input type="hidden" name="action" value="Search_Price" class="btn btn-success" >
+                                            </div>
+                                            <button type="submit" class="btn btn-success d-md-inline-block text-white">
                                                 <i class="fas fa-search"></i>
                                             </button>
-                                        
-                                    </div>
-                                       
+
+                                        </div>
+
                                     </form>
+
                                         
                                         
                                        
@@ -361,21 +355,17 @@
                                                             <input type="hidden" name="search" value="<%= search%>"/>
                                                         </td>
                                                 </form>  
+  
+                                            <%
+                                                }
 
-
-
-
-                                                    <%
-                                                        }
-                   
-                                                    %> 
-                                                </tr>
+                                            %> 
+                                            </tr>
                                             </tbody>
                                         </table>
-                                                    <%
-                                                             }
-                                                               }
-                                                    %>    
+                                        <%                                                            }
+                                            }
+                                        %>    
                                     </div>
                                 </div>
                             </div>
@@ -398,8 +388,6 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

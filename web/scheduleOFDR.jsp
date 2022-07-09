@@ -20,7 +20,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>scheduleOFDR</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
@@ -131,7 +131,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/blog4.jpg" alt="user" class="profile-pic me-2">Ma Phong Ba
+                                    <img src="./images/doctors/${LOGIN_USER.image}" style="width: 40px; height: 40px" alt="user" class="profile-pic me-2">${LOGIN_USER.userID}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
@@ -177,7 +177,7 @@
                                                          href="index.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Trang Chủ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="doctor.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                                         href="ShowProfileDoctorController?doctorID=${LOGIN_USER.userID}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="ShowScheduleForDRController?doctorID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
@@ -273,7 +273,7 @@
                                                 <tr style="text-align: center">
                                                     <td style="margin-top: 10px">
                                                         <c:forEach items="${d.showAllSlot()}" var="s">
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white">${s.slotName}</button>
+                                                            <button style="margin-bottom: 2px" class="btn btn-success mx-auto mx-md-0 text-white">${s.slotName}</button>
                                                             <hp style="text-align: left">${s.slotTime}</p></br>
                                                         </c:forEach>
                                                     </td>
@@ -411,7 +411,6 @@
                                                         </c:forEach>
 
                                                     </td>
-
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -161,4 +161,114 @@ public class DoctorDAO {
         }
         return check;
     }
+
+    public DoctorDTO getProfile(String doctorID) throws SQLException, ClassNotFoundException {
+        DoctorDTO dt = new DoctorDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT userID, password, fullName, roleID, gender, address, image, birthday, email, phone, categoryName, shift, us.status from Users us \n"
+                        + "			JOIN Doctor dt ON dt.doctorID = us.userID \n"
+                        + "			JOIN CategoryService cs ON cs.categoryID = dt.categoryID\n"
+                        + "			WHERE doctorID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, doctorID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String password = rs.getString("password");
+                    String fullName = rs.getString("fullName");
+                    String roleID = rs.getString("roleID");
+                    String gender = rs.getString("gender");
+                    String address = rs.getString("address");
+                    String image = rs.getString("image");
+                    Date birthday = rs.getDate("birthday");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String categoryName = rs.getString("categoryName");
+                    String shift = rs.getString("shift");
+                    boolean status = rs.getBoolean("status");
+                    dt = new DoctorDTO(categoryName, shift, userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return dt;
+    }
+
+    public boolean updateProfile(UserDTO us) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Users SET fullName = ?, gender = ?, address = ?, birthday = ?, email = ?, phone = ? WHERE userID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, us.getFullName());
+                ptm.setString(2, us.getGender());
+                ptm.setString(3, us.getAddress());
+                ptm.setDate(4, us.getBirthday());
+                ptm.setString(5, us.getEmail());
+                ptm.setString(6, us.getPhone());
+                ptm.setString(7, us.getUserID());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public boolean updateProfile_Avatar(UserDTO us) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Users SET image = ? WHERE userID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, us.getImage());
+                ptm.setString(2, us.getUserID());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
 }

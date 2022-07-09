@@ -171,7 +171,7 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-                            
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
@@ -272,12 +272,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -295,7 +290,6 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h2><a href="addDoctor.jsp">Add new Doctor</a></br></h2>
                                     <form action="MainController">
                                         <div class="input-group">
                                             <div class="form-outline">
@@ -305,6 +299,13 @@
                                             <button type="submit" class="btn btn-success d-md-inline-block text-white">
                                                 <i class="fas fa-search"></i>
                                             </button>
+                                        </div>
+                                        <div class="text-end upgrade-btn">
+                                            <a href="addDoctor.jsp"
+                                               class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">
+                                                <i class="fa-solid fa-circle-plus"></i>
+                                                Thêm Bác Sĩ
+                                            </a>
                                         </div>
                                     </form>
 
@@ -319,13 +320,13 @@
                                                     <th>STT</th>
                                                     <th>Tài khoản</th>
                                                     <th>Họ và tên</th>
-                                                   
+
                                                     <th>Email</th>
                                                     <th>Số điện thoại</th>
                                                     <th>Chuyên môn</th>
                                                     <th>Trạng Thái</th>
                                                     <th>Chi Tiết</th>
-                                                    
+
                                                     <th>Xóa</th>
 
 
@@ -341,7 +342,7 @@
                                                     <td><%=count++%></td>
                                                     <td><%=doctor.getUserID()%></td>
                                                     <td><%=doctor.getFullName()%></td>
-                                                                                     
+
                                                     <td><%=doctor.getEmail()%></td>
                                                     <td><%=doctor.getPhone()%></td>
                                                     <td><%=doctor.getCategoryName()%></td>
@@ -367,15 +368,15 @@
                                                         <input type="hidden" name="birthday" value="<%=doctor.getBirthday()%>"/>
                                                         <input type="hidden" name="status" value="<%=doctor.isStatus()%>"/>
                                                         <input type="hidden"  name="action" value="Delete"/>
-                                                            <button type="submit" class="btn btn-success d-none d-md-inline-block text-white">
-                                                                <i class="fa-solid fa-trash-can"></i>
-                                                            </button>
+                                                        <button type="submit" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-trash-can"></i>
+                                                        </button>
                                                     </td>
 
                                                     <td>
                                                         <form action="MainController">
                                                             <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
-                                                            
+
                                                         </form>
 
                                                     </td>   

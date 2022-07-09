@@ -777,7 +777,7 @@ public class PatientDAO {
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     boolean status = rs.getBoolean("status");
-                    us = new DoctorDTO(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
+                    us = new UserDTO(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
                 }
             }
         } catch (Exception e) {

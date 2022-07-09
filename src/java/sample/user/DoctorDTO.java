@@ -22,6 +22,12 @@ public class DoctorDTO extends UserDTO {
     public DoctorDTO() {
     }
 
+    public DoctorDTO(String categoryName, String shift, String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
+        super(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
+        this.categoryName = categoryName;
+        this.shift = shift;
+    }
+
     public DoctorDTO(String doctorID,String doctorName,String image,String categoryName, String shift)  {
         super(doctorID, doctorName, image);
         this.categoryName = categoryName;
