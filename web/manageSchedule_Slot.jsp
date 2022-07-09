@@ -319,7 +319,9 @@
                                                     <td><%=doctor.getUserID()%>
                                                         <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
                                                     </td>
-                                                    <td><%=doctor.getImage()%></td> 
+                                                    <td>
+                                                        <%=doctor.getImage()%>
+                                                    </td> 
                                                     <td><%=doctor.getFullName()%></td>                             
                                                     <td><%=doctor.getCategoryName()%></td>
                                                     <td><%=doctor.getShift()%>
