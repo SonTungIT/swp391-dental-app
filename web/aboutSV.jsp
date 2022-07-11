@@ -289,22 +289,21 @@
             if (list != null) {
                 
         %>
-        <ul class="menu__service-colume">
-            
-     
+        
+             
         <!-- about -->
         <section class="about py-5">
             <div class="container py-md-3">
                 <h2 class="heading text-center mb-sm-5 mb-4"> <%= list.getServiceName()%> </h2>
             </div>
-        </section>
-        <!-- //about -->
             <div>
                 <a><%= list.getAboutSV()%></a>
             </div>
             <div>
-                <img width="800px" height="600px" src="image/<%= list.getImage()%>" alt="Image can't show">
+                <img width="800px" height="600px" src="images/<%= list.getImage()%>" alt="Image can't show">
             </div>
+        </section>
+        <!-- //about -->          
             <%
                         
                     }
@@ -400,7 +399,7 @@
                                 alert("Xin hãy đăng nhập để được đặt lịch!!!");
                             }
 
-        </script>
+</script>
     
 
 </html>

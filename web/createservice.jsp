@@ -19,7 +19,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>create service</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
@@ -159,27 +159,38 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="admin.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
+                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="pages-profile.html" aria-expanded="false">
+                                    <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
+                            </li> -->
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="setting.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí tài khoản</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="doctor.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=Show" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bác sĩ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="patient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=ShowAllPatient" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bệnh nhân</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=ShowBooking" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=SearchSC&searchSC" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí lịch hoạt động</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">FeedBack</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Category Services</span></a></li>
+                                                         href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Category Services</span></a></li> 
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=Search Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Service</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí giá dịch vụ</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="pages-blank.html" aria-expanded="false"><i
                                         class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
@@ -232,13 +243,13 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Category Service</h3>
+                            <h3 class="page-title mb-0 p-0"> Service</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Category Service</li>
-                                        <li class="breadcrumb-item active" aria-current="page">Create Category Service</li>
+                                        <li class="breadcrumb-item active" aria-current="page"> Service</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Create Service</li>
                                         
                                     </ol>
                                 </nav>
@@ -268,30 +279,41 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">    
-                                        <form action="MainController" method="POST">
+                                        <form action="MainController" method="POST" class="form-horizontal form-material mx-2">
                                             <table class="table user-table">
                                                 <tbody>
 
                                                     <tr>
-                                                        <td class="border-top-0">Service Name</td>
-                                                        <td><input class="form-control ps-0 form-control-line" type="text" name="serviceName" placeholder="input Name" required=""/></td>
-
+                                                        <div class="form-group">
+                                                    <td class="border-top-0">Tên Dịch Vụ</td>
+                                                    <div class="col-md-12">
+                                                        <td>  
+                                                            <input class="form-control ps-0 form-control-line" type="text" name="serviceName" placeholder="input Name" required="">
+                                                        </td> 
+                                                    </div>
+                                                </div>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="border-top-0">Image</td>
+                                                    <tr >
+                                                        <td class="border-top-0">Ảnh</td>
                                                         <td><input class="form-control ps-0 form-control-line" type="text" name="image" placeholder="input XXX.jpg" required=""/></td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr >
                                                         <td class="border-top-0">Category ID</td>
                                                         <td><input class="form-control ps-0 form-control-line" type="text" name="categoryID" placeholder="input category ID"required=""/></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="border-top-0">Price</td>
+                                                    <tr >
+                                                        <td class="border-top-0">Chi Phí</td>
                                                         <td><input class="form-control ps-0 form-control-line" type="text" name="price" placeholder="input number" required=""/></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="border-top-0">Content</td>
-                                                        <td><input class="form-control ps-0 form-control-line" type="text" name="aboutSV" placeholder="input content" required=""/></td>
+                                                    <tr >
+                                                     <div class="form-group">
+                                                    <td class="border-top-0">Nội Dung </td>
+                                                    <div class="col-md-12">
+                                                        <td>
+                                                        <textarea rows="5" class="form-control ps-0 form-control-line" type="text" name="aboutSV"  placeholder="input content" required=""></textarea>
+                                                        </td>
+                                                    </div>
+                                                        </div>
                                                     </tr>
                                                     
                                                     <tr>
@@ -303,7 +325,7 @@
                                             </table>
 
                                             <td>
-                                                <input type="submit" name="action" value="Create_Service" class="btn btn-success d-none d-md-inline-block text-white" target="_blank" />
+                                                <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Create_Service">Tạo</button>
                                                 <input type="reset"  value="Reset" class="btn btn-success d-none d-md-inline-block text-white" target="_blank" />
                                             </td>
                                         </form>  

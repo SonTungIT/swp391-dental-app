@@ -40,6 +40,7 @@
         <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/price.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/bkstyle.css" rel="stylesheet" type="text/css"/>
         <!-- //css files -->
 
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -57,8 +58,8 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <%
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-        %>
+        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+    %>
     <body>       
 
         <!-- top header -->
@@ -78,24 +79,24 @@
                             </li>
                         </ul>
                     </div>
-                    
+
                     <div class="col-sm-4">
                         <ul class="d-lg-flex">
-                                <form action="SearchInformationController" >
-                                    <div class="tech-btm d-lg-flex">
-                                        <div class="form-outline">
-                                            <input type="text" name="txtSearch" class="form-control px-2" value="${param.txtSearchValue}" placeholder="Tìm Kiếm"/>
-                                            <input type="hidden" name="index" value="1"/>
-                                        </div>
-                                        <button type="submit" name="action" value="Tìm kiếm" class="btn btn-success">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-
+                            <form action="SearchInformationController" >
+                                <div class="tech-btm d-lg-flex">
+                                    <div class="form-outline">
+                                        <input type="text" name="txtSearch" class="form-control px-2" value="${param.txtSearchValue}" placeholder="Tìm Kiếm"/>
+                                        <input type="hidden" name="index" value="1"/>
                                     </div>
-                                </form>
+                                    <button type="submit" name="action" value="Tìm kiếm" class="btn btn-success">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+
+                                </div>
+                            </form>
                         </ul>
                     </div>
-                    
+
                     <div class="col-sm-4 header-right-w3_pvt">
                         <%
                             AdminDAO dao = new AdminDAO();
@@ -144,7 +145,7 @@
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
                             <ul class="menu__service-list">
-                               <%
+                                <%
                                     PatientDAO dao1 = new PatientDAO();
                                     List<CategoryServiceDTO> listCate = dao1.getTableCategory();
                                     if (listCate != null) {
@@ -155,11 +156,11 @@
                                 %>
                                 <li class="menu__service-description">   
                                     <a class="menu__service-link"><span> <%= cate.getCategoryName()%></span>  
-                                        
+
                                     </a>    
                                     <%
                                         String cate1 = cate.getCategoryName();
-                                        
+
                                         List<ServiceDTO> listService = dao1.getTableService(cate1);
 
                                         if (listService != null) {
@@ -168,24 +169,23 @@
 
                                     %>
                                     <ul class="menu__service-colume">
-                                    <%                                                                
-                                        for (ServiceDTO table : listService) {
+                                        <%                                        for (ServiceDTO table : listService) {
 
 
-                                    %> 
-                                    
+                                        %> 
+
                                         <li class="menu__service-colume--item">
-                                            <a href="MainController?action=Show_About&serviceID=<%= table.getServiceID() %>"><%= table.getServiceName()%></a>
+                                            <a href="MainController?action=Show_About&serviceID=<%= table.getServiceID()%>"><%= table.getServiceName()%></a>
                                         </li>
-                                   
 
 
+
+                                        <%
+
+                                            }
+                                        %>
+                                    </ul>   
                                     <%
-
-                                                }
-                                                %>
-                                             </ul>   
-                                                <%
                                             }
 
                                         }
@@ -204,7 +204,7 @@
                         <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                        <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                            <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
                             %>
                         <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
                             <%
@@ -381,7 +381,7 @@
                                     }
                                 </style>
                             </div>
-                            <div class="container section-title-container"><h2 class="section-title section-title-bold-center"><b></b><span class="section-title-main"><i class="icon-menu"></i>Bảng giá dịch vụ nha khoa tại Nha khoa Thiên Thần</span><b></b></h2></div>
+                            <div style="margin-bottom: 20px" class="container section-title-container"><h2 class="section-title section-title-bold-center"><b></b><span class="section-title-main"><i class="icon-menu"></i>Bảng giá dịch vụ nha khoa tại Nha khoa Thiên Thần</span><b></b></h2></div>
                         </div>
                     </div>
                 </div>
@@ -396,22 +396,25 @@
                         </div>
                     </div>
                 </div>
-                 <%
-            List<CategoryServiceDTO> listCate1 = dao1.getTableCategory();
-            if (listCate1 != null) {
-                if (listCate1.size() > 0) {
-                    for (CategoryServiceDTO cate : listCate1) {
+                <%
+                    List<CategoryServiceDTO> listCate1 = dao1.getTableCategory();
+                    if (listCate1 != null) {
+                        if (listCate1.size() > 0) {
+                            for (CategoryServiceDTO cate : listCate1) {
 
 
-        %>
+                %>
                 <p>&nbsp;</p>
                 <div class="row row-collapse" id="row-409067757">
                 </div>
                 <div class="row" style="max-width:900px" id="row-2037044618">
                     <div id="col-592795447" class="col small-12 large-12">
                         <div class="col-inner">
-                            <div class="is-divider divider clearfix"></div>
-                            <h3 class="tt-dichvunhakhoa"> <a><span  class="pagebanggia">Bảng Giá <%= cate.getCategoryName()%></span></a></h3>
+                            <h3 class="title-know"> 
+                                <a>
+                                    <span class="">Bảng Giá <%= cate.getCategoryName()%></span>
+                                </a>
+                            </h3>
                             <%
                                 String cate1 = cate.getCategoryName();
 
@@ -419,9 +422,9 @@
                                 if (listPrice != null) {
                                     if (listPrice.size() > 0) {
                             %>
-                            <table id="tablepress-24" class="tablepress tablepress-id-24">
+                            <table id="tablepress-24" class="col-lg-12 tablepress">
                                 <thead>
-                                    <tr class="row-1 odd">
+                                    <tr class="editPrice row-1 odd">
                                         <th class="column-1">NO</th>  
                                         <th class="column-2">TÊN DỊCH VỤ</th> 
                                         <th class="column-3">CHI PHÍ(VNĐ)</th> 
@@ -447,30 +450,26 @@
                                         </td>
                                     </tr>
                                     <%
-                    }
+                                        }
 
-                %> 
-
+                                    %> 
                                 </tbody>
                             </table>
-<%                        
-                }
-                                                 }
+                            <%                    }
+                                            }
+                                        }
                                     }
                                 }
-                            }
 
-                        %>
-
-                          
+                            %>
                             <!-- #tablepress-13 from cache -->
-                            <h2 class="h2-sv">BẢO HÀNH RĂNG SỨ</h2>
-                            <blockquote>
-                                <ul>
-                                    <li><strong><span style="color: #ff0000;">Bảo hành 5 năm</span></strong> đối với các dòng răng sứ kim loại</li>
-                                    <li><span style="color: #ff0000;"><strong>Bảo hành 5-10 năm</strong></span> đối với các dòng răng toàn sứ</li>
-                                    <li><span style="color: #ff0000;"><strong>Bảo hành 10-20 năm</strong> </span>đối với dòng răng sứ cao cấp Ceramill, Emax Nacera, Veneer,…</li>
-                                    <li><span style="color: #ff0000;"><b>Hỗ trợ bảo hành trọn đời cho tất cả khách hàng làm răng sứ thẩm mỹ.</b></span></li>
+                            <h2 class="title-know mt-5 mb-4 ">BẢO HÀNH RĂNG SỨ</h2>
+                            <blockquote class="mb-5">
+                                <ul style="border-left: 3px solid; border-color: #2d7745; font-size: 18px">
+                                    <li><strong><span style="margin-left: 10px; color: #ff0000;">Bảo hành 5 năm</span></strong> đối với các dòng răng sứ kim loại</li>
+                                    <li><span style="margin-left: 10px; color: #ff0000;"><strong>Bảo hành 5-10 năm</strong></span> đối với các dòng răng toàn sứ</li>
+                                    <li><span style="margin-left: 10px; color: #ff0000;"><strong>Bảo hành 10-20 năm</strong> </span>đối với dòng răng sứ cao cấp Ceramill, Emax Nacera, Veneer,…</li>
+                                    <li><span style="margin-left: 10px; color: #ff0000;"><b>Hỗ trợ bảo hành trọn đời cho tất cả khách hàng làm răng sứ thẩm mỹ.</b></span></li>
                                 </ul>
                             </blockquote>
                         </div>
@@ -478,6 +477,79 @@
                 </div>
             </div>
         </main>
+
+
+        <!-- appointment -->
+        <section class="appointment text-center py-5">
+            <div class="container py-sm-3">
+                <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
+                <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
+                <p>+84123456789</p>
+                <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
+                %>
+                <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH NGAY</a></li>
+                    <%
+                    } else {
+                    %>
+                <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH NGAY</a></li>
+                    <%
+                        }
+                    %>
+                <!--                <a href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>-->
+            </div>
+        </section>
+        <!-- //appointment -->
+
+        <!-- footer -->
+        <footer class="py-5">
+            <div class="container py-sm-3">
+                <div class="row footer-grids">
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                        <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Nha Khoa Thiên Thần</h4>
+                        <p class="mb-3">Nha khoa Thiên Thần -Trung tâm trồng răng và Niềng răng. Tự hào là một trong những nha
+                            khoa ở TP.HCM đi đầu về công nghệ và chất lượng đội ngũ Y bác sỹ.</p>
+                        <h5>Được tin cậy bởi <span>500+ Người</span> </h5>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                        <h4 class="mb-sm-4 mb-3">Thông Tin Địa Chỉ</h4>
+                        <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
+                                Chí Minh.</span></p>
+                        <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
+                        <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
+                        </p>
+                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
+                        </p>
+                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
+                        </p>
+                    </div>
+                    <div class="flex-1 ms-2">            
+                        <p class="text-muted mb-0">Số lượng truy cập web</p>
+                        <p>${sessionScope.viewOfWeb}</p>
+                    </div>
+                    <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
+                            <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
+                            <ul>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li class="my-2"><a href="#">Support Helpline</a></li>
+                                    <li><a href="#">Healthy Tips</a></li>
+                                    <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
+                            </ul>
+                    </div> -->
+                </div>
+            </div>
+        </footer>
+        <!-- //footer -->
+
+        <!-- copyright -->
+
+        <!-- //copyright -->
+
+        <!-- move top -->
+        <div class="move-top text-right">
+            <a href="#home" class="move-top">
+                <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
+            </a>
+        </div>
 
         <!-- move top -->
         <!-- JS bootstrap banner -->
@@ -498,10 +570,10 @@
                         alert("Xin hãy đăng nhập để được đặt lịch!!!");
                     }
     </script>
-    
-    
-    
-  
-    
-   
+
+
+
+
+
+
 </html>
