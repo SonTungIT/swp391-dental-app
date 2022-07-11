@@ -320,7 +320,7 @@
                                                         <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
                                                     </td>
                                                     <td>
-                                                        <%=doctor.getImage()%>
+                                                        <img src="./images/doctors/<%=doctor.getImage()%>" style="width: 60px; height: 100px" alt="alt"/>
                                                     </td> 
                                                     <td><%=doctor.getFullName()%></td>                             
                                                     <td><%=doctor.getCategoryName()%></td>
