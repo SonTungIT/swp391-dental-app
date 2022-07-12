@@ -395,13 +395,21 @@
                                                         <%
                                                             }
                                                         %>
+                                                        <input checked="checked" type="radio" name="status" value="True">Hiện<br>
+                                                        <input type="radio" name="status" value="False">Ẩn
                                                         </td>
 
                                                        
 
                                                         <!--delete-->
                                                         <td>
-                                                            <a href="MainController?action=DeleteService&serviceID=<%= service.getServiceID() %>&search=<%= search%>" >Xóa</a>
+                                                           
+                                                           <div class="form-group">
+                                                        <div class="col-sm-12 d-flex">
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="DeleteService">Xoá</button>
+                                                        </div>
+                                                </div>
+                                                     <input type="hidden" name="search" value="<%= search%>"/>    
                                                         </td>
 
                                                         <!--update-->

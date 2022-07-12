@@ -48,8 +48,9 @@ public class AdminDAO {
     private static final String CHECK_DUPLICATE_CATE = "SELECT categoryName FROM CategoryService WHERE  categoryID=? ";
     private static final String CREATE_CATEGORY = "INSERT INTO CategoryService(categoryID, categoryName , status) VALUES(?,?,?)";
 
-    private static final String SEARCH_SERVICE = "SELECT serviceID, serviceName,image, categoryID, price, aboutSV , status FROM Service WHERE serviceName like ? ";
-    private static final String DELETE_SERVICE = "DELETE Service WHERE ServiceID=? ";
+    private static final String SEARCH_SERVICE = "SELECT serviceID, serviceName,image, categoryID, price, aboutSV , status FROM Service WHERE serviceName like ? AND status like '1'";
+//    private static final String DELETE_SERVICE = "DELETE Service WHERE ServiceID=? ";
+    private static final String DELETE_SERVICE = "UPDATE Service SET status=? WHERE serviceID=? ";
     private static final String UPDATE_SERVICE = "UPDATE Service SET serviceName=?, image=?, categoryID=?, price=? ,aboutSV=? ,status=? WHERE serviceID=? ";
     private static final String CHECK_DUPLICATE_SV = "SELECT serviceName FROM Service WHERE  serviceID=? ";
     private static final String CREATE_SERVICE = "INSERT INTO Service(serviceID, serviceName , image, categoryID, price, aboutSV , status) VALUES(?,?,?,?,?,?,?)";
@@ -1838,7 +1839,7 @@ public class AdminDAO {
         return list;
     }
 
-    public boolean deleteService(String serviceID) throws SQLException {
+    public boolean deleteService(ServiceDTO service) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -1846,7 +1847,8 @@ public class AdminDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(DELETE_SERVICE);
-                ptm.setString(1, serviceID);
+                ptm.setBoolean(1, service.isStatus());
+                 ptm.setString(2, service.getServiceID());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

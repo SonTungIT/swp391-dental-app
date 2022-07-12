@@ -36,12 +36,16 @@ public class CreatefeedbackController extends HttpServlet {
         try {
             
             int count = 1;
-            String feedbackID = "FB" + count;
+            String feedbackID = "FB0" + count;
             PatientDAO dao = new PatientDAO();
             boolean checkDuplicate = dao.checkDuplicate(feedbackID);
             while (checkDuplicate) {
                 count = count + 1;
-                feedbackID = "FB" + count;
+                if(count <10){
+                  feedbackID = "FB0" + count;  
+                }else{
+                  feedbackID = "FB" + count;  
+                }
                 checkDuplicate = dao.checkDuplicate(feedbackID);
             }
             

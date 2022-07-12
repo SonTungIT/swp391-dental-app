@@ -66,6 +66,12 @@ public class ServiceDTO {
         this.serviceName = serviceName;
         this.price = price;
     }
+
+    public ServiceDTO(String serviceID, boolean status) {
+        this.serviceID = serviceID;
+        this.status = status;
+    }
+    
     
     public String getAboutSV() {
         return aboutSV;

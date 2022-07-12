@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sample.services.ServiceDTO;
 import sample.user.AdminDAO;
 
 
@@ -31,8 +32,10 @@ public class DeleteServiceController extends HttpServlet {
          String url = ERROR;
         try {
             String serviceID = request.getParameter("serviceID");
+            boolean status = Boolean.parseBoolean(request.getParameter("status"));
+            ServiceDTO service = new ServiceDTO(serviceID, status);
             AdminDAO dao = new AdminDAO();
-            boolean check = dao.deleteService(serviceID);
+            boolean check = dao.deleteService(service);
             if (check) {
                 url = SUCCESS;
             }

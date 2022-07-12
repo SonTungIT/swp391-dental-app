@@ -373,7 +373,7 @@
                                                 
                                         <div class="form-group">
                                             <div class="col-sm-12 d-flex">
-                                                <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Create_Feedback">Tạo</button>
+                                                <button class="btn btn-success mx-auto mx-md-0 text-white" onclick="mess()" type="submit" name="action" value="Create_Feedback">Tạo</button>
                                             </div>
                                         </div>
                                     </form>
@@ -425,6 +425,10 @@
         <script src="html/js/sidebarmenu.js"></script>
         <!--Custom JavaScript -->
         <script src="html/js/custom.js"></script>
-        
+        <script>
+                    function mess() {
+                        alert("đánh giá của bạn đã đuọc gửi. Cảm ơn bạn đã đóng góp ý kiến!!!");
+                    }
+        </script>
     </body>
 </html>
