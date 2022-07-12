@@ -358,6 +358,42 @@
                                             </div>
                                     </div> 
                                 </c:if>
+                                <c:if test="${s.categoryId == 3}">
+
+                                    <div style="border: 1px solid #333;
+                                         border-radius: 5px;
+                                         background: #f6f8fa;
+                                         font-weight: 600;
+                                         padding: 20px;
+                                         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="form-content">
+                                        <a style="font-size: 30px; color: #000" href="about.jsp">
+                                            ${s.title1}
+                                            <div class="form-text--center">
+                                                <p>${s.context1}</p>
+                                            </div>
+                                            <div class="image">
+                                                <img src="${s.image1}"/>
+                                            </div>
+                                    </div> 
+                                </c:if>
+                                <c:if test="${s.categoryId == 4}">
+
+                                    <div style="border: 1px solid #333;
+                                         border-radius: 5px;
+                                         background: #f6f8fa;
+                                         font-weight: 600;
+                                         padding: 20px;
+                                         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="form-content">
+                                        <a style="font-size: 30px; color: #000" href="expert.jsp">
+                                            ${s.title1}
+                                            <div class="form-text--center">
+                                                <p>${s.context1}</p>
+                                            </div>
+                                            <div class="image">
+                                                <img src="${s.image1}"/>
+                                            </div>
+                                    </div> 
+                                </c:if>
                             </c:forEach>
 
 

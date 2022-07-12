@@ -194,13 +194,13 @@
                                         class="hide-menu">Quản lí lịch hoạt động</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">FeedBack</span></a></li>
+                                        class="hide-menu">Quản lí đánh giá</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Category Services</span></a></li> 
+                                        class="hide-menu">Quản lí loại dịch vụ</span></a></li> 
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Service</span></a></li>
+                                        class="hide-menu">Quản lí dich vụ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí giá dịch vụ</span></a></li>
@@ -325,7 +325,8 @@
                                                     <th>Chuyên môn</th>
                                                     <th>Trạng Thái</th>
                                                     <th>Chi Tiết</th>
-                                                    <th>Xóa</th>
+                                                    <th></th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -347,11 +348,10 @@
                                                            class="btn btn-success d-none d-md-inline-block text-white"
                                                            target="_blank">
                                                             <i class="fa-regular fa-eye"></i>
-                                                            Chi tiết
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <input type="hidden" name="id" value="<%=doctor.getUserID()%>"/>
+                                                        <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
                                                         <input type="hidden" name="fullName" value="<%=doctor.getFullName()%>"/>
                                                         <input type="hidden" name="gender" value="<%=doctor.getGender()%>"/>
                                                         <input type="hidden" name="address" value="<%=doctor.getAddress()%>"/>
@@ -362,24 +362,23 @@
                                                         <input type="hidden" name="image" value="<%=doctor.getImage()%>"/>
                                                         <input type="hidden" name="birthday" value="<%=doctor.getBirthday()%>"/>
                                                         <input type="hidden" name="status" value="<%=doctor.isStatus()%>"/>
-                                                        <input type="hidden"  name="action" value="Delete"/>
-                                                        <button type="submit" class="btn btn-success d-none d-md-inline-block text-white">
+                                                        <button type="submit" name="action" value="Update_DR" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-circle-plus"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" name="action" value="Delete_DR" class="btn btn-danger d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </button>
                                                     </td>
-
-                                                    <td>
-                                                        <form action="MainController">
-                                                            <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
-
-                                                        </form>
-
-                                                    </td>   
                                                 </tr>
                                             </form>
                                             <%
                                                 }
                                             %>
+                                            <h4>${MESS_C}</h4>
+                                            <h4>${MESS_CF}</h4>
+                                            <h4>${MESS}</h4>
                                             </tbody>
                                             <!----------------------------------------------------------->
                                         </table>

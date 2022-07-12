@@ -39,8 +39,10 @@ public class PatientDAO {
     private static final String VIEW_HISTORY_BK = "SELECT bookingID, bk.serviceID, serviceName, bk.doctorID, us.fullName, dateBooking, timeBooking, bk.status FROM Booking bk\n"
             + "           JOIN Service sv ON sv.serviceID = bk.serviceID JOIN CategoryService cs ON cs.categoryID = sv.categoryID\n"
             + "		   JOIN Doctor dt ON dt.categoryID = cs.categoryID JOIN Users us ON us.userID = dt.doctorID\n"
-            + "		   JOIN (SELECT userID FROM Users ) AS pt ON pt.userID = bk.patientID \n"
-            + "           WHERE (bk.status = 'Active' or bk.status = 'Finished')  AND bk.doctorID = dt.doctorID AND serviceName like ? AND patientID = ? ORDER BY dateBooking, timeBooking DESC";
+
+            + "		   JOIN (SELECT userID FROM Users ) AS pt ON pt.userID = bk.patientID\n"
+            + "           WHERE bk.status = 'Active'  AND bk.doctorID = dt.doctorID AND serviceName like ? AND patientID = ? order by bk.dateBooking desc";
+
     private static final String CHECK_DUPLICATE_BK_ID = "SELECT patientID FROM Booking WHERE bookingID = ? ";
     private static final String CREATE_BOOKING = "INSERT INTO Booking(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status) VALUES(?, ?, ?, ?, ?, ?, ?)";
     private static final String CHECK_DUPLICATE_BK_SLOT = "SELECT DISTINCT sl.slotID From Slot sl JOIN Schedule sc ON sc.slotID = sl.slotID \n"

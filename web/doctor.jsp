@@ -327,8 +327,11 @@
                                         <div class="form-group">
                                             <label class="col-md-12 mb-0">Giới tính</label>
                                             <div class="col-md-12">
-                                                <input type="text" name="gender" value="${PROFILE_DT.gender}"
-                                                       class="form-control ps-0 form-control-line">
+                                                <select name="gender" class="form-control ps-0 form-control-line">
+                                                    <option value="${PROFILE_DT.gender}">${PROFILE_DT.gender}</option>
+                                                    <option value="Nam">Nam</option>
+                                                    <option value="Nam">Nữ</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -341,7 +344,7 @@
                                         <div class="form-group">
                                             <label class="col-md-12 mb-0">Ngày Sinh</label>
                                             <div class="col-md-12">
-                                                <input type="text" name="birthday" value="${PROFILE_DT.birthday}"
+                                                <input type="date" name="birthday" value="${PROFILE_DT.birthday}"
                                                        class="form-control ps-0 form-control-line">
                                             </div>
                                         </div>

@@ -4,10 +4,12 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:useBean id="ct" class="sample.user.AdminDAO" scope="request" />
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -37,7 +39,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="gender"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="gender" id="name" placeholder="gender"/>
+                                    <input type="text" name="gender" id="name" placeholder="Gender"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
@@ -49,33 +51,27 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="address"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="address" id="name" placeholder="address"/>
-                                </div>
-                                <div class="form-group" style="">
-
-                                    <div style="display: flex">
-                                        FullTime
-                                        <input style="margin-top: 6px" type="radio" name="shift" value="Full time" id="name"/>
-                                    </div>
-                                    <div style="display: flex">
-                                        Morning
-                                        <input style="margin-top: 6px" type="radio" name="shift" value="Morning" id="name"/>
-
-                                    </div>
-                                    <div style="display: flex">
-                                        Afternoon
-                                        <input style="margin-top: 6px" type="radio" name="shift" value="Afternoon" id="name"/>
-                                    </div>
-
-
+                                    <input type="text" name="address" id="name" placeholder="Address"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="categoryID"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="categoryID" id="name" placeholder="categoryID"/>
+                                    <label for="categoryID"></label>Chuyên khoa:
+                                    <select name="categoryID" style="width: 300px; height: 30px">
+                                        <c:forEach items="${ct.listCT_AD}" var="list">
+                                            <option value="${list.categoryID}">${list.categoryName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shift"></label>Ca làm việc:
+                                    <select name="shift" style="width: 300px; height: 30px">
+                                        <option value="Full time">Full time</option>
+                                        <option value="Morning">Morning</option>
+                                        <option value="Afternoon">Afternoon</option>
+                                    </select>                               
                                 </div>
                                 <div class="form-group">
                                     <label for="phone"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="phone" id="name" placeholder="phone"/>
+                                    <input type="text" name="phone" id="name" placeholder="Phone"/>
                                 </div>
 
                                 <div class="form-group form-button">

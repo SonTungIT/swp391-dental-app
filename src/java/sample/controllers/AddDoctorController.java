@@ -8,14 +8,11 @@ package sample.controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import sample.services.CategoryServiceDTO;
 import sample.user.AdminDAO;
 import sample.user.DoctorDTO;
 
@@ -37,17 +34,14 @@ public class AddDoctorController extends HttpServlet {
             String userID = request.getParameter("userID");
             String password = "1";
             String shift = request.getParameter("shift");
-
             String fullName = request.getParameter("fullName");
             String roleID = request.getParameter("roleID");
-
             String gender = request.getParameter("gender");;
             String address = request.getParameter("address");
             String categoryID = request.getParameter("categoryID");
-            String image = "";
+            String image = "macdinh.jpg";
             String phone = request.getParameter("phone");
             Date birthday = null;
-
             String email = request.getParameter("email");
 
             boolean status = true;

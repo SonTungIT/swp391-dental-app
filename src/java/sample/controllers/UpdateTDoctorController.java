@@ -1,47 +1,44 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import sample.user.AdminDAO;
-import sample.user.DoctorDTO;
-import sample.user.UserDTO;
 
 /**
  *
- * @author QUANG VAN
+ * @author Xqy
  */
+@WebServlet(name = "UpdateTDoctorController", urlPatterns = {"/UpdateTDoctorController"})
+public class UpdateTDoctorController extends HttpServlet {
 
-@WebServlet(name = "ShowDoctorController", urlPatterns = {"/ShowDoctorController"})
-public class ShowDoctorController extends HttpServlet {
-
-     public static final String ERROR = "error.jsp";
-    public static final String SUCESSFUL = "manageDoctor.jsp";
+    private static final String ERROR = "manageDoctor.jsp";
+    private static final String SUCCESS = "ShowDoctorController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        HttpSession session = request.getSession();
         try {
+            String doctorID = request.getParameter("doctorID");
             AdminDAO dao = new AdminDAO();
-            List<DoctorDTO> list = dao.getListAllDoctor();
-            session.setAttribute("LIST_DOCTOR", list);
-            url = SUCESSFUL;
-        } catch (Exception e) {
-            log("Error at DisplayCUSController: " + e.toString());
+            boolean check = dao.updateStatusDR(doctorID);
+            if (check) {
+                request.setAttribute("MESS", "Cập nhật thành công!");
+                url = SUCCESS;
+            } else {
+                request.setAttribute("MESS", "Cập nhật không thành công!");
+            }
+        } catch (Exception ex) {
+            log("Error at UpdateDoctorByADController: " + ex.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

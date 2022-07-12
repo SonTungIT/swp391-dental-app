@@ -2300,4 +2300,31 @@ public class AdminDAO {
         }
         return check;
     }
+
+    public boolean updateStatusDR(String doctorID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Users SET status = 1 WHERE userID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, doctorID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
 }
