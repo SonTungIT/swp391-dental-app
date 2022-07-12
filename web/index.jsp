@@ -295,11 +295,11 @@
                                     .equals("DR")) {
                     %>
                     <div class="dropdown btn-group">
-                        <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/blog4.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
+                       <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="./images/doctors/${LOGIN_USER.image}" style="width: 50px; height: 50px ; border-radius: 40px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="doctor.jsp" style="padding: 0">
+                            <a href="ShowProfileDoctorController?doctorID=${LOGIN_USER.getUserID()}" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Tài Khoản Của Tôi
@@ -657,7 +657,7 @@
                                 <div class="feedback-grids">    
                                     <div class="feedback-img">
                                         <td>  
-                                            <img width="80px" height="60px" src="image/<%= feedback.getImage()%>" alt="Image can't show">
+                                            <img width="80px" height="60px" src="images/<%= feedback.getImage()%>" alt="Image can't show">
                                         </td>
                                     </div>
                                     <div class="feedback-img-info">

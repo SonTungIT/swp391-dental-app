@@ -4,6 +4,7 @@
     Author     : Xqy
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <%@page import="sample.user.DoctorDTO"%>
 <%@page import="sample.user.UserDTO"%>
@@ -11,6 +12,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:useBean id="ct" class="sample.user.AdminDAO" scope="request" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
@@ -280,99 +282,118 @@
                     <!-- ============================================================== -->
                     <div class="row">
                         <!-- column -->
-                        <div class="col-sm-12">
+                        <div class="col-lg-4 col-xlg-3 col-md-5">
+                            <div class="card" style="text-align: center">
+                                <div class="card-body profile-card">
+                                    <center class="mt-4"> <img src="./images/doctors/${PROFILE_DT.image}"
+                                                               class="rounded-circle" width="140"/>
+                                        <h4 class="card-title mt-2">${PROFILE_DT.fullName}</h4>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="col-lg-8 col-xlg-9 col-md-7">
                             <div class="card">
                                 <div class="card-body">
-                                    <h2><a href="manageDoctor.jsp">Back</a></br></h2>
-                                    <form action="MainController">
-                                        <div class="input-group">
-                                            <div class="form-outline">
-                                                <input type="text" name="search" class="form-control" value="<%=search%>" placeholder="Tìm kiếm bác sĩ..."/>
-                                                <input type="hidden" name="action"  value="Search" />
+                                    <form action="UpdateDoctorByADController" class="form-horizontal form-material mx-2">
+                                        <input type="hidden" name="doctorID" value="${PROFILE_DT.userID}"/>
+                                        <input type="hidden" name="password" value="${PROFILE_DT.password}"/>
+                                        <input type="hidden" name="roleID" value="${PROFILE_DT.roleID}"/>
+                                        <input type="hidden" name="image" value="${PROFILE_DT.image}"/>
+                                        <input type="hidden" name="status" value="${PROFILE_DT.status}"/>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Họ và tên</label>
+                                            <div class="col-md-12">
+                                                <input type="text" name="fullName" value="${PROFILE_DT.fullName}" readonly="" 
+                                                       class="form-control ps-0 form-control-line">
                                             </div>
-                                            <button type="submit" class="btn btn-success d-md-inline-block text-white">
-                                                <i class="fas fa-search"></i>
-                                            </button>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Chuyên khoa</label>
+                                            <div class="col-md-12">
+                                                <select name="categoryID">
+                                                    <option value="${PROFILE_DT.categoryID}">
+                                                        ${PROFILE_DT.categoryName}
+                                                    </option>
+                                                    <c:forEach items="${ct.listCT_AD}" var="list">
+                                                        <option value="${list.categoryID}">
+                                                            ${list.categoryName}
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Ca làm việc</label>
+                                            <div class="col-md-12">
+                                                <select name="shift">
+                                                    <option value="${PROFILE_DT.shift}">
+                                                        ${PROFILE_DT.shift}
+                                                    </option>
+                                                    <option value="Full time">
+                                                        Full time
+                                                    </option>
+                                                    <option value="Morning">
+                                                        Morning
+                                                    </option>
+                                                    <option value="Afternoon">
+                                                        Afternoon
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Giới tính</label>
+                                            <div class="col-md-12">
+                                                <input type="text" name="gender" value="${PROFILE_DT.gender}" readonly=""
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Địa chỉ</label>
+                                            <div class="col-md-12">
+                                                <input type="text" name="address" value="${PROFILE_DT.address}" readonly=""
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Ngày Sinh</label>
+                                            <div class="col-md-12">
+                                                <input type="text" name="birthday" value="${PROFILE_DT.birthday}" readonly=""
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="example-email" class="col-md-12">Email</label>
+                                            <div class="col-md-12">
+                                                <input type="email" name="email" value="${PROFILE_DT.email}" readonly=""
+                                                       class="form-control ps-0 form-control-line" name="example-email"
+                                                       id="example-email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Số Điện Thoại</label>
+                                            <div class="col-md-12">
+                                                <input type="text" name="phone" value="${PROFILE_DT.phone}" readonly=""
+                                                       class="form-control ps-0 form-control-line">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12 mb-0">Nội Dung </label>
+                                                <div class="col-md-12">
+                                                    <textarea rows="5" class="form-control ps-0 form-control-line" type="text" name="aboutDR" value="">${PROFILE_DT.aboutDR}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12 d-flex">
+                                                    <button type="submit"  class="btn btn-success mx-auto mx-md-0 text-white">Cập Nhật</button>
+                                                </div>
+                                            </div>
                                     </form>
-
-                                    <div class="table-responsive">
-                                        <%  List<DoctorDTO> list = (List<DoctorDTO>) session.getAttribute("LIST_DOCTOR");
-                                            if (list != null) {
-                                                if (!list.isEmpty()) {
-                                        %>
-                                        <table class="table user-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>STT</th>
-                                                    <th>Image</th>
-                                                    <th>Tài khoản</th>
-                                                    <th>Họ và tên</th>
-                                                    <th>Giới tính</th>
-                                                    <th>Email</th>
-                                                    <th>Số điện thoại</th>
-                                                    <th>Chuyên môn</th>
-                                                    <th>Giới Thiệu</th>
-                                                    <th>Trạng Thái</th>
-                                                 
-                                                    <th>Cập Nhật</th>
-                                                    
-
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <%
-                                                    int count = 1;
-                                                    for (DoctorDTO doctor : list) {
-                                                %>
-                                            <form action="MainController">
-                                                <tr>
-                                                    <td><%=count++%></td>
-                                                    <td><%=doctor.getImage()%></td>
-                                                    <td>
-                                                    <input type="text" name="id" value="<%=doctor.getUserID()%>"/>
-                                                    </td>
-                                                    <td><%=doctor.getFullName()%></td>
-                                                    <td><%=doctor.getGender()%></td>                                              
-                                                    <td>
-                                                        <input type="text" name="email" value="<%=doctor.getEmail()%>"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="phone" value="<%=doctor.getPhone()%>"/>
-                                                    </td>
-
-
-                                                    <td><%=doctor.getCategoryName()%></td>
-                                                    <td><%=doctor.getAboutDR()%></td>
-                                                    <td><%=doctor.isStatus()%></td>
-
-                                                    <td class="form-group form-button">
-                                                    <input type="submit" name="action"  value="Update"/>
-                                                    </td>
-
-                                                <td>
-                                                    <form action="MainController">
-                                                        <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
-
-
-                                                        </form>
-
-                                                    </td> 
-
-                                                </tr>
-                                            </form>
-                                            <%
-                                                }
-                                            %>
-                                            </tbody>
-                                            <!----------------------------------------------------------->
-                                        </table>
-                                        <%
-                                                }
-                                            }
-                                        %> 
-                                    </div>
+                                    <h6>${MESS_C}</h6>
+                                    <h6>${MESS_CF}</h6>
+                                    <h6>${MESS}</h6>
                                 </div>
                             </div>
                         </div>

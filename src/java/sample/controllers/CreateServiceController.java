@@ -24,7 +24,7 @@ import sample.user.AdminDAO;
 public class CreateServiceController extends HttpServlet {
 
     private static final String ERROR="createservice.jsp";
-    private static final String SUCCESS="service.jsp";
+    private static final String SUCCESS="MainController?search=&action=Search_Service";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -32,12 +32,16 @@ public class CreateServiceController extends HttpServlet {
         try {                     
              
             int count = 1;
-            String serviceID = "SV" + count;
+            String serviceID = "SV0" + count;
             AdminDAO dao = new AdminDAO();
             boolean checkDuplicate = dao.checkDuplicateService(serviceID);
             while (checkDuplicate) {
                 count = count + 1;
+                if(count < 10){
+                serviceID = "SV0" + count;  
+                }else{
                 serviceID = "SV" + count;
+                }
                 checkDuplicate = dao.checkDuplicateService(serviceID);
             }
 

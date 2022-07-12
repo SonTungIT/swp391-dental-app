@@ -38,6 +38,10 @@
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Icon CND fontawesome -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
         <%
@@ -129,9 +133,9 @@
                             <!-- User profile and search -->
                             <!-- ============================================================== -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
+                               <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/blog4.jpg" alt="user" class="profile-pic me-2">Ma Phong Ba
+                                    <img src="./images/doctors/${LOGIN_USER.image}" style="width: 40px; height: 40px" alt="user" class="profile-pic me-2">${LOGIN_USER.userID}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <button class="dropdown-item" type="button">
@@ -177,7 +181,7 @@
                                                          href="index.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Trang Chủ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="doctor.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                                         href="ShowProfileDoctorController?doctorID=${LOGIN_USER.userID}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Hồ Sơ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="ShowScheduleForDRController?doctorID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
@@ -268,8 +272,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${listBK_PT_ForDR}" var="list"> 
-                                                <form action="UpdateBKByDRController">
+                                                <c:forEach items="${listBK_PT_ForDR}" var="list">
+                                                <form action="UpdateBKByDRController" id="form_BK">
                                                     <input type="hidden" name="doctorID" value="${LOGIN_USER.userID}" />
                                                     <tr style="text-align: center">
                                                         <td>
@@ -295,27 +299,27 @@
                                                                 </button> 
                                                             </c:if>
                                                             <c:if test="${list.status == 'Active'}">
-                                                                <button type="button" style="background-color: rgb(251 188 5)" class="btn d-none d-md-inline-block text-white">
+                                                                <button  type="button" style="background-color: rgb(251 188 5)" class="btn d-none d-md-inline-block text-white">
                                                                     <i class="fa-solid fa-hourglass"></i>
                                                                 </button>
                                                             </c:if>
                                                         </td>
                                                         <td>
                                                             <c:if test="${list.status == 'Active'}">
-                                                                <button type="submit" name="action" value="Finish" class="btn btn-success d-none d-md-inline-block text-white">
-                                                                <i class="fa-solid fa-calendar-check"></i>
-                                                            </button> 
-                                                            <button type="submit" name="action" value="Cancel" class="btn btn-danger d-none d-md-inline-block text-white">
-                                                                <i class="fa-solid fa-trash-can"></i>
-                                                            </button> 
+                                                                <button type="submit" name="action" value="Finish" class="btn btn-secondary d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-calendar-check"></i>
+                                                                </button> 
+                                                                <button  type="submit" name="action" value="Cancel" class="btn btn-danger d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-trash-can"></i>
+                                                                </button> 
                                                             </c:if>
                                                             <c:if test="${list.status == 'Finished'}">
-                                                                <button type="button"  style="background-color: rgb(52 168 84)" class="btn  d-none d-md-inline-block text-white">
-                                                                <i class="fa-solid fa-calendar-check"></i>
-                                                            </button> 
-                                                            <button type="submit" name="action" value="Cancel" class="btn btn-danger d-none d-md-inline-block text-white">
-                                                                <i class="fa-solid fa-trash-can"></i>
-                                                            </button> 
+                                                                <button type="button"  style="background-color: rgb(52 168 84)" class="btn  btn-success d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-calendar-check"></i>
+                                                                </button> 
+                                                                <button  type="submit" name="action" value="Cancel" class="btn btn-danger d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-trash-can"></i>
+                                                                </button> 
                                                             </c:if>
                                                         </td>
                                                     </tr>
@@ -370,6 +374,5 @@
         <script src="html/js/sidebarmenu.js"></script>
         <!--Custom JavaScript -->
         <script src="html/js/custom.js"></script>
-
     </body>
 </html>

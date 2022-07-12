@@ -11,9 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
-        
-         <head>
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
@@ -23,7 +21,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>service</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
@@ -163,7 +161,7 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-                            
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
@@ -186,13 +184,13 @@
                                         class="hide-menu">Quản lí lịch hoạt động</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">FeedBack</span></a></li>
+                                        class="hide-menu">Quản lí đánh giá</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Category Services</span></a></li> 
+                                        class="hide-menu">Quản lí loại dịch vụ</span></a></li> 
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Service</span></a></li>
+                                        class="hide-menu">Quản lí dich vụ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí giá dịch vụ</span></a></li>
@@ -296,19 +294,27 @@
                                         }
                                     %>
                                     <form action="MainController" >
-                                    <div class="input-group">
-                                        <div class="form-outline">
-                                            <input type="text" id="form1" class="form-control"
-                                                name="search" value="<%= search%>"  placeholder="Nhập Tên Service">
-                                            <input type="hidden" name="action" value="Search_Service" class="btn btn-success" >
-                                        </div>
-                                             <button type="submit" class="btn btn-success d-md-inline-block text-white">
+                                        <div class="input-group">
+                                            <div class="form-outline">
+                                                <input type="text" id="form1" class="form-control"
+                                                       name="search" value="<%= search%>"  placeholder="Nhập Tên Service">
+                                                <input type="hidden" name="action" value="Search_Service" class="btn btn-success" >
+                                            </div>
+                                            <button type="submit" class="btn btn-success d-md-inline-block text-white">
                                                 <i class="fas fa-search"></i>
                                             </button>
-                                        
-                                    </div>
-                                        <a href="createservice.jsp" class="btn btn-success">Add New Service</a>
+
+                                        </div>
+
+                                        <div class="text-end upgrade-btn">
+                                            <a href="createservice.jsp"
+                                               class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">
+                                                <i class="fa-solid fa-circle-plus"></i>
+                                                Add New Service
+                                            </a>
+                                        </div>
                                     </form>
+
                                         
                                        
 
@@ -353,7 +359,7 @@
                                                         </td>
                                                         <td>
                                                             
-                                                            <img width="80px" height="60px" src="image/<%= service.getImage()%>" alt="Image can't show">
+                                                            <img width="80px" height="60px" src="images/<%= service.getImage()%>" alt="Image can't show">
                                                         </td>
                                                         <td>
                                                             <%= service.getCategoryID()%>
@@ -364,44 +370,58 @@
                                                             <input type="hidden" value="<%= service.getPrice()%>" name="price" />
                                                         </td>
                                                         <td>
+                                                        <%
+                                                            if (service.getAboutSV() == null) {
+                                                                %>
+                                                             <input type="hidden" value="<%= service.getAboutSV() %>" name="aboutSV" />  
+                                                                <%
+                                                            }else{
+                                                        %>
                                                             <%= service.getAboutSV() %>
                                                             <input type="hidden" value="<%= service.getAboutSV() %>" name="aboutSV" />
+                                                            <%
+                                                                }
+                                                                %>
                                                         </td>
                                                         <td> 
-                                                            <%= service.isStatus()%></br>
-                                                            
+                                                            <%
+                                                            if (service.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <%
+                                                            }
+                                                        %>
                                                         </td>
 
                                                        
 
                                                         <!--delete-->
                                                         <td>
-                                                            <a href="MainController?action=DeleteService&serviceID=<%= service.getServiceID() %>&search=<%= search%>" >Delete</a>
+                                                            <a href="MainController?action=DeleteService&serviceID=<%= service.getServiceID() %>&search=<%= search%>" >Xóa</a>
                                                         </td>
 
                                                         <!--update-->
                                                         <td>
 <!--                                                            <input type="submit" name="action" value="Update_Service" class="btn btn-success d-none d-md-inline-block text-white"
                                                            target="_blank" />-->
-                                                            <a href="MainController?action=SUService&serviceName=<%= service.getServiceName() %>" >Update</a>
+                                                            <a href="MainController?action=SUService&serviceName=<%= service.getServiceName()%>" >Cập Nhật</a>
                                                             <input type="hidden" name="search" value="<%= search%>"/>
                                                         </td>
                                                 </form>  
+                                            <%
+                                                }
 
-
-
-
-                                                    <%
-                                                        }
-                   
-                                                    %> 
-                                                </tr>
+                                            %> 
+                                            </tr>
                                             </tbody>
                                         </table>
-                                                    <%
-                                                             }
-                                                               }
-                                                    %>    
+                                        <%                                                            }
+                                            }
+                                        %>    
                                     </div>
                                 </div>
                             </div>
@@ -424,8 +444,6 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

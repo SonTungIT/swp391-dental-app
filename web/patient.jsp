@@ -49,8 +49,6 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
-
     </head>
     <body>
         <%
@@ -258,7 +256,7 @@
                         <div class="col-lg-4 col-xlg-3 col-md-5">
                             <form action="UpdateProfilePatientController" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="patientID" value="${PROFILE_PT.userID}">
-                                <input type="hidden" name="password" value="${PROFILE_PT.fullName}">
+                                <input type="hidden" name="fullName" value="${PROFILE_PT.fullName}">
                                 <div class="card" style="text-align: center">
                                     <div class="card-body profile-card" >
                                         <center class="mt-4"> <img src="./images/customers/${PROFILE_PT.image}"

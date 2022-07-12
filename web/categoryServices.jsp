@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 
-        
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +23,7 @@
         <meta name="description"
               content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
         <meta name="robots" content="noindex,nofollow">
-        <title>Material Pro Lite Template by WrapPixel</title>
+        <title>category service page</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
@@ -163,7 +163,7 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-                            
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
@@ -186,13 +186,13 @@
                                         class="hide-menu">Quản lí lịch hoạt động</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">FeedBack</span></a></li>
+                                        class="hide-menu">Quản lí đánh giá</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Category Services</span></a></li> 
+                                        class="hide-menu">Quản lí loại dịch vụ</span></a></li> 
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Service</span></a></li>
+                                        class="hide-menu">Quản lí dich vụ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí giá dịch vụ</span></a></li>
@@ -264,12 +264,6 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -296,25 +290,33 @@
                                         }
                                     %>
                                     <form action="MainController" >
-                                    <div class="input-group">
-                                        <div class="form-outline">
-                                            <input type="text" id="form1" class="form-control"
-                                                name="search" value="<%= search%>"  placeholder="Nhập CategoryID">
-                                            <input type="hidden" name="action" value="Search_Category" class="btn btn-success" >
-                                        </div>
-                                        <button type="submit" class="btn btn-success d-md-inline-block text-white">
+                                        <div class="input-group">
+                                            <div class="form-outline">
+                                                <input type="text" id="form1" class="form-control"
+                                                       name="search" value="<%= search%>"  placeholder="Nhập CategoryID">
+                                                <input type="hidden" name="action" value="Search_Category" class="btn btn-success" >
+                                            </div>
+                                            <button type="submit" class="btn btn-success d-md-inline-block text-white">
                                                 <i class="fas fa-search"></i>
                                             </button>
-                                        
-                                    </div>
-                                        <a href="createcategory.jsp" class="btn btn-success">Add New Category</a>
+
+                                        </div>
+                                        <div class="text-end upgrade-btn">
+                                            <a href="createcategory.jsp"
+                                               class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">
+                                                <i class="fa-solid fa-circle-plus"></i>
+                                                Add New Category
+                                            </a>
+                                        </div>
+
                                     </form>
 
-                                                <%
-                                                    List<CategoryServiceDTO> listCategory = (List<CategoryServiceDTO>) request.getAttribute("LIST_CATEGORY");
-                                                    if (listCategory != null) {
-                                                        if (listCategory.size() > 0) {
-                                                %> 
+                                    <%
+                                        List<CategoryServiceDTO> listCategory = (List<CategoryServiceDTO>) request.getAttribute("LIST_CATEGORY");
+                                        if (listCategory != null) {
+                                            if (listCategory.size() > 0) {
+                                    %> 
+
 
                                                 <div class="table-responsive">
                                             <table class="table user-table">
@@ -324,8 +326,8 @@
                                                         <th class="border-top-0">Category ID</th>
                                                         <th class="border-top-0">Tên Loại Dịch Vụ</th>                                                      
                                                         <th class="border-top-0">Trạng Thái</th>
-                                                        <th class="border-top-0"></th>
-                                                        <th class="border-top-0"></th>
+                                                        <th class="border-top-0">Xóa</th>
+                                                        <th class="border-top-0">Cập Nhật</th>
                                                         
                                                         
                                                     </tr>
@@ -348,10 +350,21 @@
                                                             <input type="hidden" value="<%= category.getCategoryName()%>" name="categoryName" />
                                                         </td>
                                                         <td> 
-                                                            <%= category.isStatus()%></br>
+                                                           
+                                                            <%
+                                                            if (category.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <%
+                                                            }
+                                                        %>
                                                             <br> </br>
-                                                            <input checked="checked" type="radio" name="status" value="True">True<br>
-                                                            <input type="radio" name="status" value="False">False
+                                                            <input checked="checked" type="radio" name="status" value="True">Hiện<br>
+                                                            <input type="radio" name="status" value="False">Ẩn
                                                         </td>
 
                                                        
@@ -363,26 +376,24 @@
 
 <!--                                                        update-->
                                                         <td>
-                                                            <input type="submit" name="action" value="Update_Category" class="btn btn-success d-none d-md-inline-block text-white"
-                                                           target="_blank" />
+                                                            <button  type="submit" name="action" value="Update_Category" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-pencil"></i>
+                                                            </button>
+                                                            
                                                             <input type="hidden" name="search" value="<%= search%>"/>
                                                         </td>
                                                 </form>  
+ 
+                                            <%
+                                                }
 
-
-
-
-                                                    <%
-                                                        }
-                   
-                                                    %> 
-                                                </tr>
+                                            %> 
+                                            </tr>
                                             </tbody>
                                         </table>
-                                                    <%
-                                                             }
-                                                               }
-                                                    %>    
+                                        <%                                                            }
+                                            }
+                                        %>    
                                     </div>
                                 </div>
                             </div>
@@ -405,8 +416,7 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
+
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

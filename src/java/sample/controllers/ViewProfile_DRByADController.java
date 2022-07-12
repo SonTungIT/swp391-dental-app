@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package sample.controllers;
 
@@ -12,45 +11,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sample.services.ServiceDTO;
 import sample.user.AdminDAO;
-
+import sample.user.DoctorDTO;
 
 /**
  *
- * @author dangk
+ * @author Xqy
  */
-@WebServlet(name = "UpdateServiceController", urlPatterns = {"/UpdateServiceController"})
-public class UpdateServiceController extends HttpServlet {
-    
-    private static final String ERROR = "SearchServiceController";
-    private static final String SUCCESS = "MainController?search=&action=Search_Service";
-    
+@WebServlet(name = "ViewProfile_DRByADController", urlPatterns = {"/ViewProfile_DRByADController"})
+public class ViewProfile_DRByADController extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            String serviceID = request.getParameter("serviceID");
-            String serviceName = request.getParameter("serviceName");
-            String image = request.getParameter("image");
-            String categoryID = request.getParameter("categoryID");
-            int price = Integer.parseInt(request.getParameter("price"));
-            String aboutSV = request.getParameter("aboutSV");
-            boolean status = Boolean.parseBoolean(request.getParameter("status"));    
-            
-            ServiceDTO service = new ServiceDTO(serviceID, serviceName, image, categoryID, price, aboutSV, status);       
+            String doctorID = request.getParameter("doctorID");
             AdminDAO dao = new AdminDAO();
-            
-            boolean checkUpdate = dao.updateService(service);
-            if (checkUpdate) {
-
-                url = SUCCESS;
-            }
-        } catch (Exception e) {
-            log("Error at UpdateServiceController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            DoctorDTO dt = dao.getProfileDR(doctorID);
+            request.setAttribute("PROFILE_DT", dt);
+            request.getRequestDispatcher("seemore.jsp").forward(request, response);
+        } catch (Exception ex) {
+            log("Error at ViewProfile_DRByADController:" + ex.toString());
         }
     }
 

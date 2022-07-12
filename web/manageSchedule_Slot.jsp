@@ -172,7 +172,7 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-                            
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
@@ -195,37 +195,17 @@
                                         class="hide-menu">Quản lí lịch hoạt động</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">FeedBack</span></a></li>
+                                        class="hide-menu">Quản lí đánh giá</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Category Services</span></a></li> 
+                                        class="hide-menu">Quản lí loại dịch vụ</span></a></li> 
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Service</span></a></li>
+                                        class="hide-menu">Quản lí dich vụ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí giá dịch vụ</span></a></li>
-                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="icon-material.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Icon</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span
-                                        class="hide-menu">Google Map</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="pages-blank.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
-                            </li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="pages-error-404.html" aria-expanded="false"><i
-                                        class="mdi me-2 mdi-help-circle"></i><span class="hide-menu">Error 404</span></a>
-                            </li>
-                            <li class="text-center p-20 upgrade-btn">
-                                <a href="https://www.wrappixel.com/templates/materialpro/"
-                                    class="btn btn-warning text-white mt-4" target="_blank">Upgrade to
-                                    Pro</a>
-                            </li> -->
                         </ul>
-
                     </nav>
                     <!-- End Sidebar navigation -->
                 </div>
@@ -339,7 +319,9 @@
                                                     <td><%=doctor.getUserID()%>
                                                         <input type="hidden" name="doctorID" value="<%=doctor.getUserID()%>"/>
                                                     </td>
-                                                    <td><%=doctor.getImage()%></td> 
+                                                    <td>
+                                                        <img src="./images/doctors/<%=doctor.getImage()%>" style="width: 60px; height: 100px" alt="alt"/>
+                                                    </td> 
                                                     <td><%=doctor.getFullName()%></td>                             
                                                     <td><%=doctor.getCategoryName()%></td>
                                                     <td><%=doctor.getShift()%>
@@ -395,6 +377,18 @@
                                             </tbody>
                                             <!----------------------------------------------------------->
                                         </table>
+                                        <%
+                                            String mess_UD = (String) request.getAttribute("MESS_UD");
+                                            if (mess_UD == null) {
+                                                mess_UD = "";
+                                            }
+                                            String mess = (String) request.getAttribute("MESS");
+                                            if (mess == null) {
+                                                mess = "";
+                                            }
+                                        %>
+                                        <h6><%=mess_UD%></h6>
+                                        <h6><%=mess%></h6>
                                         <%
                                                 }
                                             }
