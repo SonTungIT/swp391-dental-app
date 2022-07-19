@@ -19,7 +19,7 @@ public class UserDAO {
 
     private static final String LOGIN = "SELECT userID, fullname, roleID, gender, address, image, birthday, email, phone, status FROM Users WHERE userID=? AND password =?";
     private static final String LOGINGOOGLE = "SELECT userID, fullname, roleID, gender, address, image, birthday, email, phone, status FROM Users WHERE email like ? ";
-    private static final String CREATE = "INSERT INTO Users(userID,password,fullName, roleID, gender, address,image,birthday, phone,email, status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String CREATE = "INSERT INTO Users(userID,password,fullName, roleID, gender, address,image,birthday,email, phone, status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     private static final String CHECK_DUPLICATE = "SELECT fullname FROM Users WHERE userID=?";
 
     public UserDTO checkLogin(String userID, String password) throws SQLException {
@@ -124,8 +124,6 @@ public class UserDAO {
                 ptm.setDate(8, user.getBirthday());
                 ptm.setString(9, user.getEmail());
                 ptm.setString(10, user.getPhone());
-               
-
                 ptm.setBoolean(11, user.isStatus());
 
                 check = ptm.executeUpdate() > 0 ? true : false;

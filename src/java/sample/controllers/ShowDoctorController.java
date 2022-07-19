@@ -37,22 +37,8 @@ public class ShowDoctorController extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             AdminDAO dao = new AdminDAO();
-//            int numberOfDoctor = dao.getNumberOfDoctor();
-//            request.setAttribute("NUMBER_OF_DOCTOR", numberOfDoctor);
-//            String indexString = request.getParameter("index");
-//            if (indexString == null) {
-//                indexString = "1";
-//            }
-//            int index = Integer.parseInt(indexString);
-//            int maxPages = dao.getFullDoctorMaxPagesBy5();
-//            System.out.println(maxPages);
-//            dao.getFullListDoctor(index);
-            
             List<DoctorDTO> list = dao.getListAllDoctor();
-            
             session.setAttribute("LIST_DOCTOR", list);
-//            session.setAttribute("maxPages", maxPages);
-//            session.setAttribute("index", index);
             url = SUCESSFUL;
         } catch (Exception e) {
             log("Error at DisplayCUSController: " + e.toString());

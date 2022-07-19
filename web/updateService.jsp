@@ -332,25 +332,7 @@
                                                 </div>
 
 
-                                                    <div class="form-group"> 
-                                                        <br> Trạng Thái :
-                                                            <%
-                                                            if (list.isStatus() == true) {
-                                                        %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
-                                                        <%
-                                                        } else {
-                                                        %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
-                                                        <%
-                                                            }
-                                                        %>
-                                                        </br>
-                                                        <input checked="checked" type="radio" name="status" value="True">Hiện<br>
-                                                        <input type="radio" name="status" value="False">Ẩn
-
-
-                                                </div>
+                                                   
 
 
                                                     <div class="form-group">

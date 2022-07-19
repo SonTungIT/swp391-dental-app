@@ -7,11 +7,14 @@ package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sample.booking.BookingDTO;
 import sample.services.ServiceDTO;
 import sample.user.AdminDAO;
 
@@ -37,10 +40,29 @@ public class UpdateServiceController extends HttpServlet {
             String categoryID = request.getParameter("categoryID");
             int price = Integer.parseInt(request.getParameter("price"));
             String aboutSV = request.getParameter("aboutSV");
-            boolean status = Boolean.parseBoolean(request.getParameter("status"));    
-            
-            ServiceDTO service = new ServiceDTO(serviceID, serviceName, image, categoryID, price, aboutSV, status);       
+            ServiceDTO service = new ServiceDTO(serviceID, serviceName, image, categoryID, price, aboutSV);    
             AdminDAO dao = new AdminDAO();
+            
+            ServiceDTO oldNameCate = dao.getOldNameCate_SV(serviceID);
+            if (oldNameCate != null) {
+                String oldName = oldNameCate.getServiceName();
+                String oldCate = oldNameCate.getCategoryID();
+                if (oldName != serviceName || oldCate != categoryID) {
+                    
+                    long millis = System.currentTimeMillis();
+                    Date curDate = new java.sql.Date(millis);
+                    List<BookingDTO> list = dao.getListBKOFSV(serviceID, curDate);
+                    if (!list.isEmpty()) {
+                        for (BookingDTO bk : list) {
+                            boolean checkUP = dao.updateBKConflict_SV(bk.getBookingID());
+                            if (checkUP) {
+                                request.setAttribute("MESS_CF", "Có một số cuộc hẹn của khách hàng bị xung đột!");
+                            }
+                        }
+                    }
+                }
+
+            }
             
             boolean checkUpdate = dao.updateService(service);
             if (checkUpdate) {

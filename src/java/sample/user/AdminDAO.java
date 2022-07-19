@@ -31,7 +31,7 @@ public class AdminDAO {
     private static final String SHOW_DR_SC = "SELECT userID, fullName, image, categoryName, shift from Users us JOIN Doctor dt ON us.userID = dt.doctorID JOIN CategoryService cs ON  cs.categoryID = dt.categoryID  WHERE us.status = 1 AND fullName like ?";
     private static final String SHOWSLOT = "SELECT slotID, slotName, slotTime, slotDateStart, slotDateEnd, status FROM Slot WHERE slotDateStart = ? OR slotDateEnd = ?";
     private static final String UPDATE_SLOT = "UPDATE Slot SET slotDateStart = ?, slotDateEnd = ?  WHERE slotTime = ?";
-    private static final String UPDATE_BOOKING_FAIL_BY_UPDATESLOT = "UPDATE Booking SET status = 'Conflit' WHERE bookingID = ?";
+    private static final String UPDATE_BOOKING_FAIL_BY_UPDATESLOT = "UPDATE Booking SET status = 'Conflict' WHERE bookingID = ?";
     private static final String CHECK_BOOKING_FAILBY_UPDATESLOT = "SELECT bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status FROM Booking WHERE dateBooking >= ?";
     private static final String CHECK_DUPLICATE_SD_ID = "SELECT doctorID FROM Schedule WHERE scheduleID = ? ";
     private static final String CHECK_DUPLICATE_SD_DR_DW_SL = "SELECT scheduleID FROM Schedule WHERE doctorID = ? AND slotID = ? AND dayWork = ?";
@@ -48,10 +48,10 @@ public class AdminDAO {
     private static final String CHECK_DUPLICATE_CATE = "SELECT categoryName FROM CategoryService WHERE  categoryID=? ";
     private static final String CREATE_CATEGORY = "INSERT INTO CategoryService(categoryID, categoryName , status) VALUES(?,?,?)";
 
-    private static final String SEARCH_SERVICE = "SELECT serviceID, serviceName,image, categoryID, price, aboutSV , status FROM Service WHERE serviceName like ? AND status like '1'";
+    private static final String SEARCH_SERVICE = "SELECT serviceID, serviceName,image, categoryID, price, aboutSV , status FROM Service WHERE serviceName like ? ";
 //    private static final String DELETE_SERVICE = "DELETE Service WHERE ServiceID=? ";
     private static final String DELETE_SERVICE = "UPDATE Service SET status=? WHERE serviceID=? ";
-    private static final String UPDATE_SERVICE = "UPDATE Service SET serviceName=?, image=?, categoryID=?, price=? ,aboutSV=? ,status=? WHERE serviceID=? ";
+    private static final String UPDATE_SERVICE = "UPDATE Service SET serviceName=?, image=?, categoryID=?, price=? ,aboutSV=?  WHERE serviceID=? ";
     private static final String CHECK_DUPLICATE_SV = "SELECT serviceName FROM Service WHERE  serviceID=? ";
     private static final String CREATE_SERVICE = "INSERT INTO Service(serviceID, serviceName , image, categoryID, price, aboutSV , status) VALUES(?,?,?,?,?,?,?)";
 
@@ -1879,8 +1879,7 @@ public class AdminDAO {
                 ptm.setString(3, service.getCategoryID());
                 ptm.setInt(4, service.getPrice());
                 ptm.setString(5, service.getAboutSV());
-                ptm.setBoolean(6, service.isStatus());
-                ptm.setString(7, service.getServiceID());
+                ptm.setString(6, service.getServiceID());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -2106,7 +2105,7 @@ public class AdminDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Booking SET status = 'Conflic' WHERE bookingID = ?";
+                String sql = "UPDATE Booking SET status = 'Conflict' WHERE bookingID = ?";
                 ptm = conn.prepareStatement(sql);
                 ptm.setString(1, bookingID);
                 check = ptm.executeUpdate() > 0 ? true : false;
@@ -2301,5 +2300,262 @@ public class AdminDAO {
 
         }
         return check;
+    }
+
+    public boolean updateStatusDR(String doctorID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Users SET status = 1 WHERE userID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, doctorID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+    
+     public List<BookingDTO> getListBKOFSV(String serviceID, Date date) throws SQLException, ClassNotFoundException {
+        List<BookingDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status FROM Booking \n"
+                        + "                        		WHERE serviceID = ? AND dateBooking > ? AND status = 'Active'";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, serviceID);
+                ptm.setDate(2, date);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String bookingID = rs.getString("bookingID");
+                    String patientID = rs.getString("patientID");
+                    String doctorID = rs.getString("doctorID");
+                    Date dateBooking = rs.getDate("dateBooking");
+                    String timeBooking = rs.getString("timeBooking");
+                    String status = rs.getString("status");
+                    list.add(new BookingDTO(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public boolean updateBKConflict_SV(String bookingID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Booking SET status = 'Conflict' WHERE bookingID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, bookingID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+    
+    public List<DoctorDTO> getListDROFCT(String categoryID) throws SQLException, ClassNotFoundException {
+        List<DoctorDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT doctorID , categoryID FROM Doctor WHERE categoryID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, categoryID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("doctorID");
+                    String fullname = "" ;
+                    String image ="";
+                    
+                    list.add(new DoctorDTO(userID,fullname, image, categoryID));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    public boolean updateCT_DR(String doctorID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Users  SET status =0 WHERE userID =?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, doctorID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+    
+     public List<BookingDTO> getListBKOFCT(String doctorID, Date date) throws SQLException, ClassNotFoundException {
+         List<BookingDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status FROM Booking \n"
+                        + "                        		WHERE doctorID = ? AND dateBooking > ? AND status = 'Active'";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, doctorID);
+                ptm.setDate(2, date);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String bookingID = rs.getString("bookingID");
+                    String patientID = rs.getString("patientID");
+                    String serviceID = rs.getString("serviceID");
+                    Date dateBooking = rs.getDate("dateBooking");
+                    String timeBooking = rs.getString("timeBooking");
+                    String status = rs.getString("status");
+                    list.add(new BookingDTO(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+     
+     public boolean updateBKConflict_CT(String bookingID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Booking SET status = 'Conflict' WHERE bookingID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, bookingID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+     public ServiceDTO getOldNameCate_SV(String serviceID) throws SQLException, ClassNotFoundException {
+         ServiceDTO service = new ServiceDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT  serviceName, categoryID FROM Service WHERE serviceID like ? ";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, serviceID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String serviceName = rs.getString("serviceName");
+                    String categoryID = rs.getString("categoryID");
+                    service = new ServiceDTO(serviceID , serviceName , categoryID);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return service;
     }
 }

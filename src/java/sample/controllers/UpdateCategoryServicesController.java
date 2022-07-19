@@ -7,13 +7,17 @@ package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sample.booking.BookingDTO;
 import sample.services.CategoryServiceDTO;
 import sample.user.AdminDAO;
+import sample.user.DoctorDTO;
 
 
 
@@ -39,6 +43,30 @@ public class UpdateCategoryServicesController extends HttpServlet {
             AdminDAO dao = new AdminDAO();
             
             boolean checkUpdate = dao.updateCategory(category);
+            
+            List<DoctorDTO> list1 = dao.getListDROFCT(CategoryID);
+             if (!list1.isEmpty()) {
+                    for (DoctorDTO dr : list1) {
+                        String USID = dr.getUserID();
+                        boolean checkUP = dao.updateCT_DR(USID);
+                        if (checkUP) {
+                            request.setAttribute("MESS_CF2", "Có một số trạng thái của bác sĩ bị xóa!");
+                        }
+                        long millis = System.currentTimeMillis();
+                        Date curDate = new java.sql.Date(millis);
+                        List<BookingDTO> list = dao.getListBKOFCT(USID, curDate);
+                        if (!list.isEmpty()) {
+                        for (BookingDTO bk : list) {
+                        boolean checkUP2 = dao.updateBKConflict_CT(bk.getBookingID());
+                        if (checkUP2) {
+                            request.setAttribute("MESS_CF", "Có một số cuộc hẹn của khách hàng bị xung đột!");
+                        }
+                    }
+                }
+                    }
+                }
+
+            
             if (checkUpdate) {
 
                 url = SUCCESS;

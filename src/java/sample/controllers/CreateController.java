@@ -38,13 +38,8 @@ public class CreateController extends HttpServlet {
             String roleID = request.getParameter("roleID");
             String gender = "";
             String address = "";
-            String image = "";
+            String image = "macdinh.jpg";
             Date birthday = null;
-            
-            
-          
-           
-          
             String email = request.getParameter("email");
             String phone = "";
             

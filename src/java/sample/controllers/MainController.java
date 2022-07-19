@@ -32,10 +32,12 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_DOCTOR = "Search";
     private static final String SEARCH_DOCTOR_CONTROLLER = "SearchDoctorController";
     private static final String ADD_DOCTOR = "Add";
-    private static final String ADD_DOCTOR_CONTROLLER = "AddDoctorController";   
-    private static final String DELETE_DOCTOR = "Delete";
+    private static final String ADD_DOCTOR_CONTROLLER = "AddDoctorController";
+    private static final String SHOWTRUE_DOCTOR = "Update_DR";
+    private static final String SHOWTRUE_DOCTOR_CONTROLLER = "UpdateTDoctorController";
+    private static final String DELETE_DOCTOR = "Delete_DR";
     private static final String DELETE_DOCTOR_CONTROLLER = "DeleteDoctorController";
-
+    
     private static final String SHOW_ALL_PATIENT = "ShowAllPatient";
     private static final String SHOW_ALL_PATIENT_CONTROLLER = "ShowPatientController";
     private static final String SEARCH_PATIENT = "Tìm kiếm";
@@ -64,7 +66,7 @@ public class MainController extends HttpServlet {
     //Slot
     private static final String UPDATESLOT = "UpdateSlot";
     private static final String UPDATESLOT_CONTROLLER = "UpdateSlotController";
-    
+
     //Doctor
     private static final String SHOWDR_BYCT = "ShowDRByCT";
     private static final String SHOWDR_BYCT_CONTROLLER = "ShowDRByCTController";
@@ -80,7 +82,6 @@ public class MainController extends HttpServlet {
     private static final String VIEW_HISTORY_BK_CONTROLLER = "ViewHistoryBKController";
     private static final String CANCEL_BK = "CancelBK";
     private static final String CANCEL_BK_CONTROLLER = "CancelBKController";
-    
 
     private static final String CREATE_FEEDBACK = "Create_Feedback";
     private static final String CREATE_FEEDBACK_CONTROLLER = "CreatefeedbackController";
@@ -92,7 +93,7 @@ public class MainController extends HttpServlet {
     private static final String SHOW_FEEDBACK_CONTROLLER = "ShowfeedbackController";
     private static final String UPDATE_FEEDBACK = "Update_Feedback";
     private static final String UPDATE_FEEDBACK_CONTROLLER = "UpdatefeedbackController";
-    
+
     private static final String SEARCH_CATEGORY = "Search_Category";
     private static final String SEARCH_CATEGORY_CONTROLLER = "SearchCategoryServicesController";
     private static final String DELETE_CATEGORY = "DeleteCategory";
@@ -101,7 +102,7 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_CATEGORY_CONTROLLER = "UpdateCategoryServicesController";
     private static final String CREATE_CATEGORY = "Create_Category";
     private static final String CREATE_CATEGORY_CONTROLLER = "CreateCategoryServicesController";
-    
+
     private static final String SEARCH_SERVICE = "Search_Service";
     private static final String SEARCH_SERVICE_CONTROLLER = "SearchServiceController";
     private static final String UPDATE_SERVICE = "Update_Service";
@@ -112,16 +113,15 @@ public class MainController extends HttpServlet {
     private static final String CREATE_SERVICE_CONTROLLER = "CreateServiceController";
     private static final String SHOW_SERVICE_DETAIL = "SUService";
     private static final String SHOW_SERVICE_DETAIL_CONTROLLER = "DetailServiceController";
-    
+
     private static final String SEARCH_PRICE_SERVICE = "Search_Price";
     private static final String SEARCH_PRICE_SERVICE_CONTROLLER = "SearchPriceServiceController";
     private static final String UPDATE_PRICE_SERVICE = "Update_Price";
     private static final String UPDATE_PRICE_SERVICE_CONTROLLER = "UpdatePriceServiceController";
-    
+
     private static final String SHOW_ABOUT_SERVICE = "Show_About";
     private static final String SHOW_ABOUT_SERVICE_CONTROLLER = "ShowAboutServiceController";
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -178,40 +178,42 @@ public class MainController extends HttpServlet {
                 url = CANCEL_BK_CONTROLLER;
             } else if (CREATE_FEEDBACK.equals(action)) {
                 url = CREATE_FEEDBACK_CONTROLLER;
-            }else if(SHOW_BOOKING_DETAIL.equals(action)){
+            } else if (SHOW_BOOKING_DETAIL.equals(action)) {
                 url = SHOW_BOOKING_DETAIL_CONTROLLER;
-            }else if(FEEDBACK_ACTIVE.equals(action)){
+            } else if (FEEDBACK_ACTIVE.equals(action)) {
                 url = FEEDBACK_ACTIVE_CONTROLLER;
-            }else if (SHOW_FEEDBACK.equals(action)) {
+            } else if (SHOW_FEEDBACK.equals(action)) {
                 url = SHOW_FEEDBACK_CONTROLLER;
-            }else if (UPDATE_FEEDBACK.equals(action)) {
+            } else if (UPDATE_FEEDBACK.equals(action)) {
                 url = UPDATE_FEEDBACK_CONTROLLER;
-            }else if (SEARCH_CATEGORY.equals(action)) {
+            } else if (SEARCH_CATEGORY.equals(action)) {
                 url = SEARCH_CATEGORY_CONTROLLER;
-            }else if (DELETE_CATEGORY.equals(action)) {
+            } else if (DELETE_CATEGORY.equals(action)) {
                 url = DELETE_CATEGORY_CONTROLLER;
-            }else if (UPDATE_CATEGORY.equals(action)) {
+            } else if (UPDATE_CATEGORY.equals(action)) {
                 url = UPDATE_CATEGORY_CONTROLLER;
-            }else if (CREATE_CATEGORY.equals(action)) {
+            } else if (CREATE_CATEGORY.equals(action)) {
                 url = CREATE_CATEGORY_CONTROLLER;
-            }else if (SEARCH_SERVICE.equals(action)) {
+            } else if (SEARCH_SERVICE.equals(action)) {
                 url = SEARCH_SERVICE_CONTROLLER;
-            }else if (DELETE_SERVICE.equals(action)) {
+            } else if (DELETE_SERVICE.equals(action)) {
                 url = DELETE_SERVICE_CONTROLLER;
-            }else if (UPDATE_SERVICE.equals(action)) {
+            } else if (UPDATE_SERVICE.equals(action)) {
                 url = UPDATE_SERVICE_CONTROLLER;
-            }else if (CREATE_SERVICE.equals(action)) {
+            } else if (CREATE_SERVICE.equals(action)) {
                 url = CREATE_SERVICE_CONTROLLER;
-            }else if (SEARCH_PRICE_SERVICE.equals(action)) {
+            } else if (SEARCH_PRICE_SERVICE.equals(action)) {
                 url = SEARCH_PRICE_SERVICE_CONTROLLER;
-            }else if (UPDATE_PRICE_SERVICE.equals(action)) {
+            } else if (UPDATE_PRICE_SERVICE.equals(action)) {
                 url = UPDATE_PRICE_SERVICE_CONTROLLER;
-            }else if (SHOW_ABOUT_SERVICE.equals(action)) {
+            } else if (SHOW_ABOUT_SERVICE.equals(action)) {
                 url = SHOW_ABOUT_SERVICE_CONTROLLER;
-            }else if(SHOW_SERVICE_DETAIL.equals(action)){
+            } else if (SHOW_SERVICE_DETAIL.equals(action)) {
                 url = SHOW_SERVICE_DETAIL_CONTROLLER;
             } else if (ADD_DOCTOR.equals(action)) {
                 url = ADD_DOCTOR_CONTROLLER;
+            }else if (SHOWTRUE_DOCTOR.equals(action)) {
+                url = SHOWTRUE_DOCTOR_CONTROLLER;
             }
 
         } catch (Exception e) {

@@ -313,7 +313,7 @@
                                         <div class="form-group">
                                             <label class="col-md-12 mb-0">Chuyên khoa</label>
                                             <div class="col-md-12">
-                                                <select name="categoryID">
+                                                <select name="categoryID" class="form-control ps-0 form-control-line">
                                                     <option value="${PROFILE_DT.categoryID}">
                                                         ${PROFILE_DT.categoryName}
                                                     </option>
@@ -328,7 +328,7 @@
                                         <div class="form-group">
                                             <label class="col-md-12 mb-0">Ca làm việc</label>
                                             <div class="col-md-12">
-                                                <select name="shift">
+                                                <select name="shift"class="form-control ps-0 form-control-line">
                                                     <option value="${PROFILE_DT.shift}">
                                                         ${PROFILE_DT.shift}
                                                     </option>

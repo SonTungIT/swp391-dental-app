@@ -76,6 +76,10 @@ public class DoctorDTO extends UserDTO {
         this.serviceID = serviceID;
         this.serviceName = serviceName;
     }
+    public DoctorDTO(String userID, String fullName, String image , String categoryID  ){
+        super(userID, fullName, image);
+        this.categoryID = categoryID;
+    }
 
     public String getCategoryID() {
         return categoryID;

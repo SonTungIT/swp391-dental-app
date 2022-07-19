@@ -1,13 +1,9 @@
 <%-- 
-    Document   : about
-    Created on : Jun 6, 2022, 12:14:54 PM
+    Document   : knowledge
+    Created on : Jun 6, 2022, 12:18:01 PM
     Author     : Lenovo Legion
 --%>
 
-
-<%@page import="sample.services.ServiceDTO"%>
-<%@page import="sample.services.CategoryServiceDTO"%>
-<%@page import="sample.user.PatientDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.List"%>
@@ -17,9 +13,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-                 <c:set var="txtSearch" value="${param.txtSearchValue}"/>
+        <jsp:useBean id="a" class="sample.informattion.NewsDAO" scope="request" />
+        <c:set var="txtSearch" value="${param.txtSearchValue}"/>
 
-        <title>Dental Health Medical Category Flat Bootstrap Responsive Website Template | About :: W3layouts</title>
+        <title>Dental Health Medical Category Flat Bootstrap Responsive Website Template | Gallery :: W3layouts</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -29,7 +26,6 @@
         <script>
             addEventListener("load", function () {
                 setTimeout(hideURLbar, 0);
-                F
             }, false);
 
             function hideURLbar() {
@@ -41,6 +37,7 @@
         <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/bkstyle.css" rel="stylesheet" type="text/css"/>
         <!-- //css files -->
 
         <!-- google fonts -->
@@ -55,46 +52,36 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-         
+        
+        <form action="SearchInformationController" >
+            <input type="text" name="txtSearch"  value="${param.txtSearchValue}" placeholder="input your text"/>
+            <input type="submit" name="action"  value="Tìm kiếm"/>
+            <input type="hidden" name="index" value="1"/>
+        </form>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <!-- top header -->
         <div class="header-top">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <ul class="d-lg-flex header-w3_pvt">
                             <li class="mr-lg-3">
                                 <span class="fa fa-envelope-open"></span>
                                 <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
                             </li>
-                        </ul>
-                        <ul class="d-lg-flex header-w3_pvt">
+                            <!-- <li>
+                                    <span class="fa fa-phone"></span>
+                                    <p class="d-inline">Call Us +12 345 678</p>
+                            </li> -->
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
                             </li>
                         </ul>
                     </div>
-                    
-                    <div class="col-sm-4">
-                        <ul class="d-lg-flex">
-                                <form action="SearchInformationController" >
-                                    <div class="tech-btm d-lg-flex">
-                                        <div class="form-outline">
-                                            <input type="text" name="txtSearch" class="form-control px-2" value="${param.txtSearchValue}" placeholder="Tìm Kiếm"/>
-                                            <input type="hidden" name="index" value="1"/>
-                                        </div>
-                                        <button type="submit" name="action" value="Tìm kiếm" class="btn btn-success">
-                                            <i class="fas fa-search"></i>
-                                        </button>
 
-                                    </div>
-                                </form>
-                        </ul>
-                    </div>
-                    
-                    <div class="col-sm-4 header-right-w3_pvt">
+                    <div class="col-sm-6 header-right-w3_pvt">
                         <%
                             AdminDAO dao = new AdminDAO();
                             List<String> listTW = dao.getOPH();
@@ -118,7 +105,6 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -142,64 +128,62 @@
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
                             <ul class="menu__service-list">
-                                 <%
-                                    PatientDAO dao1 = new PatientDAO();
-                                    List<CategoryServiceDTO> listCate = dao1.getTableCategory();
-                                    if (listCate != null) {
-                                        if (listCate.size() > 0) {
-                                            for (CategoryServiceDTO cate : listCate) {
-
-
-                                %>
-                                <li class="menu__service-description">   
-                                    <a class="menu__service-link"><span> <%= cate.getCategoryName()%></span>  
-                                        
-                                    </a>    
-                                    <%
-                                        String cate1 = cate.getCategoryName();
-                                        
-                                        List<ServiceDTO> listService = dao1.getTableService(cate1);
-
-                                        if (listService != null) {
-
-                                            if (listService.size() > 0) {
-
-                                    %>
+                                <li class="menu__service-description">
+                                    <a href="#" class="menu__service-link"><span>Niềng răng chỉnh nha</span></a>
                                     <ul class="menu__service-colume">
-                                    <%                                                                
-                                        for (ServiceDTO table : listService) {
-
-
-                                    %> 
-                                    
                                         <li class="menu__service-colume--item">
-                                            <a href="MainController?action=Show_About&serviceID=<%= table.getServiceID() %>"><%= table.getServiceName()%></a>
+                                            <a href="./listService/niengrang1.html">Niềng răng mắc cài</a>
                                         </li>
-                                   
-
-
-                                    <%
-
-                                                }
-                                                %>
-                                             </ul>   
-                                                <%
-                                            }
-
-                                        }
-                                    %>
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/niengrang2.html">Niềng răng Invisalign</a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <%
-                                    }
-
-                                %>
-                                <%        }
-                                    }
-
-                                %> 
+                                <li class="menu__service-description">
+                                    <a href="#" class="menu__service-link"><span>Răng sứ thẩm mỹ</span></a>
+                                    <ul class="menu__service-colume">
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/rangsu1.html">Dán sứ Veneer</a>
+                                        </li>
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/rangsu2.html">Bọc răng sứ</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu__service-description">
+                                    <a href="#" class="menu__service-link"><span>Cấy ghép răng implant</span></a>
+                                    <ul class="menu__service-colume">
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/cayghep1.html">Trồng răng Implant</a>
+                                        </li>
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/cayghep2.html">Trồng Implant toàn hàm</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu__service-description">
+                                    <a href="#" class="menu__service-link"><span>Dịch vụ bệnh lý</span></a>
+                                    <ul class="menu__service-colume">
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/dichvu1.html">Lấy cao răng</a>
+                                        </li>
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/dichvu2.html">Nhổ răng khôn</a>
+                                        </li>
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/dichvu3.html">Hàn trám răng</a>
+                                        </li>
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/dichvu4.html">Điều trị tủy</a>
+                                        </li>
+                                        <li class="menu__service-colume--item">
+                                            <a href="./listService/dichvu5.html">Tẩy trắng răng</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
-                        <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
+                        <li class="active"><a href="price.jsp">BẢNG GIÁ</a></li>
                         <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
                         <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
                             <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
@@ -247,11 +231,11 @@
                     %> 
 
                     <div class="dropdown btn-group">
-                         <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/customers/${LOGIN_USER.image}" style="width: 50px; height: 50px ; border-radius: 40px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
+                        <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="./images/sontung.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="ShowProfilePatientController?patientID=${LOGIN_USER.getUserID()}" style="padding: 0">
+                            <a href="patient.jsp" style="padding: 0">
                                 <button class="dropdown-item" type="button">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
                                     Tài Khoản Của Tôi
@@ -311,159 +295,176 @@
         <!-- banner -->
         <div class="innerpage-banner" id="home">
             <div class="inner-page-layer">
-
             </div>
         </div>
         <!-- //banner -->
 
-        <!-- about -->
-        <section class="about py-5">
-            <div class="container py-md-3">
-                <h2 class="heading text-center mb-sm-5 mb-4">GIỚI THIỆU </h2>
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h4 class="about-left">Uy tín luôn là hàng đầu!</h4>
-                        <p class="mt-sm-4 mt-3">Trung tâm Nha khoa Thiên Thần được thành lập từ tháng 8 năm 2009. Sau hơn 12
-                            năm hoạt động, trung tâm đã tạo dựng được uy tín và sự tin cậy từ phía khách hàng, dần khẳng
-                            định được vị thế của mình trong những trung tâm chăm sóc răng miệng hàng đầu Việt Nam, chuyên về
-                            cấy ghép Implant và răng sứ thẩm mỹ.</p>
-                        <div class="row mt-4">
-                            <img src="images/banner-dental.jpg" class="img-fluid" alt="" />
+        <!-- gallery -->
+        <section class="gallery py-5" id="gallery">
+            <div class="container py-lg-5" style="display: flex">
+                <div class="col-lg-9 left-blog-info text-left">
+                    <h2 class="heading text-center mb-sm-5 mb-4">Giới thiệu</h2>
+                    <div style="text-align: end">Ngày Đăng: ${a.about1.timepost}</div>
+                    <div class="row news-grids text-center">
+                        <div class="row item-list">
+                            <div class="form-content">
+                                <div class="title-know title--know-big">
+                                    ${a.about1.title1}
+                                </div>
+                                <div class="form-text--center">
+                                    ${a.about1.context1}
+                                </div>
+                                <div class="image">
+                                    <img src="${a.about1.image1}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-content">
+                                <div class="title-know title--know-big">
+                                    ${a.about1.title2}
+                                </div>
+                                <div class="form-text--center">
+                                    ${a.about1.context2}
+                                </div>
+                                <div class="image">
+                                    <img src="${a.about1.image2}" width="900" height="600"/>
+                                </div>
+                            </div>        
+
+                            <div class="form-content">
+                                <div class="title-know title--know-big">
+                                    ${a.about1.title3}
+                                </div>
+                                <div class="form-text--center">
+                                    ${a.about1.context3}
+                                </div>
+                                <div class="image">
+                                    <img src="${a.about1.image3}" width="900" height="600"/>
+                                </div>
+                            </div>
+
+                            <div class="form-content">
+                                <div class="title-know title--know-big">
+                                    ${a.about1.title4}
+                                </div>
+                                <div class="form-text--center">
+                                    ${t.about1.context4}
+                                </div>
+                                <div class="image">
+                                    <img src="${a.about1.image4}" width="900" height="600"/>
+                                </div>
+                            </div>
+                            <div class="form-content">
+                                <div class="title-know title--know-big">
+                                    ${a.about1.title5}
+                                </div>
+                                <div class="form-text--center">
+                                    ${t.about1.context5}
+                                </div>
+                                <div class="image">
+                                    <img src="${a.about1.image5}" width="900" height="600"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-8 dental">
-                        <img src="images/tooth.png" class="img-fluid" alt="" />
-                    </div>
                 </div>
+
+                <aside class="col-lg-3 right-blog-con text-left ml-5">
+                    <div class="right-blog-info text-left mt-5">
+                        <div class="widget">
+                            <div class="title-bl"><span>Kiên thức mới nhất</span></div>
+                            <div class="sidebar-menu">
+                                <ul class="widget-list">
+                                    <c:forEach items="${a.top5}" var="o">
+                                        <li>
+                                            <a style="line-height: 5px; font-size: 16px" href="DetailNewsController?idDetail=${o.idDetai}">
+                                                ${o.title1}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </section>
-        <!-- //about -->
+        <!-- //gallery -->
 
-        <!-- about bottom -->
-        <section class="about-bottom pb-5">
-            <div class="container pb-lg-3">
-                <div class="row bottom-grids">
-                    <div class="col-lg-6">
-                        <img src="images/service-1.jpg" class="img-fluid" alt="" />
+        <!-- appointment -->
+        <section class="appointment text-center py-5">
+            <div class="container py-sm-3">
+                <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
+                <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
+                <p>+84123456789</p>
+                <a style="font-size: 30px" href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>
+            </div>
+        </section>
+        <!-- //appointment -->
+
+        <!-- footer -->
+        <footer class="py-5">
+            <div class="container py-sm-3">
+                <div class="row footer-grids">
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                        <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Nha Khoa Thiên Thần</h4>
+                        <p class="mb-3">Nha khoa Thiên Thần -Trung tâm trồng răng và Niềng răng. Tự hào là một trong những nha
+                            khoa ở TP.HCM đi đầu về công nghệ và chất lượng đội ngũ Y bác sỹ.</p>
+                        <h5>Được tin cậy bởi <span>500+ Người</span> </h5>
                     </div>
-                    <div class="col-lg-6 mt-lg-0 mt-5">
-                        <h4>Dịch vụ đa dạng đem đến những trải nghiệm tốt nhất.</h4>
-                        <p class="py-3">Là địa chỉ uy tín, chất lượng hàng đầu về điều trị, thẩm mỹ. Cấy ghép Implant, Răng
-                            sứ thẩm mỹ, Niềng răng chỉnh nha là những dịch vụ được Nha Khoa chú trọng, liên tục phát triển
-                            cả về kỹ thuật lẫn thiết bị. Sau nhiều năm hoạt động, Nha Khoa tự tin với con số hơn 10.000 ca
-                            Cấy ghép Implant, 100 ca sứ thẩm mỹ/ tháng và triệu các ca chỉnh nha lớn, nhỏ đều nhận được phản
-                            hồi tốt và sự hài lòng tuyệt đối từ khách hàng.</p>
-                        <p class="">Luôn đón nhận, cập nhật những công nghệ nha khoa mới nhất, tốt nhất, nha khoa Thiên Thần
-                            hiện ứng dụng các công nghệ nha khoa thẩm mỹ và điều trị bệnh lý bao gồm: Bọc răng sứ Perfect
-                            Smile ,Niềng răng 3D UGSL, Cấy ghép implant, Tẩy trắng răng flash white, Nhổ răng máy siêu âm
-                            Piezotome...</p>
+                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
+                        <h4 class="mb-sm-4 mb-3">Thông Tin Địa Chỉ</h4>
+                        <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
+                                Chí Minh.</span></p>
+                        <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
+                        <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
+                        </p>
+                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
+                        </p>
+                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
+                        </p>
                     </div>
+                    <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
+                            <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
+                            <ul>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li class="my-2"><a href="#">Support Helpline</a></li>
+                                    <li><a href="#">Healthy Tips</a></li>
+                                    <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
+                            </ul>
+                    </div> -->
                 </div>
             </div>
+        </footer>
+        <!-- //footer -->
+
+        <!-- copyright -->
+       
+        <!-- //copyright -->
+
+        <!-- move top -->
+        <div class="move-top text-right">
+            <a href="#home" class="move-top">
+                <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
+            </a>
         </div>
-    </section>
-    <section>
-        <div class="container pb-lg-3">
-            <div class="row bottom-grids">
-                <div class="col-lg-6">
-                    <img src="images/room-dental.jpg" class="img-fluid" alt="" />
-                </div>
-                <div class="col-lg-6 mt-lg-0 mt-5">
-                    <h4>Trang thiết bị tiên tiến, hiện đại nhất.</h4>
-                    <p class="py-3">Nha khoa Thiên Thần là đơn vị tiên phong ứng dụng và nhập khẩu hệ thống trang thiết
-                        bị, máy móc hiện đại, qua những kiểm định khắt khe trong và ngoài nước để đưa về các cơ sở sử
-                        dụng như:
-                    </p>
-                    <p class="">
-                        Máy nhổ răng siêu âm Piezotome .
-                    </p>
-                    <p>Máy chụp phim Xquang ConeBeam CT 3D.</p>
-                    <p>Máy cấy ghép implant.</p>
-                    <p>Phần mềm thiết kế nụ cười DSD.</p>
-                    <p>Phần mềm 3D .</p>
-
-
-                </div>
-            </div>
-    </section>
-    <!-- //about bottom -->
-
-
-
-    <!-- appointment -->
-    <section class="appointment text-center py-5">
-        <div class="container py-sm-3">
-            <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
-            <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
-            <p>+84123456789</p>
-            <a style="font-size: 30px" href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>
-        </div>
-    </section>
-    <!-- //appointment -->
-
-    <!-- footer -->
-    <footer class="py-5">
-        <div class="container py-sm-3">
-            <div class="row footer-grids">
-                <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                    <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Nha Khoa Thiên Thần</h4>
-                    <p class="mb-3">Nha khoa Thiên Thần -Trung tâm trồng răng và Niềng răng. Tự hào là một trong những nha
-                        khoa ở TP.HCM đi đầu về công nghệ và chất lượng đội ngũ Y bác sỹ.</p>
-                    <h5>Được tin cậy bởi <span>500+ Người</span> </h5>
-                </div>
-                <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                    <h4 class="mb-sm-4 mb-3">Thông Tin Địa Chỉ</h4>
-                    <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
-                            Chí Minh.</span></p>
-                    <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
-                    <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
-                    </p>
-                    <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
-                    </p>
-                    <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
-                    </p>
-                </div>
-                <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
-                        <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
-                        <ul>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li class="my-2"><a href="#">Support Helpline</a></li>
-                                <li><a href="#">Healthy Tips</a></li>
-                                <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
-                        </ul>
-                </div> -->
-            </div>
-        </div>
-    </footer>
-    <!-- //footer -->
-
-    <!-- copyright -->
-
-    <!-- //copyright -->
-
-    <!-- move top -->
-    <div class="move-top text-right">
-        <a href="#home" class="move-top">
-            <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
-        </a>
-    </div>
-    <!-- move top -->
-    <!-- JS bootstrap banner -->
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-    <!-- JavaScript Bundle with Popper -->  
-    <script>
+        <!-- move top -->
+        <!-- JS bootstrap banner -->
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        <!-- JavaScript Bundle with Popper --> 
+        <script>
                             function control() {
                                 alert("Xin hãy đăng nhập để được đặt lịch!!!");
                             }
-    </script>
-</body>
+        </script>
+    </body>
 </html>

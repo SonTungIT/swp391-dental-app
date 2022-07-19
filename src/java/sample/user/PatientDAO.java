@@ -39,8 +39,10 @@ public class PatientDAO {
     private static final String VIEW_HISTORY_BK = "SELECT bookingID, bk.serviceID, serviceName, bk.doctorID, us.fullName, dateBooking, timeBooking, bk.status FROM Booking bk\n"
             + "           JOIN Service sv ON sv.serviceID = bk.serviceID JOIN CategoryService cs ON cs.categoryID = sv.categoryID\n"
             + "		   JOIN Doctor dt ON dt.categoryID = cs.categoryID JOIN Users us ON us.userID = dt.doctorID\n"
-            + "		   JOIN (SELECT userID FROM Users ) AS pt ON pt.userID = bk.patientID \n"
-            + "           WHERE (bk.status = 'Active' or bk.status = 'Finished')  AND bk.doctorID = dt.doctorID AND serviceName like ? AND patientID = ? ORDER BY dateBooking, timeBooking DESC";
+
+            + "		   JOIN (SELECT userID FROM Users ) AS pt ON pt.userID = bk.patientID\n"
+            + "           WHERE bk.status = 'Active' OR bk.status = 'Finished'  AND bk.doctorID = dt.doctorID AND serviceName like ? AND patientID = ? order by bk.dateBooking desc";
+
     private static final String CHECK_DUPLICATE_BK_ID = "SELECT patientID FROM Booking WHERE bookingID = ? ";
     private static final String CREATE_BOOKING = "INSERT INTO Booking(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status) VALUES(?, ?, ?, ?, ?, ?, ?)";
     private static final String CHECK_DUPLICATE_BK_SLOT = "SELECT DISTINCT sl.slotID From Slot sl JOIN Schedule sc ON sc.slotID = sl.slotID \n"
@@ -52,7 +54,7 @@ public class PatientDAO {
     private static final String CREATE_FEEDBACK = "INSERT INTO Feedback(feedbackID, patientID, bookingID, comment, dateFeedback, timeFeedback, status , rating) VALUES(?,?,?,?,?,?,?,?)";
     private static final String CHECK_DUPLICATE_FB = "SELECT PatientID FROM Feedback WHERE  feedbackID=? ";
 
-    private static final String SHOW_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService";
+    private static final String SHOW_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService Where status like '1'";
     private static final String SHOW_PRICE_SERVICE = "SELECT serviceName ,CategoryService.categoryName, price FROM Service join CategoryService on Service.categoryID = CategoryService.categoryID Where categoryName like ? ";
     private static final String SHOW_TABLE_SERVICE = "SELECT Service.serviceID , serviceName , CategoryService.categoryName, Service.aboutSV, image ,Service.status FROM Service join CategoryService on Service.categoryID = CategoryService.categoryID Where categoryName like ? and Service.status like '1'";
     private static final String SHOW_SERVICE_BY_ID = "SELECT Service.serviceID , serviceName , CategoryService.categoryName, Service.aboutSV, image FROM Service join CategoryService on Service.categoryID = CategoryService.categoryID Where serviceID like ?";
@@ -717,7 +719,7 @@ public class PatientDAO {
         return list;
     }
 
-    public ServiceDTO getServiceByID(String serviceID1) throws SQLException, ClassNotFoundException {
+   public ServiceDTO getServiceByID(String serviceID1) throws SQLException, ClassNotFoundException {
         ServiceDTO SV = new ServiceDTO();
         Connection conn = null;
         PreparedStatement ptm = null;

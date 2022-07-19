@@ -326,8 +326,7 @@
                                                         <th class="border-top-0">Category ID</th>
                                                         <th class="border-top-0">Tên Loại Dịch Vụ</th>                                                      
                                                         <th class="border-top-0">Trạng Thái</th>
-                                                        <th class="border-top-0">Xóa</th>
-                                                        <th class="border-top-0">Cập Nhật</th>
+                                                        <th class="border-top-0">Cập Nhật Trạng Thái</th>
                                                         
                                                         
                                                     </tr>
@@ -369,10 +368,7 @@
 
                                                        
 
-<!--                                                        delete      -->
-                                                        <td>
-                                                            <a href="MainController?action=DeleteCategory&categoryID=<%= category.getCategoryID()%>&search=<%= search%>" >Delete</a>
-                                                        </td>
+
 
 <!--                                                        update-->
                                                         <td>
@@ -388,6 +384,9 @@
                                                 }
 
                                             %> 
+                                            <h4>${MESS_CF}</h4>
+                                            <h4>${MESS_CF2}</h4>
+                                            
                                             </tr>
                                             </tbody>
                                         </table>

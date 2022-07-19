@@ -336,7 +336,7 @@
                                                         <th class="border-top-0">Chi Phí</th> 
                                                         <th class="border-top-0">Nội Dung</th>
                                                         <th class="border-top-0">Trạng Thái</th>
-                                                        <th class="border-top-0"></th>
+                                                        <th class="border-top-0">Sửa Trạng Thái</th>
                                                         <th class="border-top-0"></th>     
                                                     </tr>
                                                 </thead>
@@ -395,8 +395,10 @@
                                                         <%
                                                             }
                                                         %>
+                                                        <div>
                                                         <input checked="checked" type="radio" name="status" value="True">Hiện<br>
                                                         <input type="radio" name="status" value="False">Ẩn
+                                                        </div>
                                                         </td>
 
                                                        
@@ -406,7 +408,7 @@
                                                            
                                                            <div class="form-group">
                                                         <div class="col-sm-12 d-flex">
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="DeleteService">Xoá</button>
+                                                            <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="DeleteService">Sửa</button>
                                                         </div>
                                                 </div>
                                                      <input type="hidden" name="search" value="<%= search%>"/>    
@@ -420,10 +422,12 @@
                                                             <input type="hidden" name="search" value="<%= search%>"/>
                                                         </td>
                                                 </form>  
+                                                        
                                             <%
                                                 }
 
                                             %> 
+                                            <h4>${MESS_CF}</h4>
                                             </tr>
                                             </tbody>
                                         </table>

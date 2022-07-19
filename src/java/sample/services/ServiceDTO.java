@@ -71,6 +71,22 @@ public class ServiceDTO {
         this.serviceID = serviceID;
         this.status = status;
     }
+
+    public ServiceDTO(String serviceID, String serviceName, String image, String categoryID, int price, String aboutSV) {
+       this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.image = image;
+        this.categoryID = categoryID;
+        this.price = price;
+        this.aboutSV = aboutSV;
+        
+    }
+
+    public ServiceDTO(String serviceID, String serviceName, String categoryID) {
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.categoryID = categoryID;
+    }
     
     
     public String getAboutSV() {
