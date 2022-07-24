@@ -297,7 +297,7 @@
                 <h2 class="heading text-center mb-sm-5 mb-4"> <%= list.getServiceName()%> </h2>
             </div>
             <div>
-                <a><%= list.getAboutSV()%></a>
+                <a style="font-size:25px"><%= list.getAboutSV()%></a>
             </div>
             <div>
                 <img width="800px" height="600px" src="images/<%= list.getImage()%>" alt="Image can't show">

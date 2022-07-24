@@ -36,7 +36,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+        <link href="CSS/feedback.css" rel="stylesheet" type="text/css"/>
         <!-- Icon CND fontawesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -321,36 +321,6 @@
 
                                         <!--danh gia sao-->
                                         <div class="form-group">
-                                            <style>
-                                                div.stars {
-                                                    width: 270px;
-                                                    display: inline-block;
-                                                }
-                                                input.star { display: none; }
-
-                                                label.star {
-                                                    float: right;
-                                                    padding: 10px;
-                                                    font-size: 36px;
-                                                    color: #444;
-                                                    transition: all .2s;
-                                                }
-                                                input.star:checked ~ label.star:before {
-                                                    content: '\f005';
-                                                    color: #FD4;
-                                                    transition: all .25s;
-                                                }
-                                                input.star-5:checked ~ label.star:before {
-                                                    color: #FE7;
-                                                    
-                                                }
-                                                input.star-1:checked ~ label.star:before { color: #F62; } 
-                                                label.star:hover { transform: rotate(-15deg) scale(1.3); }
-                                                label.star:before {
-                                                    content: '\f006';
-                                                    font-family: FontAwesome;
-                                                }
-                                            </style>
                                             <label class="col-md-12 mb-0">Đánh giá sao</label>
                                             <div class="stars">
                                                  

@@ -22,6 +22,7 @@ public class ServiceDTO {
     public ServiceDTO() {
     }
 
+    
     public ServiceDTO(String serviceID, String serviceName, String image, String categoryID, int price, boolean status) {
         this.serviceID = serviceID;
         this.serviceName = serviceName;
@@ -88,6 +89,12 @@ public class ServiceDTO {
         this.categoryID = categoryID;
     }
     
+    public ServiceDTO(String serviceID, String serviceName, String image, boolean status) {
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.image = image;
+        this.status = status;
+    }
     
     public String getAboutSV() {
         return aboutSV;

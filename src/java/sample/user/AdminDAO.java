@@ -54,7 +54,8 @@ public class AdminDAO {
     private static final String UPDATE_SERVICE = "UPDATE Service SET serviceName=?, image=?, categoryID=?, price=? ,aboutSV=?  WHERE serviceID=? ";
     private static final String CHECK_DUPLICATE_SV = "SELECT serviceName FROM Service WHERE  serviceID=? ";
     private static final String CREATE_SERVICE = "INSERT INTO Service(serviceID, serviceName , image, categoryID, price, aboutSV , status) VALUES(?,?,?,?,?,?,?)";
-
+    private static final String SHOW_6_SERVICE = "SELECT TOP(6) serviceID ,serviceName , image, status FROM Service ";
+    
     private static final String SEARCH_PRICE_SERVICE = "SELECT serviceName,  price FROM Service WHERE serviceName like ? ";
     private static final String UPDATE_PRICE_SERVICE = "UPDATE Service SET  price=?  WHERE serviceName=? ";
 
@@ -2558,4 +2559,40 @@ public class AdminDAO {
         }
         return service;
     }
+     
+      public List<ServiceDTO> getTop6Service() throws SQLException, ClassNotFoundException {
+        List<ServiceDTO> list = new ArrayList<>();
+        
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SHOW_6_SERVICE);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String serviceID = rs.getString("serviceID");
+                    String serviceName = rs.getString("serviceName");
+                    String image = rs.getString("image");
+                    boolean status = rs.getBoolean("status");
+                    list.add(new ServiceDTO(serviceID, serviceName, image, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+      
 }

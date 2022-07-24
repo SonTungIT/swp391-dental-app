@@ -367,79 +367,30 @@
             <div class="container py-lg-5">
                 <h3 class="heading text-center mb-sm-5">DỊCH VỤ NỔI BẬT</h3>
                 <div class="row offer-grids">
-                    <div class="col-lg-4 col-md-6 mt-md-0 hoverItem">
-                        <a href="listService/niengrang1.html">
+                    <%
+                        List<ServiceDTO> listService = dao.getTop6Service();
+                         if (listService.size() > 0) {
+                             for (ServiceDTO ser : listService) {
+                                 
+                                 %>
+                                <div class="col-lg-4 col-md-6 mt-md-0 hoverItem">
+                        <a href="MainController?action=Show_About&serviceID=<%=ser.getServiceID() %>">
                             <div class="bg-layer--img">
-                                <img src="./images/dichvu1.png" alt="">
+                                <img width="348px" height="260px" src="./images/<%= ser.getImage() %>" alt="can't show">
                             </div>
                             <div class="ser1">
                                 <div class="bg-layer">
-                                    <h4 class="">NIỀNG RĂNG MẮC CÀI</h4>
+                                    <h4 class=""><%=ser.getServiceName() %></h4>
                                 </div>
                             </div>
                         </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mt-md-0 hoverItem">
-                        <a href="listService/niengrang2.html">
-                            <div class="bg-layer--img">
-                                <img src="./images/dichvu2.png" alt="">
-                            </div>
-                            <div class="ser2">
-                                <div class="bg-layer">
-                                    <h4 class="">NIỀNG RĂNG TRONG SUỐT</h4>
-
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mt-lg-0 mt-4 hoverItem">
-                        <a href="./listService/cayghep1.html">
-                            <div class="bg-layer--img">
-                                <img src="./images/dichvu3.png" alt="">
-                            </div>
-                            <div class="ser3">
-                                <div class="bg-layer">
-                                    <h4 class="">CẤY GHÉP RĂNG IMPLANT</h4>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mt-4 hoverItem">
-                        <a href="./listService/rangsu2.html">
-                            <div class="bg-layer--img">
-                                <img src="./images/dichvu4.png" alt="">
-                            </div>
-                            <div class="ser4">
-                                <div class="bg-layer">
-                                    <h4 class="">BỌC RĂNG SỨ THẨM MỸ</h4>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mt-4 hoverItem">
-                        <a href="./listService/rangsu1.html">
-                            <div class="bg-layer--img">
-                                <img src="./images/dichvu5.png" alt="">
-                            </div>
-                            <div class="ser5">
-                                <div class="bg-layer">
-                                    <h4 class="">DÁN RĂNG SỨ VENEER</h4>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mt-4 hoverItem">
-                        <a href="./listService/dichvu2.html">
-                            <div class="bg-layer--img">
-                                <img src="./images/dichvu6.png" alt="">
-                            </div>
-                            <div class="ser6">
-                                <div class="bg-layer">
-                                    <h4 class="">NHỔ RĂNG KHÔNG ĐAU</h4>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                        </div> 
+                                 
+                                 <%
+                             }
+                         }
+                    %>                    
+ 
                 </div>
             </div>
         </section>
