@@ -317,7 +317,7 @@
         <main id="main" class="">
             <div id="content" role="main" class="content-area">
                 <div class="row row-collapse row-full-width align-center" id="row-622117674">
-                    <div id="col-2021140538" class="col small-12 large-12">
+                    <div style="max-width: 100%;" id="col-2021140538" class="col small-12 large-12">
                         <div class="col-inner text-center">
                             <div class="banner has-hover show-for-small" id="banner-1216324343">
                                 <div class="banner-inner fill">
