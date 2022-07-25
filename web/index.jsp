@@ -64,312 +64,57 @@
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
-
-        <!-- top header -->
-        <div class="header-top">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <ul class="d-lg-flex header-w3_pvt">
-                            <li class="mr-lg-3">
-                                <span class="fa fa-envelope-open"></span>
-                                <a href="mailto:phongkhamnhakhoathienthan@gmail.com" class="">phongkhamnhakhoathienthan@gmail.com</a>
-                            </li>
-                        </ul>
-                        <ul class="d-lg-flex header-w3_pvt">
-                            <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-phone"></span>Liên hệ +12 345 678</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="col-sm-4">
-                        <ul class="d-lg-flex">
-                                <form action="SearchInformationController" >
-                                    <div class="tech-btm d-lg-flex">
-                                        <div class="form-outline">
-                                            <input type="text" name="txtSearch" class="form-control px-2" value="${param.txtSearchValue}" placeholder="Tìm Kiếm"/>
-                                            <input type="hidden" name="index" value="1"/>
-                                        </div>
-                                        <button type="submit" name="action" value="Tìm kiếm" class="btn btn-success">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-
-                                    </div>
-                                </form>
-                        </ul>
-                    </div>
-                    
-                    <div class="col-sm-4 header-right-w3_pvt">
-                        <%
-                            AdminDAO dao = new AdminDAO();
-                            List<String> listTW = dao.getOPH();
-                            String stMF = "OFF";
-                            String etMF = "OFF";
-                            String stSS = "OFF";
-                            String etSS = "OFF";
-                            if (!listTW.isEmpty()) {
-                                stMF = listTW.get(0);
-                                etMF = listTW.get(1);
-                                stSS = listTW.get(2);
-                                etSS = listTW.get(3);
-                            }
-                        %>
-                        <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
-                            <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
-                            </li>
-                            <li class="mr-lg-3">
-                                <span class=""><span class="fa fa-clock-o"></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- //top header -->
-
         <!-- //header -->
-        <header class="py-3">
-            <div class="container">
-                <div id="logo">
-                    <h1> <a href="index.jsp"><span class="fa fa-solid fa-tooth" aria-hidden="true"></span> Nha Khoa Thiên
-                            Thần </a></h1>
+        <jsp:include page="headerPage.jsp"></jsp:include>
+            <!-- //header -->
+            <!-- banner-clinic -->
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="images/banner5.jpg" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="images/banner2.jpg" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="images/banner3.jpg" alt="Third slide">
+                    </div>
                 </div>
-                <!-- nav -->
-                <nav class="d-lg-flex">
-
-                    <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
-                    <input type="checkbox" id="drop" />
-                    <ul class="menu mt-2 ml-auto">
-
-
-                        <li class=""><a href="about.jsp">GIỚI THIỆU</a></li>
-                        <li class="menu-sub menu-sub--has-table">
-                            <a href="services.jsp">DỊCH VỤ</a>
-                            <ul class="menu__service-list">
-                                <%
-                                    PatientDAO dao1 = new PatientDAO();
-                                    List<CategoryServiceDTO> listCate = dao1.getTableCategory();
-                                    if (listCate != null) {
-                                        if (listCate.size() > 0) {
-                                            for (CategoryServiceDTO cate : listCate) {
-
-
-                                %>
-                                <li class="menu__service-description">   
-                                    <a class="menu__service-link"><span> <%= cate.getCategoryName()%></span>  
-
-                                    </a>    
-                                    <%
-                                        String cate1 = cate.getCategoryName();
-
-                                        List<ServiceDTO> listService = dao1.getTableService(cate1);
-
-                                        if (listService != null) {
-
-                                            if (listService.size() > 0) {
-
-                                    %>
-                                    <ul class="menu__service-colume">
-                                        <%                                        for (ServiceDTO table : listService) {
-
-
-                                        %> 
-
-                                        <li class="menu__service-colume--item">
-                                            <a href="MainController?action=Show_About&serviceID=<%= table.getServiceID()%>"><%= table.getServiceName()%></a>
-                                        </li>
-
-
-
-                                        <%
-
-                                            }
-                                        %>
-                                    </ul>   
-                                    <%
-                                            }
-
-                                        }
-                                    %>
-                                </li>
-                                <%
-                                    }
-                                    }
-                                    }
-                                %>
-                            </ul>
-                        </li>
-                        <li class="active"><a href="priceServiceHome.jsp">BẢNG GIÁ</a></li>
-                        <li class=""><a href="knowledge.jsp">KIẾN THỨC </a></li>
-                        <li class=""><a href="expert.jsp">CHUYÊN GIA</a></li>
-                            <%if (loginUser
-                                        == null || !loginUser.getRoleID()
-                                                .equals("PT")) {
-                            %>
-                        <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH</a></li>
-                            <%
-                            } else {
-                            %>
-                        <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH</a></li>
-                            <%
-                                }
-                            %>
-
-
-
-                    </ul>
-
-                    <% if (loginUser
-                                == null) {
-                    %>
-                    <div class="login-icon ml-2">
-                        <a class="user" href="login.jsp"> LOGIN </a>
-                    </div>
-                    <% } else if (loginUser
-                            != null && loginUser.getRoleID()
-                                    .equals("AD")) {
-                    %>
-                    <div class="dropdown btn-group">
-                        <a class="navbar-brand dropdown-toggle" href="admin.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./assets/images/users/1.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="admin" class="profile-pic me-2">
-                        </a>
-                        <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="admin.jsp" style="padding: 0">
-                                <button class="dropdown-item" type="button">
-                                    <i class="fa-solid fa-circle-arrow-right"></i>
-                                    Tài Khoản Của Tôi
-                                </button>
-                            </a>
-                            <a href="login.jsp" style="padding: 0">
-                                <form action="MainController">
-                                    <button class="dropdown-item" type="button">
-                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                        <input type="submit" name="action" value="Logout" style=" background-color: transparent; border: none"/>
-                                    </button>
-                                </form>
-                            </a>
-                        </ul>
-                    </div>
-                    <%
-                    } else if (loginUser
-                            != null && loginUser.getRoleID()
-                                    .equals("PT")) {
-                    %> 
-
-                    <div class="dropdown btn-group">
-                        <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/customers/${LOGIN_USER.image}" style="width: 50px; height: 50px ; border-radius: 40px; margin-top: -7px; margin-left: 5px" alt="PT" class="profile-pic me-2">
-                        </a>
-                        <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="ShowProfilePatientController?patientID=${LOGIN_USER.getUserID()}" style="padding: 0">
-                                <button class="dropdown-item" type="button">
-                                    <i class="fa-solid fa-circle-arrow-right"></i>
-                                    Tài Khoản Của Tôi
-                                </button>
-                            </a>
-                            <a href="MainController?action=SearchHSBK&searchHSBK" style="padding: 0">
-                                <button class="dropdown-item" type="button">
-                                    <i class="fa-solid fa-circle-arrow-right"></i>
-                                    Lịch Sử Đặt Lịch
-                                </button>
-                            </a>
-                            <a href="login.jsp" style="padding: 0">
-                                <form action="MainController">
-                                    <button class="dropdown-item" type="button">
-                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                        <input type="submit" name="action" value="Logout" style=" background-color: transparent; border: none"/>
-                                    </button>
-                                </form>
-                            </a>
-                        </ul>
-                    </div>
-                    <%
-                    } else if (loginUser
-                            != null && loginUser.getRoleID()
-                                    .equals("DR")) {
-                    %>
-                    <div class="dropdown btn-group">
-                       <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/doctors/${LOGIN_USER.image}" style="width: 50px; height: 50px ; border-radius: 40px; margin-top: -7px; margin-left: 5px" alt="doctor" class="profile-pic me-2">
-                        </a>
-                        <ul class="dropdown-menu" style="background-color: #63B43E">
-                            <a href="ShowProfileDoctorController?doctorID=${LOGIN_USER.getUserID()}" style="padding: 0">
-                                <button class="dropdown-item" type="button">
-                                    <i class="fa-solid fa-circle-arrow-right"></i>
-                                    Tài Khoản Của Tôi
-                                </button>
-                            </a>
-                            <a href="login.jsp" style="padding: 0">
-                                <form action="MainController">
-                                    <button class="dropdown-item" type="button">
-                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                        <input type="submit" name="action" value="Logout" style=" background-color: transparent; border: none"/>
-                                    </button>
-                                </form>
-                            </a>
-                        </ul>
-                    </div>
-                    <%
-                        }
-                    %>
-
-                </nav>
-                <div class="clear"></div>
-                <!-- //nav -->
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-        </header>
-        <!-- //header -->
-        <!-- banner-clinic -->
-
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="images/banner5.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="images/banner2.jpg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="images/banner3.jpg" alt="Third slide">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-        <!-- <img src="./images/banner2.jpg" class="d-block w-100" alt="..."> -->
-        <!-- banner-clinic -->
-        <!-- banner -->
-        <div class="banner" id="home">
-            <div class="layer">
-                <div class="container">
-                    <div class="banner-text-agile">
-                        <div class="row">
-                            <div class="col-lg-6 p-0">
-                                <!-- banner slider-->
-                                <div class="csslider infinity" id="slider1">
-                                    <input type="radio" name="slides" checked="checked" id="slides_1" />
-                                    <input type="radio" name="slides" id="slides_2" />
-                                    <input type="radio" name="slides" id="slides_3" />
-                                    <ul class="banner_slide_bg">
-                                        <li>
-                                            <div class="container-fluid">
-                                                <div class="w3ls_banner_txt">
-                                                    <h3 class="b-w3ltxt text-capitalize mt-md-4">
-                                                        Chất lượng luôn là Hàng đầu.</h3>
-                                                    <p class="w3ls_pvt-title my-3">Với 12 năm kinh nghiệm, cùng đội ngũ nha
-                                                        sĩ đứng hàng đầu Việt Nam. Chúng tôi luôn mong muốn cung cấp dịch vụ
-                                                        nha khoa tốt nhất cho khách hàng.</p>
-                                                    <a href="about.jsp" class="btn btn-banner my-sm-3 mb-3">Tìm hiểu
-                                                        thêm</a>
+            <!-- <img src="./images/banner2.jpg" class="d-block w-100" alt="..."> -->
+            <!-- banner-clinic -->
+            <!-- banner -->
+            <div class="banner" id="home">
+                <div class="layer">
+                    <div class="container">
+                        <div class="banner-text-agile">
+                            <div class="row">
+                                <div class="col-lg-6 p-0">
+                                    <!-- banner slider-->
+                                    <div class="csslider infinity" id="slider1">
+                                        <input type="radio" name="slides" checked="checked" id="slides_1" />
+                                        <input type="radio" name="slides" id="slides_2" />
+                                        <input type="radio" name="slides" id="slides_3" />
+                                        <ul class="banner_slide_bg">
+                                            <li>
+                                                <div class="container-fluid">
+                                                    <div class="w3ls_banner_txt">
+                                                        <h3 class="b-w3ltxt text-capitalize mt-md-4">
+                                                            Chất lượng luôn là Hàng đầu.</h3>
+                                                        <p class="w3ls_pvt-title my-3">Với 12 năm kinh nghiệm, cùng đội ngũ nha
+                                                            sĩ đứng hàng đầu Việt Nam. Chúng tôi luôn mong muốn cung cấp dịch vụ
+                                                            nha khoa tốt nhất cho khách hàng.</p>
+                                                        <a href="about.jsp" class="btn btn-banner my-sm-3 mb-3">Tìm hiểu
+                                                            thêm</a>
                                                         <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
                                                         %>
                                                     <a href="login.jsp" onclick="control()" class="btn btn-banner1 my-sm-3 mb-3">Đặt lịch
@@ -542,27 +287,41 @@
                 <h3 class="heading text-center mb-sm-5">DỊCH VỤ NỔI BẬT</h3>
                 <div class="row offer-grids">
                     <%
+                        AdminDAO dao = new AdminDAO();
+                        List<String> listTW = dao.getOPH();
+                        String stMF = "OFF";
+                        String etMF = "OFF";
+                        String stSS = "OFF";
+                        String etSS = "OFF";
+                        if (!listTW.isEmpty()) {
+                            stMF = listTW.get(0);
+                            etMF = listTW.get(1);
+                            stSS = listTW.get(2);
+                            etSS = listTW.get(3);
+                        }
+                    %>
+                    <%
                         List<ServiceDTO> listService = dao.getTop6Service();
-                         if (listService.size() > 0) {
-                             for (ServiceDTO ser : listService) {
-                                 
-                                 %>
-                                <div class="col-lg-4 col-md-6 mt-md-0 hoverItem">
-                        <a href="MainController?action=Show_About&serviceID=<%=ser.getServiceID() %>">
+                        if (listService.size() > 0) {
+                            for (ServiceDTO ser : listService) {
+
+                    %>
+                    <div class="col-lg-4 col-md-6 mt-md-0 hoverItem">
+                        <a href="MainController?action=Show_About&serviceID=<%=ser.getServiceID()%>">
                             <div class="bg-layer--img">
-                                <img width="348px" height="260px" src="./images/<%= ser.getImage() %>" alt="can't show">
+                                <img width="348px" height="260px" src="./images/<%= ser.getImage()%>" alt="can't show">
                             </div>
                             <div class="ser1">
                                 <div class="bg-layer">
-                                    <h4 class=""><%=ser.getServiceName() %></h4>
+                                    <h4 class=""><%=ser.getServiceName()%></h4>
                                 </div>
                             </div>
                         </a>
-                        </div> 
-                                 
-                                 <%
-                             }
-                         }
+                    </div> 
+
+                    <%
+                            }
+                        }
                     %>           
                 </div>
             </div>
@@ -672,65 +431,8 @@
         </section>
         <!-- //blog -->
 
-        <!-- appointment -->
-        <section class="appointment text-center py-5">
-            <div class="container py-sm-3">
-                <h4>Biến nụ cười mơ ước của bạn thành sự thật</h4>
-                <p class="mt-3">Gọi chúng tôi để đặt lịch ngay</p>
-                <p>+84123456789</p>
-                <%if (loginUser == null || !loginUser.getRoleID().equals("PT")) {
-                %>
-                <li class=""><a href="login.jsp" onclick="control()">ĐẶT LỊCH NGAY</a></li>
-                    <%
-                    } else {
-                    %>
-                <li class=""><a href="MainController?action=ShowService" >ĐẶT LỊCH NGAY</a></li>
-                    <%
-                        }
-                    %>
-                <!--                <a href="MainController?action=ShowService">ĐẶT LỊCH NGAY</a>-->
-            </div>
-        </section>
-        <!-- //appointment -->
-
-        <!-- footer -->
-        <footer class="py-5">
-            <div class="container py-sm-3">
-                <div class="row footer-grids">
-                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                        <h4 class="mb-sm-4 mb-3"><span class="fa fa-stethoscope"></span> Nha Khoa Thiên Thần</h4>
-                        <p class="mb-3">Nha khoa Thiên Thần -Trung tâm trồng răng và Niềng răng. Tự hào là một trong những nha
-                            khoa ở TP.HCM đi đầu về công nghệ và chất lượng đội ngũ Y bác sỹ.</p>
-                        <h5>Được tin cậy bởi <span>500+ Người</span> </h5>
-                    </div>
-                    <div class="col-lg-6 col-sm-6 mb-lg-0 mb-sm-5 mb-4">
-                        <h4 class="mb-sm-4 mb-3">Thông Tin Địa Chỉ</h4>
-                        <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
-                                Chí Minh.</span></p>
-                        <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
-                        <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
-                        </p>
-                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
-                        </p>
-                        <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
-                        </p>
-                    </div>
-                    <div class="flex-1 ms-2">            
-                        <p class="text-muted mb-0">Số lượng truy cập web</p>
-                        <p>${sessionScope.viewOfWeb}</p>
-                    </div>
-                    <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
-                            <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
-                            <ul>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li class="my-2"><a href="#">Support Helpline</a></li>
-                                    <li><a href="#">Healthy Tips</a></li>
-                                    <li class="mt-2"><a href="#">Privacy Ploicy</a></li>
-                            </ul>
-                    </div> -->
-                </div>
-            </div>
-        </footer>
+        <!-- //footer -->
+        <jsp:include page="footerPage.jsp"></jsp:include>
         <!-- //footer -->
 
         <!-- copyright -->
@@ -758,9 +460,9 @@
         crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper --> 
         <script>
-                    function control() {
-                        alert("Xin hãy đăng nhập để được đặt lịch!!!");
-                    }
+                                                        function control() {
+                                                            alert("Xin hãy đăng nhập để được đặt lịch!!!");
+                                                        }
         </script>
     </body>
 
