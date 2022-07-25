@@ -332,12 +332,12 @@
     </a>
     <a style="background-color: transparent;
        position: fixed;
-       right: 0px;
-       bottom: 0px;
+       right: 15px;
+       bottom: 20px;
        display: block;
        z-index: 1000;" 
-       class="social-icon social-icon--zalo" href="https://chat.zalo.me/" target="_blank"> 
-        <img style="width: 85px;" src="images/logo-zalo.png"> 
+       class="social-icon social-icon--zalo" href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSBpDfrRQqGQTxrvFgJWmjSkJQjRbQGzqbfrpJMGWlXnbVSkzhQMWkPjtxvslJCxTscHqHXs" target="_blank"> 
+        <img style="width: 50px;" src="images/logo-gmail.png"> 
     </a>
     <!--ChatBot-->
 </body>
