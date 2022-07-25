@@ -111,7 +111,7 @@
                             etSS = listTW.get(3);
                         }
                     %>
-                    <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
+                    <ul style="flex-direction: column; justify-content: center" class="d-lg-flex header-w3_pvt justify-content-lg-end">
                         <li class="mr-lg-3">
                             <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
                         </li>
