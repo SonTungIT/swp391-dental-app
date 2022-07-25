@@ -78,7 +78,10 @@
 
             <div class="container py-lg-5">
                 <div class="col-lg-12 left-blog-info text-left">
-                    <p style="text-align: left; margin-bottom: 50px"><%= list.getAboutSV()%></p>
+                    <p style="text-align: left; margin-bottom: 50px">
+                        <span class="vsym sb30" title="sao 4 cánh trắng" role="button">✧</span>
+                        <%= list.getAboutSV()%>
+                    </p>
                 </div>
                 <div>
                     <img width="800px" height="600px" src="images/<%= list.getImage()%>" alt="Image can't show">

@@ -62,6 +62,26 @@
     %>
     <body>       
 
+        <!--ChatBot-->
+        <a  style="background-color: transparent;
+            position: fixed;
+            bottom: 75px;
+            right: 15px;
+            display: block;
+            z-index: 1000" 
+            class="social-icon social-icon--facebook" href="https://www.facebook.com/messages/t/100005933477553/" target="_blank"> 
+            <img style="width: 50px" src="images/logo-mess.png"> 
+        </a>
+        <a style="background-color: transparent;
+           position: fixed;
+           right: 0px;
+           bottom: 0px;
+           display: block;
+           z-index: 1000;" 
+           class="social-icon social-icon--zalo" href="https://chat.zalo.me/" target="_blank"> 
+            <img style="width: 85px;" src="images/logo-zalo.png"> 
+        </a>
+        <!--ChatBot-->
         <!-- top header -->
         <div class="header-top">
             <div class="container-fluid">
@@ -112,7 +132,7 @@
                                 etSS = listTW.get(3);
                             }
                         %>
-                        <ul class="d-lg-flex header-w3_pvt justify-content-lg-end">
+                        <ul style="flex-direction: column;" class="d-lg-flex header-w3_pvt justify-content-lg-end">
                             <li class="mr-lg-3">
                                 <span class=""><span class="fa fa-clock-o"></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
                             </li>

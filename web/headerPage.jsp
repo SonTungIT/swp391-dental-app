@@ -290,7 +290,7 @@
                 %>
                 <div class="dropdown btn-group">
                     <a class="navbar-brand dropdown-toggle" href="doctor.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="./images/doctors/${LOGIN_USER.image}" style="width: 50px; height: 50px ; border-radius: 40px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
+                        <img src="./images/doctors/${LOGIN_USER.image}" style="width: 50px; height: 50px ; border-radius: 40px; margin-top: -7px; margin-left: 5px" alt="Doctor" class="profile-pic me-2">
                     </a>
                     <ul class="dropdown-menu" style="background-color: #63B43E">
                         <a href="ShowProfileDoctorController?doctorID=${LOGIN_USER.getUserID()}" style="padding: 0">
@@ -319,5 +319,26 @@
         </div>
     </header>
     <!-- //header -->
+
+    <!--ChatBot-->
+    <a  style="background-color: transparent;
+        position: fixed;
+        bottom: 75px;
+        right: 15px;
+        display: block;
+        z-index: 1000" 
+        class="social-icon social-icon--facebook" href="https://www.facebook.com/messages/t/100005933477553/" target="_blank"> 
+        <img style="width: 50px" src="images/logo-mess.png"> 
+    </a>
+    <a style="background-color: transparent;
+       position: fixed;
+       right: 0px;
+       bottom: 0px;
+       display: block;
+       z-index: 1000;" 
+       class="social-icon social-icon--zalo" href="https://chat.zalo.me/" target="_blank"> 
+        <img style="width: 85px;" src="images/logo-zalo.png"> 
+    </a>
+    <!--ChatBot-->
 </body>
 </html>
