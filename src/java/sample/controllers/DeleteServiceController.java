@@ -54,6 +54,11 @@ public class DeleteServiceController extends HttpServlet {
             
             
             if (check) {
+                if(status == true){
+                    request.setAttribute("MESS_UP_SV", "Mã dịch vụ "+ serviceID + " đã được hiện trên trang chủ");
+                }else if(status == false){
+                    request.setAttribute("MESS_UP_SV", "Mã dịch vụ "+ serviceID + " đã được ẩn khỏi trang chủ");
+                }
                 url = SUCCESS;
             }
         } catch (Exception e) {

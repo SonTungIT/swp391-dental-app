@@ -56,7 +56,10 @@ public class CreateServiceController extends HttpServlet {
             boolean checkCreate = dao.createService(service);
             if (checkCreate) {
                 url = SUCCESS;
-            }
+            }else {
+                url = ERROR;
+                request.setAttribute("MESS_UP", "Tạo mới không thành công!");
+                        }
 
         } catch (Exception e) {
             log("ERROR at CreateServiceController:"+ e.toString());
