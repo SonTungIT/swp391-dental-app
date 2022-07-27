@@ -282,7 +282,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">    
-                                        <form action="MainController" method="POST" class="form-horizontal form-material mx-2">
+                                        <form action="MainController"  class="form-horizontal form-material mx-2">
                                             <table class="table user-table">
                                                 <tbody>
 

@@ -282,7 +282,7 @@
 
 
                                     <div class="table-responsive">    
-                                        <form action="MainController" method="POST">
+                                        <form action="MainController" >
                                             <table class="table user-table">
                                                 <tbody>
 
