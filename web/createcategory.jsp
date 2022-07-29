@@ -282,7 +282,7 @@
 
 
                                     <div class="table-responsive">    
-                                        <form action="MainController" method="POST">
+                                        <form action="MainController" >
                                             <table class="table user-table">
                                                 <tbody>
 
@@ -332,8 +332,6 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

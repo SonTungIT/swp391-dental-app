@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="sample.services.CategoryServiceDTO"%>
+<%@page import="sample.user.AdminDAO"%>
 <%@page import="sample.user.UserDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="sample.services.ServiceDTO"%>
@@ -306,18 +308,31 @@
                                                 <div class="form-group">
                                                     <label class="col-md-12 mb-0">Hình Ảnh:</label>
                                                     <div class="col-md-12">
-                                                        <td>  
-                                                            <input class="form-control ps-0 form-control-line" type="text" name="image" value="<%= list.getImage()%>">
+                                                        <td> 
+                                                            <img width="80px" height="60px" src="images/<%= list.getImage()%>" alt="Image can't show">
+                                                            <input type="file" name="image" required="" /> 
                                                         </td>  
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-md-12 mb-0">ID Loại Dịch Vụ:</label>
-                                                    <div class="col-md-12">
-                                                        <td>  
-                                                            <input class="form-control ps-0 form-control-line" type="text" name="categoryID" value="<%= list.getCategoryID()%>"> 
-                                                        </td> 
-                                                    </div>
+                                                    <select name="categoryID" id="categoryID"> 
+                                                        <option class="form-option" value="<%=list.getCategoryID() %>"><%=list.getCategoryID() %></option>
+                                                        <%
+                                                            AdminDAO dao = new AdminDAO();
+                                                            List<CategoryServiceDTO> listCategory = dao.getListCategory_SV();
+                                                            if (listCategory != null) {
+                                                                if (listCategory.size() > 0) {
+                                                                    for (CategoryServiceDTO category : listCategory) {
+
+                                                        %> 
+                                                        <option class="form-option" value="<%=category.getCategoryID()%>"><%= category.getCategoryID() %> : <%= category.getCategoryName()%></option>
+                                                            <%
+                                                                    }
+                                                                }
+                                                            }
+                                                        %>
+                                                        </select>
                                                 </div>
                                                 <div>
                                                     <input type="hidden" name="price" value="<%= list.getPrice()%>">

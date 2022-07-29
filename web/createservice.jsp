@@ -4,6 +4,9 @@
     Author     : dangk
 --%>
 
+<%@page import="sample.services.CategoryServiceDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="sample.user.AdminDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -279,7 +282,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">    
-                                        <form action="MainController" method="POST" class="form-horizontal form-material mx-2">
+                                        <form action="MainController"  class="form-horizontal form-material mx-2">
                                             <table class="table user-table">
                                                 <tbody>
 
@@ -295,11 +298,29 @@
                                                     </tr>
                                                     <tr >
                                                         <td class="border-top-0">Ảnh</td>
-                                                        <td><input class="form-control ps-0 form-control-line" type="text" name="image" placeholder="input XXX.jpg" required=""/></td>
+                                                        <td><input type="file" name="image" required=""/></td>
                                                     </tr>
                                                     <tr >
                                                         <td class="border-top-0">Category ID</td>
-                                                        <td><input class="form-control ps-0 form-control-line" type="text" name="categoryID" placeholder="input category ID"required=""/></td>
+                                                        <td>
+                                                            <select name="categoryID" id="categoryID" required=""> 
+                                                        <option class="form-option" >---Loại Dịch Vụ---</option>
+                                                        <%
+                                                            AdminDAO dao = new AdminDAO();
+                                                            List<CategoryServiceDTO> listCategory = dao.getListCategory_SV();
+                                                            if (listCategory != null) {
+                                                                if (listCategory.size() > 0) {
+                                                                    for (CategoryServiceDTO category : listCategory) {
+
+                                                        %> 
+                                                        <option class="form-option" value="<%=category.getCategoryID()%>"><%= category.getCategoryID() %> : <%= category.getCategoryName()%></option>
+                                                            <%
+                                                                    }
+                                                                }
+                                                            }
+                                                        %>
+                                                        </select>
+                                                    </td>
                                                     </tr>
                                                     <tr >
                                                         <td class="border-top-0">Chi Phí</td>
@@ -328,7 +349,8 @@
                                                 <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Create_Service">Tạo</button>
                                                 <input type="reset"  value="Reset" class="btn btn-success d-none d-md-inline-block text-white" target="_blank" />
                                             </td>
-                                        </form>  
+                                        </form>
+                                                        <h6>${MESS_UP}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -351,8 +373,6 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

@@ -419,6 +419,7 @@
                                             }
                                         %>
                                     </div>
+                                    <h6>${MESS_UP_FB}</h6>
                                 </div>
                             </div>
                         </div>

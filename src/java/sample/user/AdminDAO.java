@@ -47,7 +47,8 @@ public class AdminDAO {
     private static final String UPDATE_CATEGORY = "UPDATE CategoryService SET categoryName=?, status=? WHERE categoryID =? ";
     private static final String CHECK_DUPLICATE_CATE = "SELECT categoryName FROM CategoryService WHERE  categoryID=? ";
     private static final String CREATE_CATEGORY = "INSERT INTO CategoryService(categoryID, categoryName , status) VALUES(?,?,?)";
-
+    private static final String SHOW_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService ";
+    
     private static final String SEARCH_SERVICE = "SELECT serviceID, serviceName,image, categoryID, price, aboutSV , status FROM Service WHERE serviceName like ? ";
 //    private static final String DELETE_SERVICE = "DELETE Service WHERE ServiceID=? ";
     private static final String DELETE_SERVICE = "UPDATE Service SET status=? WHERE serviceID=? ";
@@ -2594,5 +2595,37 @@ public class AdminDAO {
         }
         return list;
     }
-      
+     
+     public List<CategoryServiceDTO> getListCategory_SV() throws SQLException, ClassNotFoundException {
+        List<CategoryServiceDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SHOW_CATEGORY);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String categoryID = rs.getString("categoryID");
+                    String categoryName = rs.getString("categoryName");
+                    boolean status = rs.getBoolean("status");
+                    list.add(new CategoryServiceDTO(categoryID, categoryName, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 }
