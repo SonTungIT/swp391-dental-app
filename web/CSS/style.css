@@ -2881,7 +2881,7 @@ a.move-top span {
     position: absolute;
     right: -410px;
     height: 300px;
-    width: 768px;
+    width: 876px;
     padding: 0 20px;
     margin-top: 20px;
     border-radius: 10px;
@@ -2906,7 +2906,7 @@ a.move-top span {
     border: 20px solid;
     border-color: transparent transparent rgba(101, 182, 64, 0.9) transparent;
     position: absolute;
-    left: 295px;
+    left: 405px;
     top: -40px;
 }
 
@@ -2914,7 +2914,7 @@ a.move-top span {
     content: "";
     display: block;
     position: absolute;
-    left: 270px;
+    left: 370px;
     top: -20px;
     width: 96px;
     height: 30px;

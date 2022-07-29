@@ -386,7 +386,7 @@
                                                         <%
                                                         } else {
                                                         %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <button type="button"  class="btn btn-danger mx-auto mx-md-0 text-white">Ẩn</button>
                                                         <%
                                                             }
                                                         %>

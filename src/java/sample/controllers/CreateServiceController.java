@@ -46,21 +46,31 @@ public class CreateServiceController extends HttpServlet {
             }
 
             String serviceName = request.getParameter("serviceName");
+            ServiceDTO oldName = dao.getOldNameSV(serviceName);
+                 String oldname = oldName.getServiceName();
+                 if(oldname == serviceName){
+                      url = ERROR;
+                request.setAttribute("MESS_UP", "Tạo mới không thành công! (Tên dịch vụ đã tồn tại)");
+                 }
+            else{
+            
             String image = request.getParameter("image");
             String categoryID = request.getParameter("categoryID");
             int price = Integer.parseInt(request.getParameter("price"));
             String aboutSV = request.getParameter("aboutSV");
             boolean status = Boolean.parseBoolean(request.getParameter("status"));
-
+            
             ServiceDTO service = new ServiceDTO(serviceID, serviceName, image, categoryID, price, aboutSV, status);
             boolean checkCreate = dao.createService(service);
             if (checkCreate) {
                 url = SUCCESS;
+                 request.setAttribute("MESS_UP_SV", "Dịch vụ: "+ serviceName  +" tạo thành công! Mời cập nhật trạng thái  ");
             }else {
                 url = ERROR;
                 request.setAttribute("MESS_UP", "Tạo mới không thành công!");
                         }
-
+            }
+            
         } catch (Exception e) {
             log("ERROR at CreateServiceController:"+ e.toString());
         }finally{

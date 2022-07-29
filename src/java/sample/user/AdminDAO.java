@@ -2628,4 +2628,68 @@ public class AdminDAO {
         }
         return list;
     }
+     
+     public ServiceDTO getOldNameSV(String serviceName) throws SQLException, ClassNotFoundException {
+         ServiceDTO service = new ServiceDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT  serviceName FROM Service WHERE serviceName like ? ";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, serviceName);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    service = new ServiceDTO(serviceName);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return service;
+    }
+     
+      public CategoryServiceDTO getOldNameCT(String categoryName) throws SQLException, ClassNotFoundException {
+         CategoryServiceDTO cate = new CategoryServiceDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT  categoryName FROM CategoryService WHERE categoryName like ? ";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, categoryName);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    cate = new CategoryServiceDTO(categoryName);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return cate;
+    }
 }
