@@ -345,7 +345,7 @@
                                                         
                                                         <td>
                                                             
-                                                            <input type="text" value="<%= service.getPrice()%>" name="price" />
+                                                            <input class="btn btn-success mx-auto mx-md-0 text-white" type="text" value="<%= service.getPrice()%>" name="price" />
                                                         </td>
 <!--                                                        update-->
                                                         <td>

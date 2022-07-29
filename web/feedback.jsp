@@ -386,7 +386,7 @@
                                                         <%
                                                         } else {
                                                         %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <button type="button"  class="btn btn-danger mx-auto mx-md-0 text-white">Ẩn</button>
                                                         <%
                                                             }
                                                         %>
@@ -440,8 +440,6 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

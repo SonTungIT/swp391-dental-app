@@ -79,7 +79,7 @@
             }
             String sName = request.getParameter("serviceName");
             if (sName == null) {
-                sName = "--------------Dịch Vụ--------------";
+                sName = "Dịch Vụ";
             }
             String drID = request.getParameter("doctorID");
             if (drID == null) {
@@ -87,7 +87,7 @@
             }
             String drName = (String) request.getAttribute("doctorName");
             if (drName == null) {
-                drName = "----------Bác Sĩ----------";
+                drName = "Bác Sĩ";
             }
             String dateBooking = request.getParameter("bookingDate");
             if (dateBooking == null) {

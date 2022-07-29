@@ -38,7 +38,7 @@
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Icon CND fontawesome -->
-        <title>Manage Doctor Page</title>
+        <title>manageSchedule</title>
     </head>
     <body>
         <%
@@ -395,11 +395,11 @@
                                         %> 
                                     </div>
                                     <c:set var="page" value="${sessionScope.page}"/>
-                                    <button class="btn btn-success d-none d-md-inline-block text-white">
-                                        <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
+                                    <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
+                                        <button class="btn btn-success d-none d-md-inline-block text-white">
                                             <a class="${i==page?"active":""}" style="color: #FFF" href="MainController?action=SearchSC&searchSC=${i}">${i}</a>
-                                        </c:forEach>
-                                    </button>
+                                        </button>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
