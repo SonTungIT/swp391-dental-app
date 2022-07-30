@@ -323,22 +323,14 @@
     <!--ChatBot-->
     <a  style="background-color: transparent;
         position: fixed;
-        bottom: 75px;
+        bottom: 45px;
         right: 15px;
         display: block;
         z-index: 1000" 
         class="social-icon social-icon--facebook" href="https://www.facebook.com/messages/t/100005933477553/" target="_blank"> 
         <img style="width: 50px" src="images/logo-mess.png"> 
     </a>
-    <a style="background-color: transparent;
-       position: fixed;
-       right: 15px;
-       bottom: 20px;
-       display: block;
-       z-index: 1000;" 
-       class="social-icon social-icon--zalo" href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSBpDfrRQqGQTxrvFgJWmjSkJQjRbQGzqbfrpJMGWlXnbVSkzhQMWkPjtxvslJCxTscHqHXs" target="_blank"> 
-        <img style="width: 50px;" src="images/logo-gmail.png"> 
-    </a>
+    
     <!--ChatBot-->
 </body>
 </html>

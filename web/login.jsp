@@ -17,6 +17,9 @@
         <link href="loginPage/colorlib-regform-7/fonts/material-icon/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css"/>
         <!-- Main css -->
         <link href="loginPage/colorlib-regform-7/css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
         <div class="main" style="padding: 50px 0">
@@ -65,7 +68,7 @@
                                     <input type="submit" name="action" id="signin" class="form-submit" value="Login"/>
                                 </div>
                             </form>
-                            <div class="social-login">
+                            <div style="margin-top: 25px" class="social-login">
                                 <span class="social-label">Đăng nhập bằng dịch vụ</span>
                                 <ul class="socials">
                                     <!-- <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
@@ -74,7 +77,14 @@
                                            &client_id=232049583848-lgpfr9t4gadm8m6mgmu4jpu160ld6khv.apps.googleusercontent.com&approval_prompt=force"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
                                 </ul>
                             </div>
-                             <a href="resetpassword.jsp" class="signup-image-link">Quên mật khẩu</a>
+                            <a style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 14px; text-align: start"
+                                href="resetpassword.jsp" class="signup-image-link">Bạn quên mật khẩu ?
+                                <i style="color: #fff;
+                                   background-color: gold;
+                                   padding: 7px;
+                                   margin-left: 10px;
+                                   border-radius: 7px;" class="fa-solid fa-key"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
