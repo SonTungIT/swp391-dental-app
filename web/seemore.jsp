@@ -172,28 +172,39 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="admin.jsp" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                                         href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="pages-profile.html" aria-expanded="false">
                                     <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
                             </li> -->
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="setting.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí tài khoản</span></a></li>
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=Show" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bác sĩ</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="MainController?action=ShowAllDoctor" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                                         href="MainController?action=ShowAllPatient" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                         class="hide-menu">Quản lí bệnh nhân</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowBooking" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>            
+                                        class="hide-menu">Quản lí lịch hẹn</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="feedback.jsp" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">FeedBack</span></a></li>
+                                                         href="MainController?action=SearchSC&searchSC" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí lịch hoạt động</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Feedback&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí đánh giá</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Category&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí loại dịch vụ</span></a></li> 
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Service&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí dich vụ</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                         href="MainController?action=Search_Price&search" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Quản lí giá dịch vụ</span></a></li>
                             <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="icon-material.html" aria-expanded="false"><i
                                         class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Icon</span></a></li>
@@ -252,7 +263,6 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Doctor</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -262,12 +272,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -415,8 +420,7 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
-                </footer>
+                
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->

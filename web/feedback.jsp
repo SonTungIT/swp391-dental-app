@@ -160,7 +160,7 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <!-- User Profile-->
-                            
+
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                          href="MainController?action=ShowDashboard" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
@@ -261,12 +261,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -363,13 +358,12 @@
                                                     </td>
                                                     <!-- hiện số sao đánh giá -->
                                                     <td>  
-                                                        <%  
+                                                        <%
                                                             int star;
-                                                            for(star =1; star <= feedback.getRating(); star++ ){
+                                                            for (star = 1; star <= feedback.getRating(); star++) {
                                                         %>
                                                         <i class="fa-solid fa-star " style="color : #ffcc00 " ></i>
                                                         <%
-                                                                
                                                             }
                                                         %>
                                                     </td>
@@ -391,25 +385,20 @@
                                                             }
                                                         %>
 
-                                                       
+
                                                     </td>
 
                                                     <!--update-->
                                                     <td>
-                                                         <div class="form-group">
-                                                            <div class="col-sm-12 d-flex">
-                                                        <button  type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white">
-                                                            <i class="fa-solid fa-circle-plus"></i>
-                                                        </button>
-                                                                  </div>
-                                                        </div>
-                                                        
                                                         <div class="form-group">
-                                                            <div class="col-sm-12 d-flex">
-                                                        <button  type="submit" name="action" value="Delete_Feedback" class="btn btn-success d-none d-md-inline-block text-white">
-                                                            <i class="fa-solid fa-trash-can"></i>
-                                                        </button>
-                                                                         </div>
+                                                            <div style="justify-content: space-around" class="col-sm-12 d-flex">
+                                                                <button  type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-circle-plus"></i>
+                                                                </button>
+                                                                <button  type="submit" name="action" value="Delete_Feedback" class="btn btn-danger d-none d-md-inline-block text-white">
+                                                                    <i class="fa-solid fa-trash-can"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                         <input type="hidden" name="search" value="<%= search%>" /> 
                                                     </td>
