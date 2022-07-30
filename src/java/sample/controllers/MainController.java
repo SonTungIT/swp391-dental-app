@@ -93,6 +93,8 @@ public class MainController extends HttpServlet {
     private static final String SHOW_FEEDBACK_CONTROLLER = "ShowfeedbackController";
     private static final String UPDATE_FEEDBACK = "Update_Feedback";
     private static final String UPDATE_FEEDBACK_CONTROLLER = "UpdatefeedbackController";
+    private static final String DELETE_FEEDBACK = "Delete_Feedback";
+    private static final String DELETE_FEEDBACK_CONTROLLER = "DeleteFeedbackController";
 
     private static final String SEARCH_CATEGORY = "Search_Category";
     private static final String SEARCH_CATEGORY_CONTROLLER = "SearchCategoryServicesController";
@@ -113,6 +115,8 @@ public class MainController extends HttpServlet {
     private static final String CREATE_SERVICE_CONTROLLER = "CreateServiceController";
     private static final String SHOW_SERVICE_DETAIL = "SUService";
     private static final String SHOW_SERVICE_DETAIL_CONTROLLER = "DetailServiceController";
+    private static final String ACTIVE_SERVICE = "ActiveService";
+    private static final String ACTIVE_SERVICE_CONTROLLER = "ActiveServiceController";
 
     private static final String SEARCH_PRICE_SERVICE = "Search_Price";
     private static final String SEARCH_PRICE_SERVICE_CONTROLLER = "SearchPriceServiceController";
@@ -214,6 +218,10 @@ public class MainController extends HttpServlet {
                 url = ADD_DOCTOR_CONTROLLER;
             }else if (SHOWTRUE_DOCTOR.equals(action)) {
                 url = SHOWTRUE_DOCTOR_CONTROLLER;
+            }else if (ACTIVE_SERVICE.equals(action)) {
+                url = ACTIVE_SERVICE_CONTROLLER;
+            }else if (DELETE_FEEDBACK.equals(action)) {
+                url = DELETE_FEEDBACK_CONTROLLER;
             }
 
         } catch (Exception e) {

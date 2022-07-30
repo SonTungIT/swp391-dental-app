@@ -32,12 +32,18 @@ public class CreateCategoryServicesController extends HttpServlet {
         try { 
             
             int count =1;
-            String categoryID = "CT" + count;
+            String categoryID = "CT000" + count;
             AdminDAO dao = new AdminDAO();
             boolean checkDuplicate = dao.checkDuplicateCategory(categoryID);
             while (checkDuplicate) {
                 count = count + 1;
-                categoryID = "CT" + count;
+                if(count < 10){
+                categoryID = "CT000" + count; 
+                }else if(count > 10 || count < 100){
+                categoryID = "CT00" + count;
+                }else if(count >100 || count < 1000){
+                    categoryID = "CT0" + count; 
+                }
                 checkDuplicate = dao.checkDuplicateCategory(categoryID);
             }
 

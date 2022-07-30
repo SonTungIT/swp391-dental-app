@@ -319,75 +319,80 @@
                                     %> 
 
 
-                                                <div class="table-responsive">
-                                            <table class="table user-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="border-top-0">No</th>
-                                                        <th class="border-top-0">Category ID</th>
-                                                        <th class="border-top-0">Tên Loại Dịch Vụ</th>                                                      
-                                                        <th class="border-top-0">Trạng Thái</th>
-                                                        <th class="border-top-0">Cập Nhật Trạng Thái</th>
-                                                        
-                                                        
-                                                    </tr>
-                                                </thead>
+                                    <div class="table-responsive">
+                                        <table class="table user-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-top-0">No</th>
+                                                    <th class="border-top-0">Category ID</th>
+                                                    <th class="border-top-0">Tên Loại Dịch Vụ</th>                                                      
+                                                    <th class="border-top-0">Trạng Thái</th>
+                                                    <th class="border-top-0">Cập Nhật Trạng Thái</th>
+                                                    <th class="border-top-0"></th>
 
-                                                <tbody>
-                                                    <%
-                                                        int count = 1;
-                                                        for (CategoryServiceDTO category : listCategory) {
-                                                    %>
-                                                <form action="MainController">
-                                                    <tr>
-                                                        <td><%= count++%></td>
-                                                        <td>
-                                                            <%= category.getCategoryID() %>
-                                                            <input type="hidden" value="<%=  category.getCategoryID()%>" name="categoryID" />
-                                                        </td>
-                                                        <td>
-                                                            <%= category.getCategoryName() %>
-                                                            <input type="hidden" value="<%= category.getCategoryName()%>" name="categoryName" />
-                                                        </td>
-                                                        <td> 
-                                                           
-                                                            <%
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <%
+                                                    int count = 1;
+                                                    for (CategoryServiceDTO category : listCategory) {
+                                                %>
+                                            <form action="MainController">
+                                                <tr>
+                                                    <td><%= count++%></td>
+                                                    <td>
+                                                        <%= category.getCategoryID()%>
+                                                        <input type="hidden" value="<%=  category.getCategoryID()%>" name="categoryID" />
+                                                    </td>
+                                                    <td>
+                                                        <%= category.getCategoryName()%>
+                                                        <input type="hidden" value="<%= category.getCategoryName()%>" name="categoryName" />
+                                                    </td>
+                                                    <td> 
+
+                                                        <%
                                                             if (category.isStatus() == true) {
                                                         %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <button type="button"  class="btn btn-danger mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
                                                         <%
                                                         } else {
                                                         %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
                                                         <button type="button"  class="btn btn-danger mx-auto mx-md-0 text-white">Ẩn</button>
                                                         <%
                                                             }
                                                         %>
-                                                            <br> </br>
-                                                            <input checked="checked" type="radio" name="status" value="True">Hiện<br>
-                                                            <input type="radio" name="status" value="False">Ẩn
-                                                        </td>
 
+                                                    </td>
+
+                                                    <td>
+
+
+                                                        <!--update-->
+
+                                                        <button  type="submit" name="action" value="Update_Category" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-circle-plus"></i>
+                                                        </button>
                                                        
+                                                    <!--delete-->
 
+                                                        <button  type="submit" name="action" value="DeleteCategory" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-trash-can"></i>
+                                                        </button>
+                                                        <input type="hidden" name="search" value="<%= search%>"/>
+                                                    </td>
+                                            </form>  
 
-
-<!--                                                        update-->
-                                                        <td>
-                                                            <button  type="submit" name="action" value="Update_Category" class="btn btn-success d-none d-md-inline-block text-white">
-                                                            <i class="fa-solid fa-pencil"></i>
-                                                            </button>
-                                                            
-                                                            <input type="hidden" name="search" value="<%= search%>"/>
-                                                        </td>
-                                                </form>  
- 
                                             <%
                                                 }
 
                                             %> 
                                             <h4>${MESS_CF}</h4>
                                             <h4>${MESS_CF2}</h4>
-                                            
+
                                             </tr>
                                             </tbody>
                                         </table>

@@ -329,7 +329,7 @@
                                                     <th class="border-top-0">Đánh Giá</th>
                                                     <th class="border-top-0">Ngày Viết</th>                                                     
                                                     <th class="border-top-0">Trạng Thái</th>
-                                                    <th class="border-top-0">Cập Nhật</th>
+                                                    <th class="border-top-0">Cập Nhật Trạng Thái</th>
                                                 </tr>
                                             </thead>
 
@@ -391,17 +391,27 @@
                                                             }
                                                         %>
 
-                                                        <br></br>
-                                                        <input checked="checked" type="radio" name="status" value="True">Hiện<br>
-                                                        <input type="radio" name="status" value="False">Ẩn
+                                                       
                                                     </td>
 
                                                     <!--update-->
                                                     <td>
+                                                         <div class="form-group">
+                                                            <div class="col-sm-12 d-flex">
                                                         <button  type="submit" name="action" value="Update_Feedback" class="btn btn-success d-none d-md-inline-block text-white">
-                                                            <i class="fa-solid fa-marker"></i>
+                                                            <i class="fa-solid fa-circle-plus"></i>
                                                         </button>
-                                                        <input type="hidden" name="search" value="<%= search%>" />                      
+                                                                  </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12 d-flex">
+                                                        <button  type="submit" name="action" value="Delete_Feedback" class="btn btn-success d-none d-md-inline-block text-white">
+                                                            <i class="fa-solid fa-trash-can"></i>
+                                                        </button>
+                                                                         </div>
+                                                        </div>
+                                                        <input type="hidden" name="search" value="<%= search%>" /> 
                                                     </td>
                                             </form>  
 

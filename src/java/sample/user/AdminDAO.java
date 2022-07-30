@@ -40,18 +40,21 @@ public class AdminDAO {
     private static final String ACTIVE_FEEDBACK3 = "SELECT top(3) fullName , Users.image  , Feedback.comment, Feedback.dateFeedback , Feedback.status From Feedback join Users on Feedback.patientID = Users.userID Where Feedback.status like '1' ORDER BY Feedback.dateFeedback DESC";
     private static final String ACTIVE_FEEDBACK = "SELECT  PT.fullName as patientName , PT.image  , fb.comment , sv.serviceName, us.fullName as doctorName ,fb.dateFeedback , fb.status, fb.rating From(Select fullName, userID,image from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID ORDER BY fb.dateFeedback DESC";
     private static final String SHOW_FEEDBACK = "SELECT feedbackID, fb.bookingID, PT.fullName as patientName , us.fullName as doctorName, sv.serviceName ,  comment , dateFeedBack , fb.status , fb.rating From (Select fullName, userID from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join CategoryService cs ON cs.categoryID = sv.categoryID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID WHERE feedbackID like ? AND Booking.doctorID = dt.doctorID ORDER BY feedbackID DESC";
-    private static final String UPDATE_FEEDBACK = "UPDATE Feedback SET status=? WHERE feedbackID =? ";
+    private static final String UPDATE_FEEDBACK = "UPDATE Feedback SET status=1 WHERE feedbackID =? ";
+     private static final String DELETE_FEEDBACK = "UPDATE Feedback SET status='False' WHERE feedbackID =? ";
 
     private static final String SEARCH_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService WHERE categoryID like ? ";
-    private static final String DELETE_CATEGORY = "DELETE CategoryService WHERE categoryID=? ";
-    private static final String UPDATE_CATEGORY = "UPDATE CategoryService SET categoryName=?, status=? WHERE categoryID =? ";
+//    private static final String DELETE_CATEGORY = "DELETE CategoryService WHERE categoryID=? ";
+    private static final String UPDATE_CATEGORY = "UPDATE CategoryService SET categoryName=?, status=1 WHERE categoryID =? ";
+    private static final String DELETE_CATEGORY = "UPDATE CategoryService SET categoryName=?, status='False' WHERE categoryID =? ";
     private static final String CHECK_DUPLICATE_CATE = "SELECT categoryName FROM CategoryService WHERE  categoryID=? ";
     private static final String CREATE_CATEGORY = "INSERT INTO CategoryService(categoryID, categoryName , status) VALUES(?,?,?)";
     private static final String SHOW_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService ";
     
     private static final String SEARCH_SERVICE = "SELECT serviceID, serviceName,image, categoryID, price, aboutSV , status FROM Service WHERE serviceName like ? ";
 //    private static final String DELETE_SERVICE = "DELETE Service WHERE ServiceID=? ";
-    private static final String DELETE_SERVICE = "UPDATE Service SET status=? WHERE serviceID=? ";
+    private static final String ACTIVE_SERVICE = "UPDATE Service SET status= 1 WHERE serviceID=? ";
+    private static final String DELETE_SERVICE = "UPDATE Service SET status='False' WHERE serviceID=? ";
     private static final String UPDATE_SERVICE = "UPDATE Service SET serviceName=?, image=?, categoryID=?, price=? ,aboutSV=?  WHERE serviceID=? ";
     private static final String CHECK_DUPLICATE_SV = "SELECT serviceName FROM Service WHERE  serviceID=? ";
     private static final String CREATE_SERVICE = "INSERT INTO Service(serviceID, serviceName , image, categoryID, price, aboutSV , status) VALUES(?,?,?,?,?,?,?)";
@@ -1638,8 +1641,35 @@ public class AdminDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(UPDATE_FEEDBACK);
 
-                ptm.setBoolean(1, status);
-                ptm.setString(2, feedbackID);
+//                ptm.setBoolean(1, status);
+                ptm.setString(1, feedbackID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+    public boolean delete_feedback(boolean status, String feedbackID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_FEEDBACK);
+
+//                ptm.setBoolean(1, status);
+                ptm.setString(1, feedbackID);
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -1691,15 +1721,43 @@ public class AdminDAO {
         return list;
     }
 
-    public boolean deleteCategory(String categoryID) throws SQLException {
+//    public boolean deleteCategory(String categoryID) throws SQLException {
+//        boolean check = false;
+//        Connection conn = null;
+//        PreparedStatement ptm = null;
+//        try {
+//            conn = DBUtils.getConnection();
+//            if (conn != null) {
+//                ptm = conn.prepareStatement(DELETE_CATEGORY);
+//                ptm.setString(1, categoryID);
+//                check = ptm.executeUpdate() > 0 ? true : false;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//
+//            if (ptm != null) {
+//                ptm.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//
+//        }
+//        return check;
+//    }
+
+    public boolean updateCategory(CategoryServiceDTO category) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(DELETE_CATEGORY);
-                ptm.setString(1, categoryID);
+                ptm = conn.prepareStatement(UPDATE_CATEGORY);
+                ptm.setString(1, category.getCategoryName());
+//                ptm.setBoolean(2, category.isStatus());
+                ptm.setString(2, category.getCategoryID());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -1716,18 +1774,17 @@ public class AdminDAO {
         }
         return check;
     }
-
-    public boolean updateCategory(CategoryServiceDTO category) throws SQLException {
+      public boolean deleteCategory(CategoryServiceDTO category) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(UPDATE_CATEGORY);
+                ptm = conn.prepareStatement(DELETE_CATEGORY);
                 ptm.setString(1, category.getCategoryName());
-                ptm.setBoolean(2, category.isStatus());
-                ptm.setString(3, category.getCategoryID());
+//                ptm.setBoolean(2, category.isStatus());
+                ptm.setString(2, category.getCategoryID());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -1849,8 +1906,35 @@ public class AdminDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(DELETE_SERVICE);
-                ptm.setBoolean(1, service.isStatus());
-                 ptm.setString(2, service.getServiceID());
+//                ptm.setBoolean(1, service.isStatus());
+                 ptm.setString(1, service.getServiceID());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+    
+    public boolean activeService(ServiceDTO service) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(ACTIVE_SERVICE);
+//                ptm.setBoolean(1, service.isStatus());
+                 ptm.setString(1, service.getServiceID());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

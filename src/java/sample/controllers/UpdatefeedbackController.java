@@ -34,12 +34,7 @@ public class UpdatefeedbackController extends HttpServlet {
             AdminDAO dao = new AdminDAO();
             boolean checkUpdate = dao.update_feedback(status ,feedbackID );
             if (checkUpdate) {
-                if(status == true){
                     request.setAttribute("MESS_UP_FB", "Feedback mã "+ feedbackID +" đã được hiện trên trang đánh giá");
-                }else if(status == false){
-                    request.setAttribute("MESS_UP_FB", "Feedback mã "+ feedbackID +" đã được ẩn "); 
-            }
-
                 url = SUCCESS;
             }
         } catch (Exception e) {

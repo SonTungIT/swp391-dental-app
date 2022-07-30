@@ -335,9 +335,9 @@
                                                     <th class="border-top-0">Hình Ảnh</th>
                                                     <th class="border-top-0">Category ID</th>
                                                     <th class="border-top-0">Chi Phí</th> 
-                                                    <th class="border-top-0">Nội Dung</th>
+<!--                                                    <th class="border-top-0">Nội Dung</th>-->
                                                     <th class="border-top-0">Trạng Thái</th>
-                                                    <th class="border-top-0">Sửa Trạng Thái</th>
+                                                    <th class="border-top-0">Cập nhập Trạng Thái</th>
                                                     <th class="border-top-0">Cập Nhật Thông Tin</th>     
                                                 </tr>
                                             </thead>
@@ -370,20 +370,7 @@
                                                         <%= service.getPrice()%>
                                                         <input type="hidden" value="<%= service.getPrice()%>" name="price" />
                                                     </td>
-                                                    <td>
-                                                        <%
-                                                            if (service.getAboutSV() == null) {
-                                                        %>
-                                                        <input type="hidden" value="<%= service.getAboutSV()%>" name="aboutSV" />  
-                                                        <%
-                                                        } else {
-                                                        %>
-                                                        <%= service.getAboutSV()%>
-                                                        <input type="hidden" value="<%= service.getAboutSV()%>" name="aboutSV" />
-                                                        <%
-                                                            }
-                                                        %>
-                                                    </td>
+                                                    
                                                     <td> 
                                                         <%
                                                             if (service.isStatus() == true) {
@@ -397,25 +384,34 @@
                                                             }
                                                         %>
                                                         <div>
-                                                            <input checked="checked" type="radio" name="status" value="True">Hiện<br>
-                                                            <input type="radio" name="status" value="False">Ẩn
+                                                            
+<!--                                                           <input checked="checked" type="radio" name="status" value="True" class="btn btn-success mx-auto mx-md-0 text-white">Hiện<br>
+                                                            <input type="radio" name="status" value="False" class="btn btn-success mx-auto mx-md-0 text-white">Ẩn-->
                                                         </div>
                                                     </td>
 
 
 
-                                                    <!--delete-->
+                                                    
                                                     <td>
-
+                                                         <!--update-->
                                                         <div class="form-group">
                                                             <div class="col-sm-12 d-flex">
-                                                                <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="DeleteService">Sửa</button>
+                                                                <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="ActiveService"><i class="fa-solid fa-circle-plus"></i></button>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                        <!--delete-->
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12 d-flex">
+                                                                <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="DeleteService"><i class="fa-solid fa-trash-can"></i></button>
                                                             </div>
                                                         </div>
                                                         <input type="hidden" name="search" value="<%= search%>"/>    
                                                     </td>
 
-                                                    <!--update-->
+                                                    
                                                     <td>
                                                         <!--                                                            <input type="submit" name="action" value="Update_Service" class="btn btn-success d-none d-md-inline-block text-white"
                                                                                                                    target="_blank" />-->

@@ -32,15 +32,17 @@ public class CreateServiceController extends HttpServlet {
         try {                     
              
             int count = 1;
-            String serviceID = "SV0" + count;
+            String serviceID = "SV000" + count;
             AdminDAO dao = new AdminDAO();
             boolean checkDuplicate = dao.checkDuplicateService(serviceID);
             while (checkDuplicate) {
                 count = count + 1;
                 if(count < 10){
-                serviceID = "SV0" + count;  
-                }else{
-                serviceID = "SV" + count;
+                serviceID = "SV000" + count;  
+                }else if(count > 10 || count < 100){
+                serviceID = "SV00" + count;
+                }else if(count >100 || count <1000){
+                    serviceID = "SV0" + count; 
                 }
                 checkDuplicate = dao.checkDuplicateService(serviceID);
             }

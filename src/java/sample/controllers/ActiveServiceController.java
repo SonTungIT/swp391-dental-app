@@ -7,51 +7,40 @@ package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sample.booking.BookingDTO;
-import sample.services.CategoryServiceDTO;
+import sample.services.ServiceDTO;
 import sample.user.AdminDAO;
-import sample.user.DoctorDTO;
-
-
 
 /**
  *
  * @author dangk
  */
-@WebServlet(name = "UpdateCategoryServicesController", urlPatterns = {"/UpdateCategoryServicesController"})
-public class UpdateCategoryServicesController extends HttpServlet {
+@WebServlet(name = "ActiveServiceController", urlPatterns = {"/ActiveServiceController"})
+public class ActiveServiceController extends HttpServlet {
 
-     private static final String ERROR = "SearchCategoryServicesController";
-    private static final String SUCCESS = "SearchCategoryServicesController";
+    private static final String ERROR = "SearchServiceController";
+    private static final String SUCCESS = "SearchServiceController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String CategoryID = request.getParameter("categoryID");
-            String CategoryName = request.getParameter("categoryName");
-            boolean status = Boolean.parseBoolean(request.getParameter("status"));            
-            CategoryServiceDTO category = new CategoryServiceDTO(CategoryID, CategoryName, status);       
+            String serviceID = request.getParameter("serviceID");
+            boolean status = Boolean.parseBoolean(request.getParameter("status"));
+            ServiceDTO service = new ServiceDTO(serviceID, status);
             AdminDAO dao = new AdminDAO();
-            
-            boolean checkUpdate = dao.updateCategory(category);
-            
-
-           
-            if (checkUpdate) {
-                 request.setAttribute("MESS_UP_CATE", "Mã Loại Dịch Vụ: "+ CategoryID + "; Tên: "+ CategoryName+ " đã được hiện ");
+            boolean check = dao.activeService(service);
+            if (check) {
+                    request.setAttribute("MESS_UP_SV", "Mã dịch vụ "+ serviceID + " đã được hiện trên trang chủ");
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at UpdateCategoryController: " + e.toString());
+            log("Error at ActiveServiceController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
