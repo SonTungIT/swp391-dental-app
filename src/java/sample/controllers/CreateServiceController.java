@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import sample.services.ServiceDTO;
 import sample.user.AdminDAO;
 
-
 /**
  *
  * @author dangk
@@ -23,59 +22,68 @@ import sample.user.AdminDAO;
 @WebServlet(name = "CreateServiceController", urlPatterns = {"/CreateServiceController"})
 public class CreateServiceController extends HttpServlet {
 
-    private static final String ERROR="createservice.jsp";
-    private static final String SUCCESS="MainController?search=&action=Search_Service";
+    private static final String ERROR = "createservice.jsp";
+    private static final String SUCCESS = "MainController?search=&action=Search_Service";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR ;
-        try {                     
-             
+        String url = ERROR;
+        try {
+
             int count = 1;
             String serviceID = "SV000" + count;
             AdminDAO dao = new AdminDAO();
             boolean checkDuplicate = dao.checkDuplicateService(serviceID);
             while (checkDuplicate) {
                 count = count + 1;
-                if(count < 10){
-                serviceID = "SV000" + count;  
-                }else if(count > 10 || count < 100){
-                serviceID = "SV00" + count;
-                }else if(count >100 || count <1000){
-                    serviceID = "SV0" + count; 
+                if (count < 10) {
+                    serviceID = "SV000" + count;
+                } else if (count > 10 || count < 100) {
+                    serviceID = "SV00" + count;
+                } else if (count > 100 || count < 1000) {
+                    serviceID = "SV0" + count;
                 }
                 checkDuplicate = dao.checkDuplicateService(serviceID);
             }
 
             String serviceName = request.getParameter("serviceName");
             ServiceDTO oldName = dao.getOldNameSV(serviceName);
-                 String oldname = oldName.getServiceName();
-                 if(oldname == serviceName){
-                      url = ERROR;
-                request.setAttribute("MESS_UP", "Tạo mới không thành công! (Tên dịch vụ đã tồn tại)");
-                 }
-            else{
-            
-            String image = request.getParameter("image");
-            String categoryID = request.getParameter("categoryID");
-            int price = Integer.parseInt(request.getParameter("price"));
-            String aboutSV = request.getParameter("aboutSV");
-            boolean status = Boolean.parseBoolean(request.getParameter("status"));
-            
-            ServiceDTO service = new ServiceDTO(serviceID, serviceName, image, categoryID, price, aboutSV, status);
-            boolean checkCreate = dao.createService(service);
-            if (checkCreate) {
-                url = SUCCESS;
-                 request.setAttribute("MESS_UP_SV", "Dịch vụ: "+ serviceName  +" tạo thành công! Mời cập nhật trạng thái  ");
-            }else {
+            String oldname = oldName.getServiceName();
+            if (oldname == serviceName) {
                 url = ERROR;
-                request.setAttribute("MESS_UP", "Tạo mới không thành công!");
-                        }
+                request.setAttribute("MESS_UP", "Tạo mới không thành công! (Tên dịch vụ đã tồn tại)");
+            } else {
+
+                String image = request.getParameter("image");
+                String categoryID = request.getParameter("categoryID");
+                int price = Integer.parseInt(request.getParameter("price"));
+                String aboutSV = request.getParameter("aboutSV");
+                boolean status = Boolean.parseBoolean(request.getParameter("status"));
+
+                boolean checkValidation = true;
+                if (serviceName.length() < 4) {
+                    checkValidation = false;
+                }
+                if (checkValidation == false) {
+                    url = ERROR;
+                    request.setAttribute("MESS_UP", "Tạo mới không thành công! (Tên dịch vụ phải từ 4 kí tự trở lên)");
+                } else {
+                    ServiceDTO service = new ServiceDTO(serviceID, serviceName, image, categoryID, price, aboutSV, status);
+                    boolean checkCreate = dao.createService(service);
+                    if (checkCreate) {
+                        url = SUCCESS;
+                        request.setAttribute("MESS_UP_SV", "Dịch vụ: " + serviceName + " tạo thành công! Mời cập nhật trạng thái  ");
+                    } else {
+                        url = ERROR;
+                        request.setAttribute("MESS_UP", "Tạo mới không thành công!");
+                    }
+                }
+
             }
-            
         } catch (Exception e) {
-            log("ERROR at CreateServiceController:"+ e.toString());
-        }finally{
+            log("ERROR at CreateServiceController:" + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

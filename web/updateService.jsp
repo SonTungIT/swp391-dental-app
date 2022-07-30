@@ -309,7 +309,7 @@
                                                     <label class="col-md-12 mb-0">Hình Ảnh:</label>
                                                     <div class="col-md-12">
                                                         <td> 
-                                                            <img width="80px" height="60px" src="images/<%= list.getImage()%>" alt="Image can't show">
+                                                            <img width="250px" height="200px" src="images/<%= list.getImage()%>" alt="Image can't show">
                                                             <input type="file" name="image" required="" /> 
                                                         </td>  
                                                     </div>

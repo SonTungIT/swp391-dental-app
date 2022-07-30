@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import sample.services.CategoryServiceDTO;
 import sample.user.AdminDAO;
 
-
 /**
  *
  * @author dangk
@@ -23,51 +22,60 @@ import sample.user.AdminDAO;
 @WebServlet(name = "CreateCategoryServicesController", urlPatterns = {"/CreateCategoryServicesController"})
 public class CreateCategoryServicesController extends HttpServlet {
 
-    private static final String ERROR="createcategory.jsp";
-    private static final String SUCCESS="MainController?search=&action=Search_Category";
+    private static final String ERROR = "createcategory.jsp";
+    private static final String SUCCESS = "MainController?search=&action=Search_Category";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR ;
-        try { 
-            
-            int count =1;
+        String url = ERROR;
+        try {
+
+            int count = 1;
             String categoryID = "CT000" + count;
             AdminDAO dao = new AdminDAO();
             boolean checkDuplicate = dao.checkDuplicateCategory(categoryID);
             while (checkDuplicate) {
                 count = count + 1;
-                if(count < 10){
-                categoryID = "CT000" + count; 
-                }else if(count > 10 || count < 100){
-                categoryID = "CT00" + count;
-                }else if(count >100 || count < 1000){
-                    categoryID = "CT0" + count; 
+                if (count < 10) {
+                    categoryID = "CT000" + count;
+                } else if (count > 10 || count < 100) {
+                    categoryID = "CT00" + count;
+                } else if (count > 100 || count < 1000) {
+                    categoryID = "CT0" + count;
                 }
                 checkDuplicate = dao.checkDuplicateCategory(categoryID);
             }
 
             String categoryName = request.getParameter("categoryName");
             CategoryServiceDTO oldName = dao.getOldNameCT(categoryName);
-                 String oldname = oldName.getCategoryName();
-                 if(oldname == categoryName){
-                      url = ERROR;
+            String oldname = oldName.getCategoryName();
+            if (oldname == categoryName) {
+                url = ERROR;
                 request.setAttribute("MESS_UP", "Tạo mới không thành công! (Tên loại dịch vụ đã tồn tại)");
-                 }
-            else{
-            
-            boolean status = Boolean.parseBoolean(request.getParameter("status"));
-            CategoryServiceDTO category = new CategoryServiceDTO(categoryID, categoryName, status);
-            boolean checkCreate = dao.createCategory(category);
-            if (checkCreate) {
-                url = SUCCESS;
-                request.setAttribute("MESS_UP_CATE","Loại dịch vụ: "+ categoryName +"; Mã ID: "+ categoryID  +" tạo  thành công! Mời cập nhật trạng thái  ");
-            }
+            } else {
+
+                boolean status = Boolean.parseBoolean(request.getParameter("status"));
+                boolean checkValidation = true;
+                if (categoryName.length() < 4) {
+                    checkValidation = false;
+                }
+                if (checkValidation == false) {
+                    url = ERROR;
+                    request.setAttribute("MESS_UP", "Tạo mới không thành công! (Tên loại dịch vụ phải từ 4 kí tự trở lên)");
+                } else {
+                    CategoryServiceDTO category = new CategoryServiceDTO(categoryID, categoryName, status);
+                    boolean checkCreate = dao.createCategory(category);
+                    if (checkCreate) {
+                        url = SUCCESS;
+                        request.setAttribute("MESS_UP_CATE", "Loại dịch vụ: " + categoryName + "; Mã ID: " + categoryID + " tạo  thành công! Mời cập nhật trạng thái  ");
+                    }
+                }
             }
 
         } catch (Exception e) {
-            log("ERROR at CreateCategoryController:"+ e.toString());
-        }finally{
+            log("ERROR at CreateCategoryController:" + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

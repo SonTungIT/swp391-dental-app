@@ -338,7 +338,7 @@
 <!--                                                    <th class="border-top-0">Nội Dung</th>-->
                                                     <th class="border-top-0">Trạng Thái</th>
                                                     <th class="border-top-0">Cập nhập Trạng Thái</th>
-                                                    <th class="border-top-0">Cập Nhật Thông Tin</th>     
+                                                    <th class="border-top-0">Chi tiết</th>     
                                                 </tr>
                                             </thead>
 
@@ -417,7 +417,7 @@
                                                                                                                    target="_blank" />-->
                                                         
                                                         <a class="btn btn-success d-none d-md-inline-block text-white" href="MainController?action=SUService&serviceName=<%= service.getServiceName()%>" >
-                                                            <i class="fa-solid fa-marker"></i>
+                                                           <i class="fa-regular fa-eye"></i>
                                                         </a>
                                                         <input type="hidden" name="search" value="<%= search%>"/>
                                                     </td>
