@@ -317,7 +317,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-12 mb-0">ID Loại Dịch Vụ:</label>
                                                     <select name="categoryID" id="categoryID"> 
-                                                        <option class="form-option" value="<%=list.getCategoryID() %>"><%=list.getCategoryID() %></option>
+                                                        <option class="form-option" value="<%=list.getCategoryID()%>"><%=list.getCategoryID()%></option>
                                                         <%
                                                             AdminDAO dao = new AdminDAO();
                                                             List<CategoryServiceDTO> listCategory = dao.getListCategory_SV();
@@ -326,13 +326,13 @@
                                                                     for (CategoryServiceDTO category : listCategory) {
 
                                                         %> 
-                                                        <option class="form-option" value="<%=category.getCategoryID()%>"><%= category.getCategoryID() %> : <%= category.getCategoryName()%></option>
-                                                            <%
+                                                        <option class="form-option" value="<%=category.getCategoryID()%>"><%= category.getCategoryID()%> : <%= category.getCategoryName()%></option>
+                                                        <%
                                                                     }
                                                                 }
                                                             }
                                                         %>
-                                                        </select>
+                                                    </select>
                                                 </div>
                                                 <div>
                                                     <input type="hidden" name="price" value="<%= list.getPrice()%>">
@@ -342,18 +342,13 @@
                                                     <label class="col-md-12 mb-0">Nội Dung </label>
                                                     <div class="col-md-12">
 
-                                                        <textarea rows="5" class="form-control ps-0 form-control-line" type="text" name="aboutSV" value="<%= list.getAboutSV()%>"><%= list.getAboutSV()%></textarea>
+                                                        <textarea rows="5" class="form-control ps-0 form-control-line" type="text" id="aboutSV" name="aboutSV" value="<%= list.getAboutSV()%>"><%= list.getAboutSV()%></textarea>
                                                     </div>
                                                 </div>
-
-
-                                                   
-
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12 d-flex">
-                                                            <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Update_Service">Cập Nhật</button>
-                                                        </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12 d-flex">
+                                                        <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="Update_Service">Cập Nhật</button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -405,5 +400,13 @@
     <script src="html/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="html/js/custom.js"></script>
+
+    <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script>
+        var editor = '';
+        $(document).ready(function () {
+            editor = CKEDITOR.replace('aboutSV');
+        });
+    </script>
 </body> 
 </html>

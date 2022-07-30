@@ -62,7 +62,6 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                                    <label style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif" for="remember-me" class="label-agree-term"><span><span></span></span>Ghi nhớ tình trạng đăng nhập</label>
                                 </div>
                                 <div class="form-group form-button">
                                     <input type="submit" name="action" id="signin" class="form-submit" value="Login"/>
