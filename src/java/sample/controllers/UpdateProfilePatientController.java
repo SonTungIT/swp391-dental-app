@@ -64,7 +64,6 @@ public class UpdateProfilePatientController extends HttpServlet {
                 String email = request.getParameter("email");
                 String phone = request.getParameter("phone");
                 Boolean status = Boolean.getBoolean(request.getParameter("status"));
-
                 UserDTO us = new UserDTO(patientID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
                 boolean check = dao.updateProfile(us);
                 if (check) {

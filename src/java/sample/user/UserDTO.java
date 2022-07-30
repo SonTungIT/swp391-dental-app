@@ -130,6 +130,14 @@ public class UserDTO {
         this.status = status;
     }
 
+    public UserDTO(String userID, String password, String roleID, String email) {
+        this.userID = userID;
+        this.password = password;
+        this.roleID = roleID;
+        this.email = email;
+    }
+    
+
     public UserDTO(String userID, String password, String fullName, String roleID, String gender, String address, String image, Date birthday, String email, String phone, boolean status) {
         this.userID = userID;
         this.password = password;

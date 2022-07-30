@@ -21,7 +21,7 @@ public class UserDAO {
     private static final String LOGINGOOGLE = "SELECT userID, fullname, roleID, gender, address, image, birthday, email, phone, status FROM Users WHERE email like ? ";
     private static final String CREATE = "INSERT INTO Users(userID,password,fullName, roleID, gender, address,image,birthday,email, phone, status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     private static final String CHECK_DUPLICATE = "SELECT fullname FROM Users WHERE userID=?";
-
+    private static final String FIND_BY_USERID_EMAIL = "Select userID, password, roleID, email from DentalClinic.dbo.Users where userID = ? and email = ?";
     public UserDTO checkLogin(String userID, String password) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -106,7 +106,8 @@ public class UserDAO {
         }
         return user;
     }
-     public boolean create(UserDTO user) throws SQLException {
+
+    public boolean create(UserDTO user) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -142,7 +143,8 @@ public class UserDAO {
         }
         return check;
     }
-     public boolean checkDuplicate(String userID) throws SQLException {
+
+    public boolean checkDuplicate(String userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -174,5 +176,72 @@ public class UserDAO {
         return check;
     }
 
+    public boolean checkDuplicateEmail(String email) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT userID FROM Users WHERE email = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, email);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+    public UserDTO findByUserIdAndEmail(String userId, String email) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(FIND_BY_USERID_EMAIL);
+                ptm.setString(1, userId);
+                ptm.setString(2, email);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String roleID = rs.getString("roleID");
+                    String password = rs.getString("password");
+                    user = new UserDTO(userID, password, roleID, email);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return user;
+    }
 
 }

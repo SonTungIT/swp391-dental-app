@@ -41,7 +41,7 @@ public class PatientDAO {
             + "		   JOIN Doctor dt ON dt.categoryID = cs.categoryID JOIN Users us ON us.userID = dt.doctorID\n"
 
             + "		   JOIN (SELECT userID FROM Users ) AS pt ON pt.userID = bk.patientID\n"
-            + "           WHERE bk.status = 'Active' OR bk.status = 'Finished'  AND bk.doctorID = dt.doctorID AND serviceName like ? AND patientID = ? order by bk.dateBooking desc";
+            + "           WHERE bk.status = ('Active' OR bk.status = 'Finished')  AND bk.doctorID = dt.doctorID AND serviceName like ? AND patientID = ? order by bk.dateBooking desc";
 
     private static final String CHECK_DUPLICATE_BK_ID = "SELECT patientID FROM Booking WHERE bookingID = ? ";
     private static final String CREATE_BOOKING = "INSERT INTO Booking(bookingID, patientID, serviceID, doctorID, dateBooking, timeBooking, status) VALUES(?, ?, ?, ?, ?, ?, ?)";
@@ -857,5 +857,30 @@ public class PatientDAO {
 
         }
         return check;
+    }
+    public void updatePassword(String id, String password) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Users SET password = ? WHERE userID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, password);
+                ptm.setString(2, id);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
     }
 }

@@ -20,6 +20,8 @@ public class MainController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String HOME = "Home";
     private static final String HOME_CONTROLLER = "HomeController";
+    private static final String SEND_MAIL = "Send";
+    private static final String SEND_MAIL_CONTROLLER ="SendMailController";
     //Login and logout
     private static final String LOGIN = "Login";
     private static final String LOGIN_CONTROLLER = "LoginController";
@@ -27,8 +29,14 @@ public class MainController extends HttpServlet {
     private static final String REGISTER_CONTROLLER = "CreateController";
     private static final String LOGOUT = "Logout";
     private static final String LOGOUT_CONTROLLER = "LogoutController";
+    private static final String FORGOT_PASSWORD = "Retrieve";
+    private static final String FORGOT_PASSWORD_CONTROLLER ="ResetPasswordController";
     private static final String SHOW_DOCTOR = "Show";
     private static final String SHOW_DOCTOR_CONTROLLER = "ShowDoctorController";
+    private static final String UPDATE_PASSWORD_PATIENT = "Update_Password";
+    private static final String UPDATE_PASSWORD_PATIENT_CONTROLLER ="UpdatePatientPasswordControler";
+    private static final String UPDATE_PASSWORD_DOCTOR = "Update_Password_Doctor";
+    private static final String UPDATE_PASSWORD_DOCTOR_CONTROLLER ="UpdatePasswordDoctorControler";
     private static final String SEARCH_DOCTOR = "Search";
     private static final String SEARCH_DOCTOR_CONTROLLER = "SearchDoctorController";
     private static final String ADD_DOCTOR = "Add";
@@ -170,6 +178,8 @@ public class MainController extends HttpServlet {
                 url = SHOWSLOT_DR_CONTROLLER;
             } else if (CREATE_BK.equals(action)) {
                 url = CREATE_BK_CONTROLLER;
+            } else if (SEND_MAIL.equals(action)) {
+                url = SEND_MAIL_CONTROLLER;
             } else if (SHOWSCHEDULE.equals(action)) {
                 url = SHOWSCHEDULE_CONTROLLER;
             } else if (UPDATE_SCHEDULEDR.equals(action)) {
@@ -210,6 +220,8 @@ public class MainController extends HttpServlet {
                 url = SEARCH_PRICE_SERVICE_CONTROLLER;
             } else if (UPDATE_PRICE_SERVICE.equals(action)) {
                 url = UPDATE_PRICE_SERVICE_CONTROLLER;
+            } else if (FORGOT_PASSWORD.equals(action)) {
+                url = FORGOT_PASSWORD_CONTROLLER;
             } else if (SHOW_ABOUT_SERVICE.equals(action)) {
                 url = SHOW_ABOUT_SERVICE_CONTROLLER;
             } else if (SHOW_SERVICE_DETAIL.equals(action)) {
@@ -222,6 +234,10 @@ public class MainController extends HttpServlet {
                 url = ACTIVE_SERVICE_CONTROLLER;
             }else if (DELETE_FEEDBACK.equals(action)) {
                 url = DELETE_FEEDBACK_CONTROLLER;
+            }else if (UPDATE_PASSWORD_PATIENT.equals(action)) {
+                url = UPDATE_PASSWORD_PATIENT_CONTROLLER;
+            } else if (UPDATE_PASSWORD_DOCTOR.equals(action)) {
+                url = UPDATE_PASSWORD_DOCTOR_CONTROLLER;
             }
 
         } catch (Exception e) {

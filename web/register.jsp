@@ -4,6 +4,7 @@
     Author     : Lenovo Legion
 --%>
 
+<%@page import="sample.user.UserError"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -12,7 +13,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Sign Up Form by Colorlib</title>
+        <title>Sign Up</title>
 
         <!-- Font Icon -->
 
@@ -22,6 +23,12 @@
         <link href="loginPage/colorlib-regform-7/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+        <%
+            UserError error = (UserError) request.getAttribute("USER_ERROR");
+            if (error == null) {
+                error = new UserError();
+            }
+        %>
         <div class="main" style="padding: 50px 0">
 
             <!-- Sign up form -->
@@ -34,36 +41,36 @@
                                 <input type="hidden" name="roleID" value="PT" />
                                 <div class="form-group">
                                     <label for="userID"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="userID" id="name" placeholder="Tên Đăng Nhập"/>
+                                    <input type="text" name="userID" id="name" placeholder="Tên đăng nhập" required=""/>
                                 </div>
+                                <p style="color: red"><%=error.getDuplicateError()%></p>
+                                <p style="color: red"><%=error.getUserIDError()%></p></br>
                                 <div class="form-group">
                                     <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="fullName" id="name" placeholder="Họ và Tên"/>
+                                    <input type="text" name="fullName" id="name" placeholder="Họ và tên" required=""/>
                                 </div>
+                                <p style="color: red"><%=error.getFullNameError()%></p></br>
                                 <div class="form-group">
                                     <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                    <input type="email" name="email" id="email" placeholder="Địa Chỉ Email"/>
+                                    <input type="email" name="email" id="email" placeholder="Địa chỉ email" required=""/>
                                 </div>
+                                <p style="color: red"><%=error.getEmailError()%></p></br>
                                 <div class="form-group">
                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                    <input type="password" name="password" id="pass" placeholder="Mật Khẩu"/>
-                                </div>
+                                    <input type="password" name="password" id="pass" placeholder="Mật khẩu" required=""/>
+                                </div></br>
                                 <div class="form-group">
                                     <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                    <input type="password" name="re_pass" id="re_pass" placeholder="Nhập Lại Mật Khẩu"/>
+                                    <input type="password" name="re_pass" id="re_pass" placeholder="Nhập lại mật khẩu" required=""/>
                                 </div>
+                                <p style="color: red"><%=error.getPasswordError()%></p></br>
                                 <div class="form-group form-button">
                                     <input type="submit" name="action" id="signup" class="form-submit" value="Register"/>
                                 </div>
                             </form>
                         </div>
                         <div class="signup-image">
-
                             <img src="loginPage/colorlib-regform-7/images/login-img2.jpg" alt=""/>
-                            <a style="padding-top: 20px;
-                               font-family: Helvetica Neue,Helvetica,Arial,sans-serif" 
-                               href="login.jsp" class="signup-image-link">Bạn đã có tài khoản ?
-                            </a>
                         </div>
                     </div>
                 </div>

@@ -74,6 +74,7 @@
                                            &client_id=232049583848-lgpfr9t4gadm8m6mgmu4jpu160ld6khv.apps.googleusercontent.com&approval_prompt=force"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
                                 </ul>
                             </div>
+                             <a href="resetpassword.jsp" class="signup-image-link">Quên mật khẩu</a>
                         </div>
                     </div>
                 </div>

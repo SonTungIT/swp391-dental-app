@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sample.user.AdminDAO;
 import sample.user.DoctorDTO;
+import sample.user.UserError;
 
 /**
  *

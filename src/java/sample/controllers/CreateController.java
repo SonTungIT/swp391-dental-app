@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sample.user.UserDAO;
 import sample.user.UserDTO;
+import sample.user.UserError;
 
 /**
  *
@@ -24,7 +25,7 @@ import sample.user.UserDTO;
 public class CreateController extends HttpServlet {
 
     private static final String ERROR = "register.jsp";
-    private static final String SUCCESS = "patient.jsp";
+    private static final String SUCCESS = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,45 +43,46 @@ public class CreateController extends HttpServlet {
             Date birthday = null;
             String email = request.getParameter("email");
             String phone = "";
-            
-           
+            String re_pass = request.getParameter("re_pass");
+
             boolean status = true;
             UserDAO dao = new UserDAO();
             UserError PE = new UserError();
-            
+
             boolean checkDuplicate = dao.checkDuplicate(userID);
             boolean checkValidation = true;
+            boolean checkMail = dao.checkDuplicateEmail(email);
 
             if (checkDuplicate) {
-                PE.setUserIDError("Duplicate Parking Attendant ID " + userID + " !");
-                request.setAttribute("UserID_ERROR", PE);
-            }
-//            if (userID.matches("^PAT\\d{3}$")) {
-//                checkValidation = false;
-//                PE.setUserIDError("UserID must be PAT*** !!!");
-//            }
-           
-            if (email.length() < 2 || email.length() > 50) {
-                PE.setEmailError("Email must be in[2,50]!");
+                PE.setDuplicateError("Tên đăng nhập " + userID + " không khả dụng");
                 checkValidation = false;
             }
-           
-            
-
+            if (userID.length() < 2 || userID.length() > 50) {
+                PE.setUserIDError("Tên đăng nhập phải từ 2 đến 50 kí tự");
+                checkValidation = false;
+            }
+            if (fullName.length() < 2 || fullName.length() > 50) {
+                PE.setFullNameError("Tên phải từ 2 đến 50 kí tự");
+                checkValidation = false;
+            }
+            if (checkMail) {
+                PE.setEmailError("Email " + email + " không khả dụng");
+                checkValidation = false;
+            }
+            if (!password.equals(re_pass)) {
+                PE.setPasswordError("Mật khẩu không khớp nhau");
+                checkValidation = false;
+            }
             if (checkValidation) {
-                System.out.println("duyet validation");
                 UserDTO user = new UserDTO(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
-
                 boolean checkCreate = dao.create(user);
                 if (checkCreate) {
+                    request.setAttribute("MESSAGE", "Đăng ký thành công !!!");
                     url = SUCCESS;
-                    request.setAttribute("SUCCESS_INFO", "Created successfully !!!");
                 }
             } else {
-                System.out.println("Co loi");
                 request.setAttribute("USER_ERROR", PE);
             }
-
         } catch (Exception e) {
             log("Error at CreateController: " + e.toString());
         } finally {
@@ -88,7 +90,7 @@ public class CreateController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
