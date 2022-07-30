@@ -304,7 +304,7 @@
                                         </div>
                                     </form>
                                     <div class="table-responsive">
-                                        <%  List<BookingDTO> list = (List<BookingDTO>) session.getAttribute("LIST_BOOKING");
+                                         <%  List<BookingDTO> list = (List<BookingDTO>) session.getAttribute("LIST_BOOKING");
                                             if (list != null) {
                                                 if (!list.isEmpty()) {
                                         %>
@@ -323,6 +323,7 @@
                                                     <th>Slot Time</th>
                                                     <th>Trạng thái</th>
                                                     <th>Xóa</th>
+                                                    <th>Gmail</th>
 
 
                                                 </tr>
@@ -356,6 +357,9 @@
                                                         </form>
 
                                                     </td>   
+                                                    <td><a href="sendmail.jsp" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i
+                                    class="mdi mdi-gmail"></i></a></td>
+                                                    
                                                 </tr>
                                             </form>
                                             <%
@@ -371,11 +375,11 @@
                                         %> 
                                     </div>
                                     <c:set var="page" value="${sessionScope.page}"/>
-                                    <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
-                                        <button class="btn btn-success d-none d-md-inline-block text-white">
-                                            <a style="color: #FFF" class="${i==page?"active":""}" style="color: #FFF" href="MainController?action=ShowBooking&page=${i}">${i}</a>
-                                        </button>
-                                    </c:forEach>
+                                    <button class="btn btn-success d-none d-md-inline-block text-white">
+                                        <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
+                                            <a class="${i==page?"active":""}" style="color: #FFF" href="MainController?action=ShowBooking&page=${i}">${i}</a>
+                                        </c:forEach>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -423,3 +427,4 @@
         <script src="html/js/custom.js"></script>
     </body>
 </html>
+

@@ -270,5 +270,30 @@ public class DoctorDAO {
         }
         return check;
     }
+    public void updatePassword(String id, String password) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Users SET password = ? WHERE userID = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, password);
+                ptm.setString(2, id);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+    }
 
 }
