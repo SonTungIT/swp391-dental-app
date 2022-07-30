@@ -30,7 +30,10 @@ public class CategoryServiceDTO {
         this.categoryName = categoryName;
     }
 
-    
+    public CategoryServiceDTO(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public String getCategoryID() {
         return categoryID;
     }

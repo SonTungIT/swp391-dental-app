@@ -24,7 +24,7 @@ import sample.user.AdminDAO;
 public class CreateCategoryServicesController extends HttpServlet {
 
     private static final String ERROR="createcategory.jsp";
-    private static final String SUCCESS="MainController?action=Search_Category&search";
+    private static final String SUCCESS="MainController?search=&action=Search_Category";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -42,11 +42,21 @@ public class CreateCategoryServicesController extends HttpServlet {
             }
 
             String categoryName = request.getParameter("categoryName");
+            CategoryServiceDTO oldName = dao.getOldNameCT(categoryName);
+                 String oldname = oldName.getCategoryName();
+                 if(oldname == categoryName){
+                      url = ERROR;
+                request.setAttribute("MESS_UP", "Tạo mới không thành công! (Tên loại dịch vụ đã tồn tại)");
+                 }
+            else{
+            
             boolean status = Boolean.parseBoolean(request.getParameter("status"));
             CategoryServiceDTO category = new CategoryServiceDTO(categoryID, categoryName, status);
             boolean checkCreate = dao.createCategory(category);
             if (checkCreate) {
                 url = SUCCESS;
+                request.setAttribute("MESS_UP_CATE","Loại dịch vụ: "+ categoryName +"; Mã ID: "+ categoryID  +" tạo  thành công! Mời cập nhật trạng thái  ");
+            }
             }
 
         } catch (Exception e) {

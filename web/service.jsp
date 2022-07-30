@@ -310,7 +310,7 @@
                                             <a href="createservice.jsp"
                                                class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">
                                                 <i class="fa-solid fa-circle-plus"></i>
-                                                Add New Service
+                                                Thêm Dịch Vụ Mới
                                             </a>
                                         </div>
                                         <h6>${MESS_UP_SV}</h6>
@@ -338,7 +338,7 @@
                                                     <th class="border-top-0">Nội Dung</th>
                                                     <th class="border-top-0">Trạng Thái</th>
                                                     <th class="border-top-0">Sửa Trạng Thái</th>
-                                                    <th class="border-top-0"></th>     
+                                                    <th class="border-top-0">Cập Nhật Thông Tin</th>     
                                                 </tr>
                                             </thead>
 

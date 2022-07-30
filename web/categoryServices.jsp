@@ -305,9 +305,10 @@
                                             <a href="createcategory.jsp"
                                                class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">
                                                 <i class="fa-solid fa-circle-plus"></i>
-                                                Add New Category
+                                                Thêm Loại Dịch Vụ Mới
                                             </a>
                                         </div>
+                                        <h6>${MESS_UP_CATE}</h6>
 
                                     </form>
 
@@ -357,7 +358,7 @@
                                                         <%
                                                         } else {
                                                         %>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <button type="button"  class="btn btn-danger mx-auto mx-md-0 text-white">Ẩn</button>
                                                         <%
                                                             }
                                                         %>

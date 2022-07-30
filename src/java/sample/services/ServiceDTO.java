@@ -95,6 +95,10 @@ public class ServiceDTO {
         this.image = image;
         this.status = status;
     }
+
+    public ServiceDTO(String serviceName) {
+         this.serviceName = serviceName;
+    }
     
     public String getAboutSV() {
         return aboutSV;
