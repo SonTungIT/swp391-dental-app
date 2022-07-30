@@ -3,30 +3,50 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sample.controllers;
+package sample.user;
 
 /**
  *
  * @author Admin
  */
 public class UserError {
+
     private String UserIDError;
     private String passwordError;
     private String EmailError;
     private String RoleIDError;
     private String fullNameError;
     private String phoneError;
+    private String DuplicateError;
 
     public UserError() {
+        UserIDError = "";
+        passwordError = "";
+        EmailError = "";
+        RoleIDError = "";
+        fullNameError = "";
+        phoneError = "";
+        DuplicateError = "";
     }
 
-    public UserError(String UserIDError, String passwordError, String EmailError, String RoleIDError, String fullNameError, String phoneError) {
+    public UserError(String UserIDError, String passwordError, String EmailError, String RoleIDError, String fullNameError, String phoneError, String DuplicateError) {
         this.UserIDError = UserIDError;
         this.passwordError = passwordError;
         this.EmailError = EmailError;
         this.RoleIDError = RoleIDError;
         this.fullNameError = fullNameError;
         this.phoneError = phoneError;
+        this.DuplicateError = DuplicateError;
+    }
+
+   
+
+    public String getDuplicateError() {
+        return DuplicateError;
+    }
+
+    public void setDuplicateError(String DuplicateError) {
+        this.DuplicateError = DuplicateError;
     }
 
     public String getUserIDError() {

@@ -311,7 +311,7 @@
                                                 <label class="col-md-12 mb-0">Họ và Tên</label>
                                                 <div class="col-md-12">
                                                     <input  type="text" name="fullName" value="${PROFILE_PT.fullName}"
-                                                            class="form-control ps-0 form-control-line">
+                                                            class="form-control ps-0 form-control-line" required="">
                                                 </div>
 
                                             </div>
@@ -321,7 +321,7 @@
                                                     <select name="gender" class="form-control ps-0 form-control-line">
                                                         <option value="${PROFILE_PT.gender}">${PROFILE_PT.gender}</option>
                                                         <option value="Nam">Nam</option>
-                                                        <option value="Nam">Nữ</option>
+                                                        <option value="Nữ">Nữ</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -336,7 +336,7 @@
                                                 <label class="col-md-12 mb-0">Ngày Sinh</label>
                                                 <div class="col-md-12">
                                                     <input type="date" name="birthday" value="${PROFILE_PT.birthday}"
-                                                           class="form-control ps-0 form-control-line">
+                                                           class="form-control ps-0 form-control-line" required="">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -344,7 +344,7 @@
                                                 <div class="col-md-12">
                                                     <input type="email" name="email" value="${PROFILE_PT.email}"
                                                            class="form-control ps-0 form-control-line" name="example-email"
-                                                           id="example-email">
+                                                           id="example-email" required="">
                                                 </div>
                                             </div>
                                             <div class="form-group">

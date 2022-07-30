@@ -19,6 +19,12 @@
         <link href="loginPage/colorlib-regform-7/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+        <%
+            String mes = (String) request.getAttribute("MESSAGE");
+            if (mes == null) {
+                mes = "";
+            }
+        %>
         <div class="main" style="padding: 50px 0">
 
             <!-- Sing in  Form -->
@@ -48,7 +54,7 @@
 
                         <div style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 16px" class="signin-form">
                             <h2 style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif" class="form-title">Đăng Nhập</h2>
-                            <form method="POST" action="MainController" class="register-form" id="login-form" ">
+                            <form action="MainController" class="register-form" id="login-form" ">
                                 <div class="form-group">
                                     <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                     <input type="text" name="userID" id="your_name" placeholder="Tên Đăng Nhập"/>
@@ -65,6 +71,7 @@
                                     <input type="submit" name="action" id="signin" class="form-submit" value="Login"/>
                                 </div>
                             </form>
+                            <h4><%=mes%></h4>
                             <div class="social-login">
                                 <span class="social-label">Đăng nhập bằng dịch vụ</span>
                                 <ul class="socials">
@@ -74,6 +81,7 @@
                                            &client_id=232049583848-lgpfr9t4gadm8m6mgmu4jpu160ld6khv.apps.googleusercontent.com&approval_prompt=force"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
                                 </ul>
                             </div>
+
                         </div>
                     </div>
                 </div>

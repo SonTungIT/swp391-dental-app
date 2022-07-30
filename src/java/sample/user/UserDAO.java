@@ -106,7 +106,8 @@ public class UserDAO {
         }
         return user;
     }
-     public boolean create(UserDTO user) throws SQLException {
+
+    public boolean create(UserDTO user) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -142,7 +143,8 @@ public class UserDAO {
         }
         return check;
     }
-     public boolean checkDuplicate(String userID) throws SQLException {
+
+    public boolean checkDuplicate(String userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -174,5 +176,37 @@ public class UserDAO {
         return check;
     }
 
+    public boolean checkDuplicateEmail(String email) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT userID FROM Users WHERE email = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, email);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
 
 }
