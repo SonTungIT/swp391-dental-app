@@ -21,6 +21,9 @@
         <!-- Main css -->
 
         <link href="loginPage/colorlib-regform-7/css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+              integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
         <%
@@ -71,6 +74,14 @@
                         </div>
                         <div class="signup-image">
                             <img src="loginPage/colorlib-regform-7/images/login-img2.jpg" alt=""/>
+                            <a style="font-size: 18px; color: #000"href="login.jsp">Sign in
+                                <i style="color: #6dabe4;
+                                   background-color: #f6f6f6;
+                                   padding: 7px;
+                                   margin-left: 10px;
+                                   margin-top: 50px;
+                                   border-radius: 7px;" class="fa-solid fa-arrow-rotate-left"></i>
+                                </a>
                         </div>
                     </div>
                 </div>
