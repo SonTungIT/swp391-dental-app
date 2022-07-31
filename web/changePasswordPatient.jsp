@@ -209,10 +209,26 @@
                     </div>
                 </div>
             </aside>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card">
+
+            <div class="page-wrapper">
+                <div class="page-breadcrumb">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-8 align-self-center">
+                            <!--<h3 class="page-title mb-0 p-0">Thông Tin</h3>-->
+                            <div class="d-flex align-items-center">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#">Trang Cá Nhân</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Thông Tin</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
                             <div class="card-body">
                                 <%
                                     UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");

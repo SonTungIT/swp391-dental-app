@@ -39,6 +39,8 @@ public class EmailDAO {
             message.setFrom(new InternetAddress(email.getFrom()));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.getTo()));
             message.setSubject(email.getSubject());
+            message.setText("Nội dung email");
+            message.setReplyTo(message.getFrom());
             message.setContent(email.getContent(),"text/html; charset=utf-8");
             
             Transport.send(message);

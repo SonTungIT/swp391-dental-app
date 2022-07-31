@@ -25,8 +25,8 @@ import sample.user.UserDTO;
 @WebServlet(name = "SendMailController", urlPatterns = {"/SendMailController"})
 public class SendMailController extends HttpServlet {
 
-    private static final String ERROR = "showbooking.jsp";
-    private static final String SUCCESS = "showbooking.jsp";
+    private static final String ERROR = "showBooking.jsp";
+    private static final String SUCCESS = "showBooking.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,10 +45,10 @@ public class SendMailController extends HttpServlet {
                 _email.setTo(email);
                 _email.setSubject("Delay Funtion");
                 StringBuilder sb = new StringBuilder();
-                sb.append("Dear ").append(userID).append("<br>");
-                sb.append("The appointment you have booked is wrong or someone has booked the same time as you. <br> ");
-                sb.append("Please click on this link to rebook: booking.jsp" );
-                sb.append("Regards <br>");
+                sb.append("Gửi ").append(userID).append("<br>");
+                sb.append("Cuộc hẹn bạn đã đặt bị sai hoặc ai đó đã đặt cùng thời gian với bạn. <br> ");
+                sb.append("Vui lòng quay lại trang \"booking.jsp\" để liên hệ đặt lại lịch dịch vụ của bạn " );
+                sb.append("Chúng tôi chân thành xin lỗi vì sự bất tiện <br>");
                 sb.append("Administrator.");
 
                 _email.setContent(sb.toString());
