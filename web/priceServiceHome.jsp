@@ -526,17 +526,15 @@
                         <p><span class="fa mr-2 fa-map-marker"></span>Đường D1, Long Thạnh Mỹ, <span>T.Phố Thủ Đức, T.Phố Hồ
                                 Chí Minh.</span></p>
                         <p class="phone py-2"><span class="fa mr-2 fa-phone"></span> +1(12) 123 456 789 </p>
-                        <p><span class="fa mr-2 fa-envelope"></span><a href="mailto:info@example.com">info@example.com</a>
+                        <p><span class="fa mr-2 fa-envelope"></span><a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSDbFbKXhBscndchvNMgKCFXwjJHxXXzXfPHPdmVSlstvvzbkFPTPwWmsHMdGBnDjXqzxkML">phongkhamnhakhoathienthan@gmail.com</a>
+
                         </p>
                         <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 2 - Thứ 6 : <%=stMF%> - <%=etMF%></span>
                         </p>
                         <p><span class=""><span class="fa fa-clock-o"></span></span>Thứ 7 & CN : <%=stSS%> - <%=etSS%></span>
                         </p>
                     </div>
-                    <div class="flex-1 ms-2">            
-                        <p class="text-muted mb-0">Số lượng truy cập web</p>
-                        <p>${sessionScope.viewOfWeb}</p>
-                    </div>
+
                     <!-- <div class="col-lg-2 col-sm-6 mb-sm-0 mb-4">
                             <h4 class="mb-sm-4 mb-3">Liên Hệ Phòng Khám</h4>
                             <ul>
