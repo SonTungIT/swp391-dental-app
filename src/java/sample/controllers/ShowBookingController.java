@@ -26,35 +26,49 @@ import sample.user.DoctorDTO;
  */
 @WebServlet(name = "ShowBookingController", urlPatterns = {"/ShowBookingController"})
 public class ShowBookingController extends HttpServlet {
+
     public static final String ERROR = "error.jsp";
     public static final String SUCESSFUL = "showBooking.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         HttpSession session = request.getSession();
         try {
-            AdminDAO dao = new AdminDAO();            
-            List<BookingDTO> list = dao.getListAllAppointmentBooking();
-            int page, numperpage =5;
-            int size = list.size();
-            int number = (size%5==0?(size/5):(size/5)) + 1;
-            String xpage = request.getParameter("page");
-            if(xpage == null){
-                page = 1;
-            } else {
-                page = Integer.parseInt(xpage);
+
+            String show = request.getParameter("showCf");
+            if(show == null){
+                show = "";
             }
-            int start, end;
-            start = (page-1) * numperpage;
-            end = Math.min(page*numperpage, size);
-            List<BookingDTO> listAllBooking = dao.getListBookingByPage(list, start, end);
-            session.setAttribute("LIST_BOOKING", listAllBooking);
-            session.setAttribute("page", page);
-            session.setAttribute("number", number);
-            
-            url = SUCESSFUL;
+            AdminDAO dao = new AdminDAO();
+            if (show.equals("Show")) {
+                List<BookingDTO> list1 = dao.getListBKConflict();
+                request.setAttribute("LIST_BOOKING_CF", list1);
+
+                url = SUCESSFUL;
+            } else {
+                List<BookingDTO> list = dao.getListAllAppointmentBooking();
+                int page, numperpage = 5;
+                int size = list.size();
+                int number = (size % 5 == 0 ? (size / 5) : (size / 5)) + 1;
+                String xpage = request.getParameter("page");
+                if (xpage == null) {
+                    page = 1;
+                } else {
+                    page = Integer.parseInt(xpage);
+                }
+                int start, end;
+                start = (page - 1) * numperpage;
+                end = Math.min(page * numperpage, size);
+                List<BookingDTO> listAllBooking = dao.getListBookingByPage(list, start, end);
+                session.setAttribute("LIST_BOOKING", listAllBooking);
+                session.setAttribute("page", page);
+                session.setAttribute("number", number);
+
+                url = SUCESSFUL;
+            }
+
         } catch (Exception e) {
             log("Error at DisplayCUSController: " + e.toString());
         } finally {

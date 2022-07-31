@@ -268,7 +268,7 @@
                                 </nav>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -281,7 +281,7 @@
                     <!-- ============================================================== -->
                     <!-- Start Page Content -->
                     <!-- ============================================================== -->
-                    <div class="row">
+                    <div class="row" id="div1" style="display: block">
                         <!-- column -->
                         <div class="col-sm-12">
                             <div class="card">
@@ -352,7 +352,7 @@
                                                         </form>
 
                                                     </td>   
-                                                    <td><a href="sendmail.jsp" class="btn btn-success d-none d-md-inline-block text-white" data-toggle="tooltip" title="" data-original-title="Email"><i
+                                                    <td><a href="SendEmailForPatient?bookingID=<%=booking.getBookingID()%>" class="btn btn-success d-none d-md-inline-block text-white" data-toggle="tooltip" title="" data-original-title="Email"><i
                                                                 class="mdi mdi-gmail"></i></a></td>
 
                                                 </tr>
@@ -379,6 +379,96 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" id="div2" style="display: block">
+                        <!-- column -->
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                   
+                                    <div class="table-responsive">
+                                        <%  List<BookingDTO> list1 = (List<BookingDTO>) request.getAttribute("LIST_BOOKING_CF");
+                                            if (list1 != null) {
+                                                if (!list1.isEmpty()) {
+                                        %>
+                                        <table class="table user-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Số thứ tự</th>
+                                                    <th>Mã lịch hẹn</th>
+                                                    <th>Họ và tên bệnh nhân</th>
+                                                    <th>Giới tính</th>
+                                                    <th>Dịch vụ khám</th>
+                                                    <th>Bác sĩ </th>
+                                                    <th>Ngày đặt lịch</th>
+                                                    <th>Thời gian đặt lịch</th>
+                                                    <th>Slot Name</th>
+                                                    <th>Slot Time</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Xóa</th>
+                                                    <th>Gmail</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%
+                                                    int count = 1;
+                                                    for (BookingDTO booking : list1) {
+                                                %>
+                                            <form action="MainController">
+                                                <tr>
+
+                                                    <td><%=count++%></td>
+                                                    <td><%=booking.getBookingID()%></td>
+                                                    <td><%=booking.getPatientName()%></td>
+                                                    <td><%=booking.getPatientGender()%></td>                                              
+                                                    <td><%=booking.getServiceName()%></td>
+                                                    <td><%=booking.getDoctorName()%></td>
+                                                    <td><%=booking.getDateBooking()%></td>
+                                                    <td><%=booking.getTimeBooking()%></td>
+                                                    <td><%=booking.getSlotName()%></td>
+                                                    <td><%=booking.getSlotTime()%></td>
+                                                    <td><%=booking.getStatus()%></td>                    
+                                                    <td>
+                                                        <form action="MainController">
+                                                            <input type="hidden" name="bookingID" value="<%=booking.getBookingID()%>"/>
+                                                            <input type="hidden"  name="action" value="Xóa lịch hẹn"/>
+                                                            <button type="submit" class="btn btn-success d-none d-md-inline-block text-white">
+                                                                <i class="fa-solid fa-trash-can"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </td>   
+                                                    <td><a href="SendEmailForPatient?bookingID=<%=booking.getBookingID()%>" class="btn btn-success d-none d-md-inline-block text-white" data-toggle="tooltip" title="" data-original-title="Email"><i
+                                                                class="mdi mdi-gmail"></i></a></td>
+
+                                                </tr>
+                                            </form>
+                                            <%
+                                                }
+                                            %>
+                                            </tbody>
+                                        </table>
+
+
+                                        <%
+                                                }
+                                            }
+                                        %> 
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="ShowBookingController">
+                        <input type="hidden" name="showCf" value="Show"/>
+                        <button  type="submit" onclick="showConflict()" class="btn btn-danger d-none d-md-inline-block text-white">
+                            Xem lịch xung đột
+                        </button></br>
+                    </form>
+
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -410,6 +500,12 @@
         <!-- ============================================================== -->
         <!-- All Jquery -->
         <!-- ============================================================== -->
+        <script>
+            function showConflict() {
+                document.getElementById("div1").style.display = "none";
+                document.getElementById("div2").style.display = "block";
+            }
+        </script>
         <script src="assets/plugins/jquery/dist1/jquery.min.js" type="text/javascript"></script>
         <!-- Bootstrap tether Core JavaScript -->
         <script src="assets/plugins/bootstrap/dist1/js/bootstrap.bundle.min.js"></script>
