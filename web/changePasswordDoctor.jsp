@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <form action="MainController"  class="form-horizontal form-material mx-2">
                         <div>
-                            <input type="hidden" name="patientID" value="${ID}">
+                            <input type="hidden" name="doctorID" value="${ID}">
                         </div>
                         <input class="form-control ps-0 form-control-line" type="hidden" name="oldPassword" value="${PROFILE_DR.password}">
                         <div class="form-group">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </form>
-                        <a href="patient.jsp"a/>
+                        <a href="doctor.jsp"a/>
                     <p>${MESSAGE}</p>
                 </div>
             </div>

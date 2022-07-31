@@ -36,7 +36,7 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_PASSWORD_PATIENT = "Update_Password";
     private static final String UPDATE_PASSWORD_PATIENT_CONTROLLER ="UpdatePatientPasswordControler";
     private static final String UPDATE_PASSWORD_DOCTOR = "Update_Password_Doctor";
-    private static final String UPDATE_PASSWORD_DOCTOR_CONTROLLER ="UpdatePasswordDoctorControler";
+    private static final String UPDATE_PASSWORD_DOCTOR_CONTROLLER ="UpdatePasswordDoctorController";
     private static final String SEARCH_DOCTOR = "Search";
     private static final String SEARCH_DOCTOR_CONTROLLER = "SearchDoctorController";
     private static final String ADD_DOCTOR = "Add";

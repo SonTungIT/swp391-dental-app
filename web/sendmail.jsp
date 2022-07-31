@@ -6,76 +6,45 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Login</title>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <!-- Font Icon -->
-        <link href="loginPage/colorlib-regform-7/fonts/material-icon/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css"/>
-        <!-- Main css -->
-        <link href="loginPage/colorlib-regform-7/css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-              integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
-    <body>
-
-        <div class="main" style="padding: 50px 0">
-            <!-- Sing in  Form -->
-            <section class="sign-in">
-                <div class="container">
-                    <div class="signin-content">
-                        <div class="signin-image">
-                            <figure><img src="loginPage/colorlib-regform-7/images/login-img1.jpg" alt="sing up image"></figure>
-                        </div>
-
-                        <div class="signin-form">
-                            <h2 class="form-title">Send mail</h2>
-                            <form action="MainController" method="POST" class="register-form" id="login-form">
-                                <div class="form-group">
-                                    <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="userID" id="your_name" value="${PROFILE_PT.getUserID}" placeholder="Tên Đăng Nhập">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email"><i class="zmdi zmdi-lock"></i></label>
-                                    <input type="text" name="email" id="email" placeholder="Email của bạn"/>
-                                </div>
-
-                                <div class="form-group form-button">
-                                    <input type="submit" name="action" id="Retrieve" class="form-submit" value="Send"/>
-                                </div>
-
-                                <a style="font-size: 18px; color: #6dabe4" href="showBooking.jsp">Trở về</a>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-        <%
-            String error = (String) session.getAttribute("ERROR");
-            if (error == null) {
-                error = "";
-            }
-        %>
-
-        <!-- JS -->
-        <script src="login and register/vendor/jquery/jquery.min.js"></script>
-        <script src="login and register/js/main.js"></script>
-        <script>
-            $(function () {
-                $('input').iCheck({
-                    checkboxClass: 'icheckbox_square-blue',
-                    radioClass: 'iradio_square-blue',
-                    increaseArea: '20%' /* optional */
-                });
-            });
-        </script>
-    </body><!-- This templates was made by Colorlib (https://colorlib.com
-    ) -->
-</html> 
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>JSP Page</title>
+</head>
+<body>
+	<div class="container" style="margin-top: 10px;">
+		<div class="row"
+			style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
+			<div class="col-sm-12">
+				<h2 class="myclass">Information</h2>
+				<form action="/send" method="post">
+					<div class="form-group">
+						<label>To:</label> 
+						<input type="text"
+						class="form-control" name="to" placeholder="Enter Email">
+					</div>
+					<div class="form-group">
+						<label>Subject:</label> 
+						<input type="text"
+						class="form-control" name="subject" placeholder="Enter Subject">
+					</div>
+					<div class="form-group">
+						<label for="content">Content:</label>
+						<textarea class="form-control" rows="3"  name="content"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary">Send</button>
+					<button type="reset" class="btn btn-primary">Cancel</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

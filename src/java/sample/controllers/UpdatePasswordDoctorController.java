@@ -23,7 +23,7 @@ import sample.user.UserDTO;
 @WebServlet(name = "UpdatePasswordDoctorController", urlPatterns = {"/UpdatePasswordDoctorController"})
 public class UpdatePasswordDoctorController extends HttpServlet {
 
-  private static final String ERROR = "changePasswordPatient.jsp";
+  private static final String ERROR = "changePasswordDoctor.jsp";
     private static final String SUCCESS = "";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +32,7 @@ public class UpdatePasswordDoctorController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            String doctorID = request.getParameter("patientID");
+            String doctorID = request.getParameter("doctorID");
             String userID = request.getParameter("userID");
             String oldpassword = request.getParameter("oldPassword");
             String oldpassword1 = request.getParameter("oldPassword1");
