@@ -12,58 +12,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import sample.Email.EmailDAO;
-import sample.Email.EmailDTO;
 import sample.user.AdminDAO;
 import sample.user.UserDTO;
 
 /**
  *
- * @author PC
+ * @author QUANG VAN
  */
-@WebServlet(name = "SendMailController", urlPatterns = {"/SendMailController"})
-public class SendMailController extends HttpServlet {
+@WebServlet(name = "SendEmailForPatient", urlPatterns = {"/SendEmailForPatient"})
+public class SendEmailForPatient extends HttpServlet {
 
-    private static final String ERROR = "showBooking.jsp";
-    private static final String SUCCESS = "showBooking.jsp";
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            String userID = request.getParameter("userID");
-            String email = request.getParameter("email");
-            String content = request.getParameter("content");
-            String subject = request.getParameter("subject");
+            String bookingID = request.getParameter("bookingID");
             AdminDAO dao = new AdminDAO();
-            UserDTO user = dao.findByUserIdAndEmail(userID, email);
-            HttpSession session = request.getSession();
-            if (user != null) {
-                EmailDTO _email = new EmailDTO();
-                _email.setFrom("namptse150442@fpt.edu.vn");
-                _email.setFromPassword("namlataone123");
-                _email.setTo(email);
-                _email.setSubject(subject);
-                StringBuilder sb = new StringBuilder();
-                sb.append("Gửi ").append(userID).append("<br>");
-                sb.append(content);
-                
-
-                _email.setContent(sb.toString());
-                EmailDAO.send(_email);
-                url = SUCCESS;
-                session.setAttribute("ERROR", "Email send to the email Address."
-                        + "Please check and get your password!");
-            } else {
-                session.setAttribute("ERROR", "UserName or Email are incorrect!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("ERROR", e.getMessage());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            UserDTO us = dao.getUS(bookingID);
+            request.setAttribute("Email_PT", us);
+            request.getRequestDispatcher("sendmail.jsp").forward(request, response);
+        } catch (Exception ex) {
+            log("Error at ShowProfileDoctorController: " + ex.toString());
         }
     }
 

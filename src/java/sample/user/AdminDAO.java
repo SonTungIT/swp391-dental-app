@@ -42,7 +42,7 @@ public class AdminDAO {
     private static final String ACTIVE_FEEDBACK = "SELECT  PT.fullName as patientName , PT.image  , fb.comment , sv.serviceName, us.fullName as doctorName ,fb.dateFeedback , fb.status, fb.rating From(Select fullName, userID,image from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID ORDER BY fb.dateFeedback DESC";
     private static final String SHOW_FEEDBACK = "SELECT feedbackID, fb.bookingID, PT.fullName as patientName , us.fullName as doctorName, sv.serviceName ,  comment , dateFeedBack , fb.status , fb.rating From (Select fullName, userID from Users where roleID = 'PT') AS PT join Feedback fb on fb.patientID =  PT.userID join Booking on fb.bookingID = Booking.bookingID join Service sv On sv.serviceID = Booking.serviceID join CategoryService cs ON cs.categoryID = sv.categoryID join Doctor dt ON dt.categoryID = sv.categoryID join Users us ON us.userID = dt.doctorID WHERE feedbackID like ? AND Booking.doctorID = dt.doctorID ORDER BY feedbackID DESC";
     private static final String UPDATE_FEEDBACK = "UPDATE Feedback SET status=1 WHERE feedbackID =? ";
-     private static final String DELETE_FEEDBACK = "UPDATE Feedback SET status='False' WHERE feedbackID =? ";
+    private static final String DELETE_FEEDBACK = "UPDATE Feedback SET status='False' WHERE feedbackID =? ";
 
     private static final String SEARCH_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService WHERE categoryID like ? ";
 //    private static final String DELETE_CATEGORY = "DELETE CategoryService WHERE categoryID=? ";
@@ -51,7 +51,7 @@ public class AdminDAO {
     private static final String CHECK_DUPLICATE_CATE = "SELECT categoryName FROM CategoryService WHERE  categoryID=? ";
     private static final String CREATE_CATEGORY = "INSERT INTO CategoryService(categoryID, categoryName , status) VALUES(?,?,?)";
     private static final String SHOW_CATEGORY = "SELECT categoryID, categoryName, status FROM CategoryService ";
-    
+
     private static final String SEARCH_SERVICE = "SELECT serviceID, serviceName,image, categoryID, price, aboutSV , status FROM Service WHERE serviceName like ? ";
 //    private static final String DELETE_SERVICE = "DELETE Service WHERE ServiceID=? ";
     private static final String ACTIVE_SERVICE = "UPDATE Service SET status= 1 WHERE serviceID=? ";
@@ -60,7 +60,7 @@ public class AdminDAO {
     private static final String CHECK_DUPLICATE_SV = "SELECT serviceName FROM Service WHERE  serviceID=? ";
     private static final String CREATE_SERVICE = "INSERT INTO Service(serviceID, serviceName , image, categoryID, price, aboutSV , status) VALUES(?,?,?,?,?,?,?)";
     private static final String SHOW_6_SERVICE = "SELECT TOP(6) serviceID ,serviceName , image, status FROM Service ";
-    
+
     private static final String SEARCH_PRICE_SERVICE = "SELECT serviceName,  price FROM Service WHERE serviceName like ? ";
     private static final String UPDATE_PRICE_SERVICE = "UPDATE Service SET  price=?  WHERE serviceName=? ";
 
@@ -917,7 +917,59 @@ public class AdminDAO {
                         + "				 inner join Schedule sch ON sch.doctorID = dt.doctorID\n"
                         + "				 inner join Slot sl ON sl.slotID = sch.slotID\n"
                         + "				 inner join (select fullName, userID from Users where roleID ='DR') as DR on DR.userID = dt.doctorID\n"
-                        + "				 where timeBooking = slotTime And bk.doctorID = dt.doctorID\n"
+                        + "				 where timeBooking = slotTime And bk.doctorID = dt.doctorID  order by bk.dateBooking desc\n"
+                        + "				 ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String bookingID = rs.getString("bookingID");
+                    String patientName = rs.getString("fullName");
+                    String patientGender = rs.getString("gender");
+                    String serviceName = rs.getString("serviceName");
+                    String doctorName = rs.getString("doctorName");
+                    Date dateBooking = rs.getDate("dateBooking");
+                    String timeBooking = rs.getString("timeBooking");
+                    String slotName = rs.getString("slotName");
+                    String slotTime = rs.getString("slotTime");
+                    String status = rs.getString("status");
+
+                    list.add(new BookingDTO(bookingID, patientName, patientGender, serviceName, doctorName, dateBooking, timeBooking, slotName, slotTime, status));
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public List<BookingDTO> getListBKConflict() throws SQLException {
+        List<BookingDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select distinct bk.bookingID, us.fullName, us.gender, sv.serviceName,DR.fullName as doctorName,  bk.dateBooking, bk.timeBooking, sl.slotName, sl.slotTime, bk.status	\n"
+                        + "   from Users us inner join Booking bk ON bk.patientID = us.userID \n"
+                        + "				 inner join Service sv On sv.serviceID = bk.serviceID\n"
+                        + "				 inner join CategoryService cs ON cs.categoryID = sv.categoryID\n"
+                        + "				 inner join Doctor dt ON dt.categoryID	= sv.categoryID\n"
+                        + "				 inner join Schedule sch ON sch.doctorID = dt.doctorID\n"
+                        + "				 inner join Slot sl ON sl.slotID = sch.slotID\n"
+                        + "				 inner join (select fullName, userID from Users where roleID ='DR') as DR on DR.userID = dt.doctorID\n"
+                        + "				 where timeBooking = slotTime And bk.doctorID = dt.doctorID AND bk.status = 'Conflict' order by bk.dateBooking desc\n"
                         + "				 ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
@@ -960,7 +1012,7 @@ public class AdminDAO {
         try {
             conn = DBUtils.getConnection();
             String sql = "Update Booking "
-                    + "set status ='False' "
+                    + "set status ='Inactive' "
                     + "where bookingID = ? ";
             stm = conn.prepareStatement(sql);
             stm.setString(1, bookingID);
@@ -1660,6 +1712,7 @@ public class AdminDAO {
         }
         return check;
     }
+
     public boolean delete_feedback(boolean status, String feedbackID) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -1747,7 +1800,6 @@ public class AdminDAO {
 //        }
 //        return check;
 //    }
-
     public boolean updateCategory(CategoryServiceDTO category) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -1775,7 +1827,8 @@ public class AdminDAO {
         }
         return check;
     }
-      public boolean deleteCategory(CategoryServiceDTO category) throws SQLException {
+
+    public boolean deleteCategory(CategoryServiceDTO category) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -1908,7 +1961,7 @@ public class AdminDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(DELETE_SERVICE);
 //                ptm.setBoolean(1, service.isStatus());
-                 ptm.setString(1, service.getServiceID());
+                ptm.setString(1, service.getServiceID());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -1925,7 +1978,7 @@ public class AdminDAO {
         }
         return check;
     }
-    
+
     public boolean activeService(ServiceDTO service) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -1935,7 +1988,7 @@ public class AdminDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(ACTIVE_SERVICE);
 //                ptm.setBoolean(1, service.isStatus());
-                 ptm.setString(1, service.getServiceID());
+                ptm.setString(1, service.getServiceID());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -2415,8 +2468,8 @@ public class AdminDAO {
         }
         return check;
     }
-    
-     public List<BookingDTO> getListBKOFSV(String serviceID, Date date) throws SQLException, ClassNotFoundException {
+
+    public List<BookingDTO> getListBKOFSV(String serviceID, Date date) throws SQLException, ClassNotFoundException {
         List<BookingDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -2482,7 +2535,7 @@ public class AdminDAO {
         }
         return check;
     }
-    
+
     public List<DoctorDTO> getListDROFCT(String categoryID) throws SQLException, ClassNotFoundException {
         List<DoctorDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -2497,10 +2550,10 @@ public class AdminDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     String userID = rs.getString("doctorID");
-                    String fullname = "" ;
-                    String image ="";
-                    
-                    list.add(new DoctorDTO(userID,fullname, image, categoryID));
+                    String fullname = "";
+                    String image = "";
+
+                    list.add(new DoctorDTO(userID, fullname, image, categoryID));
                 }
             }
         } catch (Exception e) {
@@ -2518,6 +2571,7 @@ public class AdminDAO {
         }
         return list;
     }
+
     public boolean updateCT_DR(String doctorID) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -2544,9 +2598,9 @@ public class AdminDAO {
         }
         return check;
     }
-    
-     public List<BookingDTO> getListBKOFCT(String doctorID, Date date) throws SQLException, ClassNotFoundException {
-         List<BookingDTO> list = new ArrayList<>();
+
+    public List<BookingDTO> getListBKOFCT(String doctorID, Date date) throws SQLException, ClassNotFoundException {
+        List<BookingDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -2584,8 +2638,8 @@ public class AdminDAO {
         }
         return list;
     }
-     
-     public boolean updateBKConflict_CT(String bookingID) throws SQLException {
+
+    public boolean updateBKConflict_CT(String bookingID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -2612,8 +2666,8 @@ public class AdminDAO {
         return check;
     }
 
-     public ServiceDTO getOldNameCate_SV(String serviceID) throws SQLException, ClassNotFoundException {
-         ServiceDTO service = new ServiceDTO();
+    public ServiceDTO getOldNameCate_SV(String serviceID) throws SQLException, ClassNotFoundException {
+        ServiceDTO service = new ServiceDTO();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -2627,7 +2681,7 @@ public class AdminDAO {
                 while (rs.next()) {
                     String serviceName = rs.getString("serviceName");
                     String categoryID = rs.getString("categoryID");
-                    service = new ServiceDTO(serviceID , serviceName , categoryID);
+                    service = new ServiceDTO(serviceID, serviceName, categoryID);
                 }
             }
         } catch (Exception e) {
@@ -2645,10 +2699,10 @@ public class AdminDAO {
         }
         return service;
     }
-     
-      public List<ServiceDTO> getTop6Service() throws SQLException, ClassNotFoundException {
+
+    public List<ServiceDTO> getTop6Service() throws SQLException, ClassNotFoundException {
         List<ServiceDTO> list = new ArrayList<>();
-        
+
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -2680,8 +2734,8 @@ public class AdminDAO {
         }
         return list;
     }
-     
-     public List<CategoryServiceDTO> getListCategory_SV() throws SQLException, ClassNotFoundException {
+
+    public List<CategoryServiceDTO> getListCategory_SV() throws SQLException, ClassNotFoundException {
         List<CategoryServiceDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -2713,9 +2767,9 @@ public class AdminDAO {
         }
         return list;
     }
-     
-     public ServiceDTO getOldNameSV(String serviceName) throws SQLException, ClassNotFoundException {
-         ServiceDTO service = new ServiceDTO();
+
+    public ServiceDTO getOldNameSV(String serviceName) throws SQLException, ClassNotFoundException {
+        ServiceDTO service = new ServiceDTO();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -2745,9 +2799,9 @@ public class AdminDAO {
         }
         return service;
     }
-     
-      public CategoryServiceDTO getOldNameCT(String categoryName) throws SQLException, ClassNotFoundException {
-         CategoryServiceDTO cate = new CategoryServiceDTO();
+
+    public CategoryServiceDTO getOldNameCT(String categoryName) throws SQLException, ClassNotFoundException {
+        CategoryServiceDTO cate = new CategoryServiceDTO();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -2777,7 +2831,8 @@ public class AdminDAO {
         }
         return cate;
     }
-       public UserDTO findByUserIdAndEmail(String userId, String email) throws SQLException {
+
+    public UserDTO findByUserIdAndEmail(String userId, String email) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -2812,4 +2867,41 @@ public class AdminDAO {
         }
         return user;
     }
+
+    public UserDTO getUS(String bookingID) throws SQLException, ClassNotFoundException {
+        UserDTO us = new UserDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT email, userID FROM Users JOIN Booking on patientID = userID WHERE bookingID = ? ";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, bookingID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String password = "";
+                    String roleID ="";
+                    String email = rs.getString("email");
+                    us = new UserDTO(userID, password, roleID, email);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return us;
+    }
+
 }
