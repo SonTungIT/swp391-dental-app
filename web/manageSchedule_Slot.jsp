@@ -364,7 +364,7 @@
                                                         </button>
                                                     </td>
                                                     <td>                
-                                                        <button type="submit" name="action" value="DeleteSC" class="btn btn-success d-none d-md-inline-block text-white">
+                                                        <button type="submit" name="action" value="DeleteSC" class="btn btn-danger d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </button>
                                                     </td>

@@ -113,7 +113,7 @@
                                     ${a.expect1.title4}
                                 </div>
                                 <div class="form-text--center">
-                                    ${t.expect1.context4}
+                                    ${a.expect1.context4}
                                 </div>
                                 <div class="image">
                                     <img src="./images/${a.expect1.image4}" width="900" height="600"/>

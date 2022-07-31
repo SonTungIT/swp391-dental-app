@@ -262,7 +262,6 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Doctor</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -342,7 +341,20 @@
                                                     <td><%=doctor.getEmail()%></td>
                                                     <td><%=doctor.getPhone()%></td>
                                                     <td><%=doctor.getCategoryName()%></td>
-                                                    <td><%=doctor.isStatus()%></td>
+                                                    <td>
+                                                    
+                                                         <%
+                                                            if (doctor.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-danger mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <%
+                                                            }
+                                                        %>
+                                                    </td>
                                                     <td>
                                                         <a href="ViewProfile_DRByADController?doctorID=<%=doctor.getUserID()%>"
                                                            class="btn btn-success d-none d-md-inline-block text-white"

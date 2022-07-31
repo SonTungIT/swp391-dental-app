@@ -24,8 +24,8 @@ import sample.user.UserError;
 @WebServlet(name = "AddDoctorController", urlPatterns = {"/AddDoctorController"})
 public class AddDoctorController extends HttpServlet {
 
-    public static final String ERROR = "MainController?action=Search&search";
-    public static final String SUCCESS = "MainController?action=Search&search";
+    public static final String ERROR = "MainController?action=Show";
+    public static final String SUCCESS = "MainController?action=Show";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

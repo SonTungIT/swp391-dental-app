@@ -268,12 +268,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -304,7 +299,7 @@
                                         </div>
                                     </form>
                                     <div class="table-responsive">
-                                         <%  List<BookingDTO> list = (List<BookingDTO>) session.getAttribute("LIST_BOOKING");
+                                        <%  List<BookingDTO> list = (List<BookingDTO>) session.getAttribute("LIST_BOOKING");
                                             if (list != null) {
                                                 if (!list.isEmpty()) {
                                         %>
@@ -357,9 +352,9 @@
                                                         </form>
 
                                                     </td>   
-                                                    <td><a href="sendmail.jsp" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i
-                                    class="mdi mdi-gmail"></i></a></td>
-                                                    
+                                                    <td><a href="sendmail.jsp" class="btn btn-success d-none d-md-inline-block text-white" data-toggle="tooltip" title="" data-original-title="Email"><i
+                                                                class="mdi mdi-gmail"></i></a></td>
+
                                                 </tr>
                                             </form>
                                             <%
@@ -375,11 +370,11 @@
                                         %> 
                                     </div>
                                     <c:set var="page" value="${sessionScope.page}"/>
-                                    <button class="btn btn-success d-none d-md-inline-block text-white">
-                                        <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
+                                    <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
+                                        <button class="btn btn-success d-none d-md-inline-block text-white">
                                             <a class="${i==page?"active":""}" style="color: #FFF" href="MainController?action=ShowBooking&page=${i}">${i}</a>
-                                        </c:forEach>
-                                    </button>
+                                        </button>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>

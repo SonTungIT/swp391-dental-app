@@ -324,7 +324,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="border-top-0">No</th>
-                                                    <th class="border-top-0">Category ID</th>
+                                                    <th class="border-top-0">ID</th>
                                                     <th class="border-top-0">Tên Loại Dịch Vụ</th>                                                      
                                                     <th class="border-top-0">Trạng Thái</th>
                                                     <th class="border-top-0">Cập Nhật Trạng Thái</th>
@@ -355,8 +355,8 @@
                                                         <%
                                                             if (category.isStatus() == true) {
                                                         %>
-                                                        <button type="button"  class="btn btn-danger mx-auto mx-md-0 text-white">Hiện</button>
-                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <button type="button"  class="btn btn-danger mx-auto mx-md-0 text-white">Ẩn</button>
                                                         <%
                                                         } else {
                                                         %>
@@ -379,7 +379,7 @@
                                                        
                                                     <!--delete-->
 
-                                                        <button  type="submit" name="action" value="DeleteCategory" class="btn btn-success d-none d-md-inline-block text-white">
+                                                        <button  type="submit" name="action" value="DeleteCategory" class="btn btn-danger d-none d-md-inline-block text-white">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </button>
                                                         <input type="hidden" name="search" value="<%= search%>"/>

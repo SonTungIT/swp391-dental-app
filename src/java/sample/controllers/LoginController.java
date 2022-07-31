@@ -50,10 +50,10 @@ public class LoginController extends HttpServlet {
                 } else if (DR.equals(roleID)) {
                     url = DOCTOR_PAGE;
                 } else {
-                    request.setAttribute("ERROR", "Your role is not support !");
+                    request.setAttribute("ERROR", "Vai trò của bạn không được hỗ trợ !");
                 }
             } else {
-                request.setAttribute("ERROR", "Incorrect User ID or Password");
+                request.setAttribute("ERROR", "Tài khoản hoặc mật khẩu không đúng! ");
             }
 
         } catch (Exception e) {

@@ -283,7 +283,7 @@
                     <!-- ============================================================== -->
                     <div class="row">
                         <!-- <div class="row"> -->
-                        <div class="col-xl-2 col-lg-6 col-md-4 mt-4">
+                        <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
                             <div class="card features feature-primary rounded border-0 shadow p-4">
                                 <div class="d-flex align-items-center">
                                     <div class="icon text-center rounded-md">
@@ -298,7 +298,7 @@
                         </div>
                         <!--end col-->
 
-                        <div class="col-xl-2 col-lg-6 col-md-4 mt-4">
+                        <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
                             <div class="card features feature-primary rounded border-0 shadow p-4">
                                 <div class="d-flex align-items-center">
                                     <div class="icon text-center rounded-md">
@@ -328,23 +328,10 @@
                         </div> -->
                         <!--end col-->
 
-                        <div class="col-xl-2 col-lg-6 col-md-4 mt-4">
-                            <div class="card features feature-primary rounded border-0 shadow p-4">
-                                <div class="d-flex align-items-center">
-                                    <div class="icon text-center rounded-md">
-                                        <i class="fa-solid fa-briefcase-medical h3 mb-0"></i>
-                                    </div>
-                                    <div class="flex-1 ms-2">
-                                        <h5 class="mb-0">${sessionScope.view}</h5>
-                                        <p class="text-muted mb-0">Số lượng truy cập web</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                        
                         <!--end col-->
 
-                        <div class="col-xl-2 col-lg-6 col-md-4 mt-4">
+                        <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
                             <div class="card features feature-primary rounded border-0 shadow p-4">
                                 <div class="d-flex align-items-center">
                                     <div class="icon text-center rounded-md">
@@ -357,19 +344,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-lg-6 col-md-4 mt-4">
-                            <div class="card features feature-primary rounded border-0 shadow p-4">
-                                <div class="d-flex align-items-center">
-                                    <div class="icon text-center rounded-md">
-                                        <i class="fa-solid fa-briefcase-medical h3 mb-0"></i>
-                                    </div>
-                                    <div class="flex-1 ms-2">
-                                        <h5 class="mb-0">${sessionScope.numberBookingInOneWeek}</h5>
-                                        <p class="text-muted mb-0">Lịch hẹn trong 1 tuần</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <!--end col-->
                     </div>

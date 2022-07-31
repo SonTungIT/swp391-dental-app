@@ -22,6 +22,20 @@
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
+        <%
+        String error = (String) request.getAttribute("ERROR");
+        if (error == null){
+            error = "";
+        }
+        String mess = (String) request.getAttribute("MESSAGE");
+        if (mess == null){
+            mess = "";
+        }
+         String error2 = (String) session.getAttribute("ERROR2");
+        if (error2 == null){
+            error2 = "";
+        }
+        %>
         <div class="main" style="padding: 50px 0">
 
             <!-- Sing in  Form -->
@@ -63,6 +77,7 @@
                                 <div class="form-group">
                                     <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                                 </div>
+                                  <h4 style="color: red" ><%=error%> </h4>
                                 <div class="form-group form-button">
                                     <input type="submit" name="action" id="signin" class="form-submit" value="Login"/>
                                 </div>
@@ -72,7 +87,7 @@
                                 <ul class="socials">
                                     <!-- <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
                                     <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li> -->
-                                    <li><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/dental-demo-2/LoginGoogleController&response_type=code
+                                    <li><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/dental-demo-2/LoginGoogleController&response_type=code
                                            &client_id=232049583848-lgpfr9t4gadm8m6mgmu4jpu160ld6khv.apps.googleusercontent.com&approval_prompt=force"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
                                 </ul>
                             </div>
@@ -84,6 +99,8 @@
                                    margin-left: 10px;
                                    border-radius: 7px;" class="fa-solid fa-key"></i>
                             </a>
+                                 <h4 style="color: red" ><%=mess%> </h4>
+                                 <h4 style="color: red" ><%=error2%> </h4>
                         </div>
                     </div>
                 </div>

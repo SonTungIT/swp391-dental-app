@@ -498,9 +498,11 @@
                                         <button type="button" class="btn-banner" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
                                     </div>
                                 </form></br>
+                                <h4>
                                 <%=mess%>
                                 <%=slot_doctorEmmty%></br></br>
                                 <%=errorTime%></br></br>
+                                </h4>
                             </div>
                         </div>
                     </div>

@@ -252,7 +252,6 @@
                 <div class="page-breadcrumb">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-8 align-self-center">
-                            <h3 class="page-title mb-0 p-0">Service</h3>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -262,12 +261,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-md-6 col-4 align-self-center">
-                            <div class="text-end upgrade-btn">
-                                <a href="#"
-                                   class="btn btn-danger d-none d-md-inline-block text-white" target="_blank">Admin</a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -335,7 +329,7 @@
                                                     <th class="border-top-0">Hình Ảnh</th>
                                                     <th class="border-top-0">Category ID</th>
                                                     <th class="border-top-0">Chi Phí</th> 
-<!--                                                    <th class="border-top-0">Nội Dung</th>-->
+                                                    <!--                                                    <th class="border-top-0">Nội Dung</th>-->
                                                     <th class="border-top-0">Trạng Thái</th>
                                                     <th class="border-top-0">Cập nhập Trạng Thái</th>
                                                     <th class="border-top-0">Chi tiết</th>     
@@ -370,7 +364,7 @@
                                                         <%= service.getPrice()%>
                                                         <input type="hidden" value="<%= service.getPrice()%>" name="price" />
                                                     </td>
-                                                    
+
                                                     <td> 
                                                         <%
                                                             if (service.isStatus() == true) {
@@ -384,40 +378,37 @@
                                                             }
                                                         %>
                                                         <div>
-                                                            
-<!--                                                           <input checked="checked" type="radio" name="status" value="True" class="btn btn-success mx-auto mx-md-0 text-white">Hiện<br>
-                                                            <input type="radio" name="status" value="False" class="btn btn-success mx-auto mx-md-0 text-white">Ẩn-->
+
+                                                            <!--                                                           <input checked="checked" type="radio" name="status" value="True" class="btn btn-success mx-auto mx-md-0 text-white">Hiện<br>
+                                                                                                                        <input type="radio" name="status" value="False" class="btn btn-success mx-auto mx-md-0 text-white">Ẩn-->
                                                         </div>
                                                     </td>
 
 
 
-                                                    
+
                                                     <td>
-                                                         <!--update-->
+                                                        <!--update-->
                                                         <div class="form-group">
-                                                            <div class="col-sm-12 d-flex">
+                                                            <div style="justify-content: space-around" class="col-sm-12 d-flex">
                                                                 <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="ActiveService"><i class="fa-solid fa-circle-plus"></i></button>
+                                                                <button class="btn btn-danger mx-auto mx-md-0 text-white" type="submit" name="action" value="DeleteService"><i class="fa-solid fa-trash-can"></i></button>
                                                             </div>
                                                         </div>
-                                                        
-                                                        
+
+
                                                         <!--delete-->
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12 d-flex">
-                                                                <button class="btn btn-success mx-auto mx-md-0 text-white" type="submit" name="action" value="DeleteService"><i class="fa-solid fa-trash-can"></i></button>
-                                                            </div>
-                                                        </div>
+
                                                         <input type="hidden" name="search" value="<%= search%>"/>    
                                                     </td>
 
-                                                    
+
                                                     <td>
                                                         <!--                                                            <input type="submit" name="action" value="Update_Service" class="btn btn-success d-none d-md-inline-block text-white"
                                                                                                                    target="_blank" />-->
-                                                        
+
                                                         <a class="btn btn-success d-none d-md-inline-block text-white" href="MainController?action=SUService&serviceName=<%= service.getServiceName()%>" >
-                                                           <i class="fa-regular fa-eye"></i>
+                                                            <i class="fa-regular fa-eye"></i>
                                                         </a>
                                                         <input type="hidden" name="search" value="<%= search%>"/>
                                                     </td>
