@@ -190,7 +190,7 @@
                                                          href="ManagePTBK_DRController?doctorID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Quản lý lịch hẹn</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="#s" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                                         href="UpdatePasswordDoctorController?doctorID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Thay Đổi Mật Khẩu</span></a></li>
                         </ul>
 

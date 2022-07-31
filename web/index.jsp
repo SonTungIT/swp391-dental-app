@@ -398,7 +398,7 @@
         <!-- blog -->
         <section class="blog py-5">
             <div class="container py-md-5 py-3">
-                <h3>
+                <h3 class="heading text-center mb-sm-5 mb-4">
                     <a href="news.jsp">Tin tức nổi bật</a>
 
                 </h3>

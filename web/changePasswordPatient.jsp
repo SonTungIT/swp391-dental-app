@@ -219,7 +219,7 @@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#">Trang Cá Nhân</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Thông Tin</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Thay đổi mật khẩu</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -260,7 +260,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="col-md-12 mb-0">Xác nhận mật khẩu mởi:</label>
+                                                    <label class="col-md-12 mb-0">Xác nhận mật khẩu mới: </label>
                                                     <div class="col-md-12">
                                                         <td>  
                                                             <input class="form-control ps-0 form-control-line" type="password" name="newPassword1" value="">
