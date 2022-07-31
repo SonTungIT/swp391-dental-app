@@ -30,7 +30,12 @@
                         <div class="signin-image">
                             <figure><img src="loginPage/colorlib-regform-7/images/login-img3.jpg" alt="sing up image"></figure>
                         </div>
-
+                        <%
+            String error = (String) session.getAttribute("ERROR");
+            if (error == null) {
+                error = "";
+            }
+        %>
                         <div class="signin-form">
                             <h2 class="form-title">Forgot Password</h2>
                             <form action="MainController" method="POST" class="register-form" id="login-form">
@@ -55,20 +60,15 @@
                                    border-radius: 7px;" class="fa-solid fa-arrow-rotate-left"></i>
                                 </a>
                             </form>
-
+                           <h4 style="color: red" ><%=error%> </h4>
                         </div>
                     </div>
                 </div>
             </section>
 
         </div>
-        <%
-            String error = (String) session.getAttribute("ERROR");
-            if (error == null) {
-                error = "";
-            }
-        %>
-
+        
+            
         <!-- JS -->
         <script src="login and register/vendor/jquery/jquery.min.js"></script>
         <script src="login and register/js/main.js"></script>

@@ -312,7 +312,7 @@
                                                     <input type="hidden" name="patientID" value="<%=patientID%>"  />    
                                                     <input type="hidden" name="bookingID" value="<%= booking.getBookingID()%>"  />
 <!--                                                    <input type="text" name="comment"  required=""/>-->
-                                                <textarea rows="5" class="form-control ps-0 form-control-line" type="text" name="comment"  required=""></textarea>
+<textarea rows="5" id="comment" class="form-control ps-0 form-control-line" type="text" name="comment"  required=""></textarea>
 
                                                     <input type="hidden" name="status" value="false"  />
 
@@ -400,5 +400,13 @@
                         alert("đánh giá của bạn đã đuọc gửi. Cảm ơn bạn đã đóng góp ý kiến!!!");
                     }
         </script>
+        
+    <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script>
+        var editor = '';
+        $(document).ready(function () {
+            editor = CKEDITOR.replace('comment');
+        });
+    </script>
     </body>
 </html>

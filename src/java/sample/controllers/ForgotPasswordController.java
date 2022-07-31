@@ -54,10 +54,10 @@ public class ForgotPasswordController extends HttpServlet {
                 _email.setContent(sb.toString());
                 EmailDAO.send(_email);
                 url = SUCCESS;
-                session.setAttribute("ERROR", "Email send to the email Address."
-                        + "Please check and get your password!");
+                session.setAttribute("ERROR2", "Mật khẩu đã được gửi về gmail của bạn ."
+                        + "Xin kiểm tra gmail của bạn!");
             } else {
-                session.setAttribute("ERROR", "UserID hoặc Email không chính xác!");
+                session.setAttribute("ERROR", "Tài khoản hoặc Email không chính xác!");
             }
         } catch (Exception e) {
             e.printStackTrace();

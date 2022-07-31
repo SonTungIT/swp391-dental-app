@@ -387,7 +387,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-12 mb-0">Nội Dung </label>
                                                 <div class="col-md-12">
-                                                    <textarea rows="5" class="form-control ps-0 form-control-line" type="text" name="aboutDR" value="">${PROFILE_DT.aboutDR}</textarea>
+                                                    <textarea rows="5" id="aboutDR" class="form-control ps-0 form-control-line" type="text" name="aboutDR" value="">${PROFILE_DT.aboutDR}</textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -445,5 +445,12 @@
         <script src="html/js/sidebarmenu.js"></script>
         <!--Custom JavaScript -->
         <script src="html/js/custom.js"></script>
+         <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script>
+        var editor = '';
+        $(document).ready(function () {
+            editor = CKEDITOR.replace('aboutDR');
+        });
+    </script>
     </body>
 </html>

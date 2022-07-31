@@ -366,7 +366,19 @@
                                                     <td><%=patient.getBirthday()%></td>                                              
                                                     <td><%=patient.getEmail()%></td>
                                                     <td><%=patient.getPhone()%></td>                    
-                                                    <td><%=patient.isStatus()%></td>
+                                                    <td>
+                                                          <%
+                                                            if (patient.isStatus() == true) {
+                                                        %>
+                                                        <button type="button"  class="btn btn-success mx-auto mx-md-0 text-white">Hiện</button>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <button type="button"  class="btn btn-danger mx-auto mx-md-0 text-white">Ẩn</button>
+                                                        <%
+                                                            }
+                                                        %>
+                                                    </td>
 
                                                     <td>
                                                         <a href="#"
@@ -400,11 +412,13 @@
                                         %> 
                                     </div>
                                     <c:set var="page" value="${sessionScope.page}"/>
-                                    <button class="btn btn-success d-none d-md-inline-block text-white">
+                                    
                                         <c:forEach begin="${1}" end="${sessionScope.number}" var="i">
+                                            <button class="btn btn-success d-none d-md-inline-block text-white">
                                             <a class="${i==page?"active":""}" style="color: #FFF" href="MainController?action=ShowAllPatient&page=${i}">${i}</a>
-                                        </c:forEach>
-                                    </button>
+                                            </button>
+                                            </c:forEach>
+                                    
                                 </div>
                             </div>
                         </div>

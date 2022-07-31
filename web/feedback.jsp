@@ -314,13 +314,13 @@
                                             <thead>
                                                 <tr>
                                                     <th class="border-top-0">No</th>
-                                                    <th class="border-top-0">feedback ID</th>
+                                                    <th class="border-top-0">ID</th>
 
-                                                    <th class="border-top-0">booking ID</th>
+                                                    <th class="border-top-0">ID Lịch Hẹn</th>
                                                     <th class="border-top-0">Tên Bệnh Nhân</th>
                                                     <th class="border-top-0">Bác Sĩ Phụ Trách </th>
                                                     <th class="border-top-0">Tên Dịch Vụ</th>
-                                                    <th class="border-top-0">comment</th>
+                                                    <th class="border-top-0">Nội Dung</th>
                                                     <th class="border-top-0">Đánh Giá</th>
                                                     <th class="border-top-0">Ngày Viết</th>                                                     
                                                     <th class="border-top-0">Trạng Thái</th>

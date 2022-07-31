@@ -324,7 +324,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="border-top-0">No</th>
-                                                    <th class="border-top-0">Category ID</th>
+                                                    <th class="border-top-0">ID</th>
                                                     <th class="border-top-0">Tên Loại Dịch Vụ</th>                                                      
                                                     <th class="border-top-0">Trạng Thái</th>
                                                     <th class="border-top-0">Cập Nhật Trạng Thái</th>
