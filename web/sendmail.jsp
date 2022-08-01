@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label for="content">Content:</label>
-                            <textarea class="form-control" rows="3"  name="content"></textarea>
+                            <textarea id="comment" class="form-control" rows="3"  name="content"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send</button>
                         <button type="reset" class="btn btn-primary">Cancel</button>
@@ -47,5 +47,13 @@
                 </div>
             </div>
         </div>
+        <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+        <script>
+            var editor = '';
+            $(document).ready(function () {
+                editor = CKEDITOR.replace('comment');
+            });
+        </script>
+
     </body>
 </html>
