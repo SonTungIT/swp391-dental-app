@@ -195,7 +195,7 @@
                                                          href="MainController?action=SearchHSBK&searchHSBK" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Lịch Sử Đặt Lịch</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                         href="changePasswordPatient.jsp" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
+                                                         href="UpdatePatientPasswordControler?patientID=${LOGIN_USER.getUserID()}" aria-expanded="false"><i class="mdi me-2 mdi-account-check"></i><span
                                         class="hide-menu">Thay Đổi Mật Khẩu</span></a></li>
                         </ul>
 

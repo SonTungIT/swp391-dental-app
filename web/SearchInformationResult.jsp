@@ -56,7 +56,7 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        
+
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
@@ -77,24 +77,24 @@
                             </li>
                         </ul>
                     </div>
-                    
+
                     <div class="col-sm-4">
                         <ul class="d-lg-flex">
-                                <form action="SearchInformationController" >
-                                    <div class="tech-btm d-lg-flex">
-                                        <div class="form-outline">
-                                            <input type="text" name="txtSearch" class="form-control px-2" value="${param.txtSearchValue}" placeholder="Tìm Kiếm"/>
-                                            <input type="hidden" name="index" value="1"/>
-                                        </div>
-                                        <button type="submit" name="action" value="Tìm kiếm" class="btn btn-success">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-
+                            <form action="SearchInformationController" >
+                                <div class="tech-btm d-lg-flex">
+                                    <div class="form-outline">
+                                        <input type="text" name="txtSearch" class="form-control px-2" value="${param.txtSearchValue}" placeholder="Tìm Kiếm"/>
+                                        <input type="hidden" name="index" value="1"/>
                                     </div>
-                                </form>
+                                    <button type="submit" name="action" value="Tìm kiếm" class="btn btn-success">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+
+                                </div>
+                            </form>
                         </ul>
                     </div>
-                    
+
                     <div class="col-sm-4 header-right-w3_pvt">
                         <%
                             AdminDAO dao = new AdminDAO();
@@ -143,7 +143,7 @@
                         <li class="menu-sub menu-sub--has-table">
                             <a href="services.jsp">DỊCH VỤ</a>
                             <ul class="menu__service-list">
-                              <%
+                                <%
                                     PatientDAO dao1 = new PatientDAO();
                                     List<CategoryServiceDTO> listCate = dao1.getTableCategory();
                                     if (listCate != null) {
@@ -248,7 +248,7 @@
 
                     <div class="dropdown btn-group">
                         <a class="navbar-brand dropdown-toggle" href="patient.jsp" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/sontung.jpg" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
+                            <img src="./images/customers/" style="width: 50px; border-radius: 30px; margin-top: -7px; margin-left: 5px" alt="patient" class="profile-pic me-2">
                         </a>
                         <ul class="dropdown-menu" style="background-color: #63B43E">
                             <a href="patient.jsp" style="padding: 0">

@@ -18,6 +18,7 @@ public class UserError {
     private String fullNameError;
     private String phoneError;
     private String DuplicateError;
+    private String AddressError;
 
     public UserError() {
         UserIDError = "";
@@ -27,9 +28,10 @@ public class UserError {
         fullNameError = "";
         phoneError = "";
         DuplicateError = "";
+        AddressError = "";
     }
 
-    public UserError(String UserIDError, String passwordError, String EmailError, String RoleIDError, String fullNameError, String phoneError, String DuplicateError) {
+    public UserError(String UserIDError, String passwordError, String EmailError, String RoleIDError, String fullNameError, String phoneError, String DuplicateError, String AddressError) {
         this.UserIDError = UserIDError;
         this.passwordError = passwordError;
         this.EmailError = EmailError;
@@ -37,6 +39,16 @@ public class UserError {
         this.fullNameError = fullNameError;
         this.phoneError = phoneError;
         this.DuplicateError = DuplicateError;
+        this.AddressError = AddressError;
+    }
+
+    
+    public String getAddressError() {
+        return AddressError;
+    }
+
+    public void setAddressError(String AddressError) {
+        this.AddressError = AddressError;
     }
 
    

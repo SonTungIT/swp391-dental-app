@@ -24,7 +24,7 @@ import sample.user.UserError;
 @WebServlet(name = "AddDoctorController", urlPatterns = {"/AddDoctorController"})
 public class AddDoctorController extends HttpServlet {
 
-    public static final String ERROR = "MainController?action=Show";
+    public static final String ERROR = "addDoctor.jsp";
     public static final String SUCCESS = "MainController?action=Show";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -52,26 +52,35 @@ public class AddDoctorController extends HttpServlet {
             boolean checkDuplicate = dao.checkDuplicate(userID);
             boolean checkValidation = true;
             if (checkDuplicate) {
-                PE.setUserIDError("Duplicate Parking Attendant ID " + userID + " !");
-                request.setAttribute("UserID_ERROR", PE);
+                PE.setDuplicateError("Tài khoản " + userID + " không khả dụng !");
+                checkValidation = false;
             }
-//            if (userID.matches("^PAT\\d{3}$")) {
-//                checkValidation = false;
-//                PE.setUserIDError("UserID must be PAT*** !!!");
-//            }
-
-            if (email.length() < 2 || email.length() > 50) {
-                PE.setEmailError("Email must be in[2,50]!");
+            
+            if (userID.length() < 5 || userID.length() > 50) {
+                PE.setUserIDError("Tài khoản từ 5 đến 50 kí tự");
+                checkValidation = false;
+            }
+            if (fullName.length() < 5 || fullName.length() > 50) {
+                PE.setFullNameError("Họ và tên phải từ 5 đến 50 kí tự!");
+                checkValidation = false;
+            }
+            if (address.length() < 5 || address.length() > 50) {
+                PE.setAddressError("Địa chỉ phải từ 5 đến 50 kí tự!");
+                checkValidation = false;
+            }
+            boolean checkMail = dao.checkDuplicateEmail(email);
+            if (checkMail) {
+                PE.setEmailError("Email không khả dụng!");
                 checkValidation = false;
             }
 
             if (checkValidation) {
-                System.out.println("duyet validation");
+                
                 DoctorDTO doctor = new DoctorDTO(userID, password, fullName, roleID, gender, address, image, birthday, email, phone, status);
 
                 boolean checkAddDoctor = dao.addDoctor(doctor);
                 if (checkAddDoctor) {
-                    DoctorDTO dt = new DoctorDTO(categoryID, phone, shift);
+                    DoctorDTO dt = new DoctorDTO(categoryID, "", shift);
                     boolean checkDR = dao.buildDR(doctor.getUserID(), dt);
                     if (checkDR) {
 
@@ -81,7 +90,6 @@ public class AddDoctorController extends HttpServlet {
                     }
                 }
             } else {
-                System.out.println("Co loi");
                 request.setAttribute("USER_ERROR", PE);
             }
 

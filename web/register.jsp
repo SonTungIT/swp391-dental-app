@@ -40,7 +40,7 @@
                     <div class="signup-content">
                         <div class="signup-form" style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 18px">
                             <h2 style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif" class="form-title">Đăng Ký</h2>
-                            <form action="MainController" method="POST" class="register-form" id="register-form">
+                            <form action="MainController" class="register-form" id="register-form">
                                 <input type="hidden" name="roleID" value="PT" />
                                 <div class="form-group">
                                     <label for="userID"><i class="zmdi zmdi-account material-icons-name"></i></label>

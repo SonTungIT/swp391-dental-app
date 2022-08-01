@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="sample.user.UserError"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,6 +24,12 @@
         <link href="loginPage/colorlib-regform-7/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+        <%
+            UserError error = (UserError) request.getAttribute("USER_ERROR");
+            if (error == null) {
+                error = new UserError();
+            }
+        %>
         <div class="main" style="padding: 50px 0">
 
             <!-- Sign up form -->
@@ -35,24 +42,40 @@
                                 <input type="hidden" name="roleID" value="DR" />
                                 <div class="form-group">
                                     <label for="doctorID"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="userID" id="name" placeholder="UserID"/>
+                                    <input type="text" name="userID" id="name" placeholder="UserID" required="" pattern="DR.{4,}" title="Phải bắt đầu bằng DR và 4 chữ số đằng sau"/>
                                 </div>
+                                <h6 style="color: red"> <%=error.getDuplicateError()%>
+                                    <%=error.getUserIDError()%>
+                                </h6>
+
                                 <div class="form-group">
-                                    <label for="gender"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="gender" id="name" placeholder="Gender"/>
+                                    <label for="gender"></label>Giới tính:
+                                    <select name="gender" style="width: 300px; height: 30px" required=""  class="zmdi zmdi-account material-icons-name">
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="fullName" id="name" placeholder="Name"/>
+                                    <input type="text" name="fullName" required="" id="name" placeholder="Name"/>
                                 </div>
+                                <h6 style="color: red"> 
+                                    <%=error.getFullNameError()%>
+                                </h6>
                                 <div class="form-group">
                                     <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                    <input type="email" name="email" id="email" placeholder="Email"/>
+                                    <input type="email" name="email" id="email" placeholder="Email" required=""/>
                                 </div>
+                                <h6 style="color: red"> 
+                                    <%=error.getEmailError()%>
+                                </h6>
                                 <div class="form-group">
                                     <label for="address"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="address" id="name" placeholder="Address"/>
+                                    <input type="text" name="address" id="name" placeholder="Address" required=""/>
                                 </div>
+                                <h6 style="color: red"> 
+                                    <%=error.getAddressError()%>
+                                </h6>
                                 <div class="form-group">
                                     <label for="categoryID"></label>Chuyên khoa:
                                     <select name="categoryID" style="width: 300px; height: 30px">
@@ -71,7 +94,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phone"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="phone" id="name" placeholder="Phone"/>
+                                    <input type="text" name="phone" id="name" placeholder="Phone" required=""/>
                                 </div>
 
                                 <div class="form-group form-button">
